@@ -14,6 +14,39 @@ class Languages extends Translations {
       'onboardingScreen7': 'Check attendance history and\nsubmit manual requests anytime.',
 
 
+      'loginScreen1': 'Welcome To Smart Attendance',
+      'loginScreen2': 'Email',
+      'loginScreen3': '..........',
+      'loginScreen4': 'Password',
+      'loginScreen5': 'Remember me',
+      'loginScreen6': 'Forget Password?',
+      'loginScreen7': 'Login',
+      'loginScreen8': 'OR',
+      'loginScreen9': 'Don’t have an Account?',
+      'loginScreen10': 'Create Account',
+
+
+
+
+      'forgotPassword1': 'Create Account',
+      'forgotPassword2': 'Enter Your email adress',
+      'forgotPassword3': 'Enter Email',
+      'forgotPassword4': 'email@gmail,com',
+      'forgotPassword5': 'Send Code',
+
+
+
+      'conformPassword1': 'Enter Your Confirm Password',
+      'conformPassword2': 'Password',
+      'conformPassword3': '..........',
+      'conformPassword4': 'Confirm Password',
+      'conformPassword5': 'Continue',
+
+
+
+
+
+
 
 
 

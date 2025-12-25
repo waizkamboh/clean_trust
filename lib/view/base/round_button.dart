@@ -18,6 +18,7 @@ class RoundButton extends StatefulWidget {
     this.borderColor = AppColors.kWhiteColor,
     this.image,
     this.radius,
+    this.padding,
   });
   final bool loading;
   final String title;
@@ -27,6 +28,7 @@ class RoundButton extends StatefulWidget {
   final TextStyle? textStyle;
   final Widget? image;
   final BorderRadius? radius;
+  final EdgeInsets? padding;
 
   @override
   State<RoundButton> createState() => _RoundButtonState();
@@ -39,6 +41,7 @@ class _RoundButtonState extends State<RoundButton> {
     return InkWell(
       onTap: widget.onPress,
       child: Container(
+        padding: widget.padding,
         height: widget.height,
         width: widget.width,
         decoration: BoxDecoration(

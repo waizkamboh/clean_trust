@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 
 import '../../../helper/routes/routes_name.dart';
 import '../../../util/app_images.dart';
-import '../../base/onboarding_item.dart';
+import 'component/onboarding_item.dart';
 
 class OnboardingScreen2 extends StatelessWidget {
   const OnboardingScreen2({super.key});

@@ -13,20 +13,20 @@ class SplashScreen extends StatefulWidget {
 
 class _SplashScreenState extends State<SplashScreen> {
   @override
-  void initState() {
-    // TODO: implement initState
-
-    super.initState();
-    Future.delayed(const Duration(seconds: 3), () {
-      Get.toNamed(RouteName.onboardingScreen1);
-    });
-  }
+  // void initState() {
+  //   // TODO: implement initState
+  //
+  //   super.initState();
+  //   Future.delayed(const Duration(seconds: 3), () {
+  //     Get.toNamed(RouteName.onboardingScreen1);
+  //   });
+  // }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.kSplashColor,
+      backgroundColor: AppColors.kDeepBlueColor,
       body: Center(
-        child: Image.asset(AppImages.appLogo),
+        child: Image.asset(AppImages.splashLogo),
       ),
     );
   }

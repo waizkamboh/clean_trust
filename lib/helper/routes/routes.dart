@@ -7,6 +7,8 @@ import 'package:clean_trust/view/screens/onboarding/onboarding_screen2.dart';
 import 'package:clean_trust/view/screens/onboarding/onboarding_screen3.dart';
 import 'package:get/get.dart';
 
+import '../../view/screens/splash/splash_screen.dart';
+
 
 class AppRoutes{
 

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../util/app_colors.dart';
-import '../../util/size_config.dart';
-import '../../util/text_style.dart';
-import '../base/round_button.dart';
+import '../../../../util/app_colors.dart';
+import '../../../../util/size_config.dart';
+import '../../../../util/text_style.dart';
+import '../../../base/round_button.dart';
 
 class OnboardingItem extends StatelessWidget {
   final String imagePath;
