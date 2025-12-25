@@ -32,12 +32,12 @@ double getFont(double size) {
 double getHeight(double inputHeight) {
   double screenHeight = SizeConfig.screenHeight!;
   // 812 is the layout height that designer use
-  return (inputHeight / 932.0) * screenHeight;
+  return (inputHeight / 852.0) * screenHeight;
 }
 
 // Get the proportionate width as per screen size
 double getWidth(double inputWidth) {
   double screenWidth = SizeConfig.screenWidth!;
   // 375 is the layout width that Figma provides
-  return (inputWidth / 430.0) * screenWidth;
+  return (inputWidth / 393.0) * screenWidth;
 }

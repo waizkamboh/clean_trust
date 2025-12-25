@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import 'app_colors.dart';
+
 void showCustomSnackBar(String message, {bool isError = true}) {
   if (Get.context != null) { // Check if context is available
     Get.showSnackbar(
       GetSnackBar(
-        backgroundColor: isError ? AppColors.kPrimary : AppColors.kPrimary,
+        backgroundColor: isError ? AppColors.kSplashColor : AppColors.kSplashColor,
         message: message,
         duration: const Duration(seconds: 3),
         snackStyle: SnackStyle.FLOATING,
