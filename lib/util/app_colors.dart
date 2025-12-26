@@ -22,6 +22,8 @@ class AppColors {
   static const kCoolGreyColor = Color(0xff6B7280);
   static const kLightGreyColor = Color(0xffC5C5C5);
   static const kVeryLightGreenColor = Color(0xffF0FDF4);
+  static const kLightSkyBlueColor = Color(0xff80C4DF);
+  static const kLightBlueColor = Color(0xffDBEAFE);
 
 
 

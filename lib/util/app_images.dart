@@ -5,6 +5,7 @@ class AppImages{
   static const String onboardingScreen3 = 'assets/images/onboarding_screen3.png';
   static const String appLogo = 'assets/images/app_logo.png';
   static const String homePersonImage = 'assets/images/home_person_image.png';
+  static const String QRCodeImage = 'assets/images/QR_code_image.png';
 
 
 
@@ -17,6 +18,14 @@ class AppImages{
   static const String handIcon = 'assets/icons/hand_icon.png';
   static const String dragHandleIcon = 'assets/icons/drag_handle.png';
   static const String circleTickIcon = 'assets/icons/circle_tick.png';
+  static const String homeIcon = 'assets/icons/home_icon.png';
+  static const String networkIcon = 'assets/icons/network_icon.png';
+  static const String profileIcon = 'assets/icons/profile_icon.png';
+  static const String flashIcon = 'assets/icons/flash_icon.png';
+  static const String qrScreenIcon1 = 'assets/icons/qrscreen_icon1.png';
+  static const String qrScreenIcon2 = 'assets/icons/qrscreen_icon2.png';
+  static const String qrScreenIcon3 = 'assets/icons/qrscreen_icon3.png';
+  static const String qrScreenIcon4 = 'assets/icons/qrscreen_icon4.png';
 
 
 

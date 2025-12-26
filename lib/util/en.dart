@@ -60,6 +60,20 @@ class Languages extends Translations {
       'conformPassword5': 'Continue',
 
 
+      'scanQrCode1': 'Scan QR Code',
+      'scanQrCode2': 'GPS Required',
+      'scanQrCode3': 'Location access needed for\nscanning',
+      'scanQrCode4': 'Enable',
+      'scanQrCode5': 'Scan',
+      'scanQrCode6': 'Turn on Flash',
+      'scanQrCode7': 'Location Status',
+      'scanQrCode8': 'Active',
+      'scanQrCode9': 'GPS Coordinates',
+      'scanQrCode10': '37.7749° N, 122.4194° W',
+      'scanQrCode11': 'Attendance Time',
+      'scanQrCode12': 'Ready to capture',
+
+
 
       'homeScreen1': 'Welcome back!',
       'homeScreen2': 'Hi Ali Khan',
