@@ -26,6 +26,7 @@ class AppImages{
   static const String qrScreenIcon2 = 'assets/icons/qrscreen_icon2.png';
   static const String qrScreenIcon3 = 'assets/icons/qrscreen_icon3.png';
   static const String qrScreenIcon4 = 'assets/icons/qrscreen_icon4.png';
+  static const String dropDownIcon = 'assets/icons/drop_down_icon.png';
 
 
 

@@ -1,5 +1,6 @@
 import 'package:clean_trust/util/en.dart';
 import 'package:clean_trust/view/base/bottom_nav_bar.dart';
+import 'package:clean_trust/view/screens/attendance/attendance_history_screen.dart';
 import 'package:clean_trust/view/screens/auth/login_screen.dart';
 import 'package:clean_trust/view/screens/auth/signup_screen.dart';
 import 'package:clean_trust/view/screens/home/home_screen.dart';
@@ -31,7 +32,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
       ),
-     home: ScanResultScreen(),
+     home: AttendanceHistoryScreen(),
       translations: Languages(),
       locale: const Locale('en', 'US'),
       fallbackLocale:  const Locale('en', 'US'),

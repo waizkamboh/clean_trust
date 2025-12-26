@@ -88,6 +88,34 @@ class Languages extends Translations {
 
 
 
+
+      'attendanceHistory1': 'Attendance History',
+      'attendanceHistory2': 'Filter',
+      'attendanceHistory3': 'Date Range',
+      'attendanceHistory4': '2024-01-01',
+      'attendanceHistory5': '2024-01-31',
+      'attendanceHistory6': 'Status',
+      'attendanceHistory7': 'All Status',
+      'attendanceHistory8': 'Apply',
+      'attendanceHistory9': 'Reset',
+      'attendanceHistory10': 'Total Hours in Selected Range',
+      'attendanceHistory11': '38h 26m',
+      'attendanceHistory12': 'Hours worked between 01 Jan – 31 Jan 2024',
+      'attendanceHistory13': 'Attendance Records',
+      'attendanceHistory14': 'Monday, Jan 15',
+      'attendanceHistory15': 'Office A, Building B, Store C',
+      'attendanceHistory16': 'Check In:',
+      'attendanceHistory17': '09:00 AM',
+      'attendanceHistory18': 'Check Out:',
+      'attendanceHistory19': '06:30 PM',
+      'attendanceHistory20': 'Total Hours:',
+      'attendanceHistory21': '8h 30m',
+      'attendanceHistory22': 'Tuesday, Jan 16',
+      'attendanceHistory23': 'Load More',
+
+
+
+
       'homeScreen1': 'Welcome back!',
       'homeScreen2': 'Hi Ali Khan',
       'homeScreen3': 'Clocked In',
