@@ -75,6 +75,19 @@ class Languages extends Translations {
 
 
 
+
+      'scanResult1': 'Scan Result',
+      'scanResult2': 'Clock In Successful!',
+      'scanResult3': 'Your attendance has been recorded',
+      'scanResult4': 'Current Time',
+      'scanResult5': '09:15 AM',
+      'scanResult6': 'Monday, Nov 18, 2024',
+      'scanResult7': 'Main Office',
+      'scanResult8': '123 Business Street, Downtown',
+      'scanResult9': 'Go to Dashboard',
+
+
+
       'homeScreen1': 'Welcome back!',
       'homeScreen2': 'Hi Ali Khan',
       'homeScreen3': 'Clocked In',

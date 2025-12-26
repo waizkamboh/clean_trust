@@ -194,11 +194,11 @@ class ScanQrcodeScreen extends StatelessWidget {
               ),
             ),
 
-
+            SizedBox(height: getHeight(10),),
             buildInfoCard(
               leadingWidget: Image.asset(AppImages.qrScreenIcon1, width: 24, height: 24),
-              title: 'scanQrCode2'.tr,
-              subtitle: 'scanQrCode3'.tr,
+              title: 'scanQrCode9'.tr,
+              subtitle: 'scanQrCode10'.tr,
               trailingWidget: Image.asset(AppImages.qrScreenIcon2, width: 20, height: 20),
             ),
 
@@ -206,8 +206,8 @@ class ScanQrcodeScreen extends StatelessWidget {
 
             buildInfoCard(
               leadingWidget: Image.asset(AppImages.qrScreenIcon3, width: 24, height: 24),
-              title: 'scanQrCode2'.tr,
-              subtitle: 'scanQrCode3'.tr,
+              title: 'scanQrCode11'.tr,
+              subtitle: 'scanQrCode12'.tr,
               trailingWidget: Image.asset(AppImages.qrScreenIcon4, width: 20, height: 20),
             ),
 
