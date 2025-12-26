@@ -31,6 +31,10 @@ class AppColors {
   static const kDarkSlateGray = Color(0xFF374151);
   static const kRedColor = Color(0xFFDC1B1A);
   static const kTealGreenLight = Color(0xff008B86);
+  static const kLightCoolGray = Color(0xFFD1D5DB);
+  static const kLightGrayBackground = Color(0xFFF3F4F6);
+
+
 
 
 

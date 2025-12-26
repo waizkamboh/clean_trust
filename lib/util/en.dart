@@ -149,6 +149,28 @@ class Languages extends Translations {
 
 
 
+      'manualEntry1': 'Manual Entry',
+      'manualEntry2': 'Submit Manual Attendance\nEntry',
+      'manualEntry3': 'Fill in the details below to request a manual\nattendance entry',
+      'manualEntry4': 'Date',
+      'manualEntry5': 'mm/dd/yyyy',
+      'manualEntry6': 'Select Object',
+      'manualEntry7': 'Choose Object',
+      'manualEntry8': 'Employee MUST select an object (cannot submit without it)',
+      'manualEntry9': 'Clock In Time',
+      'manualEntry10': '--:-- --',
+      'manualEntry11': 'Clock Out Time',
+      'manualEntry12': '--:-- --',
+      'manualEntry13': 'Reason',
+      'manualEntry14': 'Please explain why you need a manual entry',
+      'manualEntry15': 'Minimum 20 characters',
+      'manualEntry16': 'Submit Entry',
+      'manualEntry17': 'Submit Other Entry',
+
+
+
+
+
 
       'homeScreen1': 'Welcome back!',
       'homeScreen2': 'Hi Ali Khan',

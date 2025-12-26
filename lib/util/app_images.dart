@@ -32,6 +32,8 @@ class AppImages{
   static const String attendanceDetailIcon1 = 'assets/icons/attendance_detail1.png';
   static const String attendanceDetailIcon2 = 'assets/icons/attendance_detail2.png';
   static const String attendanceDetailIcon3 = 'assets/icons/attendance_detail3.png';
+  static const String starIcon = 'assets/icons/star_icon.png';
+
 
 
 
