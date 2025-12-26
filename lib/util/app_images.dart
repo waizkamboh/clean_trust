@@ -6,6 +6,8 @@ class AppImages{
   static const String appLogo = 'assets/images/app_logo.png';
   static const String homePersonImage = 'assets/images/home_person_image.png';
   static const String QRCodeImage = 'assets/images/QR_code_image.png';
+  static const String attendanceDetailImg1 = 'assets/images/attendance_detail_img1.png';
+  static const String attendanceDetailImg2 = 'assets/images/attendance_detail_img2.png';
 
 
 
@@ -27,6 +29,9 @@ class AppImages{
   static const String qrScreenIcon3 = 'assets/icons/qrscreen_icon3.png';
   static const String qrScreenIcon4 = 'assets/icons/qrscreen_icon4.png';
   static const String dropDownIcon = 'assets/icons/drop_down_icon.png';
+  static const String attendanceDetailIcon1 = 'assets/icons/attendance_detail1.png';
+  static const String attendanceDetailIcon2 = 'assets/icons/attendance_detail2.png';
+  static const String attendanceDetailIcon3 = 'assets/icons/attendance_detail3.png';
 
 
 
