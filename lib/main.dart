@@ -1,8 +1,11 @@
 import 'package:clean_trust/util/en.dart';
-import 'package:clean_trust/view/screens/login/login_screen.dart';
+import 'package:clean_trust/view/screens/auth/login_screen.dart';
+import 'package:clean_trust/view/screens/auth/signup_screen.dart';
+import 'package:clean_trust/view/screens/home/home_screen.dart';
 import 'package:clean_trust/view/screens/onboarding/onboarding_screen1.dart';
 import 'package:clean_trust/view/screens/onboarding/onboarding_screen2.dart';
 import 'package:clean_trust/view/screens/onboarding/onboarding_screen3.dart';
+import 'package:clean_trust/view/screens/profile/profile_screen.dart';
 import 'package:clean_trust/view/screens/splash/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -25,7 +28,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
       ),
-     home: LoginScreen(),
+     home: HomeScreen(),
       translations: Languages(),
       locale: const Locale('en', 'US'),
       fallbackLocale:  const Locale('en', 'US'),

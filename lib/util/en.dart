@@ -20,10 +20,27 @@ class Languages extends Translations {
       'loginScreen4': 'Password',
       'loginScreen5': 'Remember me',
       'loginScreen6': 'Forget Password?',
-      'loginScreen7': 'Login',
+      'loginScreen7': 'Sign In',
       'loginScreen8': 'OR',
       'loginScreen9': 'Don’t have an Account?',
       'loginScreen10': 'Create Account',
+
+
+
+
+      'signupScreen1': 'Register',
+      'signupScreen2': 'Create your new account',
+      'signupScreen3': 'Enter Email',
+      'signupScreen4': 'email@gmail,com',
+      'signupScreen5': 'Phone Number',
+      'signupScreen6': '+92 3455555555',
+      'signupScreen7': 'Password',
+      'signupScreen8': '..........',
+      'signupScreen9': 'By signing up you agree to our Terms & Conditions and\nPrivacy Policy',
+      'signupScreen10': 'Sign Up',
+      'signupScreen11': 'OR',
+      'signupScreen12': 'Have an Account? ',
+      'signupScreen13': 'Sign In',
 
 
 
@@ -41,6 +58,21 @@ class Languages extends Translations {
       'conformPassword3': '..........',
       'conformPassword4': 'Confirm Password',
       'conformPassword5': 'Continue',
+
+
+
+      'homeScreen1': 'Welcome back!',
+      'homeScreen2': 'Hi Ali Khan',
+
+
+
+      'profileScreen1': 'Profile',
+      'profileScreen2': 'Sarah Anderson',
+      'profileScreen3': 'Product Designer',
+      'profileScreen4': 'Email',
+      'profileScreen5': 'sarah.ander@email.com',
+      'profileScreen6': 'Phone',
+      'profileScreen7': '+1 (555) 123-4567',
 
 
 

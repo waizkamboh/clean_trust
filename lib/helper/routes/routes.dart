@@ -1,7 +1,6 @@
 
 
 import 'package:clean_trust/helper/routes/routes_name.dart';
-import 'package:clean_trust/view/screens/login/login_screen.dart';
 import 'package:clean_trust/view/screens/onboarding/onboarding_screen1.dart';
 import 'package:clean_trust/view/screens/onboarding/onboarding_screen2.dart';
 import 'package:clean_trust/view/screens/onboarding/onboarding_screen3.dart';
