@@ -15,6 +15,13 @@ class AppColors {
   static const kBlueGreenColor = Color(0xff008A86);
   static const kDeepSkyBlueColor = Color(0xff027CAD);
   static const kLightCoolGreyColor = Color(0xffE5E7EB);
+  static const kLightGreenColor = Color(0xffDCFCE7);
+  static const kGreenColor = Color(0xff22C55E);
+  static const kForestGreenColor = Color(0xff166534);
+  static const kMidnightBlueColor = Color(0xff111827);
+  static const kCoolGreyColor = Color(0xff6B7280);
+  static const kLightGreyColor = Color(0xffC5C5C5);
+  static const kVeryLightGreenColor = Color(0xffF0FDF4);
 
 
 

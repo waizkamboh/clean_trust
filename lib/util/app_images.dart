@@ -15,6 +15,8 @@ class AppImages{
   static const String appleIcon = 'assets/icons/apple.png';
   static const String bellIcon = 'assets/icons/bell_icon.png';
   static const String handIcon = 'assets/icons/hand_icon.png';
+  static const String dragHandleIcon = 'assets/icons/drag_handle.png';
+  static const String circleTickIcon = 'assets/icons/circle_tick.png';
 
 
 

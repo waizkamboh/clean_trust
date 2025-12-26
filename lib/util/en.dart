@@ -63,6 +63,18 @@ class Languages extends Translations {
 
       'homeScreen1': 'Welcome back!',
       'homeScreen2': 'Hi Ali Khan',
+      'homeScreen3': 'Clocked In',
+      'homeScreen4': '8h 24m',
+      'homeScreen5': 'Working hours today',
+      'homeScreen6': 'Clock In',
+      'homeScreen7': '9:15 AM',
+      'homeScreen8': 'Scan QR Code',
+      'homeScreen9': 'Clock In / Clock Out',
+      'homeScreen10': 'Manual Entry (Clock In / Clock Out)',
+      'homeScreen11': 'Monthly Summary',
+      'homeScreen12': 'Calculated from actual Clock In & Clock Out records',
+      'homeScreen13': 'Total Hours Worked (This Month)',
+      'homeScreen14': '142h 35m',
 
 
 
