@@ -28,6 +28,8 @@ class Languages extends Translations {
 
 
 
+
+
       'signupScreen1': 'Register',
       'signupScreen2': 'Create your new account',
       'signupScreen3': 'Enter Email',
@@ -36,7 +38,7 @@ class Languages extends Translations {
       'signupScreen6': '+92 3455555555',
       'signupScreen7': 'Password',
       'signupScreen8': '..........',
-      'signupScreen9': 'By signing up you agree to our Terms & Conditions and\nPrivacy Policy',
+      'signupScreen9': 'By signing up you agree to our Terms & Conditions and Privacy Policy',
       'signupScreen10': 'Sign Up',
       'signupScreen11': 'OR',
       'signupScreen12': 'Have an Account? ',
@@ -45,7 +47,7 @@ class Languages extends Translations {
 
 
 
-      'forgotPassword1': 'Create Account',
+      'forgotPassword1': 'Forgot Password',
       'forgotPassword2': 'Enter Your email adress',
       'forgotPassword3': 'Enter Email',
       'forgotPassword4': 'email@gmail,com',

@@ -5,6 +5,7 @@ import 'package:clean_trust/view/base/top_header.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../../helper/routes/routes_name.dart';
 import '../../../util/text_style.dart';
 import '../../base/custom_drop_down.dart';
 import '../../base/input_text_field.dart';
@@ -275,120 +276,126 @@ class AttendanceHistoryScreen extends StatelessWidget {
     );
   }
   Widget reuseContainer() {
-    return Container(
-      padding: EdgeInsetsGeometry.symmetric(horizontal: getWidth(16), vertical: getHeight(25)),
-      margin: EdgeInsetsGeometry.only(bottom: getHeight(10)),
-      width: getWidth(362),
-      decoration: BoxDecoration(
-        color: AppColors.kWhiteColor,
-        borderRadius: BorderRadius.all(Radius.circular(12)),
-        border: Border.all(color: AppColors.kLightCoolGreyColor, width: 1),
-        boxShadow: [
-          BoxShadow(
-            color: AppColors.kBlackColor.withOpacity(0.10),
-            offset: const Offset(0, 10),
-            blurRadius: 15,
-            spreadRadius: 0,
-          ),
+    return GestureDetector(
+      onTap: (){
+        Get.toNamed(RouteName.attendanceDetailsScreen);
 
-          BoxShadow(
-            color: AppColors.kBlackColor.withOpacity(0.10),
-            offset: const Offset(0, 4),
-            blurRadius: 6,
-            spreadRadius: 0,
-          ),
-        ],
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            'attendanceHistory15'.tr,
-            style: kSize16W400KWhiteColorOutfitRegular.copyWith(
-              color: AppColors.kMidnightBlueColor,
-
+      },
+      child: Container(
+        padding: EdgeInsetsGeometry.symmetric(horizontal: getWidth(16), vertical: getHeight(25)),
+        margin: EdgeInsetsGeometry.only(bottom: getHeight(10)),
+        width: getWidth(362),
+        decoration: BoxDecoration(
+          color: AppColors.kWhiteColor,
+          borderRadius: BorderRadius.all(Radius.circular(12)),
+          border: Border.all(color: AppColors.kLightCoolGreyColor, width: 1),
+          boxShadow: [
+            BoxShadow(
+              color: AppColors.kBlackColor.withOpacity(0.10),
+              offset: const Offset(0, 10),
+              blurRadius: 15,
+              spreadRadius: 0,
             ),
-          ),
-          SizedBox(height: getHeight(5),),
 
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Row(
-                children: [
-                  Image.asset(AppImages.qrScreenIcon1, color: AppColors.kRedColor,),
-                  SizedBox(width: getWidth(5),),
+            BoxShadow(
+              color: AppColors.kBlackColor.withOpacity(0.10),
+              offset: const Offset(0, 4),
+              blurRadius: 6,
+              spreadRadius: 0,
+            ),
+          ],
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              'attendanceHistory15'.tr,
+              style: kSize16W400KWhiteColorOutfitRegular.copyWith(
+                color: AppColors.kMidnightBlueColor,
 
-                  RichText(
-                    text: TextSpan(
-                      children: [
-                        TextSpan(
-                            text: "attendanceHistory16".tr,
-                            style: kSize16W400KWhiteColorOutfitRegular.copyWith(color: AppColors.kCoolGreyColor, fontSize: getFont(14))
-                        ),
-                        TextSpan(
-                          text: "attendanceHistory17".tr,
-                          style: kSize16W400KWhiteColorOutfitRegular.copyWith(
-                            color: AppColors.kMidnightBlueColor,
-
-                          ),
-                        ),
-                      ],
-                    ),
-                  )
-
-                ],
               ),
-              Row(
-                children: [
-                  Image.asset(AppImages.qrScreenIcon1, color: AppColors.kGreenColor,),
-                  SizedBox(width: getWidth(5),),
+            ),
+            SizedBox(height: getHeight(5),),
 
-                  RichText(
-                    text: TextSpan(
-                      children: [
-                        TextSpan(
-                            text: "attendanceHistory18".tr,
-                            style: kSize16W400KWhiteColorOutfitRegular.copyWith(color: AppColors.kCoolGreyColor, fontSize: getFont(14))
-                        ),
-                        TextSpan(
-                          text: "attendanceHistory19".tr,
-                          style: kSize16W400KWhiteColorOutfitRegular.copyWith(
-                            color: AppColors.kMidnightBlueColor,
-
-                          ),
-                        ),
-                      ],
-                    ),
-                  )
-
-                ],
-              ),
-
-
-            ],
-          ),
-          SizedBox(height: getHeight(5),),
-
-          RichText(
-            text: TextSpan(
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                TextSpan(
-                    text: "attendanceHistory20".tr,
-                    style: kSize16W400KWhiteColorOutfitRegular.copyWith(color: AppColors.kCoolGreyColor, fontSize: getFont(14))
-                ),
-                TextSpan(
-                  text: "attendanceHistory21".tr,
-                  style: kSize16W400KWhiteColorOutfitRegular.copyWith(
-                    color: AppColors.kMidnightBlueColor,
+                Row(
+                  children: [
+                    Image.asset(AppImages.qrScreenIcon1, color: AppColors.kRedColor,),
+                    SizedBox(width: getWidth(5),),
 
-                  ),
+                    RichText(
+                      text: TextSpan(
+                        children: [
+                          TextSpan(
+                              text: "attendanceHistory16".tr,
+                              style: kSize16W400KWhiteColorOutfitRegular.copyWith(color: AppColors.kCoolGreyColor, fontSize: getFont(14))
+                          ),
+                          TextSpan(
+                            text: "attendanceHistory17".tr,
+                            style: kSize16W400KWhiteColorOutfitRegular.copyWith(
+                              color: AppColors.kMidnightBlueColor,
+
+                            ),
+                          ),
+                        ],
+                      ),
+                    )
+
+                  ],
                 ),
+                Row(
+                  children: [
+                    Image.asset(AppImages.qrScreenIcon1, color: AppColors.kGreenColor,),
+                    SizedBox(width: getWidth(5),),
+
+                    RichText(
+                      text: TextSpan(
+                        children: [
+                          TextSpan(
+                              text: "attendanceHistory18".tr,
+                              style: kSize16W400KWhiteColorOutfitRegular.copyWith(color: AppColors.kCoolGreyColor, fontSize: getFont(14))
+                          ),
+                          TextSpan(
+                            text: "attendanceHistory19".tr,
+                            style: kSize16W400KWhiteColorOutfitRegular.copyWith(
+                              color: AppColors.kMidnightBlueColor,
+
+                            ),
+                          ),
+                        ],
+                      ),
+                    )
+
+                  ],
+                ),
+
+
               ],
             ),
-          )
+            SizedBox(height: getHeight(5),),
 
-        ],
+            RichText(
+              text: TextSpan(
+                children: [
+                  TextSpan(
+                      text: "attendanceHistory20".tr,
+                      style: kSize16W400KWhiteColorOutfitRegular.copyWith(color: AppColors.kCoolGreyColor, fontSize: getFont(14))
+                  ),
+                  TextSpan(
+                    text: "attendanceHistory21".tr,
+                    style: kSize16W400KWhiteColorOutfitRegular.copyWith(
+                      color: AppColors.kMidnightBlueColor,
+
+                    ),
+                  ),
+                ],
+              ),
+            )
+
+          ],
+        ),
       ),
     );
 

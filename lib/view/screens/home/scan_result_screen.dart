@@ -5,6 +5,7 @@ import 'package:clean_trust/view/base/top_header.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../../helper/routes/routes_name.dart';
 import '../../../util/text_style.dart';
 import '../../base/round_button.dart';
 
@@ -63,7 +64,9 @@ class ScanResultScreen extends StatelessWidget {
           SizedBox(height: getHeight(30),),
 
           RoundButton(
-            onPress: (){},
+            onPress: (){
+
+            },
             radius: BorderRadius.circular(12),
             title: 'scanResult9'.tr,
             textStyle: kSize16W600KBlackColorOutfitSemiBold.copyWith(color: AppColors.kWhiteColor, fontSize: getFont(18)),

@@ -1,3 +1,4 @@
+import 'package:clean_trust/helper/routes/routes_name.dart';
 import 'package:clean_trust/util/app_colors.dart';
 import 'package:clean_trust/util/app_images.dart';
 import 'package:flutter/material.dart';
@@ -24,6 +25,7 @@ class LoginScreen extends StatelessWidget {
         children: [
           AuthHeader(),
           AuthCard(
+            size: getHeight(40),
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
@@ -118,15 +120,22 @@ class LoginScreen extends StatelessWidget {
                         ],
                       ),
                       Spacer(),
-                      Text(
-                        'loginScreen6'.tr,
-                        style: kSize16W400KWhiteColorOutfitRegular.copyWith(fontSize: getFont(12), color: AppColors.kSkyBlueColor),
+                      GestureDetector(
+                        onTap: (){
+                          Get.toNamed(RouteName.forGetPasswordScreen);
+                        },
+                        child: Text(
+                          'loginScreen6'.tr,
+                          style: kSize16W400KWhiteColorOutfitRegular.copyWith(fontSize: getFont(12), color: AppColors.kSkyBlueColor),
+                        ),
                       ),
                     ],
                   ),
                   SizedBox(height: getHeight(40)),
                   RoundButton(
-                    onPress: (){},
+                    onPress: (){
+                      Get.toNamed(RouteName.signUpScreen);
+                    },
                     radius: BorderRadius.circular(8),
                     title: 'loginScreen7'.tr,
                     textStyle: kSize16W600KBlackColorOutfitSemiBold.copyWith(fontSize: getFont(14.11), color: AppColors.kWhiteColor),

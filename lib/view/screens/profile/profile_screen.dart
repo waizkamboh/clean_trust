@@ -4,6 +4,7 @@ import 'package:clean_trust/view/screens/auth/component/auth_card.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../../helper/routes/routes_name.dart';
 import '../../../util/app_colors.dart';
 import '../../../util/size_config.dart';
 import '../../../util/text_style.dart';
@@ -122,15 +123,21 @@ class ProfileScreen extends StatelessWidget {
             ProfileOptionTile(
               leadingIcon: AppImages.profileScreenIcon3,
               title: 'profileScreen8'.tr,
-              onTap: () {  },
-        
+              onTap: () {  }, onTap1: () {
+              Get.toNamed(RouteName.editProfileScreen);
+
+            },
+
             ),
             SizedBox(height: getHeight(20),),
 
             ProfileOptionTile(
               leadingIcon: AppImages.profileScreenIcon4,
               title: 'profileScreen9'.tr,
-              onTap: () {  },
+              onTap: () {  }, onTap1: () {
+              Get.toNamed(RouteName.changePasswordScreen);
+
+            },
         
             ),
             SizedBox(height: getHeight(20),),
@@ -138,7 +145,10 @@ class ProfileScreen extends StatelessWidget {
             ProfileOptionTile(
               leadingIcon: AppImages.profileScreenIcon4,
               title: 'profileScreen10'.tr,
-              onTap: () {  },
+              onTap: () {  }, onTap1: () {
+              Get.toNamed(RouteName.appSettingScreen);
+
+            },
         
             ),
             SizedBox(height: getHeight(20),),
@@ -146,7 +156,7 @@ class ProfileScreen extends StatelessWidget {
             ProfileOptionTile(
               leadingIcon: AppImages.profileScreenIcon5,
               title: 'profileScreen11'.tr,
-              onTap: () {  },
+              onTap: () {  }, onTap1: () {  },
         
             ),
             SizedBox(height: getHeight(20),),
@@ -154,7 +164,7 @@ class ProfileScreen extends StatelessWidget {
             ProfileOptionTile(
               leadingIcon: AppImages.profileScreenIcon6,
               title: 'profileScreen12'.tr,
-              onTap: () {  },
+              onTap: () {  }, onTap1: () {  },
         
             ),
             SizedBox(height: getHeight(20),),
@@ -162,7 +172,7 @@ class ProfileScreen extends StatelessWidget {
             ProfileOptionTile(
               leadingIcon: AppImages.profileScreenIcon7,
               title: 'profileScreen13'.tr,
-              onTap: () {  },
+              onTap: () {  }, onTap1: () {  },
         
             ),
             SizedBox(height: getHeight(50),),
@@ -229,12 +239,13 @@ class ProfileOptionTile extends StatefulWidget {
   final String leadingIcon;
   final String title;
   final VoidCallback onTap;
+  final VoidCallback onTap1;
 
   const ProfileOptionTile({
     super.key,
     required this.leadingIcon,
     required this.title,
-    required this.onTap,
+    required this.onTap, required this.onTap1,
   });
 
   @override
@@ -248,81 +259,84 @@ class _ProfileOptionTileState extends State<ProfileOptionTile> {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () {
-        setState(() {
-          isSelected = !isSelected;
-        });
-        widget.onTap();
-      },
-      child: Container(
-        width: getWidth(327),
-        height: getHeight(74),
-        padding: EdgeInsets.symmetric(
-          horizontal: getWidth(17),
-          vertical: getHeight(17),
-        ),
-        decoration: BoxDecoration(
-          color: isSelected
-              ? AppColors.kSkyBlueColor
-              : AppColors.kWhiteColor,
-          borderRadius: BorderRadius.circular(12),
-          border: Border.all(
-            color: AppColors.kBlackColor.withOpacity(0.6),
-            width: 1,
+    return InkWell(
+      onTap: widget.onTap1,
+      child: GestureDetector(
+        onTap: () {
+          setState(() {
+            isSelected = !isSelected;
+          });
+          widget.onTap();
+        },
+        child: Container(
+          width: getWidth(327),
+          height: getHeight(74),
+          padding: EdgeInsets.symmetric(
+            horizontal: getWidth(17),
+            vertical: getHeight(17),
           ),
-        ),
-        child: Row(
-          children: [
-            // Leading Icon Box
-            Container(
-              width: getWidth(40),
-              height: getHeight(40),
-              decoration: BoxDecoration(
-                color: isSelected
-                    ? AppColors.kWhiteColor.withOpacity(0.2)
-                    : isLogout
-                    ? AppColors.kLightRed
-                    : AppColors.kColor3,
-                borderRadius: BorderRadius.circular(8),
-              ),
-              child: Image.asset(
-                widget.leadingIcon,
-                color: isSelected
-                    ? AppColors.kWhiteColor
-                    : isLogout
-                    ? AppColors.kPrimaryRed
-                    : AppColors.kSkyBlueColor,
-              ),
+          decoration: BoxDecoration(
+            color: isSelected
+                ? AppColors.kSkyBlueColor
+                : AppColors.kWhiteColor,
+            borderRadius: BorderRadius.circular(12),
+            border: Border.all(
+              color: AppColors.kBlackColor.withOpacity(0.6),
+              width: 1,
             ),
-
-            SizedBox(width: getWidth(5)),
-
-            // Title
-            Text(
-              widget.title.tr,
-              style: kSize16W600KBlackColorOutfitSemiBold.copyWith(
-                color: isSelected
-                    ? AppColors.kWhiteColor
-                    : isLogout
-                    ? AppColors.kPrimaryRed
-                    : AppColors.kMidnightBlueColor,
+          ),
+          child: Row(
+            children: [
+              // Leading Icon Box
+              Container(
+                width: getWidth(40),
+                height: getHeight(40),
+                decoration: BoxDecoration(
+                  color: isSelected
+                      ? AppColors.kWhiteColor.withOpacity(0.2)
+                      : isLogout
+                      ? AppColors.kLightRed
+                      : AppColors.kColor3,
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                child: Image.asset(
+                  widget.leadingIcon,
+                  color: isSelected
+                      ? AppColors.kWhiteColor
+                      : isLogout
+                      ? AppColors.kPrimaryRed
+                      : AppColors.kSkyBlueColor,
+                ),
               ),
-            ),
 
-            const Spacer(),
+              SizedBox(width: getWidth(5)),
 
-            // Arrow
-            Icon(
-              Icons.arrow_forward_ios_outlined,
-              size: 16,
-              color: isSelected
-                  ? AppColors.kWhiteColor.withOpacity(0.50)
-                  : isLogout
-                  ? AppColors.kSoftRed
-                  : AppColors.kBlackColor.withOpacity(0.50),
-            ),
-          ],
+              // Title
+              Text(
+                widget.title.tr,
+                style: kSize16W600KBlackColorOutfitSemiBold.copyWith(
+                  color: isSelected
+                      ? AppColors.kWhiteColor
+                      : isLogout
+                      ? AppColors.kPrimaryRed
+                      : AppColors.kMidnightBlueColor,
+                ),
+              ),
+
+              const Spacer(),
+
+              // Arrow
+              Icon(
+                Icons.arrow_forward_ios_outlined,
+                size: 16,
+                color: isSelected
+                    ? AppColors.kWhiteColor.withOpacity(0.50)
+                    : isLogout
+                    ? AppColors.kSoftRed
+                    : AppColors.kBlackColor.withOpacity(0.50),
+              ),
+            ],
+          ),
         ),
       ),
     );

@@ -3,6 +3,7 @@ import 'package:clean_trust/util/app_images.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../../helper/routes/routes_name.dart';
 import '../../../util/size_config.dart';
 import '../../../util/text_style.dart';
 
@@ -74,15 +75,21 @@ class HomeScreen extends StatelessWidget {
                           ),
         
                           Spacer(),
-        
-                          Container(
-                            width: getWidth(39),
-                            height: getHeight(38),
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(6),
-                              color: AppColors.kWhiteColor.withOpacity(0.22),
+
+                          GestureDetector(
+                            onTap: (){
+                              Get.toNamed(RouteName.notificationScreen);
+
+                            },
+                            child: Container(
+                              width: getWidth(39),
+                              height: getHeight(38),
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(6),
+                                color: AppColors.kWhiteColor.withOpacity(0.22),
+                              ),
+                              child: Image.asset(AppImages.bellIcon),
                             ),
-                            child: Image.asset(AppImages.bellIcon),
                           ),
                         ],
                       )
@@ -212,91 +219,103 @@ class HomeScreen extends StatelessWidget {
               ],
             ),
             SizedBox(height: getHeight(220)),
-            Container(
-              padding: EdgeInsetsGeometry.symmetric(horizontal: getWidth(24), vertical: getHeight(24)),
-              width: getWidth(327),
-              decoration: BoxDecoration(
-                color: AppColors.kSkyBlueColor,
-                borderRadius: BorderRadius.all(Radius.circular(16)),
-                border: Border.all(color: AppColors.kLightCoolGreyColor, width: 1),
-                boxShadow: [
-                  BoxShadow(
-                    color: AppColors.kBlackColor.withOpacity(0.10),
-                    offset: const Offset(0, 10),
-                    blurRadius: 15,
-                    spreadRadius: 0,
-                  ),
+            GestureDetector(
+              onTap: (){
+                Get.toNamed(RouteName.scanQRCodeScreen);
 
-                  BoxShadow(
-                    color: AppColors.kBlackColor.withOpacity(0.10),
-                    offset: const Offset(0, 4),
-                    blurRadius: 6,
-                    spreadRadius: 0,
-                  ),
-                ],
-              ),
-              child: Column(
-                children: [
-                  Row(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Image.asset(
-                        AppImages.dragHandleIcon,
-                        width: getWidth(21),
-                        height: getHeight(24),
-                      ),
+              },
+              child: Container(
+                padding: EdgeInsetsGeometry.symmetric(horizontal: getWidth(24), vertical: getHeight(24)),
+                width: getWidth(327),
+                decoration: BoxDecoration(
+                  color: AppColors.kSkyBlueColor,
+                  borderRadius: BorderRadius.all(Radius.circular(16)),
+                  border: Border.all(color: AppColors.kLightCoolGreyColor, width: 1),
+                  boxShadow: [
+                    BoxShadow(
+                      color: AppColors.kBlackColor.withOpacity(0.10),
+                      offset: const Offset(0, 10),
+                      blurRadius: 15,
+                      spreadRadius: 0,
+                    ),
 
-                      SizedBox(width: getWidth(20)),
+                    BoxShadow(
+                      color: AppColors.kBlackColor.withOpacity(0.10),
+                      offset: const Offset(0, 4),
+                      blurRadius: 6,
+                      spreadRadius: 0,
+                    ),
+                  ],
+                ),
+                child: Column(
+                  children: [
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Image.asset(
+                          AppImages.dragHandleIcon,
+                          width: getWidth(21),
+                          height: getHeight(24),
+                        ),
 
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                            'homeScreen8'.tr,
-                            style: kSize16W600KBlackColorOutfitSemiBold.copyWith(
-                              fontSize: getFont(18),
-                              color: AppColors.kWhiteColor
+                        SizedBox(width: getWidth(20)),
 
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              'homeScreen8'.tr,
+                              style: kSize16W600KBlackColorOutfitSemiBold.copyWith(
+                                fontSize: getFont(18),
+                                color: AppColors.kWhiteColor
+
+                              ),
                             ),
-                          ),
 
-                          Text(
-                            'homeScreen9'.tr,
-                            style: kSize16W400KWhiteColorOutfitRegular.copyWith(
-                              fontSize: getFont(14),
+                            Text(
+                              'homeScreen9'.tr,
+                              style: kSize16W400KWhiteColorOutfitRegular.copyWith(
+                                fontSize: getFont(14),
 
+                              ),
                             ),
-                          ),
-                        ],
-                      ),
+                          ],
+                        ),
 
 
-                    ],
-                  )
+                      ],
+                    )
 
 
 
-                ],
+                  ],
+                ),
               ),
             ),
             SizedBox(height: getHeight(10)),
-            Container(
-              padding: EdgeInsetsGeometry.symmetric(horizontal: getWidth(29), vertical: getHeight(22)),
-              width: getWidth(327),
-              decoration: BoxDecoration(
-                color: AppColors.kColor1,
-                borderRadius: BorderRadius.all(Radius.circular(8)),
-                border: Border.all(color: AppColors.kLightCoolGreyColor, width: 2),
-              ),
-              child: Center(
-                child: Text(
-                  'homeScreen10'.tr,
-                  style: kSize16W600KBlackColorOutfitSemiBold.copyWith(
-                      fontSize: getFont(14),
-                      color: AppColors.kMidnightBlueColor.withOpacity(0.50)
-        
+            GestureDetector(
+              onTap: (){
+                Get.toNamed(RouteName.manualEntryScreen);
+
+              },
+              child: Container(
+                padding: EdgeInsetsGeometry.symmetric(horizontal: getWidth(29), vertical: getHeight(22)),
+                width: getWidth(327),
+                decoration: BoxDecoration(
+                  color: AppColors.kColor1,
+                  borderRadius: BorderRadius.all(Radius.circular(8)),
+                  border: Border.all(color: AppColors.kLightCoolGreyColor, width: 2),
+                ),
+                child: Center(
+                  child: Text(
+                    'homeScreen10'.tr,
+                    style: kSize16W600KBlackColorOutfitSemiBold.copyWith(
+                        fontSize: getFont(14),
+                        color: AppColors.kMidnightBlueColor.withOpacity(0.50)
+
+                    ),
                   ),
                 ),
               ),
@@ -336,59 +355,65 @@ class HomeScreen extends StatelessWidget {
                         fontSize: getFont(14)
                     ),
                   ),
-                  Container(
-                    padding: EdgeInsetsGeometry.symmetric(horizontal: getWidth(12), vertical: getHeight(18)),
-                    width: getWidth(293),
-                    decoration: BoxDecoration(
-                      gradient: LinearGradient(colors: [
-                        AppColors.kVeryLightGreenColor,
-                        AppColors.kLightGreenColor.withOpacity(0.50),
-                      ]),
-        
-                      borderRadius: BorderRadius.all(Radius.circular(16)),
-                      border: Border.all(color: AppColors.kLightCoolGreyColor, width: 1),
-                    ),
-                    child: Row(
-                      children: [
-                        Container(
-                          width: getWidth(45),
-                          height: getHeight(50),
-                          decoration: BoxDecoration(
-                            color: AppColors.kGreenColor.withOpacity(0.10),
-                            borderRadius: BorderRadius.all(Radius.circular(12)),
-                            border: Border.all(color: AppColors.kLightCoolGreyColor, width: 1),
+                  GestureDetector(
+                    onTap: (){
+                      Get.toNamed(RouteName.attendanceHistoryScreen);
+
+                    },
+                    child: Container(
+                      padding: EdgeInsetsGeometry.symmetric(horizontal: getWidth(12), vertical: getHeight(18)),
+                      width: getWidth(293),
+                      decoration: BoxDecoration(
+                        gradient: LinearGradient(colors: [
+                          AppColors.kVeryLightGreenColor,
+                          AppColors.kLightGreenColor.withOpacity(0.50),
+                        ]),
+
+                        borderRadius: BorderRadius.all(Radius.circular(16)),
+                        border: Border.all(color: AppColors.kLightCoolGreyColor, width: 1),
+                      ),
+                      child: Row(
+                        children: [
+                          Container(
+                            width: getWidth(45),
+                            height: getHeight(50),
+                            decoration: BoxDecoration(
+                              color: AppColors.kGreenColor.withOpacity(0.10),
+                              borderRadius: BorderRadius.all(Radius.circular(12)),
+                              border: Border.all(color: AppColors.kLightCoolGreyColor, width: 1),
+                            ),
+                            child: Image.asset(AppImages.circleTickIcon),
+
                           ),
-                          child: Image.asset(AppImages.circleTickIcon),
-        
-                        ),
-                        SizedBox(width: getWidth(10)),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text(
-                              'homeScreen13'.tr,
-                              style: kSize16W400KWhiteColorOutfitRegular.copyWith(
-                                  color: AppColors.kCoolGreyColor,
-                                  fontSize: getFont(13)
+                          SizedBox(width: getWidth(10)),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(
+                                'homeScreen13'.tr,
+                                style: kSize16W400KWhiteColorOutfitRegular.copyWith(
+                                    color: AppColors.kCoolGreyColor,
+                                    fontSize: getFont(13)
+                                ),
                               ),
-                            ),
-        
-                            Text(
-                              'homeScreen14'.tr,
-                              style: kSize20W700KWhiteColorOutfitBold.copyWith(
-                                  color: AppColors.kMidnightBlueColor,
-                                  fontSize: getFont(24)
+
+                              Text(
+                                'homeScreen14'.tr,
+                                style: kSize20W700KWhiteColorOutfitBold.copyWith(
+                                    color: AppColors.kMidnightBlueColor,
+                                    fontSize: getFont(24)
+                                ),
                               ),
-                            ),
-                          ],
-                        ),
-        
-        
-        
-        
-        
-                      ],
+                            ],
+                          ),
+
+
+
+
+
+                        ],
+                      ),
                     ),
                   ),
         

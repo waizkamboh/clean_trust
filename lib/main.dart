@@ -40,11 +40,11 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
       ),
-     home: NotificationScreen(),
+     //home: NotificationScreen(),
       translations: Languages(),
       locale: const Locale('en', 'US'),
       fallbackLocale:  const Locale('en', 'US'),
-     // getPages: AppRoutes.appRoutes(),
+      getPages: AppRoutes.appRoutes(),
     );
   }
 }

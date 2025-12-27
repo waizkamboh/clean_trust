@@ -1,35 +1,48 @@
+import 'package:clean_trust/helper/routes/routes_name.dart';
+import 'package:clean_trust/util/app_colors.dart';
 import 'package:clean_trust/util/app_images.dart';
-import 'package:clean_trust/view/base/top_header.dart';
-import 'package:clean_trust/view/screens/auth/component/auth_card.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../../util/app_colors.dart';
 import '../../../util/size_config.dart';
 import '../../../util/text_style.dart';
 import '../../base/input_text_field.dart';
 import '../../base/round_button.dart';
+import 'component/auth_card.dart';
+import 'component/auth_header.dart';
+import 'component/social_auth_section.dart';
 
-class ChangePasswordScreen extends StatelessWidget {
-  const ChangePasswordScreen({super.key});
+class ConfirmPasswordScreen extends StatelessWidget {
+  const ConfirmPasswordScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     SizeConfig().init(context);
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       backgroundColor: AppColors.kWhiteColor,
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            TopHeader(title: 'changePasswordScreen1'.tr),
-            SizedBox(height: getHeight(40),),
-            SingleChildScrollView(
+      body: Stack(
+        clipBehavior: Clip.none,
+        children: [
+          AuthHeader(),
+          AuthCard(
+             // size: getHeight(40),
               child: Column(
+                mainAxisSize: MainAxisSize.min,
                 children: [
+                 // SizedBox(height: getHeight(34)),
+                  Align(
+                    alignment: Alignment.centerLeft,
+                    child: Text(
+                      'conformPassword1'.tr,
+                      style: kSize16W600KBlackColorOutfitSemiBold.copyWith(fontSize: getFont(18)),
+                    ),
+                  ),
+                  SizedBox(height: getHeight(20)),
                   InputTextField(
                     //height: getHeight(42),
                     //myController: controller.emailController,
-                    width: getWidth(333),
+                    width: getWidth(300),
                     contentPadding: EdgeInsets.symmetric(horizontal: getWidth(20)),
                     //myController: signUpC.nameSignupController.value,
                     //focusNode: signUpC.nameSignupFocusNode.value,
@@ -39,6 +52,7 @@ class ChangePasswordScreen extends StatelessWidget {
                     onValidator: (email){
                       return null;
                     },
+                    keyBoardType: TextInputType.emailAddress,
                     obscureText: true,
                     suffixIcon: InkWell(
                       splashColor: Colors.transparent,
@@ -65,21 +79,16 @@ class ChangePasswordScreen extends StatelessWidget {
                         ],
                       ),
                     ),
-                    keyBoardType: TextInputType.emailAddress,
-                    labelTextStyle: kSize16W400KWhiteColorOutfitRegular.copyWith(fontSize: getFont(14), color: AppColors.kCharcoalBlackColor),
-                    hintTextStyle: kSize16W400KWhiteColorOutfitRegular.copyWith(fontSize: getFont(14), color: AppColors.kBlackColor.withOpacity(0.66)),
-                    hintText: 'changePasswordScreen2'.tr,
-                    labelText: 'changePasswordScreen3'.tr,
-                    borderRadius: 5,
+                    hintText: 'conformPassword3'.tr,
+                    labelText: 'conformPassword2'.tr,
                     borderSideColor: AppColors.kBlackColor.withOpacity(0.37),
                     textFormFieldColor: AppColors.kWhiteColor,
                   ),
-                  SizedBox(height: getHeight(20),),
-
+                  SizedBox(height: getHeight(20)),
                   InputTextField(
                     //height: getHeight(42),
                     //myController: controller.emailController,
-                    width: getWidth(333),
+                    width: getWidth(300),
                     contentPadding: EdgeInsets.symmetric(horizontal: getWidth(20)),
                     //myController: signUpC.nameSignupController.value,
                     //focusNode: signUpC.nameSignupFocusNode.value,
@@ -89,6 +98,7 @@ class ChangePasswordScreen extends StatelessWidget {
                     onValidator: (email){
                       return null;
                     },
+                    keyBoardType: TextInputType.emailAddress,
                     obscureText: true,
                     suffixIcon: InkWell(
                       splashColor: Colors.transparent,
@@ -115,93 +125,36 @@ class ChangePasswordScreen extends StatelessWidget {
                         ],
                       ),
                     ),
-                    keyBoardType: TextInputType.emailAddress,
-                    labelTextStyle: kSize16W400KWhiteColorOutfitRegular.copyWith(fontSize: getFont(14), color: AppColors.kCharcoalBlackColor),
-                    hintTextStyle: kSize16W400KWhiteColorOutfitRegular.copyWith(fontSize: getFont(14), color: AppColors.kBlackColor.withOpacity(0.66)),
-                    hintText: 'changePasswordScreen3'.tr,
-                    labelText: 'changePasswordScreen4'.tr,
-                    borderRadius: 5,
+                    hintText: 'conformPassword3'.tr,
+                    labelText: 'conformPassword4'.tr,
                     borderSideColor: AppColors.kBlackColor.withOpacity(0.37),
                     textFormFieldColor: AppColors.kWhiteColor,
                   ),
-                  SizedBox(height: getHeight(20),),
-
-                  InputTextField(
-                    //height: getHeight(42),
-                    //myController: controller.emailController,
-                    width: getWidth(333),
-                    contentPadding: EdgeInsets.symmetric(horizontal: getWidth(20)),
-                    //myController: signUpC.nameSignupController.value,
-                    //focusNode: signUpC.nameSignupFocusNode.value,
-                    // onFiledSubmittedValue: (value){
-                    //   Utils.fieldFocusChange(context, signUpC.nameSignupFocusNode.value, signUpC.emailSignupFocusNode.value);
-                    // },
-                    onValidator: (email){
-                      return null;
-                    },
-                    obscureText: true,
-                    suffixIcon: InkWell(
-                      splashColor: Colors.transparent,
-                      // onTap: (){
-                      //   controller.isPassShow = !controller.isPassShow;
-                      //   controller.update();
-                      // },
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Icon(
-                            Icons.remove_red_eye_outlined,
-                            color: AppColors.kBlackColor.withOpacity(0.66),
-                          )
-                          // controller.isPassShow
-                          //     ? const Icon(
-                          //   Icons.remove_red_eye_outlined,
-                          //   color: AppColors.kPrimary,
-                          // )
-                          //     : const Icon(
-                          //   Icons.remove_red_eye,
-                          //   color: AppColors.kPrimary,
-                          // )
-                        ],
-                      ),
-                    ),
-                    keyBoardType: TextInputType.emailAddress,
-                    labelTextStyle: kSize16W400KWhiteColorOutfitRegular.copyWith(fontSize: getFont(14), color: AppColors.kCharcoalBlackColor),
-                    hintTextStyle: kSize16W400KWhiteColorOutfitRegular.copyWith(fontSize: getFont(14), color: AppColors.kBlackColor.withOpacity(0.66)),
-                    hintText: 'changePasswordScreen3'.tr,
-                    labelText: 'changePasswordScreen5'.tr,
-                    borderRadius: 5,
-                    borderSideColor: AppColors.kBlackColor.withOpacity(0.37),
-                    textFormFieldColor: AppColors.kWhiteColor,
-                  ),
-                  SizedBox(height: getHeight(100),),
+                  SizedBox(height: getHeight(40)),
                   RoundButton(
-                    onPress: (){},
-                    radius: BorderRadius.circular(12),
-                    title: 'changePasswordScreen6'.tr,
-                    textStyle: kSize16W600KBlackColorOutfitSemiBold.copyWith(color: AppColors.kWhiteColor,),
+                    onPress: (){
+                      Get.toNamed(RouteName.signUpScreen);
+                    },
+                    radius: BorderRadius.circular(8),
+                    title: 'conformPassword5'.tr,
+                    textStyle: kSize16W600KBlackColorOutfitSemiBold.copyWith(fontSize: getFont(14.11), color: AppColors.kWhiteColor),
                     buttonColor: AppColors.kSkyBlueColor,
-                    width: getWidth(343),
-                    height: getHeight(56),
+                    width: getWidth(269),
+                    height: getHeight(44),
 
                   ),
+                  SizedBox(height: getHeight(20)),
+
+
+
 
                 ],
-              ),
-            ),
+              )
+          ),
 
 
-
-
-          ]
-
-
-
-        ),
+        ],
       ),
     );
   }
-
 }
-
-

@@ -6,14 +6,16 @@ import '../../../../util/app_images.dart';
 
 class AuthCard extends StatelessWidget {
   final Widget child;
+  final double size;
 
-  const AuthCard({super.key, required this.child});
+  const AuthCard({super.key, required this.child, this.size = 0});
 
   @override
   Widget build(BuildContext context) {
     SizeConfig().init(context);
     return Center(
       child: Container(
+        margin: EdgeInsetsGeometry.only(top: size),
         padding: EdgeInsetsGeometry.symmetric(horizontal: getWidth(15)),
         width: getWidth(332),
         // height: getHeight(500),

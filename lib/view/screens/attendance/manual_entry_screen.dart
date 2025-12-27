@@ -5,6 +5,7 @@ import 'package:clean_trust/view/base/top_header.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../../helper/routes/routes_name.dart';
 import '../../../util/text_style.dart';
 import '../../base/custom_drop_down.dart';
 import '../../base/input_text_field.dart';
@@ -244,7 +245,10 @@ class ManualEntryScreen extends StatelessWidget {
                   ),
                   SizedBox(height: getHeight(30),),
                   RoundButton(
-                    onPress: (){},
+                    onPress: (){
+                      Get.toNamed(RouteName.leaveRequestScreen);
+
+                    },
                     radius: BorderRadius.circular(12),
                     title: 'manualEntry16'.tr,
                     textStyle: kSize16W600KBlackColorOutfitSemiBold.copyWith(color: AppColors.kWhiteColor,),

@@ -73,8 +73,7 @@ class OnboardingItem extends StatelessWidget {
                   onPress: onButtonPress,
                   radius: BorderRadius.circular(8),
                   title: 'onboardingScreen3'.tr,
-                  textStyle:
-                  kSize16W600KBlackColorOutfitSemiBold,
+                  textStyle: kSize16W600KBlackColorOutfitSemiBold,
                   width: getWidth(332),
                   height: getHeight(54),
                 ),

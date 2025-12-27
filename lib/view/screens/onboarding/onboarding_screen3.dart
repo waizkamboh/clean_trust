@@ -1,3 +1,4 @@
+import 'package:clean_trust/helper/routes/routes_name.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -14,7 +15,7 @@ class OnboardingScreen3 extends StatelessWidget {
       title: 'onboardingScreen6',
       subtitle: 'onboardingScreen7',
       onButtonPress: () {
-        //Get.toNamed('/nextOnboarding');
+        Get.toNamed(RouteName.loginScreen);
       },
     );
   }

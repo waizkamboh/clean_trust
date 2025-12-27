@@ -4,6 +4,7 @@ import 'package:clean_trust/view/base/top_header.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../../helper/routes/routes_name.dart';
 import '../../../util/app_images.dart';
 import '../../../util/text_style.dart';
 import '../../base/round_button.dart';
@@ -111,7 +112,12 @@ class ScanQrcodeScreen extends StatelessWidget {
               ],
             ),
             SizedBox(height: getHeight(80),),
-            Image.asset(AppImages.QRCodeImage,),
+            GestureDetector(
+              onTap: (){
+                Get.toNamed(RouteName.scanResultScreen);
+
+              },
+                child: Image.asset(AppImages.QRCodeImage,)),
             Container(
               width: getWidth(64),
               height: getHeight(64),
