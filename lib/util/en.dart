@@ -283,6 +283,19 @@ class Languages extends Translations {
       'appSettingScreen17': 'Sign Out',
 
 
+      'notificationsScreen1': 'Notifications',
+      'notificationsScreen2': 'All',
+      'notificationsScreen3': 'System',
+      'notificationsScreen4': 'Approvals',
+      'notificationsScreen5': 'Summary',
+      'notificationsScreen6': 'System Update Available',
+      'notificationsScreen7': 'A new version of the app is ready to install with bug fixes and improvements.',
+      'notificationsScreen8': '2 minutes ago',
+      'notificationsScreen9': 'Leave Request Approved',
+      'notificationsScreen10': 'Your vacation request for March 15-20 has been approved by your manager.',
+      'notificationsScreen11': '15 minutes ago',
+
+
 
 
 

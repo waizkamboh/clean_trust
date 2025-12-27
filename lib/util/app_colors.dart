@@ -39,6 +39,7 @@ class AppColors {
   static const kLightRed = Color(0xFFFEF2F2);
   static const kPrimaryRed = Color(0xFFDC2626);
   static const kSoftRed = Color(0xFFF87171);
+  static const kIceBlueColor = Color(0xffF1FAFD);
 
 
 

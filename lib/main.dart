@@ -10,6 +10,7 @@ import 'package:clean_trust/view/screens/auth/signup_screen.dart';
 import 'package:clean_trust/view/screens/home/home_screen.dart';
 import 'package:clean_trust/view/screens/home/scan_qrcode_screen.dart';
 import 'package:clean_trust/view/screens/home/scan_result_screen.dart';
+import 'package:clean_trust/view/screens/notification/notification_screen.dart';
 import 'package:clean_trust/view/screens/onboarding/onboarding_screen1.dart';
 import 'package:clean_trust/view/screens/onboarding/onboarding_screen2.dart';
 import 'package:clean_trust/view/screens/onboarding/onboarding_screen3.dart';
@@ -39,7 +40,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
       ),
-     home: AppSettingScreen(),
+     home: NotificationScreen(),
       translations: Languages(),
       locale: const Locale('en', 'US'),
       fallbackLocale:  const Locale('en', 'US'),
