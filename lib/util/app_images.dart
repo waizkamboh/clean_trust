@@ -38,20 +38,6 @@ class AppImages{
   static const String leaveRequestIcon3 = 'assets/icons/leave_request3.png';
   static const String leaveRequestIcon4 = 'assets/icons/leave_request4.png';
   static const String leaveRequestIcon5 = 'assets/icons/leave_request5.png';
-
-
-
-
-
-
-
-
-
-
-
-
-
-
   static const String profileScreenIcon1 = 'assets/icons/profile_screen_icon1.png';
   static const String profileScreenIcon2 = 'assets/icons/profile_screen_icon2.png';
   static const String profileScreenIcon3 = 'assets/icons/profile_screen_icon3.png';
@@ -59,6 +45,11 @@ class AppImages{
   static const String profileScreenIcon5 = 'assets/icons/profile_screen_icon5.png';
   static const String profileScreenIcon6 = 'assets/icons/profile_screen_icon6.png';
   static const String profileScreenIcon7 = 'assets/icons/profile_screen_icon7.png';
+  static const String switchButtonIcon = 'assets/icons/switch_button.png';
+  static const String switchButtonIcon1 = 'assets/icons/switch_button1.png';
+  static const String appSettingIcon1 = 'assets/icons/app_setting_icon1.png';
+  static const String appSettingIcon2 = 'assets/icons/app_setting_icon2.png';
+  static const String forwardIcon = 'assets/icons/forward_icon.png';
 
 
 

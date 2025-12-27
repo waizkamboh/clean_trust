@@ -264,6 +264,26 @@ class Languages extends Translations {
       'changePasswordScreen6': 'Save Changes',
 
 
+      'appSettingScreen1': 'App Setting',
+      'appSettingScreen2': 'Allow Notifications',
+      'appSettingScreen3': 'Get updates and alerts',
+      'appSettingScreen4': 'Allow Location',
+      'appSettingScreen5': 'Access your location',
+      'appSettingScreen6': 'Auto Sync',
+      'appSettingScreen7': 'Sync data automatically',
+      'appSettingScreen8': 'App Version',
+      'appSettingScreen9': 'Version 2.4.1',
+      'appSettingScreen10': 'Latest',
+      'appSettingScreen11': 'Last Updated',
+      'appSettingScreen12': 'Dec 15, 2024',
+      'appSettingScreen13': 'Build Number',
+      'appSettingScreen14': '241215',
+      'appSettingScreen15': '© 2024 Your App. All rights reserved.',
+      'appSettingScreen16': 'Help & Support',
+      'appSettingScreen17': 'Sign Out',
+
+
+
 
 
 
