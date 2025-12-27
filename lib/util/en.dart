@@ -256,6 +256,15 @@ class Languages extends Translations {
 
 
 
+      'changePasswordScreen1': 'Change Password',
+      'changePasswordScreen2': 'Old Password',
+      'changePasswordScreen3': '..........',
+      'changePasswordScreen4': 'New Password',
+      'changePasswordScreen5': 'Confirm Password',
+      'changePasswordScreen6': 'Save Changes',
+
+
+
 
 
 

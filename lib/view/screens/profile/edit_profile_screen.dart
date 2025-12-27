@@ -207,7 +207,6 @@ class EditProfileScreen extends StatelessWidget {
                 return null;
               },
               keyBoardType: TextInputType.emailAddress,
-              readOnly: true,
               labelTextStyle: kSize16W400KWhiteColorOutfitRegular.copyWith(fontSize: getFont(14), color: AppColors.kCharcoalBlackColor),
               hintTextStyle: kSize16W400KWhiteColorOutfitRegular.copyWith(fontSize: getFont(14), color: AppColors.kBlackColor.withOpacity(0.66)),
               obscureText: false,
@@ -232,7 +231,6 @@ class EditProfileScreen extends StatelessWidget {
                 return null;
               },
               keyBoardType: TextInputType.emailAddress,
-              readOnly: true,
               labelTextStyle: kSize16W400KWhiteColorOutfitRegular.copyWith(fontSize: getFont(14), color: AppColors.kCharcoalBlackColor),
               hintTextStyle: kSize16W400KWhiteColorOutfitRegular.copyWith(fontSize: getFont(14), color: AppColors.kBlackColor.withOpacity(0.66)),
               obscureText: false,
