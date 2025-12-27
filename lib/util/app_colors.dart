@@ -33,6 +33,10 @@ class AppColors {
   static const kTealGreenLight = Color(0xff008B86);
   static const kLightCoolGray = Color(0xFFD1D5DB);
   static const kLightGrayBackground = Color(0xFFF3F4F6);
+  static const kSoftPeach = Color(0xffFFEDD5);
+  static const kVividOrange = Color(0xFFEA580C);
+  static const kBurntOrange = Color(0xFF9A3412);
+
 
 
 
