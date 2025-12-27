@@ -22,15 +22,14 @@ class _NotificationScreenState extends State<NotificationScreen> {
     SizeConfig().init(context);
     return Scaffold(
       backgroundColor: AppColors.kWhiteColor,
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            TopHeader(title: 'notificationsScreen1'.tr),
-            Padding(
+      body: Column(
+        children: [
+          TopHeader(title: 'notificationsScreen1'.tr),
+          Expanded(
+            child: Padding(
               padding:  EdgeInsets.symmetric(horizontal: getWidth(20)),
-              child: Column(
+              child: ListView(
                 children: [
-                  SizedBox(height: getHeight(30),),
                   Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: List.generate(4, (index) {
@@ -44,7 +43,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
                 },
               );
             }),
-          ),
+                    ),
                   SizedBox(height: getHeight(30),),
                   buildNotificationCard(
                       iconPath: AppImages.bellIcon,
@@ -130,8 +129,8 @@ class _NotificationScreenState extends State<NotificationScreen> {
                 ],
               ),
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
