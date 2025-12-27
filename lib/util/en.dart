@@ -167,6 +167,27 @@ class Languages extends Translations {
       'manualEntry16': 'Submit Entry',
       'manualEntry17': 'Submit Other Entry',
 
+      'leaveRequest1': 'Leave Request',
+      'leaveRequest2': 'Request Time Off',
+      'leaveRequest3': 'Fill out the form below to submit your leave request',
+      'leaveRequest4': 'Request Time Off',
+      'leaveRequest5': 'Fill out the form below to submit your\nleave request',
+       'leaveRequest6': 'Leave Type',
+       'leaveRequest7': 'Sick',
+       'leaveRequest8': 'Vacation',
+       'leaveRequest9': 'Other',
+      'leaveRequest10': 'Start Date',
+      'leaveRequest11': 'mm/dd/yyyy',
+      'leaveRequest12': 'End Date',
+      'leaveRequest13': 'mm/dd/yyyy',
+      'leaveRequest14': 'Reason',
+      'leaveRequest15': 'Upload Document',
+      'leaveRequest16': '(optional)',
+      'leaveRequest17': 'Tap to upload a file',
+      'leaveRequest18': 'PDF, DOC, or Image files',
+      'leaveRequest19': 'Submit Leave Request',
+
+
 
 
 

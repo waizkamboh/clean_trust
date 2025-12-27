@@ -33,6 +33,11 @@ class AppImages{
   static const String attendanceDetailIcon2 = 'assets/icons/attendance_detail2.png';
   static const String attendanceDetailIcon3 = 'assets/icons/attendance_detail3.png';
   static const String starIcon = 'assets/icons/star_icon.png';
+  static const String leaveRequestIcon1 = 'assets/icons/leave_request1.png';
+  static const String leaveRequestIcon2 = 'assets/icons/leave_request2.png';
+  static const String leaveRequestIcon3 = 'assets/icons/leave_request3.png';
+  static const String leaveRequestIcon4 = 'assets/icons/leave_request4.png';
+  static const String leaveRequestIcon5 = 'assets/icons/leave_request5.png';
 
 
 
