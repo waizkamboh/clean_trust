@@ -240,6 +240,20 @@ class Languages extends Translations {
       'profileScreen12': 'Help & Support',
       'profileScreen13': 'Logout',
 
+      'EditProfileScreen1': 'Edit Profile',
+      'EditProfileScreen2': 'Name',
+      'EditProfileScreen3': 'User name',
+      'EditProfileScreen4': 'Enter Email',
+      'EditProfileScreen5': 'email@gmail,com',
+      'EditProfileScreen6': 'Joining Date',
+      'EditProfileScreen7': 'Department',
+      'EditProfileScreen8': 'Designation',
+      'EditProfileScreen9': 'Phone Number',
+      'EditProfileScreen10': '+92 3455555555',
+      'EditProfileScreen11': 'Password',
+      'EditProfileScreen12': '..........',
+      'EditProfileScreen13': 'Save Changes',
+
 
 
 

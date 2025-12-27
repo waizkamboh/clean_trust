@@ -92,6 +92,8 @@ class InputTextField extends StatelessWidget {
         validator: onValidator,
         keyboardType: keyBoardType,
         decoration: InputDecoration(
+          floatingLabelBehavior: FloatingLabelBehavior.always,
+
           counterText: counterText,
           contentPadding: contentPadding ??
               const EdgeInsets.symmetric(horizontal: 0, vertical: 0),
