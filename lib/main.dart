@@ -36,7 +36,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
       ),
-     home: AttendanceOfflineScreen(),
+     home: ProfileScreen(),
       translations: Languages(),
       locale: const Locale('en', 'US'),
       fallbackLocale:  const Locale('en', 'US'),

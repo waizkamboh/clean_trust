@@ -233,6 +233,12 @@ class Languages extends Translations {
       'profileScreen5': 'sarah.ander@email.com',
       'profileScreen6': 'Phone',
       'profileScreen7': '+1 (555) 123-4567',
+      'profileScreen8': 'Edit Profile',
+      'profileScreen9': 'Change Password',
+      'profileScreen10': 'App Settings',
+      'profileScreen11': 'Language',
+      'profileScreen12': 'Help & Support',
+      'profileScreen13': 'Logout',
 
 
 

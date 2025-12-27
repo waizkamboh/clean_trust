@@ -36,6 +36,10 @@ class AppColors {
   static const kSoftPeach = Color(0xffFFEDD5);
   static const kVividOrange = Color(0xFFEA580C);
   static const kBurntOrange = Color(0xFF9A3412);
+  static const kLightRed = Color(0xFFFEF2F2);
+  static const kPrimaryRed = Color(0xFFDC2626);
+  static const kSoftRed = Color(0xFFF87171);
+
 
 
 
