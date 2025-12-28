@@ -189,6 +189,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     title: 'profileScreen12',
                     onTap: () {
                       setState(() => selectedIndex = 4);
+                      Get.toNamed(RouteName.helpSupportScreen);
+
                     },
                   ),
                   SizedBox(height: getHeight(20)),

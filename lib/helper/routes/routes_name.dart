@@ -20,6 +20,7 @@ class RouteName{
   static const String appSettingScreen = '/appSetting_screen';
   static const String changePasswordScreen = '/changePassword_screen';
   static const String languageScreen = '/language_screen';
+  static const String helpSupportScreen = '/helpSupport_screen';
 
 
 
