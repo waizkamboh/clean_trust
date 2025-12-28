@@ -8,6 +8,7 @@ import '../../../helper/routes/routes_name.dart';
 import '../../../util/app_colors.dart';
 import '../../../util/size_config.dart';
 import '../../../util/text_style.dart';
+import '../../base/round_button.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
@@ -198,6 +199,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     title: 'profileScreen13',
                     onTap: () {
                       setState(() => selectedIndex = 5);
+                      showLogoutDialog();
+
                     },
                   ),
                   SizedBox(height: getHeight(50)),
@@ -342,4 +345,89 @@ class _ProfileScreenState extends State<ProfileScreen> {
       ),
     );
   }
+  void showLogoutDialog() {
+    Get.dialog(
+      Dialog(
+        backgroundColor: AppColors.kWhiteColor,
+        shadowColor: AppColors.kBlackColor.withOpacity(0.10),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(16),
+
+        ),
+        child: SizedBox(
+          width: getWidth(327),
+          child: Padding(
+            padding:  EdgeInsets.symmetric(horizontal: getWidth(32), vertical: getHeight(34)),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Container(
+                  width: getWidth(64),
+                  height: getHeight(64),
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: AppColors.kSkyBlueColor.withOpacity(0.08),
+                    border: Border.all(
+                      color: AppColors.kLightCoolGreyColor,
+                      width: 1,
+                    ),
+                  ),
+                  child: Image.asset(AppImages.profileScreenIcon7, color: AppColors.kSkyBlueColor,),
+                ),
+                SizedBox(height: getHeight(10),),
+                Text(
+                  'logout1'.tr,
+                  style: kSize16W600KBlackColorOutfitSemiBold.copyWith(
+                      color: AppColors.kMidnightBlueColor,
+                      fontSize: getFont(20)
+                  ),
+                ),
+                SizedBox(height: getHeight(5),),
+
+                Text(
+                  'logout2'.tr,
+                  style: kSize16W400KWhiteColorOutfitRegular.copyWith(
+                    color: AppColors.kDarkSlateGray,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+                SizedBox(height: getHeight(30),),
+
+                RoundButton(
+                  onPress: (){
+                    Get.back();
+
+                  },
+                  radius: BorderRadius.circular(12),
+                  title: 'logout3'.tr,
+                  textStyle: kSize16W400KWhiteColorOutfitRegular,
+                  buttonColor: AppColors.kSkyBlueColor,
+                  borderColor: AppColors.kLightCoolGreyColor,
+                  width: getWidth(263),
+                  height: getHeight(48),
+
+                ),
+                SizedBox(height: getHeight(10),),
+
+                RoundButton(
+                  onPress: (){
+                    Get.back();
+                  },
+                  radius: BorderRadius.circular(12),
+                  title: 'logout4'.tr,
+                  textStyle: kSize16W400KWhiteColorOutfitRegular.copyWith(color: AppColors.kSkyBlueColor),
+                  buttonColor: AppColors.kLightGrayBackground,
+                  borderColor: AppColors.kLightCoolGreyColor,
+                  width: getWidth(263),
+                  height: getHeight(48),
+
+                )
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
 }

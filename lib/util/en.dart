@@ -304,6 +304,11 @@ class Languages extends Translations {
       'helpSupportScreen12': 'Need immediate assistance?',
       'helpSupportScreen13': 'Call Now',
 
+      'logout1': 'Log Out',
+      'logout2': 'Are you sure you want to log out?You will need to sign in again to continue using the app.',
+      'logout3': 'Log Out',
+      'logout4': 'Cancel',
+
 
 
 
