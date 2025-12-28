@@ -5,6 +5,9 @@ import 'package:clean_trust/view/base/top_header.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../../controller/general_controller.dart';
+import '../../../util/app_constant.dart';
+import '../../../util/language_module/utils/localization_page.dart';
 import '../../../util/text_style.dart';
 import '../../base/round_button.dart';
 
@@ -62,15 +65,41 @@ class _LanguageScreenState extends State<LanguageScreen> {
           ),
           Spacer(),
           RoundButton(
-            onPress: (){},
+            onPress: () async {
+
+              if (selectedIndex == 0) {
+                // English
+                LocalizationService().changeLocale("english");
+                Get.find<GeneralController>()
+                    .sharedPreferences
+                    .setString(language, "en");
+
+              } else if (selectedIndex == 1) {
+                // Czech
+                LocalizationService().changeLocale("czech");
+                Get.find<GeneralController>()
+                    .sharedPreferences
+                    .setString(language, "cs");
+
+              } else if (selectedIndex == 2) {
+                // Russian
+                LocalizationService().changeLocale("russian");
+                Get.find<GeneralController>()
+                    .sharedPreferences
+                    .setString(language, "ru");
+              }
+
+            },
             radius: BorderRadius.circular(12),
             title: 'languageScreen5'.tr,
-            textStyle: kSize16W600KBlackColorOutfitSemiBold.copyWith(color: AppColors.kWhiteColor,),
+            textStyle: kSize16W600KBlackColorOutfitSemiBold.copyWith(
+              color: AppColors.kWhiteColor,
+            ),
             buttonColor: AppColors.kSkyBlueColor,
             width: getWidth(343),
             height: getHeight(56),
-
           ),
+
 
           SizedBox(height: getHeight(50),)
 

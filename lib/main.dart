@@ -1,4 +1,6 @@
-import 'package:clean_trust/util/en.dart';
+import 'package:clean_trust/controller/general_controller.dart';
+import 'package:clean_trust/util/language_module/data_binding.dart';
+import 'package:clean_trust/util/language_module/utils/localization_page.dart';
 import 'package:clean_trust/view/base/bottom_nav_bar.dart';
 import 'package:clean_trust/view/screens/attendance/attendance_details_screen.dart';
 import 'package:clean_trust/view/screens/attendance/attendance_history_screen.dart';
@@ -25,7 +27,10 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'helper/routes/routes.dart';
 
-void main() {
+void main() async{
+  WidgetsFlutterBinding.ensureInitialized();
+
+  await DataBindings();
   runApp(const MyApp());
 }
 
@@ -41,11 +46,11 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
       ),
-      home: HelpSupportScreen(),
-      translations: Languages(),
-      locale: const Locale('en', 'US'),
-      fallbackLocale:  const Locale('en', 'US'),
-     // getPages: AppRoutes.appRoutes(),
+      //home: LanguageScreen(),
+      locale: LocalizationService.locale ,
+      fallbackLocale: LocalizationService.fallbackLocale,
+      translations: LocalizationService(),
+      getPages: AppRoutes.appRoutes(),
     );
   }
 }
