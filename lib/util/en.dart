@@ -284,6 +284,12 @@ class Languages extends Translations {
       'appSettingScreen16': 'Help & Support',
       'appSettingScreen17': 'Sign Out',
 
+      'languageScreen1': 'Language',
+      'languageScreen2': 'English',
+      'languageScreen3': 'Czech',
+      'languageScreen4': 'Russian',
+      'languageScreen5': 'Save Changes',
+
 
 
 

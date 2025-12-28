@@ -8,6 +8,9 @@ class AppImages{
   static const String QRCodeImage = 'assets/images/QR_code_image.png';
   static const String attendanceDetailImg1 = 'assets/images/attendance_detail_img1.png';
   static const String attendanceDetailImg2 = 'assets/images/attendance_detail_img2.png';
+  static const String languageScreen1 = 'assets/images/language_screen1.png';
+  static const String languageScreen2 = 'assets/images/language_screen2.png';
+  static const String languageScreen3 = 'assets/images/language_screen3.png';
 
 
 
