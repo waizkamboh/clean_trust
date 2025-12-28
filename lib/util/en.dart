@@ -285,6 +285,8 @@ class Languages extends Translations {
       'appSettingScreen17': 'Sign Out',
 
 
+
+
       'notificationsScreen1': 'Notifications',
       'notificationsScreen2': 'All',
       'notificationsScreen3': 'System',
