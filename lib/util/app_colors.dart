@@ -10,6 +10,7 @@ class AppColors {
   static const kGradientColor4 = Color(0xff00425B);
   static const kGradientColor5 = Color(0xff028ABF);
   static const kGradientColor6 = Color(0xff014059);
+  static const kGradientColor7 = Color(0xff01648B);
   static const kCharcoalBlackColor = Color(0xff191A1C);
   static const kSkyBlueColor = Color(0xff4DBFE8);
   static const kBlueGreenColor = Color(0xff008A86);

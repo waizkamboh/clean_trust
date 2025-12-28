@@ -19,6 +19,7 @@ import 'package:clean_trust/view/screens/onboarding/onboarding_screen3.dart';
 import 'package:clean_trust/view/screens/profile/app_setting_Screen.dart';
 import 'package:clean_trust/view/screens/profile/change_password_screen.dart';
 import 'package:clean_trust/view/screens/profile/edit_profile_screen.dart';
+import 'package:clean_trust/view/screens/profile/language_screen.dart';
 import 'package:get/get.dart';
 
 import '../../view/screens/splash/splash_screen.dart';
@@ -145,9 +146,16 @@ GetPage(
       // transition: Transition.rightToLeftWithFade,
       //transitionDuration: const Duration(milliseconds: 250)
     ),
+
 GetPage(
       name: RouteName.changePasswordScreen,
       page: () => const ChangePasswordScreen(),
+      // transition: Transition.rightToLeftWithFade,
+      //transitionDuration: const Duration(milliseconds: 250)
+    ),
+    GetPage(
+      name: RouteName.languageScreen,
+      page: () => const LanguageScreen(),
       // transition: Transition.rightToLeftWithFade,
       //transitionDuration: const Duration(milliseconds: 250)
     ),

@@ -290,6 +290,20 @@ class Languages extends Translations {
       'languageScreen4': 'Russian',
       'languageScreen5': 'Save Changes',
 
+      'helpSupportScreen1': 'Help & Support',
+      'helpSupportScreen2': "We're Here to Help",
+      'helpSupportScreen3': "Facing any issues? We're here to assist you. Choose an option below to get support.",
+      'helpSupportScreen4': 'Quick Actions',
+      'helpSupportScreen5': 'Contact HR',
+      'helpSupportScreen6': 'Get help directly from your workplace HR team.',
+      'helpSupportScreen7': 'Contact HR',
+      'helpSupportScreen8': 'Email Support',
+      'helpSupportScreen9': 'Send a message to our support team. We usually reply within 24 hours.',
+      'helpSupportScreen10': 'Email Support',
+      'helpSupportScreen11': 'Emergency Support',
+      'helpSupportScreen12': 'Need immediate assistance?',
+      'helpSupportScreen13': 'Call Now',
+
 
 
 

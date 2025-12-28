@@ -53,6 +53,10 @@ class AppImages{
   static const String appSettingIcon1 = 'assets/icons/app_setting_icon1.png';
   static const String appSettingIcon2 = 'assets/icons/app_setting_icon2.png';
   static const String forwardIcon = 'assets/icons/forward_icon.png';
+  static const String helpScreenIcon1 = 'assets/icons/helpScreenIcon1.png';
+  static const String helpScreenIcon2 = 'assets/icons/helpScreenIcon2.png';
+  static const String helpScreenIcon3 = 'assets/icons/helpScreenIcon3.png';
+  static const String helpScreenIcon4 = 'assets/icons/helpScreenIcon4.png';
 
 
 
