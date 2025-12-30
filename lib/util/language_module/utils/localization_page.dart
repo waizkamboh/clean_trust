@@ -1,7 +1,7 @@
 import 'dart:ui';
 
 import 'package:get/get.dart';
-import '../../../controller/general_controller.dart';
+import '../../../view_model/controller/general_controller.dart';
 import '../../app_constant.dart';
 import '../translation/cs.dart';
 import '../translation/en.dart';
@@ -10,15 +10,15 @@ import '../translation/ru.dart';
 class LocalizationService extends Translations {
 
   static final locale = Locale(
-    Get.find<GeneralController>().sharedPreferences.getString(language) == null
+    Get.find<GeneralController>().sharedPreferences.getString(AppUrl.language) == null
         ? "en"
-        : Get.find<GeneralController>().sharedPreferences.getString(language).toString(),
+        : Get.find<GeneralController>().sharedPreferences.getString(AppUrl.language).toString(),
   );
 
   static final fallbackLocale = Locale(
-    Get.find<GeneralController>().sharedPreferences.getString(language) == null
+    Get.find<GeneralController>().sharedPreferences.getString(AppUrl.language) == null
         ? "en"
-        : Get.find<GeneralController>().sharedPreferences.getString(language).toString(),
+        : Get.find<GeneralController>().sharedPreferences.getString(AppUrl.language).toString(),
   );
 
   static final langs = [

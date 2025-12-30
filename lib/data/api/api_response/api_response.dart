@@ -1,6 +1,6 @@
 
 
-import 'package:clean_trust/data/api_response/status.dart';
+import 'package:clean_trust/data/api/api_response/status.dart';
 
 class ApiResponse<T> {
   Status? status;

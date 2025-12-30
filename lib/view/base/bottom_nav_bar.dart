@@ -83,6 +83,7 @@ class _BottomNavScreenState extends State<BottomNavScreen> {
 
   @override
   Widget build(BuildContext context) {
+    SizeConfig().init(context);
     return PersistentTabView(
       context,
       controller: _controller,
@@ -94,7 +95,7 @@ class _BottomNavScreenState extends State<BottomNavScreen> {
       padding: EdgeInsets.symmetric(horizontal: getWidth(14.31), vertical: getHeight(11.93)),
       decoration: NavBarDecoration(
         borderRadius: BorderRadius.circular(100),
-        colorBehindNavBar: AppColors.kWhiteColor, // ✅ FIX
+        colorBehindNavBar: AppColors.kWhiteColor,
 
       ),
     );

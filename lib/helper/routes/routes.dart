@@ -55,7 +55,7 @@ class AppRoutes{
     ),
     GetPage(
       name: RouteName.loginScreen,
-      page: () => const LoginScreen(),
+      page: () =>  LoginScreen(),
       // transition: Transition.rightToLeftWithFade,
       //transitionDuration: const Duration(milliseconds: 250)
      ),

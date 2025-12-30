@@ -1,4 +1,3 @@
-import 'package:clean_trust/controller/general_controller.dart';
 import 'package:clean_trust/util/language_module/data_binding.dart';
 import 'package:clean_trust/util/language_module/utils/localization_page.dart';
 import 'package:clean_trust/view/base/bottom_nav_bar.dart';

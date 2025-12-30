@@ -72,7 +72,7 @@ class NetworkApiServices extends BaseApiServices{
       print(data);
     }
     dynamic responseJson;
-      print(responseJson);
+      print('responseJson$responseJson');
     try{
       final response = await http.post(Uri.parse(url),
         body: jsonEncode(data),

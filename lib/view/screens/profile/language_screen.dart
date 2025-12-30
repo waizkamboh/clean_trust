@@ -5,10 +5,10 @@ import 'package:clean_trust/view/base/top_header.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../../controller/general_controller.dart';
 import '../../../util/app_constant.dart';
 import '../../../util/language_module/utils/localization_page.dart';
 import '../../../util/text_style.dart';
+import '../../../view_model/controller/general_controller.dart';
 import '../../base/round_button.dart';
 
 class LanguageScreen extends StatefulWidget {
@@ -72,21 +72,21 @@ class _LanguageScreenState extends State<LanguageScreen> {
                 LocalizationService().changeLocale("english");
                 Get.find<GeneralController>()
                     .sharedPreferences
-                    .setString(language, "en");
+                    .setString(AppUrl.language, "en");
 
               } else if (selectedIndex == 1) {
                 // Czech
                 LocalizationService().changeLocale("czech");
                 Get.find<GeneralController>()
                     .sharedPreferences
-                    .setString(language, "cs");
+                    .setString(AppUrl.language, "cs");
 
               } else if (selectedIndex == 2) {
                 // Russian
                 LocalizationService().changeLocale("russian");
                 Get.find<GeneralController>()
                     .sharedPreferences
-                    .setString(language, "ru");
+                    .setString(AppUrl.language, "ru");
               }
 
             },

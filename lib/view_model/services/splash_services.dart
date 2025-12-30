@@ -1,23 +1,21 @@
 // import 'dart:async';
-// import 'package:car_project/res/routes/routes_name.dart';
 // import 'package:get/get.dart';
-//
+// import '../../helper/routes/routes_name.dart';
 // import '../user_preference/user_preference.dart';
 //
 // class SplashServices {
-//   UserPreference userPreference = UserPreference();
+//   final UserPreference userPreference = UserPreference();
 //
-//   void isLogin() {
-//     userPreference.getUser().then((value) {
-//       print(value.token);
-//       if (value.token == null || value.token!.isEmpty || value.token == 'null') {
-//         Timer(const Duration(seconds: 3), () {
-//           Get.toNamed(RouteName.loginScreen);
-//         });
+//   void isLogin() async {
+//     String? token = await userPreference.getToken();
+//
+//     print('Saved Token: $token');
+//
+//     Timer(const Duration(seconds: 3), () {
+//       if (token == null || token.isEmpty) {
+//         Get.toNamed(RouteName.loginScreen);
 //       } else {
-//         Timer(const Duration(seconds: 3), () {
-//           Get.toNamed(RouteName.dashboardScreen);
-//         });
+//         Get.toNamed(RouteName.bottomNavScreen);
 //       }
 //     });
 //   }
