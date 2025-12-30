@@ -1,9 +1,11 @@
 import 'package:clean_trust/helper/routes/routes_name.dart';
 import 'package:clean_trust/util/app_colors.dart';
 import 'package:clean_trust/util/app_images.dart';
+import 'package:clean_trust/view_model/controller/auth/signup_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../../util/custom_snackbar.dart';
 import '../../../util/size_config.dart';
 import '../../../util/text_style.dart';
 import '../../base/input_text_field.dart';
@@ -13,8 +15,8 @@ import 'component/auth_header.dart';
 import 'component/social_auth_section.dart';
 
 class SignupScreen extends StatelessWidget {
-  const SignupScreen({super.key});
-
+   SignupScreen({super.key});
+   SignupController signupController = Get.put(SignupController());
   @override
   Widget build(BuildContext context) {
     SizeConfig().init(context);
@@ -46,14 +48,14 @@ class SignupScreen extends StatelessWidget {
                         SizedBox(height: getHeight(20)),
                         InputTextField(
                           //height: getHeight(42),
-                          //myController: controller.emailController,
+                          myController: signupController.emailController.value,
                           width: getWidth(300),
                           contentPadding: EdgeInsets.symmetric(horizontal: getWidth(20)),
-                          //myController: signUpC.nameSignupController.value,
-                          //focusNode: signUpC.nameSignupFocusNode.value,
-                          // onFiledSubmittedValue: (value){
-                          //   Utils.fieldFocusChange(context, signUpC.nameSignupFocusNode.value, signUpC.emailSignupFocusNode.value);
-                          // },
+                          focusNode: signupController.emailFocusNode.value,
+                          onFiledSubmittedValue: (value){
+                            FocusScope.of(context)
+                                .requestFocus(signupController.phoneFocusNode.value);
+                          },
                           onValidator: (email){
                             return null;
                           },
@@ -68,14 +70,14 @@ class SignupScreen extends StatelessWidget {
                         SizedBox(height: getHeight(20)),
                         InputTextField(
                           //height: getHeight(42),
-                          //myController: controller.emailController,
+                          myController: signupController.phoneController.value,
                           width: getWidth(300),
                           contentPadding: EdgeInsets.symmetric(horizontal: getWidth(20)),
-                          //myController: signUpC.nameSignupController.value,
-                          //focusNode: signUpC.nameSignupFocusNode.value,
-                          // onFiledSubmittedValue: (value){
-                          //   Utils.fieldFocusChange(context, signUpC.nameSignupFocusNode.value, signUpC.emailSignupFocusNode.value);
-                          // },
+                          focusNode: signupController.phoneFocusNode.value,
+                          onFiledSubmittedValue: (value){
+                            FocusScope.of(context)
+                                .requestFocus(signupController.passwordFocusNode.value);
+                          },
                           onValidator: (email){
                             return null;
                           },
@@ -88,50 +90,38 @@ class SignupScreen extends StatelessWidget {
                           textFormFieldColor: AppColors.kWhiteColor,
                         ),
                         SizedBox(height: getHeight(20)),
-                        InputTextField(
-                          //height: getHeight(42),
-                          //myController: controller.emailController,
-                          width: getWidth(300),
-                          contentPadding: EdgeInsets.symmetric(horizontal: getWidth(20)),
-                          //myController: signUpC.nameSignupController.value,
-                          //focusNode: signUpC.nameSignupFocusNode.value,
-                          // onFiledSubmittedValue: (value){
-                          //   Utils.fieldFocusChange(context, signUpC.nameSignupFocusNode.value, signUpC.emailSignupFocusNode.value);
-                          // },
-                          onValidator: (email){
-                            return null;
-                          },
-                          keyBoardType: TextInputType.emailAddress,
-                          obscureText: true,
-                          suffixIcon: InkWell(
-                            splashColor: Colors.transparent,
-                            // onTap: (){
-                            //   controller.isPassShow = !controller.isPassShow;
-                            //   controller.update();
-                            // },
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Icon(
-                                  Icons.remove_red_eye_outlined,
-                                  color: AppColors.kBlackColor.withOpacity(0.66),
-                                )
-                                // controller.isPassShow
-                                //     ? const Icon(
-                                //   Icons.remove_red_eye_outlined,
-                                //   color: AppColors.kPrimary,
-                                // )
-                                //     : const Icon(
-                                //   Icons.remove_red_eye,
-                                //   color: AppColors.kPrimary,
-                                // )
-                              ],
+                        Obx(() {
+                          return  InputTextField(
+                            //height: getHeight(42),
+                            myController: signupController.passwordController.value,
+                            width: getWidth(300),
+                            contentPadding: EdgeInsets.symmetric(horizontal: getWidth(20)),
+                            focusNode: signupController.passwordFocusNode.value,
+                            onFiledSubmittedValue: (value){
+
+                            },
+                            onValidator: (email){
+                              return null;
+                            },
+                            keyBoardType: TextInputType.emailAddress,
+                            obscureText: signupController.isPasswordHidden.value,
+                            suffixIcon: InkWell(
+                              onTap: () {
+                                signupController.isPasswordHidden.toggle();
+                              },
+                              child: Icon(
+                                signupController.isPasswordHidden.value
+                                    ? Icons.remove_red_eye_outlined
+                                    : Icons.remove_red_eye,
+                              ),
                             ),
-                          ),
-                          hintText: 'signupScreen8'.tr,
-                          labelText: 'signupScreen7'.tr,
-                          borderSideColor: AppColors.kBlackColor.withOpacity(0.37),
-                          textFormFieldColor: AppColors.kWhiteColor,
+                            hintText: 'signupScreen8'.tr,
+                            labelText: 'signupScreen7'.tr,
+                            borderSideColor: AppColors.kBlackColor.withOpacity(0.37),
+                            textFormFieldColor: AppColors.kWhiteColor,
+                          );
+
+                        }
                         ),
                         SizedBox(height: getHeight(20)),
                         Text(
@@ -143,18 +133,57 @@ class SignupScreen extends StatelessWidget {
                         SizedBox(height: getHeight(40)),
                         Padding(
                           padding:  EdgeInsets.symmetric(horizontal: getWidth(17)),
-                          child: RoundButton(
-                            onPress: (){
-                              Get.toNamed(RouteName.bottomNavScreen);
-                            },
-                            radius: BorderRadius.circular(8),
-                            title: 'signupScreen10'.tr,
-                            textStyle: kSize16W600KBlackColorOutfitSemiBold.copyWith(fontSize: getFont(14.11), color: AppColors.kWhiteColor),
-                            buttonColor: AppColors.kSkyBlueColor,
-                            width: getWidth(269),
-                            height: getHeight(44),
+                          child: Obx((){
+                            return  RoundButton(
+                              loading: signupController.loading.value,
 
-                          ),
+                              onPress: ()  {
+                                String email = signupController.emailController.value.text.trim();
+                                String password = signupController.passwordController.value.text.trim();
+                                String phoneNumber = signupController.phoneController.value.text.trim();
+
+                                // Password regex: At least 1 uppercase, 1 lowercase, 1 number, 1 special char, and 8+ characters
+                                final passwordRegex = RegExp(r'^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[!@#$%^&*(),.?":{}|<>]).{8,}$');
+                                const phoneNumberRegex = r'^(\+)1\s*([-\.\s]?(\d{3})[-\.\s]?(\d{3})[-\.\s]?(\d{4}))?$';
+
+
+                                //  Frontend Validation
+                                if (email.isEmpty) {
+                                  showCustomSnackBar('Enter email address');
+                                  return; // Stop further execution
+                                }
+                                if (!GetUtils.isEmail(email)) {
+                                  showCustomSnackBar('Enter a valid email address');
+                                  return;
+                                }
+                                if(phoneNumber.isEmpty){
+                                  showCustomSnackBar("Enter Phone Number");
+                                }
+                                // if(!RegExp(phoneNumberRegex).hasMatch(phoneNumber)){
+                                //   showCustomSnackBar('Enter a valid Phone Number');
+                                // }
+                                if (password.isEmpty) {
+                                  showCustomSnackBar('Enter password');
+                                  return;
+                                }
+                                if (!passwordRegex.hasMatch(password)) {
+                                  showCustomSnackBar('Password must contain at least 1 uppercase letter, 1 lowercase letter, 1 number, 1 special character, and be at least 8 characters long');
+                                  return;
+                                }
+
+                                signupController.signupApi();
+
+                              },
+
+                              radius: BorderRadius.circular(8),
+                              title: 'signupScreen10'.tr,
+                              textStyle: kSize16W600KBlackColorOutfitSemiBold.copyWith(fontSize: getFont(14.11), color: AppColors.kWhiteColor),
+                              buttonColor: AppColors.kSkyBlueColor,
+                              width: getWidth(269),
+                              height: getHeight(44),
+
+                            );
+                          }),
                         ),
                         SizedBox(height: getHeight(20)),
                         Row(
@@ -201,7 +230,9 @@ class SignupScreen extends StatelessWidget {
                           ],
                         ),
                         SizedBox(height: getHeight(40)),
-                        SocialAuthSection(),
+                        SocialAuthSection(text1: 'signupScreen12', text2: 'signupScreen13',onTap: (){
+                          Get.toNamed(RouteName.loginScreen);
+                        },),
                         SizedBox(height: getHeight(34),),
 
 

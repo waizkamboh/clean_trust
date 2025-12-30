@@ -137,33 +137,38 @@ class NetworkApiServices extends BaseApiServices{
   }
 
 
-  dynamic returnResponse(http.Response response){
-     print(response.body.toString());
+
+  dynamic returnResponse(http.Response response) {
     if (kDebugMode) {
+      print(response.body);
       print(response.statusCode);
     }
-    switch(response.statusCode){
+
+    switch (response.statusCode) {
 
       case 200:
-        dynamic responseJson = jsonDecode(response.body);
-        return responseJson;
       case 201:
-        dynamic responseJson = jsonDecode(response.body);
-        return responseJson;
       case 400:
-        dynamic responseJson = jsonDecode(response.body);
-        return responseJson;
-      // case 500:
-      // // Parse error message from response body
-      //   final errorMessage = jsonDecode(response.body);
-      //   throw FetchDataException('Server Error: $errorMessage');
+      case 401:
+      case 403:
+      case 404:
+      case 422:
+        return jsonDecode(response.body);
+
+      case 500:
+        throw ServerException('Server error');
 
       default:
-        throw FetchDataException(response.body.toString()+response.statusCode.toString());
-
-        
+        if (kDebugMode) {
+          print('Unhandled Status Code: ${response.statusCode}');
+          print(response.body);
+        }
+        throw FetchDataException(
+          'Something went wrong. Please try again.',
+        );
 
     }
   }
+
 
 }

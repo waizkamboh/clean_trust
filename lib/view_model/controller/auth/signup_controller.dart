@@ -1,3 +1,5 @@
+import 'package:clean_trust/data/model/auth/SignUpModel.dart';
+import 'package:clean_trust/data/repository/auth/signup_repository.dart';
 import 'package:clean_trust/util/custom_snackbar.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -9,35 +11,37 @@ import '../../user_preference/user_preference.dart';
 
 
 
-class LoginController extends GetxController{
+class SignupController extends GetxController{
 
   UserPreference userPreference = UserPreference();
-  final _api = LoginRepository();
+  final _api = SignupRepository();
 
 
   final emailController = TextEditingController().obs;
   final passwordController = TextEditingController().obs;
+  final phoneController = TextEditingController().obs;
   final emailFocusNode = FocusNode().obs;
   final passwordFocusNode = FocusNode().obs;
+  final phoneFocusNode = FocusNode().obs;
   var isPasswordHidden = true.obs;
   RxBool loading = false.obs;
 
 
 
-
-  void loginApi() {
+  void signupApi() {
     loading.value = true;
 
     Map<String, String> headers = {
       'Content-Type': 'application/json',
     };
 
-    Map data = {
+    Map<String, dynamic> data = {
       'email': emailController.value.text.trim(),
       'password': passwordController.value.text.trim(),
+      'phone_number': phoneController.value.text.trim(),
     };
 
-    _api.loginApi(headers, data).then((response) {
+    _api.signUpApi(headers, data).then((response) {
       loading.value = false;
 
       if (response == null) {
@@ -45,19 +49,22 @@ class LoginController extends GetxController{
         return;
       }
 
-      if (response['success'] != true) {
-        showCustomSnackBar(response['message'] ?? 'Login failed');
+      SignUpModel signupResponse = SignUpModel.fromJson(response);
+
+      // ✅ SAFE CHECK
+      if (signupResponse.success != true) {
+        showCustomSnackBar(signupResponse.message ?? 'Signup failed');
         return;
       }
 
-      String accessToken = response['data']['accessToken'];
+      // ✅ SUCCESS
+      showCustomSnackBar(signupResponse.message ?? 'Signup successful');
 
-      userPreference.saveToken(accessToken).then((_) {
-        Get.offAllNamed(RouteName.bottomNavScreen);
-        showCustomSnackBar(response['message']);
+      if (signupResponse.requiresApproval == true) {
+        Get.toNamed(RouteName.loginScreen);
         clearFields();
-      });
 
+      }
     }).onError((error, stackTrace) {
       loading.value = false;
       showCustomSnackBar(error.toString());
@@ -67,15 +74,19 @@ class LoginController extends GetxController{
 
 
 
+
   @override
   void dispose() {
     // Dispose of TextEditingController
     emailController.value.dispose();
     passwordController.value.dispose();
+    phoneController.value.dispose();
 
     // // Dispose of FocusNode
     emailFocusNode.value.dispose();
     passwordFocusNode.value.dispose();
+    phoneFocusNode.value.dispose();
+
 
     super.dispose();
   }
@@ -85,10 +96,13 @@ class LoginController extends GetxController{
     // Clear TextEditingController
     emailController.value.clear();
     passwordController.value.clear();
+    phoneController.value.clear();
+
 
     // // Remove focus from FocusNode
     emailFocusNode.value.unfocus();
     passwordFocusNode.value.unfocus();
+    phoneFocusNode.value.unfocus();
   }
 
 

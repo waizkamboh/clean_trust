@@ -1,3 +1,4 @@
+import 'package:clean_trust/helper/routes/routes_name.dart';
 import 'package:clean_trust/util/size_config.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -7,7 +8,10 @@ import '../../../../util/app_images.dart';
 import '../../../../util/text_style.dart';
 
 class SocialAuthSection extends StatelessWidget {
-  const SocialAuthSection({super.key});
+  final String text1;
+  final String text2;
+  final VoidCallback? onTap;
+   SocialAuthSection({super.key, required this.text1, required this.text2, this.onTap});
 
   @override
   Widget build(BuildContext context) {
@@ -36,13 +40,16 @@ class SocialAuthSection extends StatelessWidget {
         ),
         SizedBox(height: getHeight(10),),
         Text(
-          'loginScreen9'.tr,
+          text1.tr,
           style: kSize16W400KWhiteColorOutfitRegular.copyWith(fontSize: getFont(13), color: AppColors.kBlackColor.withOpacity(0.60)),
         ),
         SizedBox(height: getHeight(10),),
-        Text(
-          'loginScreen10'.tr,
-          style: kSize16W600KBlackColorOutfitSemiBold.copyWith(fontSize: getFont(13),),
+        GestureDetector(
+          onTap: onTap,
+          child: Text(
+            text2.tr,
+            style: kSize16W600KBlackColorOutfitSemiBold.copyWith(fontSize: getFont(13),),
+          ),
         ),
       ],
     );

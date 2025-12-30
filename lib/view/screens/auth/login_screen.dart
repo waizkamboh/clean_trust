@@ -136,7 +136,7 @@ class LoginScreen extends StatelessWidget {
                         // Password regex: At least 1 uppercase, 1 lowercase, 1 number, 1 special char, and 8+ characters
                         final passwordRegex = RegExp(r'^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[!@#$%^&*(),.?":{}|<>]).{8,}$');
 
-                        // ✅ Frontend Validation
+                        // Frontend Validation
                         if (email.isEmpty) {
                           showCustomSnackBar('Enter email address');
                           return; // Stop further execution
@@ -216,7 +216,9 @@ class LoginScreen extends StatelessWidget {
                     ],
                   ),
                   SizedBox(height: getHeight(40)),
-                  SocialAuthSection(),
+                  SocialAuthSection(text1: 'loginScreen9',text2: 'loginScreen10',onTap: (){
+                    Get.toNamed(RouteName.signUpScreen);
+                  },),
                   SizedBox(height: getHeight(34),),
 
 

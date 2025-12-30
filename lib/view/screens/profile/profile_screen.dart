@@ -1,6 +1,7 @@
 import 'package:clean_trust/util/app_images.dart';
 import 'package:clean_trust/view/base/top_header.dart';
 import 'package:clean_trust/view/screens/auth/component/auth_card.dart';
+import 'package:clean_trust/view_model/user_preference/user_preference.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -396,8 +397,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 SizedBox(height: getHeight(30),),
 
                 RoundButton(
-                  onPress: (){
-                    Get.back();
+                  onPress: () async{
+                    UserPreference userPreference = UserPreference();
+                      await userPreference.removeToken();
+                      Get.offAllNamed(RouteName.loginScreen);
 
                   },
                   radius: BorderRadius.circular(12),

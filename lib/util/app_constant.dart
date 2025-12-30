@@ -10,6 +10,7 @@ class AppUrl{
    static const String baseUrl = 'https://redoubtably-bulky-alison.ngrok-free.dev';
 
    static const String loginApi = '${baseUrl}/api/auth/signin';
+   static const String signUpApi = '${baseUrl}/api/auth/signup';
 
 
 
