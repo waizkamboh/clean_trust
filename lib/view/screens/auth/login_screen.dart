@@ -130,31 +130,6 @@ class LoginScreen extends StatelessWidget {
                     return RoundButton(
                       loading: loginController.loading.value,
                       onPress: ()  {
-                        String email = loginController.emailController.value.text.trim();
-                        String password = loginController.passwordController.value.text.trim();
-
-                        // Password regex: At least 1 uppercase, 1 lowercase, 1 number, 1 special char, and 8+ characters
-                        final passwordRegex = RegExp(r'^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[!@#$%^&*(),.?":{}|<>]).{8,}$');
-
-                        // Frontend Validation
-                        if (email.isEmpty) {
-                          showCustomSnackBar('Enter email address');
-                          return; // Stop further execution
-                        }
-                        if (!GetUtils.isEmail(email)) {
-                          showCustomSnackBar('Enter a valid email address');
-                          return;
-                        }
-                        if (password.isEmpty) {
-                          showCustomSnackBar('Enter password');
-                          return;
-                        }
-                        if (!passwordRegex.hasMatch(password)) {
-                          showCustomSnackBar('Password must contain at least 1 uppercase letter, 1 lowercase letter, 1 number, 1 special character, and be at least 8 characters long');
-                          return;
-                        }
-                        debugPrint('ffffffffffffffffffffffffffffffffffff$email');
-                        debugPrint('ffffffffffffffffffffffffffffffffffff$password');
 
 
                          loginController.loginApi();

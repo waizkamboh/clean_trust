@@ -143,14 +143,14 @@ class AppRoutes{
     ),
 GetPage(
       name: RouteName.appSettingScreen,
-      page: () => const AppSettingScreen(),
+      page: () =>  AppSettingScreen(),
       // transition: Transition.rightToLeftWithFade,
       //transitionDuration: const Duration(milliseconds: 250)
     ),
 
 GetPage(
       name: RouteName.changePasswordScreen,
-      page: () => const ChangePasswordScreen(),
+      page: () =>  ChangePasswordScreen(),
       // transition: Transition.rightToLeftWithFade,
       //transitionDuration: const Duration(milliseconds: 250)
     ),

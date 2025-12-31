@@ -400,6 +400,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   onPress: () async{
                     UserPreference userPreference = UserPreference();
                       await userPreference.removeToken();
+
+
                       Get.offAllNamed(RouteName.loginScreen);
 
                   },

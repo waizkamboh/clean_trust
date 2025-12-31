@@ -122,7 +122,7 @@ class NetworkApiServices extends BaseApiServices{
     }
     dynamic responseJson;
     try {
-      final response = await http.patch(Uri.parse(url),
+      final response = await http.put(Uri.parse(url),
           body: jsonEncode(data),
           headers: headers
       );

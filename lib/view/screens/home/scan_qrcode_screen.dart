@@ -114,7 +114,6 @@ class ScanQrcodeScreen extends StatelessWidget {
             SizedBox(height: getHeight(80),),
             GestureDetector(
               onTap: (){
-                Get.toNamed(RouteName.scanResultScreen);
 
               },
                 child: Image.asset(AppImages.QRCodeImage,)),

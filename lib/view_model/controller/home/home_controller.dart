@@ -1,0 +1,66 @@
+import 'package:geolocator/geolocator.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
+
+import '../../../util/custom_snackbar.dart';
+import '../../../view/screens/home/home_screen.dart';
+import '../../../view/screens/home/scan_qrcode_screen.dart';
+
+class HomeController extends GetxController {
+
+  Future<bool> shouldAskForLocationPermission() async {
+    bool serviceEnabled = await Geolocator.isLocationServiceEnabled();
+    LocationPermission permission = await Geolocator.checkPermission();
+
+    // Ask only if location is not ready
+    if (!serviceEnabled ||
+        permission == LocationPermission.denied ||
+        permission == LocationPermission.deniedForever) {
+      return true;
+    }
+
+    return false; // everything is OK
+  }
+
+
+  Future<Position> getCurrentLocation() async {
+    bool serviceEnabled = await Geolocator.isLocationServiceEnabled();
+
+    if (!serviceEnabled) {
+      showCustomSnackBar('Please enable location to continue.');
+      await Geolocator.openLocationSettings();
+      throw Exception('Location service disabled');
+    }
+
+    LocationPermission permission = await Geolocator.checkPermission();
+
+    if (permission == LocationPermission.denied) {
+      permission = await Geolocator.requestPermission();
+    }
+
+    if (permission == LocationPermission.deniedForever) {
+      showCustomSnackBar(
+        'Location permission is required for attendance. Enable it from settings.',
+      );
+      await Geolocator.openAppSettings();
+      throw Exception('Permission denied forever');
+    }
+
+    if (permission == LocationPermission.denied) {
+      throw Exception('Permission denied');
+    }
+
+    Position position = await Geolocator.getCurrentPosition(
+      desiredAccuracy: LocationAccuracy.high,
+    );
+
+    // Close dialog before navigation
+    if (Get.isDialogOpen == true) {
+      Get.back();
+    }
+
+    Get.to(() => ScanQrcodeScreen());
+
+    return position;
+  }
+}

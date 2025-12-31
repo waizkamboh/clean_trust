@@ -57,6 +57,7 @@ class AppImages{
   static const String helpScreenIcon2 = 'assets/icons/helpScreenIcon2.png';
   static const String helpScreenIcon3 = 'assets/icons/helpScreenIcon3.png';
   static const String helpScreenIcon4 = 'assets/icons/helpScreenIcon4.png';
+  static const String locationIcon = 'assets/icons/location_icon.png';
 
 
 

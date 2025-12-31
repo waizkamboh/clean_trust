@@ -28,20 +28,62 @@ class SignupController extends GetxController{
 
 
 
-  void signupApi() {
+  void signupApi() async {
+    String email = emailController.value.text.trim();
+    String password = passwordController.value.text.trim();
+    String phoneNumber = phoneController.value.text.trim();
+
+    final passwordRegex = RegExp(
+        r'^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[!@#$%^&*(),.?":{}|<>]).{8,}$');
+    final phoneNumberRegex = RegExp(r'^(\+?1)?\d{10,15}$'); // example regex
+
+    // Frontend Validation
+    if (email.isEmpty) {
+      showCustomSnackBar('Enter email address');
+      return;
+    }
+
+    if (!GetUtils.isEmail(email)) {
+      showCustomSnackBar('Enter a valid email address');
+      return;
+    }
+
+    if (phoneNumber.isEmpty) {
+      showCustomSnackBar("Enter Phone Number");
+      return;
+    }
+
+    if (!phoneNumberRegex.hasMatch(phoneNumber)) {
+      showCustomSnackBar('Enter a valid Phone Number');
+      return;
+    }
+
+    if (password.isEmpty) {
+      showCustomSnackBar('Enter password');
+      return;
+    }
+
+    if (!passwordRegex.hasMatch(password)) {
+      showCustomSnackBar(
+          'Password must contain at least 1 uppercase letter, 1 lowercase letter, 1 number, 1 special character, and be at least 8 characters long');
+      return;
+    }
+
     loading.value = true;
 
-    Map<String, String> headers = {
-      'Content-Type': 'application/json',
-    };
+    try {
+      Map<String, String> headers = {
+        'Content-Type': 'application/json',
+      };
 
-    Map<String, dynamic> data = {
-      'email': emailController.value.text.trim(),
-      'password': passwordController.value.text.trim(),
-      'phone_number': phoneController.value.text.trim(),
-    };
+      Map<String, dynamic> data = {
+        'email': email,
+        'password': password,
+        'phone_number': phoneNumber,
+      };
 
-    _api.signUpApi(headers, data).then((response) {
+      final response = await _api.signUpApi(headers, data);
+
       loading.value = false;
 
       if (response == null) {
@@ -51,24 +93,25 @@ class SignupController extends GetxController{
 
       SignUpModel signupResponse = SignUpModel.fromJson(response);
 
-      // ✅ SAFE CHECK
       if (signupResponse.success != true) {
         showCustomSnackBar(signupResponse.message ?? 'Signup failed');
         return;
       }
 
-      // ✅ SUCCESS
       showCustomSnackBar(signupResponse.message ?? 'Signup successful');
 
       if (signupResponse.requiresApproval == true) {
-        Get.toNamed(RouteName.loginScreen);
         clearFields();
-
+        Get.toNamed(RouteName.loginScreen);
       }
-    }).onError((error, stackTrace) {
+    } catch (error, stackTrace) {
       loading.value = false;
-      showCustomSnackBar(error.toString());
-    });
+      showCustomSnackBar('Error: ${error.toString()}');
+      if (kDebugMode) {
+        print('Signup Error: $error');
+        print(stackTrace);
+      }
+    }
   }
 
 

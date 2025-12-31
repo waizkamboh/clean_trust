@@ -138,38 +138,7 @@ class SignupScreen extends StatelessWidget {
                               loading: signupController.loading.value,
 
                               onPress: ()  {
-                                String email = signupController.emailController.value.text.trim();
-                                String password = signupController.passwordController.value.text.trim();
-                                String phoneNumber = signupController.phoneController.value.text.trim();
 
-                                // Password regex: At least 1 uppercase, 1 lowercase, 1 number, 1 special char, and 8+ characters
-                                final passwordRegex = RegExp(r'^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[!@#$%^&*(),.?":{}|<>]).{8,}$');
-                                const phoneNumberRegex = r'^(\+)1\s*([-\.\s]?(\d{3})[-\.\s]?(\d{3})[-\.\s]?(\d{4}))?$';
-
-
-                                //  Frontend Validation
-                                if (email.isEmpty) {
-                                  showCustomSnackBar('Enter email address');
-                                  return; // Stop further execution
-                                }
-                                if (!GetUtils.isEmail(email)) {
-                                  showCustomSnackBar('Enter a valid email address');
-                                  return;
-                                }
-                                if(phoneNumber.isEmpty){
-                                  showCustomSnackBar("Enter Phone Number");
-                                }
-                                // if(!RegExp(phoneNumberRegex).hasMatch(phoneNumber)){
-                                //   showCustomSnackBar('Enter a valid Phone Number');
-                                // }
-                                if (password.isEmpty) {
-                                  showCustomSnackBar('Enter password');
-                                  return;
-                                }
-                                if (!passwordRegex.hasMatch(password)) {
-                                  showCustomSnackBar('Password must contain at least 1 uppercase letter, 1 lowercase letter, 1 number, 1 special character, and be at least 8 characters long');
-                                  return;
-                                }
 
                                 signupController.signupApi();
 

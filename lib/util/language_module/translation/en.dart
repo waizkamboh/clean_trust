@@ -202,6 +202,11 @@ Map<String, String> en = {
   'homeScreen13': 'Total Hours Worked (This Month)',
   'homeScreen14': '142h 35m',
 
+  'enableLocation1': 'Location Required',
+  'enableLocation2': 'Please enable location services to continue scanning QR codes. This helps us provide accurate location- based features.',
+  'enableLocation3': 'Enable Location',
+  'enableLocation4': 'Cancel',
+
 
   'profileScreen1': 'Profile',
   'profileScreen2': 'Sarah Anderson',

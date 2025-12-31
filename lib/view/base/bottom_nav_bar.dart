@@ -26,11 +26,11 @@ class _BottomNavScreenState extends State<BottomNavScreen> {
   PersistentTabController(initialIndex: 0);
 
   List<Widget> _screens() {
-    return const [
+    return [
       HomeScreen(),
-      AttendanceOfflineScreen(),
-      NotificationScreen(),
-      ProfileScreen(),
+      const AttendanceOfflineScreen(),
+      const NotificationScreen(),
+      const ProfileScreen(),
     ];
   }
 
