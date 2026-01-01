@@ -24,12 +24,19 @@ import 'package:clean_trust/view/screens/profile/profile_screen.dart';
 import 'package:clean_trust/view/screens/splash/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:hive_flutter/adapters.dart';
+import 'data/model/hive/offline_attendance.dart';
 import 'helper/routes/routes.dart';
 
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
-
   await DataBindings();
+  WidgetsFlutterBinding.ensureInitialized();
+  await Hive.initFlutter();
+  if (!Hive.isAdapterRegistered(1)) {
+    Hive.registerAdapter(OfflineAttendanceAdapter());
+  }
+  await Hive.openBox<OfflineAttendance>('offline_attendance');
   runApp(const MyApp());
 }
 
@@ -45,7 +52,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
       ),
-      //home: BottomNavScreen(),
+      //home: ManualEntryScreen(),
       locale: LocalizationService.locale ,
       fallbackLocale: LocalizationService.fallbackLocale,
       translations: LocalizationService(),

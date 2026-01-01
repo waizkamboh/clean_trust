@@ -2,6 +2,7 @@ import 'package:clean_trust/util/app_colors.dart';
 import 'package:clean_trust/util/app_images.dart';
 import 'package:clean_trust/util/size_config.dart';
 import 'package:clean_trust/view/base/top_header.dart';
+import 'package:clean_trust/view_model/controller/home/attendance/manual_attendance_entry_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -12,8 +13,8 @@ import '../../base/input_text_field.dart';
 import '../../base/round_button.dart';
 
 class ManualEntryScreen extends StatelessWidget {
-  const ManualEntryScreen({super.key});
-
+   ManualEntryScreen({super.key});
+  ManualAttendanceEntryController controller = Get.put(ManualAttendanceEntryController());
   @override
   Widget build(BuildContext context) {
     SizeConfig().init(context);
@@ -65,17 +66,14 @@ class ManualEntryScreen extends StatelessWidget {
                   SizedBox(height: getHeight(5),),
                   InputTextField(
                     height: getHeight(60),
-                    //myController: controller.emailController,
+                    myController: controller.dateController.value,
                     width: getWidth(343),
                     contentPadding: EdgeInsets.symmetric(horizontal: getWidth(20)),
-                    //myController: signUpC.nameSignupController.value,
-                    //focusNode: signUpC.nameSignupFocusNode.value,
-                    // onFiledSubmittedValue: (value){
-                    //   Utils.fieldFocusChange(context, signUpC.nameSignupFocusNode.value, signUpC.emailSignupFocusNode.value);
-                    // },
                     onValidator: (email){
                       return null;
                     },
+                    readOnly: true,
+                    onTap: ()=> _datePicker(),
                     suffixIcon: Icon(Icons.calendar_today_outlined, color: AppColors.kBlackColor,),
                     keyBoardType: TextInputType.datetime,
                     borderRadius: 12,
@@ -85,42 +83,42 @@ class ManualEntryScreen extends StatelessWidget {
                     borderSideColor: AppColors.kLightCoolGray,
                     textFormFieldColor: AppColors.kColor1,
                   ),
-                  SizedBox(height: getHeight(10),),
-                  Row(
-                    children: [
-                      Text(
-                        'manualEntry5'.tr,
-                        style: kSize16W600KBlackColorOutfitSemiBold.copyWith(
-                          fontSize: getFont(14),
-                          color: AppColors.kDarkSlateGray,
-        
-                        ),
-                      ),
-                      Image.asset(AppImages.starIcon),
-        
-                    ],
-                  ),
-                  SizedBox(height: getHeight(5),),
-                  CustomDropdownField(
-                    width: getWidth(343),
-                    height: getHeight(56),
-                    contentPadding: EdgeInsets.symmetric(horizontal: getWidth(20)),
-                    hintText: 'manualEntry7'.tr,
-                    hintTextStyle: kSize16W400KWhiteColorOutfitRegular.copyWith(fontSize: getFont(18), color: AppColors.kBlackColor),
-                    borderSideColor: AppColors.kLightCoolGray,
-                    borderRadius: 12,
-                    items:   ['manualEntry7'.tr, 'manualEntry7'.tr],
-                    dropdownFieldColor: AppColors.kWhiteColor,
-                    suffixIcon: Image.asset(AppImages.dropDownIcon),
-                  ),
-                  Text(
-                    'manualEntry8'.tr,
-                    style: kSize16W400KWhiteColorOutfitRegular.copyWith(
-                      fontSize: getFont(10),
-                      color: AppColors.kBlackColor,
-        
-                    ),
-                  ),
+                  // SizedBox(height: getHeight(10),),
+                  // Row(
+                  //   children: [
+                  //     Text(
+                  //       'manualEntry5'.tr,
+                  //       style: kSize16W600KBlackColorOutfitSemiBold.copyWith(
+                  //         fontSize: getFont(14),
+                  //         color: AppColors.kDarkSlateGray,
+                  //
+                  //       ),
+                  //     ),
+                  //     Image.asset(AppImages.starIcon),
+                  //
+                  //   ],
+                  // ),
+                  // SizedBox(height: getHeight(5),),
+                  // CustomDropdownField(
+                  //   width: getWidth(343),
+                  //   height: getHeight(56),
+                  //   contentPadding: EdgeInsets.symmetric(horizontal: getWidth(20)),
+                  //   hintText: 'manualEntry7'.tr,
+                  //   hintTextStyle: kSize16W400KWhiteColorOutfitRegular.copyWith(fontSize: getFont(18), color: AppColors.kBlackColor),
+                  //   borderSideColor: AppColors.kLightCoolGray,
+                  //   borderRadius: 12,
+                  //   items:   ['manualEntry7'.tr, 'manualEntry7'.tr],
+                  //   dropdownFieldColor: AppColors.kWhiteColor,
+                  //   suffixIcon: Image.asset(AppImages.dropDownIcon),
+                  // ),
+                  // Text(
+                  //   'manualEntry8'.tr,
+                  //   style: kSize16W400KWhiteColorOutfitRegular.copyWith(
+                  //     fontSize: getFont(10),
+                  //     color: AppColors.kBlackColor,
+                  //
+                  //   ),
+                  // ),
                   SizedBox(height: getHeight(10),),
                   Row(
                     children: [
@@ -139,14 +137,9 @@ class ManualEntryScreen extends StatelessWidget {
                   SizedBox(height: getHeight(5),),
                   InputTextField(
                     height: getHeight(60),
-                    //myController: controller.emailController,
+                    myController: controller.checkInController.value,
                     width: getWidth(343),
                     contentPadding: EdgeInsets.symmetric(horizontal: getWidth(20)),
-                    //myController: signUpC.nameSignupController.value,
-                    //focusNode: signUpC.nameSignupFocusNode.value,
-                    // onFiledSubmittedValue: (value){
-                    //   Utils.fieldFocusChange(context, signUpC.nameSignupFocusNode.value, signUpC.emailSignupFocusNode.value);
-                    // },
                     onValidator: (email){
                       return null;
                     },
@@ -286,4 +279,27 @@ class ManualEntryScreen extends StatelessWidget {
       ),
     );
   }
+  Future<void> _datePicker() async {
+    DateTime? _picked = await showDatePicker(
+      context: Get.context!,
+      initialDate: DateTime.now(),
+      firstDate: DateTime(2000),
+      lastDate: DateTime(2100),
+      builder: (BuildContext context, Widget? child) {
+        return Theme(
+          data: ThemeData(
+            // Change the color of the selected date circle
+            colorScheme: const ColorScheme.light(primary: AppColors.kBlackColor), // Change the color as per your preference
+            // Change the text color of the selected date
+
+          ),
+          child: child!,
+        );
+      },
+    );
+    if (_picked != null) {
+      controller.dateController.value.text = _picked.toString().split(" ")[0];
+    }
+  }
+
 }

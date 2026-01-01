@@ -123,8 +123,8 @@ class Attendance {
     date = json['date'];
     checkInTime = json['check_in_time'];
     checkOutTime = json['check_out_time'];
-    latitude = json['latitude'];
-    longitude = json['longitude'];
+    latitude = json['latitude']?.toString();
+    longitude = json['longitude']?.toString();
     isValid = json['is_valid'];
     validationMessage = json['validation_message'];
     isManual = json['is_manual'];

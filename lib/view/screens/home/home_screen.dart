@@ -1,7 +1,7 @@
 import 'package:clean_trust/util/app_colors.dart';
 import 'package:clean_trust/util/app_images.dart';
 import 'package:clean_trust/view/screens/home/scan_qrcode_screen.dart';
-import 'package:clean_trust/view_model/controller/home/home_controller.dart';
+import 'package:clean_trust/view_model/controller/home/attendance/scanqrcode_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -12,7 +12,7 @@ import '../../base/round_button.dart';
 
 class HomeScreen extends StatelessWidget {
    HomeScreen({super.key});
- HomeController homeController = Get.put(HomeController());
+ ScanQrCodeController scanQrCodeController = Get.put(ScanQrCodeController());
   @override
   Widget build(BuildContext context) {
     SizeConfig().init(context);
@@ -217,7 +217,7 @@ class HomeScreen extends StatelessWidget {
                   ),
                 ),
         
-        
+
         
               ],
             ),
@@ -225,7 +225,7 @@ class HomeScreen extends StatelessWidget {
             GestureDetector(
               onTap: () async {
                 bool shouldShowDialog =
-                await homeController.shouldAskForLocationPermission();
+                await scanQrCodeController.shouldAskForLocationPermission();
 
                 if (shouldShowDialog) {
                   showLocationEnabledDialog();
@@ -517,7 +517,7 @@ class HomeScreen extends StatelessWidget {
                     RoundButton(
                       onPress: () async{
 
-                        homeController.getCurrentLocation();
+                        scanQrCodeController.getCurrentLocation();
                       },
                       radius: BorderRadius.circular(16),
                       title: 'enableLocation3'.tr,

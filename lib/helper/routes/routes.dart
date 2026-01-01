@@ -124,7 +124,7 @@ class AppRoutes{
 
     GetPage(
       name: RouteName.manualEntryScreen,
-      page: () => const ManualEntryScreen(),
+      page: () =>  ManualEntryScreen(),
       // transition: Transition.rightToLeftWithFade,
       //transitionDuration: const Duration(milliseconds: 250)
     ),

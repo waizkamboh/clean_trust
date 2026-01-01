@@ -60,6 +60,8 @@ class LoginController extends GetxController{
     try {
       Map<String, String> headers = {
         'Content-Type': 'application/json',
+        'Accept': 'application/json',
+
       };
 
       Map<String, String> data = {
