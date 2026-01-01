@@ -98,7 +98,7 @@ class AppRoutes{
     ),
     GetPage(
       name: RouteName.scanQRCodeScreen,
-      page: () => const ScanQrcodeScreen(),
+      page: () =>  ScanQrcodeScreen(),
       // transition: Transition.rightToLeftWithFade,
       //transitionDuration: const Duration(milliseconds: 250)
     ),

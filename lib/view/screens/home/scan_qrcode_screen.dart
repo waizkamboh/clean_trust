@@ -300,3 +300,214 @@ class ScanQrcodeScreen extends StatelessWidget {
 
 
 }
+
+// import 'package:clean_trust/util/app_colors.dart';
+// import 'package:clean_trust/util/size_config.dart';
+// import 'package:clean_trust/view/base/top_header.dart';
+// import 'package:flutter/material.dart';
+// import 'package:get/get.dart';
+// import 'package:mobile_scanner/mobile_scanner.dart';
+//
+// import '../../../util/app_images.dart';
+// import '../../../util/text_style.dart';
+// import '../../../view_model/controller/home/attendance/attendance_controller.dart';
+// import '../../base/round_button.dart';
+//
+// class ScanQrcodeScreen extends StatelessWidget {
+//   ScanQrcodeScreen({super.key});
+//
+//   final ScanQrCodeController controller = Get.put(ScanQrCodeController());
+//
+//   @override
+//   Widget build(BuildContext context) {
+//     SizeConfig().init(context);
+//
+//     return Scaffold(
+//       backgroundColor: AppColors.kWhiteColor,
+//       body: Stack(
+//         children: [
+//
+//           /// ================= MAIN UI (UNCHANGED) =================
+//           SingleChildScrollView(
+//             child: Column(
+//               mainAxisSize: MainAxisSize.min,
+//               children: [
+//
+//                 /// -------- HEADER --------
+//                 Stack(
+//                   clipBehavior: Clip.none,
+//                   children: [
+//                     TopHeader(title: 'scanQrCode1'.tr),
+//
+//                     Positioned(
+//                       left: getWidth(30),
+//                       right: getWidth(30),
+//                       top: getHeight(120),
+//                       child: Container(
+//                         padding: EdgeInsets.symmetric(
+//                           horizontal: getWidth(20),
+//                           vertical: getHeight(23),
+//                         ),
+//                         decoration: BoxDecoration(
+//                           color: AppColors.kWhiteColor,
+//                           borderRadius: BorderRadius.circular(16),
+//                           border: Border.all(
+//                               color: AppColors.kLightCoolGreyColor),
+//                           boxShadow: [
+//                             BoxShadow(
+//                               color:
+//                               AppColors.kBlackColor.withOpacity(0.10),
+//                               offset: const Offset(0, 10),
+//                               blurRadius: 15,
+//                             ),
+//                             BoxShadow(
+//                               color:
+//                               AppColors.kBlackColor.withOpacity(0.10),
+//                               offset: const Offset(0, 4),
+//                               blurRadius: 6,
+//                             ),
+//                           ],
+//                         ),
+//                         child: Row(
+//                           children: [
+//                             Container(
+//                               width: getWidth(40),
+//                               height: getHeight(40),
+//                               decoration: BoxDecoration(
+//                                 color: AppColors.kSkyBlueColor,
+//                                 shape: BoxShape.circle,
+//                               ),
+//                               child: const Icon(
+//                                 Icons.location_on,
+//                                 color: Colors.white,
+//                               ),
+//                             ),
+//                             SizedBox(width: getWidth(12)),
+//                             Column(
+//                               crossAxisAlignment:
+//                               CrossAxisAlignment.start,
+//                               children: [
+//                                 Text(
+//                                   'scanQrCode2'.tr,
+//                                   style: kSize16W600KBlackColorOutfitSemiBold
+//                                       .copyWith(fontSize: getFont(14)),
+//                                 ),
+//                                 Text(
+//                                   'scanQrCode3'.tr,
+//                                   style:
+//                                   kSize16W400KWhiteColorOutfitRegular
+//                                       .copyWith(
+//                                     fontSize: getFont(12),
+//                                     color: AppColors.kBlackColor,
+//                                   ),
+//                                 ),
+//                               ],
+//                             ),
+//                             const Spacer(),
+//                             Text(
+//                               'scanQrCode4'.tr,
+//                               style: kSize16W600KBlackColorOutfitSemiBold
+//                                   .copyWith(
+//                                 fontSize: getFont(12),
+//                                 decoration: TextDecoration.underline,
+//                               ),
+//                             ),
+//                           ],
+//                         ),
+//                       ),
+//                     ),
+//                   ],
+//                 ),
+//
+//                 SizedBox(height: getHeight(80)),
+//
+//                 /// -------- QR IMAGE (TAP TO SCAN) --------
+//                 GestureDetector(
+//                   onTap: controller.openScanner,
+//                   child: Image.asset(AppImages.QRCodeImage),
+//                 ),
+//
+//                 SizedBox(height: getHeight(16)),
+//
+//                 /// -------- DRAG ICON --------
+//                 Container(
+//                   width: getWidth(64),
+//                   height: getHeight(64),
+//                   decoration: BoxDecoration(
+//                     color: AppColors.kSkyBlueColor,
+//                     shape: BoxShape.circle,
+//                     boxShadow: [
+//                       BoxShadow(
+//                         color:
+//                         AppColors.kBlackColor.withOpacity(0.10),
+//                         offset: const Offset(0, 10),
+//                         blurRadius: 15,
+//                       ),
+//                     ],
+//                   ),
+//                   child: Image.asset(AppImages.dragHandleIcon),
+//                 ),
+//
+//                 SizedBox(height: getHeight(6)),
+//
+//                 Text(
+//                   'scanQrCode5'.tr,
+//                   style: kSize16W600KBlackColorOutfitSemiBold.copyWith(
+//                     fontSize: getFont(12),
+//                     color: AppColors.kMidnightBlueColor,
+//                   ),
+//                 ),
+//
+//                 SizedBox(height: getHeight(20)),
+//
+//                 /// -------- FLASH BUTTON --------
+//                 RoundButton(
+//                   image: Image.asset(AppImages.flashIcon),
+//                   onPress: () {
+//                     controller.scannerController.toggleTorch();
+//                   },
+//                   radius: BorderRadius.circular(16),
+//                   title: 'scanQrCode6'.tr,
+//                   textStyle:
+//                   kSize16W600KBlackColorOutfitSemiBold.copyWith(
+//                     color: AppColors.kWhiteColor,
+//                   ),
+//                   buttonColor: AppColors.kSkyBlueColor,
+//                   width: getWidth(287),
+//                   height: getHeight(60),
+//                 ),
+//
+//                 SizedBox(height: getHeight(50)),
+//               ],
+//             ),
+//           ),
+//
+//           /// ================= QR SCANNER OVERLAY =================
+//           Obx(() {
+//             if (!controller.showScanner.value) {
+//               return const SizedBox.shrink();
+//             }
+//
+//             return Positioned.fill(
+//               child: Container(
+//                 color: Colors.black,
+//                 child: MobileScanner(
+//                   controller: controller.scannerController,
+//                   onDetect: (barcodeCapture) {
+//                     final String? qrCode =
+//                         barcodeCapture.barcodes.first.rawValue;
+//
+//                     if (qrCode != null) {
+//                       controller.onQrDetected(qrCode);
+//                     }
+//                   },
+//                 ),
+//               ),
+//             );
+//           }),
+//         ],
+//       ),
+//     );
+//   }
+// }
+

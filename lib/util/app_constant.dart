@@ -15,6 +15,8 @@ class AppUrl{
    static const String getAppSettingApi = '${baseUrl}/app-settings';
    static const String updateAppSettingApi = '${baseUrl}/app-settings';
    static const String getAppVersionApi = '${baseUrl}/app-settings/version';
+   static const String scanQRCodeApi = '${baseUrl}/attendance/scan';
+   static const String manualAttendanceEntryApi = '${baseUrl}/attendance/manual';
 
 
 

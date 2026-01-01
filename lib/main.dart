@@ -45,11 +45,11 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
       ),
-      home: BottomNavScreen(),
+      //home: BottomNavScreen(),
       locale: LocalizationService.locale ,
       fallbackLocale: LocalizationService.fallbackLocale,
       translations: LocalizationService(),
-      //getPages: AppRoutes.appRoutes(),
+      getPages: AppRoutes.appRoutes(),
     );
   }
 }
