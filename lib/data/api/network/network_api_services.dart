@@ -90,9 +90,50 @@ class NetworkApiServices extends BaseApiServices{
     }
 
     return responseJson;
-
-
   }
+
+  @override
+  Future<dynamic> postMultipartApi(
+      String url, {
+        required Map<String, String> fields,
+        required List<File> files,
+        Map<String, String>? headers,
+      }) async {
+    if(kDebugMode){
+      print(url);
+      print(fields);
+      print(files);
+    }
+    try {
+      var request = http.MultipartRequest('POST', Uri.parse(url));
+
+      // headers
+      if (headers != null) {
+        request.headers.addAll(headers);
+      }
+
+      // fields (text data)
+      request.fields.addAll(fields);
+
+      // files (documents[])
+      for (var file in files) {
+        request.files.add(
+          await http.MultipartFile.fromPath(
+            'documents[]', // backend expects array
+            file.path,
+          ),
+        );
+      }
+
+      var streamedResponse = await request.send();
+      var response = await http.Response.fromStream(streamedResponse);
+
+      return returnResponse(response);
+    } on SocketException {
+      throw InternetException();
+    }
+  }
+
 
   @override
   Future<dynamic> deleteApi(String url, {Map<String, String>? headers}) async {

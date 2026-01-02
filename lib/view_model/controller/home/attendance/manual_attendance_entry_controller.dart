@@ -20,7 +20,10 @@ class ManualAttendanceEntryController extends GetxController {
   final checkOutController = TextEditingController().obs;
   final reasonController = TextEditingController().obs;
 
-  Future<void> datePicker() async {
+  Future<void> datePicker(    {
+      required TextEditingController controller,
+  }
+      ) async {
     DateTime? _picked = await showDatePicker(
       context: Get.context!,
       initialDate: DateTime.now(),
@@ -39,7 +42,7 @@ class ManualAttendanceEntryController extends GetxController {
       },
     );
     if (_picked != null) {
-      dateController.value.text = _picked.toString().split(" ")[0];
+      controller.text = _picked.toString().split(" ")[0];
     }
   }
 

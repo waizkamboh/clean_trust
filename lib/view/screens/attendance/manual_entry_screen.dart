@@ -70,7 +70,7 @@ class ManualEntryScreen extends StatelessWidget {
                     width: getWidth(343),
                     contentPadding: EdgeInsets.symmetric(horizontal: getWidth(20)),
                     readOnly: true,
-                    onTap: ()=> controller.datePicker(),
+                    onTap: ()=> controller.datePicker(controller: controller.dateController.value),
                     suffixIcon: Icon(Icons.calendar_today_outlined, color: AppColors.kBlackColor.withOpacity(0.66)),
                     keyBoardType: TextInputType.datetime,
                     borderRadius: 12,

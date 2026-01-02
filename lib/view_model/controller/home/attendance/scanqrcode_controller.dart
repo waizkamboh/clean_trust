@@ -15,7 +15,6 @@ import '../../../user_preference/user_preference.dart';
 
 class ScanQrCodeController extends GetxController {
   final ScanQrCodeRepository _repo = ScanQrCodeRepository();
-  final UserPreference _userPreference = UserPreference();
   final OfflineAttendanceService localDb = OfflineAttendanceService();
   final ScanQrCodeRepository repo = ScanQrCodeRepository();
   final UserPreference userPreference = UserPreference();
@@ -112,6 +111,7 @@ class ScanQrCodeController extends GetxController {
 
       final online = await isOnline();
       debugPrint('INTERNET STATUS: $online');
+      final UserPreference _userPreference = UserPreference();
 
 
       /// ================= OFFLINE =================

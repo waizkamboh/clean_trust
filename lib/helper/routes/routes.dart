@@ -131,7 +131,7 @@ class AppRoutes{
 
     GetPage(
       name: RouteName.leaveRequestScreen,
-      page: () => const LeaveRequestScreen(),
+      page: () =>  LeaveRequestScreen(),
       // transition: Transition.rightToLeftWithFade,
       //transitionDuration: const Duration(milliseconds: 250)
     ),

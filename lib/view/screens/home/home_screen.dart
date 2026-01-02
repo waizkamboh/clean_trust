@@ -375,7 +375,7 @@ class HomeScreen extends StatelessWidget {
                   ),
                   GestureDetector(
                     onTap: (){
-                      Get.toNamed(RouteName.attendanceHistoryScreen);
+                      Get.toNamed(RouteName.leaveRequestScreen);
 
                     },
                     child: Container(
