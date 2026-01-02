@@ -122,6 +122,7 @@ class ScanQrCodeController extends GetxController {
             scanTime: DateTime.now().toIso8601String(),
           ),
         );
+        localDb.debugPrintAll();
 
         loading.value = false;
         showCustomSnackBar('Attendance saved offline');

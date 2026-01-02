@@ -56,11 +56,11 @@ class ManualEntryScreen extends StatelessWidget {
                         style: kSize16W600KBlackColorOutfitSemiBold.copyWith(
                           fontSize: getFont(14),
                           color: AppColors.kDarkSlateGray,
-        
+
                         ),
                       ),
                       Image.asset(AppImages.starIcon),
-        
+
                     ],
                   ),
                   SizedBox(height: getHeight(5),),
@@ -69,17 +69,13 @@ class ManualEntryScreen extends StatelessWidget {
                     myController: controller.dateController.value,
                     width: getWidth(343),
                     contentPadding: EdgeInsets.symmetric(horizontal: getWidth(20)),
-                    onValidator: (email){
-                      return null;
-                    },
                     readOnly: true,
-                    onTap: ()=> _datePicker(),
-                    suffixIcon: Icon(Icons.calendar_today_outlined, color: AppColors.kBlackColor,),
+                    onTap: ()=> controller.datePicker(),
+                    suffixIcon: Icon(Icons.calendar_today_outlined, color: AppColors.kBlackColor.withOpacity(0.66)),
                     keyBoardType: TextInputType.datetime,
                     borderRadius: 12,
                     obscureText: false,
                     hintText: 'manualEntry5'.tr,
-                    hintTextStyle: kSize16W400KWhiteColorOutfitRegular.copyWith(fontSize: getFont(18), color: AppColors.kBlackColor),
                     borderSideColor: AppColors.kLightCoolGray,
                     textFormFieldColor: AppColors.kColor1,
                   ),
@@ -127,11 +123,11 @@ class ManualEntryScreen extends StatelessWidget {
                         style: kSize16W600KBlackColorOutfitSemiBold.copyWith(
                           fontSize: getFont(14),
                           color: AppColors.kDarkSlateGray,
-        
+
                         ),
                       ),
                       Image.asset(AppImages.starIcon),
-        
+
                     ],
                   ),
                   SizedBox(height: getHeight(5),),
@@ -140,15 +136,18 @@ class ManualEntryScreen extends StatelessWidget {
                     myController: controller.checkInController.value,
                     width: getWidth(343),
                     contentPadding: EdgeInsets.symmetric(horizontal: getWidth(20)),
-                    onValidator: (email){
-                      return null;
+                    onTap: () {
+                      controller.selectTime(
+                        context: context,
+                        controller: controller.checkInController.value,
+                      );
                     },
-                    suffixIcon: Image.asset(AppImages.qrScreenIcon3, color: AppColors.kBlackColor,),
+                    readOnly: true,
+                    suffixIcon: Image.asset(AppImages.qrScreenIcon3, color: AppColors.kBlackColor.withOpacity(0.66)),
                     keyBoardType: TextInputType.datetime,
                     borderRadius: 12,
                     obscureText: false,
                     hintText: 'manualEntry10'.tr,
-                    hintTextStyle: kSize16W400KWhiteColorOutfitRegular.copyWith(fontSize: getFont(18), color: AppColors.kBlackColor),
                     borderSideColor: AppColors.kLightCoolGray,
                     textFormFieldColor: AppColors.kColor1,
                   ),
@@ -160,33 +159,31 @@ class ManualEntryScreen extends StatelessWidget {
                         style: kSize16W600KBlackColorOutfitSemiBold.copyWith(
                           fontSize: getFont(14),
                           color: AppColors.kDarkSlateGray,
-        
+
                         ),
                       ),
                       Image.asset(AppImages.starIcon),
-        
+
                     ],
                   ),
                   SizedBox(height: getHeight(5),),
                   InputTextField(
                     height: getHeight(60),
-                    //myController: controller.emailController,
+                    myController: controller.checkOutController.value,
                     width: getWidth(343),
                     contentPadding: EdgeInsets.symmetric(horizontal: getWidth(20)),
-                    //myController: signUpC.nameSignupController.value,
-                    //focusNode: signUpC.nameSignupFocusNode.value,
-                    // onFiledSubmittedValue: (value){
-                    //   Utils.fieldFocusChange(context, signUpC.nameSignupFocusNode.value, signUpC.emailSignupFocusNode.value);
-                    // },
-                    onValidator: (email){
-                      return null;
+                    onTap: () {
+                      controller.selectTime(
+                        context: context,
+                        controller: controller.checkOutController.value,
+                      );
                     },
-                    suffixIcon: Image.asset(AppImages.qrScreenIcon3, color: AppColors.kBlackColor,),
+                    suffixIcon: Image.asset(AppImages.qrScreenIcon3, color: AppColors.kBlackColor.withOpacity(0.66)),
+                    readOnly: true,
                     keyBoardType: TextInputType.datetime,
                     borderRadius: 12,
                     obscureText: false,
                     hintText: 'manualEntry12'.tr,
-                    hintTextStyle: kSize16W400KWhiteColorOutfitRegular.copyWith(fontSize: getFont(18), color: AppColors.kBlackColor),
                     borderSideColor: AppColors.kLightCoolGray,
                     textFormFieldColor: AppColors.kColor1,
                   ),
@@ -208,23 +205,14 @@ class ManualEntryScreen extends StatelessWidget {
                   SizedBox(height: getHeight(5),),
                   InputTextField(
                     height: getHeight(126),
-                    //myController: controller.emailController,
+                    myController: controller.reasonController.value,
                     width: getWidth(343),
                     contentPadding: EdgeInsets.symmetric(horizontal: getWidth(20)),
-                    //myController: signUpC.nameSignupController.value,
-                    //focusNode: signUpC.nameSignupFocusNode.value,
-                    // onFiledSubmittedValue: (value){
-                    //   Utils.fieldFocusChange(context, signUpC.nameSignupFocusNode.value, signUpC.emailSignupFocusNode.value);
-                    // },
-                    onValidator: (email){
-                      return null;
-                    },
-                    keyBoardType: TextInputType.datetime,
+                    keyBoardType: TextInputType.text,
                     maxLines: 4,
                     borderRadius: 12,
                     obscureText: false,
                     hintText: 'manualEntry14'.tr,
-                    hintTextStyle: kSize16W400KWhiteColorOutfitRegular.copyWith(fontSize: getFont(18), color: AppColors.kBlackColor),
                     borderSideColor: AppColors.kLightCoolGray,
                     textFormFieldColor: AppColors.kColor1,
                   ),
@@ -237,19 +225,25 @@ class ManualEntryScreen extends StatelessWidget {
                     ),
                   ),
                   SizedBox(height: getHeight(30),),
-                  RoundButton(
-                    onPress: (){
-                      Get.toNamed(RouteName.leaveRequestScreen);
+                  Obx((){
+                    return RoundButton(
+                      loading: controller.loading.value,
 
-                    },
-                    radius: BorderRadius.circular(12),
-                    title: 'manualEntry16'.tr,
-                    textStyle: kSize16W600KBlackColorOutfitSemiBold.copyWith(color: AppColors.kWhiteColor,),
-                    buttonColor: AppColors.kSkyBlueColor,
-                    width: getWidth(343),
-                    height: getHeight(56),
+                      onPress: (){
+                        controller.submitManualAttendance();
 
-                  ),
+                      },
+                      radius: BorderRadius.circular(12),
+                      title: 'manualEntry16'.tr,
+                      textStyle: kSize16W600KBlackColorOutfitSemiBold.copyWith(color: AppColors.kWhiteColor,),
+                      buttonColor: AppColors.kSkyBlueColor,
+                      width: getWidth(343),
+                      height: getHeight(56),
+
+                    );
+
+
+                  }),
                   SizedBox(height: getHeight(10),),
                   RoundButton(
                     onPress: (){},
@@ -278,28 +272,6 @@ class ManualEntryScreen extends StatelessWidget {
         ),
       ),
     );
-  }
-  Future<void> _datePicker() async {
-    DateTime? _picked = await showDatePicker(
-      context: Get.context!,
-      initialDate: DateTime.now(),
-      firstDate: DateTime(2000),
-      lastDate: DateTime(2100),
-      builder: (BuildContext context, Widget? child) {
-        return Theme(
-          data: ThemeData(
-            // Change the color of the selected date circle
-            colorScheme: const ColorScheme.light(primary: AppColors.kBlackColor), // Change the color as per your preference
-            // Change the text color of the selected date
-
-          ),
-          child: child!,
-        );
-      },
-    );
-    if (_picked != null) {
-      controller.dateController.value.text = _picked.toString().split(" ")[0];
-    }
   }
 
 }
