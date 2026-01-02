@@ -111,6 +111,8 @@ class ScanQrCodeController extends GetxController {
       );
 
       final online = await isOnline();
+      debugPrint('INTERNET STATUS: $online');
+
 
       /// ================= OFFLINE =================
       if (!online) {

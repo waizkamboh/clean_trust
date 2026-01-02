@@ -1,6 +1,7 @@
 import 'package:clean_trust/util/app_colors.dart';
 import 'package:clean_trust/util/app_images.dart';
 import 'package:clean_trust/view/screens/home/scan_qrcode_screen.dart';
+import 'package:clean_trust/view_model/controller/home/attendance/get_attendance_history_controller.dart';
 import 'package:clean_trust/view_model/controller/home/attendance/scanqrcode_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -13,6 +14,7 @@ import '../../base/round_button.dart';
 class HomeScreen extends StatelessWidget {
    HomeScreen({super.key});
  ScanQrCodeController scanQrCodeController = Get.put(ScanQrCodeController());
+ GetAttendanceHistoryController getAttendanceHistoryController = Get.put(GetAttendanceHistoryController());
   @override
   Widget build(BuildContext context) {
     SizeConfig().init(context);
@@ -164,14 +166,17 @@ class HomeScreen extends StatelessWidget {
                            ),
                          ),
                          SizedBox(height: getHeight(10),),
-                         Text(
-                           'homeScreen4'.tr,
-                           style: kSize20W700KWhiteColorOutfitBold.copyWith(
-                             color: AppColors.kMidnightBlueColor,
-                             fontSize: getFont(24)
-                           ),
-                         ),
-                         Text(
+                  Obx(() {
+                    return Text(
+                      "${getAttendanceHistoryController.totalHours.value}",
+                      style: const TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    );
+                  }),
+
+                  Text(
                            'homeScreen5'.tr,
                            style: kSize16W400KWhiteColorOutfitRegular.copyWith(
                                color: AppColors.kCoolGreyColor,
@@ -197,16 +202,19 @@ class HomeScreen extends StatelessWidget {
                                      fontSize: getFont(12)
                                  ),
                                ),
-                               Text(
-                                 'homeScreen7'.tr,
-                                 style: kSize16W600KBlackColorOutfitSemiBold.copyWith(
-                                     color: AppColors.kMidnightBlueColor,
-                                 ),
+                           Obx(() {
+                             return Text(
+                               getAttendanceHistoryController.checkInTime.value,
+                               style: const TextStyle(
+                                 fontSize: 16,
+                                 fontWeight: FontWeight.w500,
                                ),
-        
-        
-        
-                             ],
+                             );
+                           })
+
+
+
+                           ],
                            ),
                          ),
         

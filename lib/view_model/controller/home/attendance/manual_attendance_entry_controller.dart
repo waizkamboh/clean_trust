@@ -6,13 +6,15 @@ import '../../../../data/model/home/attendance/ManualAttendanceEntryModel.dart';
 import '../../../../data/repository/home/attendance/manual_attendance_entry_repository.dart';
 import '../../../../util/app_colors.dart';
 import '../../../../util/custom_snackbar.dart';
+import '../../../user_preference/user_preference.dart';
 
 class ManualAttendanceEntryController extends GetxController {
   final _repo = ManualAttendanceEntryRepository();
+  final UserPreference _userPreference = UserPreference();
 
   RxBool loading = false.obs;
 
-  /// Controllers (UI change nahi ki – future ready)
+  /// Controllers
   final dateController = TextEditingController().obs;
   final checkInController = TextEditingController().obs;
   final checkOutController = TextEditingController().obs;
@@ -56,7 +58,6 @@ class ManualAttendanceEntryController extends GetxController {
             ),
             timePickerTheme: TimePickerThemeData(
               dialHandColor: AppColors.kSkyBlueColor,
-             //hourMinuteTextColor: AppColors.kSkyBlueColor,
               entryModeIconColor: AppColors.kSkyBlueColor,
             ),
           ),
@@ -66,9 +67,25 @@ class ManualAttendanceEntryController extends GetxController {
     );
 
     if (pickedTime != null) {
-      controller.text = pickedTime.format(context);
+      // Convert TimeOfDay to DateTime
+      final now = DateTime.now();
+      final dateTime = DateTime(
+        now.year,
+        now.month,
+        now.day,
+        pickedTime.hour,
+        pickedTime.minute,
+      );
+
+      // Format to HH:mm:ss
+      final formattedTime =
+          "${dateTime.hour.toString().padLeft(2, '0')}:"
+          "${dateTime.minute.toString().padLeft(2, '0')}:00";
+
+      controller.text = formattedTime;
     }
   }
+
 
 
   Future<void> submitManualAttendance() async {
@@ -99,14 +116,16 @@ class ManualAttendanceEntryController extends GetxController {
     );
 
     try {
-      Map<String, String> headers = {
+      final token = await _userPreference.getToken();
+
+      final headers = {
+        'Authorization': 'Bearer $token',
         'Content-Type': 'application/json',
-        // 'Authorization': 'Bearer token'  // agar required ho
       };
 
-      /// 👇 EXACT body – Postman screenshot wali
+
       Map<String, dynamic> body = {
-        "workplace_id": 9,
+        //"workplace_id": 9,
         "date": dateController.value.text,
         "check_in_time": checkInController.value.text,
         "check_out_time": checkOutController.value.text,

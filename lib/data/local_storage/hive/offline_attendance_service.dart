@@ -21,8 +21,12 @@ class OfflineAttendanceService {
     for (var i = 0; i < box.length; i++) {
       final item = box.getAt(i);
       debugPrint(
-        '[$i] QR: ${item?.qrCode}, lat: ${item?.latitude}, synced: ${item?.synced}',
+        '[$i] QR: ${item?.qrCode}, '
+            'lat: ${item?.latitude}, '
+            'lng: ${item?.longitude}, '
+            'synced: ${item?.synced}',
       );
+
     }
   }
 

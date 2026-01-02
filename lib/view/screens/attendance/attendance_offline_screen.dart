@@ -2,15 +2,18 @@ import 'package:clean_trust/util/app_colors.dart';
 import 'package:clean_trust/util/app_images.dart';
 import 'package:clean_trust/util/size_config.dart';
 import 'package:clean_trust/view/base/top_header.dart';
+import 'package:clean_trust/view_model/controller/home/attendance/attendance_offline_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../../data/model/hive/offline_attendance.dart';
 import '../../../util/text_style.dart';
 import '../../base/input_text_field.dart';
 import '../../base/round_button.dart';
 
 class AttendanceOfflineScreen extends StatelessWidget {
-  const AttendanceOfflineScreen({super.key});
+   AttendanceOfflineScreen({super.key});
+  AttendanceOfflineController controller = Get.put(AttendanceOfflineController());
 
   @override
   Widget build(BuildContext context) {
@@ -23,44 +26,47 @@ class AttendanceOfflineScreen extends StatelessWidget {
             TopHeader(title: 'attendanceOffline1'.tr),
             SizedBox(height: getHeight(30)),
 
-            Container(
-              padding: EdgeInsetsGeometry.symmetric(horizontal: getWidth(20), vertical: getHeight(12)),
-              width: getWidth(393),
-              decoration: BoxDecoration(
-                color: AppColors.kSkyBlueColor.withOpacity(0.1),
-                borderRadius: BorderRadius.all(Radius.circular(8)),
-                border: Border(left: BorderSide(color: AppColors.kSkyBlueColor, width: 4)),
-              ),
-              child: Row(
-                children: [
-                  Image.asset(AppImages.networkIcon, color: AppColors.kSkyBlueColor,),
-                  SizedBox(width: getWidth(10)),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        'attendanceOffline2'.tr,
-                        style: kSize16W400KWhiteColorOutfitRegular.copyWith(
-                          color: AppColors.kBlackColor,
-                        ),
-                      ),
-
-                      Text(
-                        'attendanceOffline3'.tr,
-                        style: kSize16W400KWhiteColorOutfitRegular.copyWith(
+            GestureDetector(
+              onTap: attendanceAutoSyncDialog,
+              child: Container(
+                padding: EdgeInsetsGeometry.symmetric(horizontal: getWidth(20), vertical: getHeight(12)),
+                width: getWidth(393),
+                decoration: BoxDecoration(
+                  color: AppColors.kSkyBlueColor.withOpacity(0.1),
+                  borderRadius: BorderRadius.all(Radius.circular(8)),
+                  border: Border(left: BorderSide(color: AppColors.kSkyBlueColor, width: 4)),
+                ),
+                child: Row(
+                  children: [
+                    Image.asset(AppImages.networkIcon, color: AppColors.kSkyBlueColor,),
+                    SizedBox(width: getWidth(10)),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          'attendanceOffline2'.tr,
+                          style: kSize16W400KWhiteColorOutfitRegular.copyWith(
                             color: AppColors.kBlackColor,
-                            fontSize: getFont(12)
+                          ),
                         ),
-                      ),
-                    ],
-                  ),
+
+                        Text(
+                          'attendanceOffline3'.tr,
+                          style: kSize16W400KWhiteColorOutfitRegular.copyWith(
+                              color: AppColors.kBlackColor,
+                              fontSize: getFont(12)
+                          ),
+                        ),
+                      ],
+                    ),
 
 
 
 
 
-                ],
+                  ],
+                ),
               ),
             ),
             SizedBox(height: getHeight(20)),
@@ -110,13 +116,14 @@ class AttendanceOfflineScreen extends StatelessWidget {
                               ),
                             ),
 
-                            Text(
-                              'attendanceOffline5'.tr,
+                            Obx(() => Text(
+                              '${controller.count} ${'attendanceOffline5'.tr}',
                               style: kSize16W400KWhiteColorOutfitRegular.copyWith(
-                                  color: AppColors.kCoolGreyColor,
-                                  fontSize: getFont(14)
+                                color: AppColors.kCoolGreyColor,
+                                fontSize: getFont(14),
                               ),
-                            ),
+                            )),
+
                           ],
                         ),
                         Spacer(),
@@ -148,9 +155,12 @@ class AttendanceOfflineScreen extends StatelessWidget {
                     ),
                   ),
                   SizedBox(height: getHeight(10)),
-                  reusableContainer(),
-                  reusableContainer(),
-                  reusableContainer(),
+                  Obx(() => Column(
+                    children: controller.offlineList
+                        .map((item) => offlineAttendanceContainer(item))
+                        .toList(),
+                  )),
+
 
                   Container(
                     padding: EdgeInsetsGeometry.symmetric(horizontal: getWidth(16), vertical: getHeight(16)),
@@ -215,7 +225,7 @@ class AttendanceOfflineScreen extends StatelessWidget {
       ),
     );
   }
-  Widget reusableContainer() {
+  Widget offlineAttendanceContainer(OfflineAttendance attendance) {
     return Container(
       padding: EdgeInsetsGeometry.symmetric(horizontal: getWidth(17), vertical: getHeight(17)),
       margin: EdgeInsetsGeometry.only(bottom: getHeight(10)),
@@ -258,19 +268,14 @@ class AttendanceOfflineScreen extends StatelessWidget {
               ),
 
               Text(
-                'attendanceOffline8'.tr,
+                controller.formatAttendanceTime(attendance.scanTime),
                 style: kSize16W400KWhiteColorOutfitRegular.copyWith(
-                    color: AppColors.kCoolGreyColor,
-                    fontSize: getFont(14)
+                  color: AppColors.kCoolGreyColor,
+                  fontSize: getFont(14),
                 ),
               ),
-              Text(
-                'attendanceOffline9'.tr,
-                style: kSize16W400KWhiteColorOutfitRegular.copyWith(
-                    color: AppColors.kBlackColor,
-                    fontSize: getFont(12)
-                ),
-              ),
+
+
             ],
           ),
           Spacer(),
@@ -312,5 +317,83 @@ class AttendanceOfflineScreen extends StatelessWidget {
 
 
   }
- 
+   void attendanceAutoSyncDialog() {
+     Get.dialog(
+       Dialog(
+         backgroundColor: AppColors.kWhiteColor,
+         shadowColor: AppColors.kBlackColor.withOpacity(0.10),
+         shape: RoundedRectangleBorder(
+           borderRadius: BorderRadius.circular(16),
+
+         ),
+         child: SizedBox(
+           width: getWidth(327),
+           child: Padding(
+             padding:  EdgeInsets.symmetric(horizontal: getWidth(32), vertical: getHeight(34)),
+             child: Column(
+               mainAxisSize: MainAxisSize.min,
+               children: [
+                 Container(
+                   width: getWidth(64),
+                   height: getHeight(64),
+                   decoration: BoxDecoration(
+                     shape: BoxShape.circle,
+                     color: AppColors.kSkyBlueColor.withOpacity(0.08),
+                     border: Border.all(
+                       color: AppColors.kLightCoolGreyColor,
+                       width: 1,
+                     ),
+                   ),
+                   child: Image.asset(AppImages.profileScreenIcon7, color: AppColors.kSkyBlueColor,),
+                 ),
+                 SizedBox(height: getHeight(10),),
+                 Text(
+                   'backOnline1'.tr,
+                   style: kSize16W600KBlackColorOutfitSemiBold.copyWith(
+                       color: AppColors.kMidnightBlueColor,
+                       fontSize: getFont(20)
+                   ),
+                 ),
+                 SizedBox(height: getHeight(5),),
+
+                 Text(
+                   'backOnline2'.tr,
+                   style: kSize16W400KWhiteColorOutfitRegular.copyWith(
+                     color: AppColors.kDarkSlateGray,
+                   ),
+                   textAlign: TextAlign.center,
+                 ),
+                 SizedBox(height: getHeight(5),),
+
+                 Text(
+                   'backOnline3'.tr,
+                   style: kSize16W400KWhiteColorOutfitRegular.copyWith(
+                     color: AppColors.kCoolGreyColor,
+                     fontSize: getFont(14)
+                   ),
+                   textAlign: TextAlign.center,
+                 ),
+                 SizedBox(height: getHeight(20),),
+                 Text(
+                   'backOnline4'.tr,
+                   style: kSize16W400KWhiteColorOutfitRegular.copyWith(
+                       color: AppColors.kCoolGreyColor,
+                       fontSize: getFont(12)
+                   ),
+                   textAlign: TextAlign.center,
+                 ),
+                 SizedBox(height: getHeight(30),),
+
+
+
+
+               ],
+             ),
+           ),
+         ),
+       ),
+     );
+   }
+
+
 }

@@ -1,5 +1,6 @@
 import 'package:clean_trust/util/app_colors.dart';
 import 'package:clean_trust/util/app_images.dart';
+import 'package:clean_trust/view_model/controller/auth/forget_password_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -12,9 +13,9 @@ import 'component/auth_card.dart';
 import 'component/auth_header.dart';
 
 
-class ForgotPassword extends StatelessWidget {
-  const ForgotPassword({super.key});
-
+class ForgotPasswordScreen extends StatelessWidget {
+   ForgotPasswordScreen({super.key});
+ ForgetPasswordController controller = Get.put(ForgetPasswordController());
   @override
   Widget build(BuildContext context) {
     SizeConfig().init(context);
@@ -46,15 +47,9 @@ class ForgotPassword extends StatelessWidget {
                           ),
                           SizedBox(height: getHeight(30)),
                           InputTextField(
-                            //height: getHeight(42),
-                            //myController: controller.emailController,
+                            myController: controller.emailController.value,
                             width: getWidth(300),
                             contentPadding: EdgeInsets.symmetric(horizontal: getWidth(20)),
-                            //myController: signUpC.nameSignupController.value,
-                            //focusNode: signUpC.nameSignupFocusNode.value,
-                            // onFiledSubmittedValue: (value){
-                            //   Utils.fieldFocusChange(context, signUpC.nameSignupFocusNode.value, signUpC.emailSignupFocusNode.value);
-                            // },
                             onValidator: (email){
                               return null;
                             },
@@ -68,19 +63,24 @@ class ForgotPassword extends StatelessWidget {
                           ),
                       
                           SizedBox(height: getHeight(80)),
-                          RoundButton(
-                            onPress: (){
-                             // Get.toNamed(RouteName.confirmPasswordScreen);
 
-                            },
-                            radius: BorderRadius.circular(8),
-                            title: 'forgotPassword5'.tr,
-                            textStyle: kSize16W600KBlackColorOutfitSemiBold.copyWith(fontSize: getFont(14.11), color: AppColors.kWhiteColor),
-                            buttonColor: AppColors.kSkyBlueColor,
-                            width: getWidth(269),
-                            height: getHeight(44),
-                      
-                          ),
+                          Obx((){
+                            return RoundButton(
+                              loading: controller.loading.value,
+                              onPress: (){
+                                controller.forgetPasswordApi();
+
+                              },
+                              radius: BorderRadius.circular(8),
+                              title: 'forgotPassword5'.tr,
+                              textStyle: kSize16W600KBlackColorOutfitSemiBold.copyWith(fontSize: getFont(14.11), color: AppColors.kWhiteColor),
+                              buttonColor: AppColors.kSkyBlueColor,
+                              width: getWidth(269),
+                              height: getHeight(44),
+
+                            );
+
+                          }),
                           SizedBox(height: getHeight(100),),
                       
                       

@@ -177,7 +177,7 @@ Map<String, String> en = {
   'attendanceOffline2': 'You are offline',
   'attendanceOffline3': 'Attendance will sync automatically when connection is\nrestored.',
   'attendanceOffline4': 'Pending Sync',
-  'attendanceOffline5': '3 items waiting to upload',
+  'attendanceOffline5': 'items waiting to upload',
   'attendanceOffline6': 'Unsynced Attendance',
   'attendanceOffline7': 'Check-in Scan',
   'attendanceOffline8': 'Today, 9:15 AM',
@@ -186,6 +186,11 @@ Map<String, String> en = {
   'attendanceOffline11': 'Auto-Sync Information',
   'attendanceOffline12': 'Your attendance data is stored locally and\nwill automatically sync when you reconnect\nto the internet. No data will be lost.',
 
+  'backOnline1': 'Back Online',
+  'backOnline2': 'All pending attendance scans are being uploaded now.',
+  'backOnline3': 'This process may take a few seconds depending on your network speed',
+  'backOnline4': 'Upload complete!',
+  'backOnline5': 'OK',
 
   'homeScreen1': 'Welcome back!',
   'homeScreen2': 'Hi Ali Khan',
