@@ -83,20 +83,27 @@ class ScanQrCodeController extends GetxController {
     Get.toNamed(RouteName.scanQRCodeScreen);
     return position;
   }
-
   void openScanner() {
+    _scanLock = false;
     isScanned.value = false;
     showScanner.value = true;
+
+    scannerController.start();
   }
+
+  // void openScanner() {
+  //   isScanned.value = false;
+  //   showScanner.value = true;
+  // }
 
   void toggleTorch() {
     scannerController.toggleTorch();
     torchOn.value = !torchOn.value;
   }
   Future<void> onQrDetected(String qrCode) async {
-    if (_scanLock) return; // ❌ already scanned
+    if (_scanLock) return;
 
-    _scanLock = true;      // 🔒 lock immediately
+    _scanLock = true;
     isScanned.value = true;
     showScanner.value = false;
 

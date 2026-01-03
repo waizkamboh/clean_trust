@@ -13,7 +13,7 @@ import '../../base/round_button.dart';
 
 class AttendanceOfflineScreen extends StatelessWidget {
    AttendanceOfflineScreen({super.key});
-  AttendanceOfflineController controller = Get.find();
+  AttendanceOfflineController controller = Get.put(AttendanceOfflineController());
 
   @override
   Widget build(BuildContext context) {
@@ -321,50 +321,129 @@ class AttendanceOfflineScreen extends StatelessWidget {
      Get.dialog(
        Dialog(
          backgroundColor: AppColors.kWhiteColor,
+         shadowColor: AppColors.kBlackColor.withOpacity(0.10),
          shape: RoundedRectangleBorder(
            borderRadius: BorderRadius.circular(16),
-         ),
-         child: Obx(() {
-           // 🔥 Dialog open hote hi API call
-           if (!controller.syncing.value) {
-             Future.microtask(() {
-               controller.syncOfflineAttendance();
-             });
-           }
 
-           return SizedBox(
-             width: getWidth(327),
-             child: Padding(
-               padding: EdgeInsets.symmetric(
-                 horizontal: getWidth(32),
-                 vertical: getHeight(34),
-               ),
-               child: Column(
-                 mainAxisSize: MainAxisSize.min,
-                 children: [
-                   CircularProgressIndicator(),
-                   SizedBox(height: getHeight(20)),
-                   Text(
-                     'backOnline1'.tr,
-                     style: kSize16W600KBlackColorOutfitSemiBold.copyWith(
-                       fontSize: getFont(18),
+         ),
+         child: SizedBox(
+           width: getWidth(327),
+           child: Padding(
+             padding:  EdgeInsets.symmetric(horizontal: getWidth(32), vertical: getHeight(34)),
+             child: Column(
+               mainAxisSize: MainAxisSize.min,
+               children: [
+                 Container(
+                   width: getWidth(64),
+                   height: getHeight(64),
+                   decoration: BoxDecoration(
+                     shape: BoxShape.circle,
+                     color: AppColors.kSkyBlueColor.withOpacity(0.08),
+                     border: Border.all(
+                       color: AppColors.kLightCoolGreyColor,
+                       width: 1,
                      ),
                    ),
-                   SizedBox(height: getHeight(10)),
-                   Text(
-                     'Uploading attendance, please wait...',
-                     textAlign: TextAlign.center,
-                     style: kSize16W400KWhiteColorOutfitRegular,
+                   child: Image.asset(AppImages.profileScreenIcon7, color: AppColors.kSkyBlueColor,),
+                 ),
+                 SizedBox(height: getHeight(10),),
+                 Text(
+                   'backOnline1'.tr,
+                   style: kSize16W600KBlackColorOutfitSemiBold.copyWith(
+                       color: AppColors.kMidnightBlueColor,
+                       fontSize: getFont(20)
                    ),
-                 ],
-               ),
+                 ),
+                 SizedBox(height: getHeight(5),),
+
+                 Text(
+                   'backOnline2'.tr,
+                   style: kSize16W400KWhiteColorOutfitRegular.copyWith(
+                     color: AppColors.kDarkSlateGray,
+                   ),
+                   textAlign: TextAlign.center,
+                 ),
+                 SizedBox(height: getHeight(5),),
+
+                 Text(
+                   'backOnline3'.tr,
+                   style: kSize16W400KWhiteColorOutfitRegular.copyWith(
+                     color: AppColors.kCoolGreyColor,
+                     fontSize: getFont(14)
+                   ),
+                   textAlign: TextAlign.center,
+                 ),
+                 SizedBox(height: getHeight(20),),
+                 Text(
+                   'backOnline4'.tr,
+                   style: kSize16W400KWhiteColorOutfitRegular.copyWith(
+                       color: AppColors.kCoolGreyColor,
+                       fontSize: getFont(12)
+                   ),
+                   textAlign: TextAlign.center,
+                 ),
+                 SizedBox(height: getHeight(30),),
+
+
+
+
+               ],
              ),
-           );
-         }),
+           ),
+         ),
        ),
-       barrierDismissible: false, // ❌ user dialog close na kare
      );
    }
 
 
 }
+
+// void attendanceAutoSyncDialog() {
+//   Get.dialog(
+//     Dialog(
+//       backgroundColor: AppColors.kWhiteColor,
+//       shape: RoundedRectangleBorder(
+//         borderRadius: BorderRadius.circular(16),
+//       ),
+//       child: Obx(() {
+//         // 🔥 Dialog open hote hi API call
+//         if (!controller.syncing.value) {
+//           Future.microtask(() {
+//             controller.syncOfflineAttendance();
+//           });
+//         }
+//
+//         return SizedBox(
+//           width: getWidth(327),
+//           child: Padding(
+//             padding: EdgeInsets.symmetric(
+//               horizontal: getWidth(32),
+//               vertical: getHeight(34),
+//             ),
+//             child: Column(
+//               mainAxisSize: MainAxisSize.min,
+//               children: [
+//                 CircularProgressIndicator(),
+//                 SizedBox(height: getHeight(20)),
+//                 Text(
+//                   'backOnline1'.tr,
+//                   style: kSize16W600KBlackColorOutfitSemiBold.copyWith(
+//                     fontSize: getFont(18),
+//                   ),
+//                 ),
+//                 SizedBox(height: getHeight(10)),
+//                 Text(
+//                   'Uploading attendance, please wait...',
+//                   textAlign: TextAlign.center,
+//                   style: kSize16W400KWhiteColorOutfitRegular,
+//                 ),
+//               ],
+//             ),
+//           ),
+//         );
+//       }),
+//     ),
+//     barrierDismissible: false, // ❌ user dialog close na kare
+//   );
+// }
+
