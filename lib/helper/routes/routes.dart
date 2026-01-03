@@ -137,7 +137,7 @@ class AppRoutes{
     ),
     GetPage(
       name: RouteName.editProfileScreen,
-      page: () => const EditProfileScreen(),
+      page: () =>  EditProfileScreen(),
       // transition: Transition.rightToLeftWithFade,
       //transitionDuration: const Duration(milliseconds: 250)
     ),

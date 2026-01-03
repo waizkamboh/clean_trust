@@ -1,6 +1,7 @@
 import 'package:clean_trust/util/app_colors.dart';
 import 'package:clean_trust/util/size_config.dart';
 import 'package:clean_trust/view/base/top_header.dart';
+import 'package:clean_trust/view_model/controller/notification/mark_all_notification_read_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../util/app_images.dart';
@@ -30,6 +31,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
   final NotificationController controller = Get.put(NotificationController());
 
   final markReadController = Get.put(MarkNotificationReadController());
+  final markAllReadController = Get.put(MarkAllNotificationReadController());
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +41,29 @@ class _NotificationScreenState extends State<NotificationScreen> {
       backgroundColor: AppColors.kWhiteColor,
       body: Column(
         children: [
-          TopHeader(title: 'notificationsScreen1'.tr),
+          TopHeader(
+            title: 'notificationsScreen1'.tr,
+            actions: [
+              PopupMenuButton<int>(
+                icon: const Icon(
+                  Icons.more_vert,
+                  color: Colors.white,
+                ),
+                onSelected: (value) {
+                  if (value == 1) {
+                    markAllReadController.markAllAsRead();
+                  }
+                },
+                itemBuilder: (context) => [
+                  const PopupMenuItem(
+                    value: 1,
+                    child: Text('Mark all as read'),
+                  ),
+                ],
+              ),
+            ],
+          ),
+
           SizedBox(height: getHeight(20),),
           Expanded(
             child: Obx(() {

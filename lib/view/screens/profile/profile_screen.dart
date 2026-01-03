@@ -9,6 +9,7 @@ import '../../../helper/routes/routes_name.dart';
 import '../../../util/app_colors.dart';
 import '../../../util/size_config.dart';
 import '../../../util/text_style.dart';
+import '../../../view_model/controller/employee/editProfileController.dart';
 import '../../base/round_button.dart';
 
 class ProfileScreen extends StatefulWidget {
@@ -20,7 +21,14 @@ class ProfileScreen extends StatefulWidget {
 
 class _ProfileScreenState extends State<ProfileScreen> {
   int selectedIndex = -1;
-
+  final EditProfileController controller =
+  Get.put(EditProfileController());
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    controller.fetchEmployee();
+  }
   @override
   Widget build(BuildContext context) {
     SizeConfig().init(context);
@@ -54,6 +62,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             clipBehavior: Clip.none,
                             children: [
                               // Profile Circle
+                              Obx(()=>
                               Container(
                                 width: getWidth(120),
                                 height: getHeight(120),
@@ -64,6 +73,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                     color: AppColors.kLightCoolGreyColor,
                                     width: 4,
                                   ),
+                                  image: controller.profilePicture.value.isNotEmpty
+                                      ? DecorationImage(
+                                    image: NetworkImage(
+                                      controller.profilePicture.value,
+                                    ),
+                                    fit: BoxFit.cover,
+                                  )
+                                      : null,
                                   boxShadow: [
                                     BoxShadow(
                                       color:
@@ -79,7 +96,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                     ),
                                   ],
                                 ),
-                              ),
+                              ),),
 
                               // Camera Button
                               Positioned(
@@ -103,35 +120,35 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           ),
 
                           SizedBox(height: getHeight(20)),
-
+                      Obx(()=>
                           Text(
-                            'profileScreen2'.tr,
+                            controller.fullName.value,
                             style: kSize20W700KWhiteColorOutfitBold.copyWith(
                                 color: AppColors.kBlackColor),
-                          ),
+                          ),),
                           SizedBox(height: getHeight(10)),
-
+                          Obx(()=>
                           Text(
-                            'profileScreen3'.tr,
+                            controller.email.value,
                             style: kSize16W400KWhiteColorOutfitRegular.copyWith(
                               fontSize: getFont(14),
                               color: AppColors.kBlackColor.withOpacity(0.66),
                             ),
-                          ),
+                          ),),
                           SizedBox(height: getHeight(20)),
-
+                      Obx(()=>
                           profileInfoTile(
                             iconPath: AppImages.profileScreenIcon1,
                             title: 'profileScreen4',
-                            subtitle: 'profileScreen5',
-                          ),
+                            subtitle: controller.email.value,
+                          ),),
                           SizedBox(height: getHeight(10)),
-
+                      Obx(()=>
                           profileInfoTile(
                             iconPath: AppImages.profileScreenIcon2,
-                            title: 'profileScreen6',
-                            subtitle: 'profileScreen7',
-                          ),
+                            title: 'profileScreen6'.tr,
+                            subtitle: controller.phoneNumber.value,
+                          ),),
                         ],
                       ),
                     ),

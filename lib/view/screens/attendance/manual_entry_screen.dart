@@ -79,42 +79,42 @@ class ManualEntryScreen extends StatelessWidget {
                     borderSideColor: AppColors.kLightCoolGray,
                     textFormFieldColor: AppColors.kColor1,
                   ),
-                  // SizedBox(height: getHeight(10),),
-                  // Row(
-                  //   children: [
-                  //     Text(
-                  //       'manualEntry5'.tr,
-                  //       style: kSize16W600KBlackColorOutfitSemiBold.copyWith(
-                  //         fontSize: getFont(14),
-                  //         color: AppColors.kDarkSlateGray,
-                  //
-                  //       ),
-                  //     ),
-                  //     Image.asset(AppImages.starIcon),
-                  //
-                  //   ],
-                  // ),
-                  // SizedBox(height: getHeight(5),),
-                  // CustomDropdownField(
-                  //   width: getWidth(343),
-                  //   height: getHeight(56),
-                  //   contentPadding: EdgeInsets.symmetric(horizontal: getWidth(20)),
-                  //   hintText: 'manualEntry7'.tr,
-                  //   hintTextStyle: kSize16W400KWhiteColorOutfitRegular.copyWith(fontSize: getFont(18), color: AppColors.kBlackColor),
-                  //   borderSideColor: AppColors.kLightCoolGray,
-                  //   borderRadius: 12,
-                  //   items:   ['manualEntry7'.tr, 'manualEntry7'.tr],
-                  //   dropdownFieldColor: AppColors.kWhiteColor,
-                  //   suffixIcon: Image.asset(AppImages.dropDownIcon),
-                  // ),
-                  // Text(
-                  //   'manualEntry8'.tr,
-                  //   style: kSize16W400KWhiteColorOutfitRegular.copyWith(
-                  //     fontSize: getFont(10),
-                  //     color: AppColors.kBlackColor,
-                  //
-                  //   ),
-                  // ),
+                  SizedBox(height: getHeight(10),),
+                  Row(
+                    children: [
+                      Text(
+                        'manualEntry5'.tr,
+                        style: kSize16W600KBlackColorOutfitSemiBold.copyWith(
+                          fontSize: getFont(14),
+                          color: AppColors.kDarkSlateGray,
+
+                        ),
+                      ),
+                      Image.asset(AppImages.starIcon),
+
+                    ],
+                  ),
+                  SizedBox(height: getHeight(5),),
+                  CustomDropdownField(
+                    width: getWidth(343),
+                    height: getHeight(56),
+                    contentPadding: EdgeInsets.symmetric(horizontal: getWidth(20)),
+                    hintText: 'manualEntry7'.tr,
+                    hintTextStyle: kSize16W400KWhiteColorOutfitRegular.copyWith(fontSize: getFont(18), color: AppColors.kBlackColor),
+                    borderSideColor: AppColors.kLightCoolGray,
+                    borderRadius: 12,
+                    items:   ['manualEntry7'.tr, 'manualEntry7'.tr],
+                    dropdownFieldColor: AppColors.kWhiteColor,
+                    suffixIcon: Image.asset(AppImages.dropDownIcon),
+                  ),
+                  Text(
+                    'manualEntry8'.tr,
+                    style: kSize16W400KWhiteColorOutfitRegular.copyWith(
+                      fontSize: getFont(10),
+                      color: AppColors.kBlackColor,
+
+                    ),
+                  ),
                   SizedBox(height: getHeight(10),),
                   Row(
                     children: [
@@ -246,7 +246,9 @@ class ManualEntryScreen extends StatelessWidget {
                   }),
                   SizedBox(height: getHeight(10),),
                   RoundButton(
-                    onPress: (){},
+                    onPress: (){
+                      Get.toNamed(RouteName.leaveRequestScreen);
+                    },
                     radius: BorderRadius.circular(12),
                     title: 'manualEntry17'.tr,
                     textStyle: kSize16W600KBlackColorOutfitSemiBold.copyWith(color: AppColors.kBlackColor,),

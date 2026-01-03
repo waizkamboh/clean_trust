@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:clean_trust/helper/routes/routes_name.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:file_picker/file_picker.dart';
@@ -84,6 +85,7 @@ class LeaveRequestController extends GetxController {
 
       if (response['success'] == true) {
         showCustomSnackBar(response['message'] ?? 'Leave request submitted');
+        Get.toNamed(RouteName.bottomNavScreen);
       } else {
         showCustomSnackBar(response['message'] ?? 'Something went wrong');
       }

@@ -4,11 +4,7 @@ class AppUrl{
   //Select Language
   static const String language = "language";
 
-
-
-
    static const String baseUrl = 'http://192.168.1.4:3000/api';
-
    static const String loginApi = '${baseUrl}/auth/signin';
    static const String signUpApi = '${baseUrl}/auth/signup';
    static const String changePasswordApi = '${baseUrl}/auth/change-password';
@@ -23,7 +19,10 @@ class AppUrl{
    static const String getAllNotificationApi = '${baseUrl}/notifications?page=1&limit=20';
    static const String getUnreadCountNotificationApi = '${baseUrl}/notifications/unread-count';
    static String markNotificationReadApi(int id) => "${baseUrl}/notifications/$id/read";
-  static const String markAllNotificationReadApi = '${baseUrl}/notifications/read-all';
+   static const String markAllNotificationReadApi = '${baseUrl}/notifications/read-all';
+   static String getEmployeeByIdApi(int id) => "${baseUrl}/employees/$id";
+   static String updateEmployeeApi(int id) => "${baseUrl}/employees/$id";
+
 
 
 

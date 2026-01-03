@@ -52,6 +52,17 @@ class UserPreference {
     return await sp.remove('token');
   }
 
+  Future<bool> saveUserId(int userId) async {
+    SharedPreferences sp = await SharedPreferences.getInstance();
+    return await sp.setInt('user_id', userId);
+  }
+
+  /// Get User ID
+  Future<int?> getUserId() async {
+    SharedPreferences sp = await SharedPreferences.getInstance();
+    return sp.getInt('user_id');
+  }
+
   Future<void> saveSettings({
     required bool allowNotifications,
     required bool allowLocation,

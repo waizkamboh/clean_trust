@@ -150,7 +150,7 @@ Map<String, String> en = {
   'manualEntry14': 'Please explain why you need a manual entry',
   'manualEntry15': 'Minimum 20 characters',
   'manualEntry16': 'Submit Entry',
-  'manualEntry17': 'Submit Other Entry',
+  'manualEntry17': 'Submit Leave Request',
 
   'leaveRequest1': 'Leave Request',
   'leaveRequest2': 'Request Time Off',

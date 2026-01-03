@@ -7,12 +7,26 @@ import 'package:get/get.dart';
 import '../../../util/app_colors.dart';
 import '../../../util/size_config.dart';
 import '../../../util/text_style.dart';
+import '../../../view_model/controller/employee/editProfileController.dart';
 import '../../base/input_text_field.dart';
 import '../../base/round_button.dart';
 
-class EditProfileScreen extends StatelessWidget {
-  const EditProfileScreen({super.key});
+class EditProfileScreen extends StatefulWidget {
+   EditProfileScreen({super.key});
 
+  @override
+  State<EditProfileScreen> createState() => _EditProfileScreenState();
+}
+
+class _EditProfileScreenState extends State<EditProfileScreen> {
+   final EditProfileController controller =
+   Get.put(EditProfileController());
+@override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    controller.fetchEmployee();
+  }
   @override
   Widget build(BuildContext context) {
     SizeConfig().init(context);
@@ -32,6 +46,7 @@ class EditProfileScreen extends StatelessWidget {
                   child: Stack(
                     clipBehavior: Clip.none,
                     children: [
+                      Obx(()=>
                       Container(
                         width: getWidth(140),
                         height: getHeight(140),
@@ -42,9 +57,17 @@ class EditProfileScreen extends StatelessWidget {
                             color: AppColors.kLightCoolGreyColor,
                             width: 4,
                           ),
+                          image: controller.profilePicture.value.isNotEmpty
+                              ? DecorationImage(
+                            image: NetworkImage(
+                              controller.profilePicture.value,
+                            ),
+                            fit: BoxFit.cover,
+                          )
+                              : null,
 
                         ),
-                      ),
+                      ),),
                       Positioned(
                         bottom: 2,
                         right: 10,
@@ -69,41 +92,27 @@ class EditProfileScreen extends StatelessWidget {
               ],
             ),
             SizedBox(height: getHeight(130),),
+            Obx(()=>
             InputTextField(
-              //height: getHeight(42),
-              //myController: controller.emailController,
               width: getWidth(333),
               contentPadding: EdgeInsets.symmetric(horizontal: getWidth(20)),
-              //myController: signUpC.nameSignupController.value,
-              //focusNode: signUpC.nameSignupFocusNode.value,
-              // onFiledSubmittedValue: (value){
-              //   Utils.fieldFocusChange(context, signUpC.nameSignupFocusNode.value, signUpC.emailSignupFocusNode.value);
-              // },
-              onValidator: (email){
-                return null;
-              },
               keyBoardType: TextInputType.emailAddress,
               readOnly: true,
               labelTextStyle: kSize16W400KWhiteColorOutfitRegular.copyWith(fontSize: getFont(14), color: AppColors.kCharcoalBlackColor),
               hintTextStyle: kSize16W400KWhiteColorOutfitRegular.copyWith(fontSize: getFont(14), color: AppColors.kBlackColor.withOpacity(0.66)),
               obscureText: false,
-              hintText: 'EditProfileScreen2'.tr,
+              hintText: controller.fullName.value,
               labelText: 'EditProfileScreen3'.tr,
               borderRadius: 5,
               borderSideColor: AppColors.kBlackColor.withOpacity(0.37),
               textFormFieldColor: AppColors.kWhiteColor,
-            ),
+            ),),
             SizedBox(height: getHeight(20),),
+        Obx(()=>
             InputTextField(
-              //height: getHeight(42),
-              //myController: controller.emailController,
+              myController: controller.emailController.value,
               width: getWidth(333),
               contentPadding: EdgeInsets.symmetric(horizontal: getWidth(20)),
-              //myController: signUpC.nameSignupController.value,
-              //focusNode: signUpC.nameSignupFocusNode.value,
-              // onFiledSubmittedValue: (value){
-              //   Utils.fieldFocusChange(context, signUpC.nameSignupFocusNode.value, signUpC.emailSignupFocusNode.value);
-              // },
               onValidator: (email){
                 return null;
               },
@@ -111,125 +120,82 @@ class EditProfileScreen extends StatelessWidget {
               labelTextStyle: kSize16W400KWhiteColorOutfitRegular.copyWith(fontSize: getFont(14), color: AppColors.kCharcoalBlackColor),
               hintTextStyle: kSize16W400KWhiteColorOutfitRegular.copyWith(fontSize: getFont(14), color: AppColors.kBlackColor.withOpacity(0.66)),
               obscureText: false,
-              hintText: 'EditProfileScreen4'.tr,
+              hintText: controller.email.value,
               labelText: 'EditProfileScreen5'.tr,
               borderRadius: 5,
               borderSideColor: AppColors.kBlackColor.withOpacity(0.37),
               textFormFieldColor: AppColors.kWhiteColor,
-            ),
+            ),),
             SizedBox(height: getHeight(20),),
+        Obx(()=>
             InputTextField(
-              //height: getHeight(42),
-              //myController: controller.emailController,
               width: getWidth(333),
               contentPadding: EdgeInsets.symmetric(horizontal: getWidth(20)),
-              //myController: signUpC.nameSignupController.value,
-              //focusNode: signUpC.nameSignupFocusNode.value,
-              // onFiledSubmittedValue: (value){
-              //   Utils.fieldFocusChange(context, signUpC.nameSignupFocusNode.value, signUpC.emailSignupFocusNode.value);
-              // },
-              onValidator: (email){
-                return null;
-              },
               keyBoardType: TextInputType.emailAddress,
               readOnly: true,
               labelTextStyle: kSize16W400KWhiteColorOutfitRegular.copyWith(fontSize: getFont(14), color: AppColors.kCharcoalBlackColor),
               hintTextStyle: kSize16W400KWhiteColorOutfitRegular.copyWith(fontSize: getFont(14), color: AppColors.kBlackColor.withOpacity(0.66)),
               obscureText: false,
-              hintText: 'EditProfileScreen6'.tr,
+              hintText: controller.createdAt.value,
               labelText: 'EditProfileScreen6'.tr,
               borderRadius: 5,
               borderSideColor: AppColors.kBlackColor.withOpacity(0.37),
               textFormFieldColor: AppColors.kWhiteColor,
-            ),
+            ),),
             SizedBox(height: getHeight(20),),
+        Obx(()=>
             InputTextField(
-              //height: getHeight(42),
-              //myController: controller.emailController,
               width: getWidth(333),
               contentPadding: EdgeInsets.symmetric(horizontal: getWidth(20)),
-              //myController: signUpC.nameSignupController.value,
-              //focusNode: signUpC.nameSignupFocusNode.value,
-              // onFiledSubmittedValue: (value){
-              //   Utils.fieldFocusChange(context, signUpC.nameSignupFocusNode.value, signUpC.emailSignupFocusNode.value);
-              // },
-              onValidator: (email){
-                return null;
-              },
               keyBoardType: TextInputType.emailAddress,
               readOnly: true,
               labelTextStyle: kSize16W400KWhiteColorOutfitRegular.copyWith(fontSize: getFont(14), color: AppColors.kCharcoalBlackColor),
               hintTextStyle: kSize16W400KWhiteColorOutfitRegular.copyWith(fontSize: getFont(14), color: AppColors.kBlackColor.withOpacity(0.66)),
               obscureText: false,
-              hintText: 'EditProfileScreen7'.tr,
+              hintText: controller.role.value,
               labelText: 'EditProfileScreen7'.tr,
               borderRadius: 5,
               borderSideColor: AppColors.kBlackColor.withOpacity(0.37),
               textFormFieldColor: AppColors.kWhiteColor,
-            ),
+            ),),
             SizedBox(height: getHeight(20),),
+        Obx(()=>
             InputTextField(
-              //height: getHeight(42),
-              //myController: controller.emailController,
               width: getWidth(333),
               contentPadding: EdgeInsets.symmetric(horizontal: getWidth(20)),
-              //myController: signUpC.nameSignupController.value,
-              //focusNode: signUpC.nameSignupFocusNode.value,
-              // onFiledSubmittedValue: (value){
-              //   Utils.fieldFocusChange(context, signUpC.nameSignupFocusNode.value, signUpC.emailSignupFocusNode.value);
-              // },
-              onValidator: (email){
-                return null;
-              },
               keyBoardType: TextInputType.emailAddress,
               readOnly: true,
               labelTextStyle: kSize16W400KWhiteColorOutfitRegular.copyWith(fontSize: getFont(14), color: AppColors.kCharcoalBlackColor),
               hintTextStyle: kSize16W400KWhiteColorOutfitRegular.copyWith(fontSize: getFont(14), color: AppColors.kBlackColor.withOpacity(0.66)),
               obscureText: false,
-              hintText: 'EditProfileScreen8'.tr,
+              hintText: controller.position.value,
               labelText: 'EditProfileScreen8'.tr,
               borderRadius: 5,
               borderSideColor: AppColors.kBlackColor.withOpacity(0.37),
               textFormFieldColor: AppColors.kWhiteColor,
-            ),
+            ),),
             SizedBox(height: getHeight(20),),
+        Obx(()=>
             InputTextField(
-              //height: getHeight(42),
-              //myController: controller.emailController,
+              myController: controller.phoneController.value,
               width: getWidth(333),
               contentPadding: EdgeInsets.symmetric(horizontal: getWidth(20)),
-              //myController: signUpC.nameSignupController.value,
-              //focusNode: signUpC.nameSignupFocusNode.value,
-              // onFiledSubmittedValue: (value){
-              //   Utils.fieldFocusChange(context, signUpC.nameSignupFocusNode.value, signUpC.emailSignupFocusNode.value);
-              // },
-              onValidator: (email){
-                return null;
-              },
               keyBoardType: TextInputType.emailAddress,
               labelTextStyle: kSize16W400KWhiteColorOutfitRegular.copyWith(fontSize: getFont(14), color: AppColors.kCharcoalBlackColor),
               hintTextStyle: kSize16W400KWhiteColorOutfitRegular.copyWith(fontSize: getFont(14), color: AppColors.kBlackColor.withOpacity(0.66)),
               obscureText: false,
-              hintText: 'EditProfileScreen10'.tr,
+              hintText: controller.phoneNumber.value,
               labelText: 'EditProfileScreen9'.tr,
               borderRadius: 5,
               borderSideColor: AppColors.kBlackColor.withOpacity(0.37),
               textFormFieldColor: AppColors.kWhiteColor,
-            ),
+            ),),
             SizedBox(height: getHeight(20),),
+        Obx(()=>
             InputTextField(
-              //height: getHeight(42),
-              //myController: controller.emailController,
+              myController: controller.passwordController.value,
               width: getWidth(333),
               contentPadding: EdgeInsets.symmetric(horizontal: getWidth(20)),
-              //myController: signUpC.nameSignupController.value,
-              //focusNode: signUpC.nameSignupFocusNode.value,
-              // onFiledSubmittedValue: (value){
-              //   Utils.fieldFocusChange(context, signUpC.nameSignupFocusNode.value, signUpC.emailSignupFocusNode.value);
-              // },
-              onValidator: (email){
-                return null;
-              },
               keyBoardType: TextInputType.emailAddress,
               labelTextStyle: kSize16W400KWhiteColorOutfitRegular.copyWith(fontSize: getFont(14), color: AppColors.kCharcoalBlackColor),
               hintTextStyle: kSize16W400KWhiteColorOutfitRegular.copyWith(fontSize: getFont(14), color: AppColors.kBlackColor.withOpacity(0.66)),
@@ -239,10 +205,14 @@ class EditProfileScreen extends StatelessWidget {
               borderRadius: 5,
               borderSideColor: AppColors.kBlackColor.withOpacity(0.37),
               textFormFieldColor: AppColors.kWhiteColor,
-            ),
+            ),),
             SizedBox(height: getHeight(50),),
+        Obx(()=>
             RoundButton(
-              onPress: (){},
+              loading: controller.isLoading.value,
+              onPress: (){
+                controller.updateProfile();
+              },
               radius: BorderRadius.circular(12),
               title: 'EditProfileScreen13'.tr,
               textStyle: kSize16W600KBlackColorOutfitSemiBold.copyWith(color: AppColors.kWhiteColor,),
@@ -250,7 +220,7 @@ class EditProfileScreen extends StatelessWidget {
               width: getWidth(343),
               height: getHeight(56),
 
-            ),
+            ),),
             SizedBox(height: getHeight(50),),
 
 
@@ -265,7 +235,6 @@ class EditProfileScreen extends StatelessWidget {
       ),
     );
   }
-
 }
 
 

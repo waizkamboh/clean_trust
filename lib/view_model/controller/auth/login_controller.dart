@@ -84,8 +84,12 @@ class LoginController extends GetxController{
       }
 
       String accessToken = response['data']['accessToken'];
+      int userId = response['data']['user']['id'];
+
 
       await userPreference.saveToken(accessToken);
+      await userPreference.saveUserId(userId);
+
 
       clearFields();
       Get.offAllNamed(RouteName.bottomNavScreen);
