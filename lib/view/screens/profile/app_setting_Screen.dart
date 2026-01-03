@@ -12,7 +12,7 @@ class AppSettingScreen extends StatelessWidget {
   AppSettingScreen({super.key});
 
   final AppSettingController controller =
-  Get.put(AppSettingController());
+  Get.find();
 
   @override
   Widget build(BuildContext context) {

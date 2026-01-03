@@ -328,7 +328,7 @@ class ScanQrcodeScreen extends StatelessWidget {
   ScanQrcodeScreen({super.key});
 
   final ScanQrCodeController controller =
-  Get.put(ScanQrCodeController());
+  Get.find();
 
   @override
   Widget build(BuildContext context) {

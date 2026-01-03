@@ -28,10 +28,10 @@ class _NotificationScreenState extends State<NotificationScreen> {
     Get.find<UnreadCountController>().fetchUnreadCount();
 
   }
-  final NotificationController controller = Get.put(NotificationController());
+   NotificationController controller = Get.find<NotificationController>();
 
-  final markReadController = Get.put(MarkNotificationReadController());
-  final markAllReadController = Get.put(MarkAllNotificationReadController());
+  MarkNotificationReadController markReadController = Get.find<MarkNotificationReadController>();
+  MarkAllNotificationReadController markAllReadController = Get.find<MarkAllNotificationReadController>();
 
   @override
   Widget build(BuildContext context) {

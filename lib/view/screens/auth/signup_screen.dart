@@ -16,7 +16,7 @@ import 'component/social_auth_section.dart';
 
 class SignupScreen extends StatelessWidget {
    SignupScreen({super.key});
-   SignupController signupController = Get.put(SignupController());
+   SignupController signupController = Get.find();
   @override
   Widget build(BuildContext context) {
     SizeConfig().init(context);

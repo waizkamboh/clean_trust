@@ -19,7 +19,7 @@ import 'component/social_auth_section.dart';
 class LoginScreen extends StatelessWidget {
    LoginScreen({super.key});
 
-  LoginController loginController = Get.put(LoginController());
+  LoginController loginController = Get.find();
 
   @override
   Widget build(BuildContext context) {

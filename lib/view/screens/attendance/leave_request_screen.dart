@@ -13,8 +13,8 @@ import '../../base/round_button.dart';
 
 class LeaveRequestScreen extends StatelessWidget {
    LeaveRequestScreen({super.key});
-  final controller = Get.put(LeaveRequestController());
-  ManualAttendanceEntryController manualAttendanceEntryController = Get.put(ManualAttendanceEntryController());
+  final controller = Get.find();
+  ManualAttendanceEntryController manualAttendanceEntryController = Get.find();
 
 
   @override

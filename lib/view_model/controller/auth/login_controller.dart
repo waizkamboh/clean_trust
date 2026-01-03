@@ -93,7 +93,7 @@ class LoginController extends GetxController{
 
       clearFields();
       Get.offAllNamed(RouteName.bottomNavScreen);
-      AppSettingController appSettingController = Get.put(AppSettingController());
+      AppSettingController appSettingController = Get.find();
       appSettingController.fetchFromApi();
       appSettingController.fetchAppVersion();
 

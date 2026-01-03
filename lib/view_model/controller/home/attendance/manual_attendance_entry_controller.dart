@@ -14,7 +14,7 @@ class ManualAttendanceEntryController extends GetxController {
   final _repo = ManualAttendanceEntryRepository();
   final UserPreference _userPreference = UserPreference();
   final GetWorkplacesController workplacesController =
-  Get.put(GetWorkplacesController());
+  Get.find();
 
   RxBool loading = false.obs;
 

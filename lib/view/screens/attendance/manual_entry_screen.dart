@@ -15,8 +15,8 @@ import '../../base/round_button.dart';
 
 class ManualEntryScreen extends StatelessWidget {
   ManualEntryScreen({super.key});
-  ManualAttendanceEntryController controller = Get.put(ManualAttendanceEntryController());
-  final GetWorkplacesController workplaceController = Get.put(GetWorkplacesController());
+  ManualAttendanceEntryController controller = Get.find();
+  final GetWorkplacesController workplaceController = Get.find();
 
   @override
   Widget build(BuildContext context) {

@@ -13,7 +13,7 @@ import '../../base/round_button.dart';
 
 class ChangePasswordScreen extends StatelessWidget {
    ChangePasswordScreen({super.key});
-   ChangePasswordController changePasswordController = Get.put(ChangePasswordController());
+   ChangePasswordController changePasswordController = Get.find();
   @override
   Widget build(BuildContext context) {
     SizeConfig().init(context);

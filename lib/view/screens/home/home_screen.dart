@@ -27,18 +27,19 @@ class _HomeScreenState extends State<HomeScreen> {
     super.initState();
     unreadCountController.fetchUnreadCount();
 
-    ever(Get.put<NotificationController>(NotificationController()).unreadCount, (_) {
+    ever(notificationController.unreadCount, (_) {
       unreadCountController.fetchUnreadCount();
     });
 
   }
 
- ScanQrCodeController scanQrCodeController = Get.put(ScanQrCodeController());
+ ScanQrCodeController scanQrCodeController = Get.find();
+ NotificationController notificationController = Get.find();
 
- GetAttendanceHistoryController getAttendanceHistoryController = Get.put(GetAttendanceHistoryController());
+ GetAttendanceHistoryController getAttendanceHistoryController = Get.find<GetAttendanceHistoryController>();
 
    final UnreadCountController unreadCountController =
-   Get.put(UnreadCountController());
+   Get.find<UnreadCountController>();
 
 
   @override

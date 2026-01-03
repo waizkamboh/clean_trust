@@ -24,6 +24,8 @@ class ScanQrCodeController extends GetxController {
   RxBool isScanned = false.obs;
   RxBool loading = false.obs;
   RxBool torchOn = false.obs;
+  bool _scanLock = false;
+
 
 
 
@@ -91,13 +93,25 @@ class ScanQrCodeController extends GetxController {
     scannerController.toggleTorch();
     torchOn.value = !torchOn.value;
   }
-
   Future<void> onQrDetected(String qrCode) async {
-    if (isScanned.value) return;
+    if (_scanLock) return; // ❌ already scanned
+
+    _scanLock = true;      // 🔒 lock immediately
     isScanned.value = true;
     showScanner.value = false;
+
+    // 📷 STOP camera immediately
+    await scannerController.stop();
+
     await _markAttendance(qrCode);
   }
+
+  // Future<void> onQrDetected(String qrCode) async {
+  //   if (isScanned.value) return;
+  //   isScanned.value = true;
+  //   showScanner.value = false;
+  //   await _markAttendance(qrCode);
+  // }
 
 
 

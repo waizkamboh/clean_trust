@@ -21,8 +21,7 @@ class ProfileScreen extends StatefulWidget {
 
 class _ProfileScreenState extends State<ProfileScreen> {
   int selectedIndex = -1;
-  final EditProfileController controller =
-  Get.put(EditProfileController());
+  final EditProfileController controller = Get.find();
   @override
   void initState() {
     // TODO: implement initState

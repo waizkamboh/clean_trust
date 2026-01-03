@@ -15,7 +15,7 @@ import 'component/auth_header.dart';
 
 class ForgotPasswordScreen extends StatelessWidget {
    ForgotPasswordScreen({super.key});
- ForgetPasswordController controller = Get.put(ForgetPasswordController());
+ ForgetPasswordController controller = Get.find();
   @override
   Widget build(BuildContext context) {
     SizeConfig().init(context);

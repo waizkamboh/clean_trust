@@ -1,3 +1,4 @@
+import 'package:clean_trust/helper/get_di.dart';
 import 'package:clean_trust/util/language_module/data_binding.dart';
 import 'package:clean_trust/util/language_module/utils/localization_page.dart';
 import 'package:clean_trust/view/base/bottom_nav_bar.dart';
@@ -57,6 +58,7 @@ class MyApp extends StatelessWidget {
       fallbackLocale: LocalizationService.fallbackLocale,
       translations: LocalizationService(),
       getPages: AppRoutes.appRoutes(),
+      initialBinding: AppBindings(),
     );
   }
 }
