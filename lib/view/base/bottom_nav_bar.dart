@@ -22,6 +22,12 @@ class BottomNavScreen extends StatefulWidget {
 }
 
 class _BottomNavScreenState extends State<BottomNavScreen> {
+@override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+
+  }
   final PersistentTabController _controller =
   PersistentTabController(initialIndex: 0);
 
@@ -29,8 +35,8 @@ class _BottomNavScreenState extends State<BottomNavScreen> {
     return [
       HomeScreen(),
       AttendanceOfflineScreen(),
-      const NotificationScreen(),
-      const ProfileScreen(),
+       NotificationScreen(),
+       ProfileScreen(),
     ];
   }
 

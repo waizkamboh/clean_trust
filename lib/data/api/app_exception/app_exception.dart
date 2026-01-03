@@ -15,7 +15,7 @@ class AppExceptions implements Exception{
 
 class InternetException extends AppExceptions{
 
-  InternetException([String? message]) : super(message, 'Check Your Internet Connection');
+  InternetException([String? message]) : super(message, 'Unable to connect to server. Please check your internet connection.');
 
 }
 

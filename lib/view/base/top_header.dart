@@ -7,6 +7,7 @@ import '../../util/text_style.dart';
 
 class TopHeader extends StatelessWidget {
   String title;
+
    TopHeader({super.key, required this.title});
 
   @override

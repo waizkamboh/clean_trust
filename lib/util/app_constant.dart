@@ -7,7 +7,7 @@ class AppUrl{
 
 
 
-   static const String baseUrl = 'http://192.168.1.3:3000/api';
+   static const String baseUrl = 'http://192.168.1.4:3000/api';
 
    static const String loginApi = '${baseUrl}/auth/signin';
    static const String signUpApi = '${baseUrl}/auth/signup';
@@ -20,6 +20,11 @@ class AppUrl{
    static const String manualAttendanceEntryApi = '${baseUrl}/attendance/manual';
    static const String getTodayAttendanceApi = '${baseUrl}/attendance/today';
    static const String leaveRequestApi = '${baseUrl}/leave-requests';
+   static const String getAllNotificationApi = '${baseUrl}/notifications?page=1&limit=20';
+   static const String getUnreadCountNotificationApi = '${baseUrl}/notifications/unread-count';
+   static String markNotificationReadApi(int id) => "${baseUrl}/notifications/$id/read";
+  static const String markAllNotificationReadApi = '${baseUrl}/notifications/read-all';
+
 
 
 

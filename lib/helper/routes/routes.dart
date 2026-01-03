@@ -92,7 +92,7 @@ class AppRoutes{
     ),
     GetPage(
       name: RouteName.notificationScreen,
-      page: () => const NotificationScreen(),
+      page: () =>  NotificationScreen(),
       // transition: Transition.rightToLeftWithFade,
       //transitionDuration: const Duration(milliseconds: 250)
     ),

@@ -5,16 +5,42 @@ import 'package:clean_trust/view_model/controller/home/attendance/get_attendance
 import 'package:clean_trust/view_model/controller/home/attendance/scanqrcode_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
 import '../../../helper/routes/routes_name.dart';
 import '../../../util/size_config.dart';
 import '../../../util/text_style.dart';
+import '../../../view_model/controller/notification/get_unread_count_controller.dart';
+import '../../../view_model/controller/notification/notification_controller.dart';
 import '../../base/round_button.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
    HomeScreen({super.key});
+
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    unreadCountController.fetchUnreadCount();
+
+    ever(Get.put<NotificationController>(NotificationController()).unreadCount, (_) {
+      unreadCountController.fetchUnreadCount();
+    });
+
+  }
+
  ScanQrCodeController scanQrCodeController = Get.put(ScanQrCodeController());
+
  GetAttendanceHistoryController getAttendanceHistoryController = Get.put(GetAttendanceHistoryController());
+
+   final UnreadCountController unreadCountController =
+   Get.put(UnreadCountController());
+
+
   @override
   Widget build(BuildContext context) {
     SizeConfig().init(context);
@@ -34,7 +60,7 @@ class HomeScreen extends StatelessWidget {
                         colors: [
                           AppColors.kGradientColor5,
                           AppColors.kGradientColor6,
-        
+
                         ]),
                     borderRadius: BorderRadius.only(bottomLeft: Radius.circular(25),bottomRight: Radius.circular(25)),
                   ),
@@ -48,9 +74,9 @@ class HomeScreen extends StatelessWidget {
                             width: getWidth(49),
                             height: getHeight(49),
                           ),
-        
+
                           SizedBox(width: getWidth(12)),
-        
+
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             mainAxisAlignment: MainAxisAlignment.center,
@@ -61,7 +87,7 @@ class HomeScreen extends StatelessWidget {
                                   fontSize: getFont(14),
                                 ),
                               ),
-        
+
                               Row(
                                 children: [
                                   Text(
@@ -70,35 +96,74 @@ class HomeScreen extends StatelessWidget {
                                       fontSize: getFont(20),
                                     ),
                                   ),
-        
+
                                   SizedBox(width: getWidth(6)),
-        
+
                                   Image.asset(AppImages.handIcon),
                                 ],
                               ),
                             ],
                           ),
-        
+
                           Spacer(),
 
                           GestureDetector(
-                            onTap: (){
+                            onTap: () {
                               Get.toNamed(RouteName.notificationScreen);
 
                             },
-                            child: Container(
-                              width: getWidth(39),
-                              height: getHeight(38),
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(6),
-                                color: AppColors.kWhiteColor.withOpacity(0.22),
-                              ),
-                              child: Image.asset(AppImages.bellIcon),
+                            child: Stack(
+                              clipBehavior: Clip.none,
+                              children: [
+                                Container(
+                                  width: getWidth(39),
+                                  height: getHeight(38),
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(6),
+                                    color: AppColors.kWhiteColor.withOpacity(0.22),
+                                  ),
+                                  child: Image.asset(AppImages.bellIcon),
+                                ),
+
+                                /// 🔴 Unread Badge
+                                Obx(() {
+                                  if (unreadCountController.unreadCount.value == 0) {
+                                    return const SizedBox();
+                                  }
+
+                                  return Positioned(
+                                    right: -4,
+                                    top: -4,
+                                    child: Container(
+                                      padding: const EdgeInsets.all(5),
+                                      decoration: const BoxDecoration(
+                                        color: Colors.red,
+                                        shape: BoxShape.circle,
+                                      ),
+                                      constraints: const BoxConstraints(
+                                        minWidth: 18,
+                                        minHeight: 18,
+                                      ),
+                                      child: Center(
+                                        child: Text(
+                                          unreadCountController.unreadCount.value.toString(),
+                                          style: const TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 10,
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  );
+                                }),
+                              ],
                             ),
                           ),
+
                         ],
                       )
-        
+
                   ),
                 ),
                 Positioned(
@@ -119,7 +184,7 @@ class HomeScreen extends StatelessWidget {
                           blurRadius: 15,
                           spreadRadius: 0,
                         ),
-        
+
                         BoxShadow(
                           color: AppColors.kBlackColor.withOpacity(0.10),
                           offset: const Offset(0, 4),
@@ -149,7 +214,7 @@ class HomeScreen extends StatelessWidget {
                                    shape: BoxShape.circle,
                                    border: Border.all(color: AppColors.kLightCoolGreyColor, width: 1),
                                  ),
-        
+
                                ),
                                SizedBox(width: getWidth(10),),
                                Text(
@@ -158,10 +223,10 @@ class HomeScreen extends StatelessWidget {
                                    color: AppColors.kForestGreenColor,
                                  ),
                                ),
-        
-        
-        
-        
+
+
+
+
                              ],
                            ),
                          ),
@@ -176,7 +241,7 @@ class HomeScreen extends StatelessWidget {
                     );
                   }),
 
-                  Text(
+                         Text(
                            'homeScreen5'.tr,
                            style: kSize16W400KWhiteColorOutfitRegular.copyWith(
                                color: AppColors.kCoolGreyColor,
@@ -191,7 +256,7 @@ class HomeScreen extends StatelessWidget {
                              color: AppColors.kColor1,
                              borderRadius: BorderRadius.all(Radius.circular(8)),
                              border: Border.all(color: AppColors.kLightCoolGreyColor, width: 1),
-        
+
                            ),
                            child: Column(
                              children: [
@@ -217,16 +282,16 @@ class HomeScreen extends StatelessWidget {
                            ],
                            ),
                          ),
-        
-        
-        
+
+
+
                        ],
                      ),
                   ),
                 ),
-        
 
-        
+
+
               ],
             ),
             SizedBox(height: getHeight(220)),
@@ -353,7 +418,7 @@ class HomeScreen extends StatelessWidget {
                     blurRadius: 4,
                     spreadRadius: 0,
                   ),
-        
+
                 ],
               ),
               child: Column(
@@ -434,20 +499,20 @@ class HomeScreen extends StatelessWidget {
                       ),
                     ),
                   ),
-        
-        
-        
+
+
+
                 ],
               ),
             ),
             SizedBox(height: getHeight(50),)
 
-        
-        
-        
-        
-        
-        
+
+
+
+
+
+
           ],
         ),
       ),
@@ -495,15 +560,15 @@ class HomeScreen extends StatelessWidget {
                         ),
                       ),
                       child: Image.asset(AppImages.locationIcon, color: AppColors.kWhiteColor,)
-          
+
                     ),
                     SizedBox(height: getHeight(10),),
                     Text(
                       'enableLocation1'.tr,
                       style: kSize20W700KWhiteColorOutfitBold
                     ),
-          
-          
+
+
                   ],
                 ),
               ),
@@ -564,8 +629,4 @@ class HomeScreen extends StatelessWidget {
       ),
     );
   }
-
-
-
-
 }
