@@ -9,7 +9,7 @@ class ScanQrCodeRepository{
 
   Future<dynamic> scanQRCodeApi(Map<String, String>? headers,var data) async{
     //print(AppUrl.loginApi);
-    dynamic response = await _apiService.postApi(data, AppUrl.leaveRequestApi, headers: headers);
+    dynamic response = await _apiService.postApi(data, AppUrl.scanQRCodeApi, headers: headers);
     return response;
   }
 }

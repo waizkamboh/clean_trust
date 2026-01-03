@@ -7,10 +7,13 @@ import '../../../../data/repository/home/attendance/manual_attendance_entry_repo
 import '../../../../util/app_colors.dart';
 import '../../../../util/custom_snackbar.dart';
 import '../../../user_preference/user_preference.dart';
+import '../../workplaces/get_workplaces_controller.dart';
 
 class ManualAttendanceEntryController extends GetxController {
   final _repo = ManualAttendanceEntryRepository();
   final UserPreference _userPreference = UserPreference();
+  final GetWorkplacesController workplacesController =
+  Get.find<GetWorkplacesController>();
 
   RxBool loading = false.obs;
 
@@ -91,13 +94,20 @@ class ManualAttendanceEntryController extends GetxController {
 
 
 
+
+
   Future<void> submitManualAttendance() async {
+    final int workplaceId = workplacesController.selectedWorkplaceId.value;
+
     String date = dateController.value.text.trim();
     String checkInTime = checkInController.value.text.trim();
     String checkOutTime = checkOutController.value.text.trim();
     String reason = reasonController.value.text.trim();
     if (date.isEmpty) {
       showCustomSnackBar('Please choose date');
+      return;
+    }if (workplaceId == 0) {
+      showCustomSnackBar('Please select a workplace');
       return;
     }if (checkInTime.isEmpty) {
       showCustomSnackBar('Please choose check In Time');
@@ -128,7 +138,7 @@ class ManualAttendanceEntryController extends GetxController {
 
 
       Map<String, dynamic> body = {
-        //"workplace_id": 9,
+        "workplace_id": workplaceId,
         "date": dateController.value.text,
         "check_in_time": checkInController.value.text,
         "check_out_time": checkOutController.value.text,

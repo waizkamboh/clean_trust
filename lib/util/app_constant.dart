@@ -22,6 +22,9 @@ class AppUrl{
    static const String markAllNotificationReadApi = '${baseUrl}/notifications/read-all';
    static String getEmployeeByIdApi(int id) => "${baseUrl}/employees/$id";
    static String updateEmployeeApi(int id) => "${baseUrl}/employees/$id";
+  static const String getWorkplacesApi = '${baseUrl}/workplaces';
+  static const String syncOfflineAttendance = '${baseUrl}/attendance/sync-offline';
+
 
 
 

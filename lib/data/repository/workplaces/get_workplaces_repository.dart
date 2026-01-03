@@ -13,7 +13,7 @@ class GetWorkplacesRepository{
   final _api = NetworkApiServices();
 
   Future<GetAllWorkPlacesModel> getWorkplacesApi(Map<String, String>? headers)async{
-    final response = await _api.getApi(AppUrl.getAllNotificationApi, headers: headers);
+    final response = await _api.getApi(AppUrl.getWorkplacesApi, headers: headers);
 
     return GetAllWorkPlacesModel.fromJson(response);
 

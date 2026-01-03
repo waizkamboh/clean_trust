@@ -8,13 +8,16 @@ import 'package:get/get.dart';
 
 import '../../../helper/routes/routes_name.dart';
 import '../../../util/text_style.dart';
+import '../../../view_model/controller/workplaces/get_workplaces_controller.dart';
 import '../../base/custom_drop_down.dart';
 import '../../base/input_text_field.dart';
 import '../../base/round_button.dart';
 
 class ManualEntryScreen extends StatelessWidget {
-   ManualEntryScreen({super.key});
+  ManualEntryScreen({super.key});
   ManualAttendanceEntryController controller = Get.put(ManualAttendanceEntryController());
+  final GetWorkplacesController workplaceController = Get.put(GetWorkplacesController());
+
   @override
   Widget build(BuildContext context) {
     SizeConfig().init(context);
@@ -36,7 +39,7 @@ class ManualEntryScreen extends StatelessWidget {
                     style: kSize20W700KWhiteColorOutfitBold.copyWith(
                       fontSize: getFont(24),
                       color: AppColors.kMidnightBlueColor,
-        
+
                     ),
                   ),
                   Text(
@@ -44,10 +47,10 @@ class ManualEntryScreen extends StatelessWidget {
                     style: kSize16W400KWhiteColorOutfitRegular.copyWith(
                       fontSize: getFont(14),
                       color: AppColors.kSlateGray,
-        
+
                     ),
                   ),
-        
+
                   SizedBox(height: getHeight(20),),
                   Row(
                     children: [
@@ -95,18 +98,28 @@ class ManualEntryScreen extends StatelessWidget {
                     ],
                   ),
                   SizedBox(height: getHeight(5),),
-                  CustomDropdownField(
+
+                  Obx(() => CustomDropdownField(
                     width: getWidth(343),
                     height: getHeight(56),
-                    contentPadding: EdgeInsets.symmetric(horizontal: getWidth(20)),
-                    hintText: 'manualEntry7'.tr,
-                    hintTextStyle: kSize16W400KWhiteColorOutfitRegular.copyWith(fontSize: getFont(18), color: AppColors.kBlackColor),
+                    contentPadding:
+                    EdgeInsets.symmetric(horizontal: getWidth(20)),
+                    hintText: 'Select Workplace',
+                    hintTextStyle:
+                    kSize16W400KWhiteColorOutfitRegular.copyWith(
+                      fontSize: getFont(18),
+                      color: AppColors.kBlackColor,
+                    ),
                     borderSideColor: AppColors.kLightCoolGray,
                     borderRadius: 12,
-                    items:   ['manualEntry7'.tr, 'manualEntry7'.tr],
+                    items: workplaceController.workplaceNames,
                     dropdownFieldColor: AppColors.kWhiteColor,
                     suffixIcon: Image.asset(AppImages.dropDownIcon),
-                  ),
+                    onChanged: (value) {
+                      workplaceController.onWorkplaceSelected(value);
+                    },
+                  )),
+
                   Text(
                     'manualEntry8'.tr,
                     style: kSize16W400KWhiteColorOutfitRegular.copyWith(
@@ -195,11 +208,11 @@ class ManualEntryScreen extends StatelessWidget {
                         style: kSize16W600KBlackColorOutfitSemiBold.copyWith(
                           fontSize: getFont(14),
                           color: AppColors.kDarkSlateGray,
-        
+
                         ),
                       ),
                       Image.asset(AppImages.starIcon),
-        
+
                     ],
                   ),
                   SizedBox(height: getHeight(5),),
