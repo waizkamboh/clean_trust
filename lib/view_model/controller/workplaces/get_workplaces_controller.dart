@@ -75,4 +75,5 @@ class GetWorkplacesController extends GetxController {
       print('Selected workplace id: ${selectedWorkplaceId.value}');
     }
   }
+
 }

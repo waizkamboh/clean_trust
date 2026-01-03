@@ -1,3 +1,4 @@
+import 'package:clean_trust/helper/routes/routes_name.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
@@ -13,7 +14,7 @@ class ManualAttendanceEntryController extends GetxController {
   final _repo = ManualAttendanceEntryRepository();
   final UserPreference _userPreference = UserPreference();
   final GetWorkplacesController workplacesController =
-  Get.find<GetWorkplacesController>();
+  Get.put(GetWorkplacesController());
 
   RxBool loading = false.obs;
 
@@ -169,7 +170,7 @@ class ManualAttendanceEntryController extends GetxController {
         model.message ?? 'Manual entry submitted successfully',
       );
 
-      Get.back(); // ya jis screen pe jana ho
+      clearFields();
 
     } catch (e) {
       loading.value = false;
@@ -184,5 +185,12 @@ class ManualAttendanceEntryController extends GetxController {
     checkOutController.value.dispose();
     reasonController.value.dispose();
     super.dispose();
+  }
+  void clearFields() {
+    dateController.value.clear();
+    checkInController.value.clear();
+    checkOutController.value.clear();
+    reasonController.value.clear();
+    workplacesController.selectedWorkplaceId.value = 0;
   }
 }

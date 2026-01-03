@@ -24,6 +24,9 @@ class CustomDropdownField extends StatelessWidget {
   final Widget? helperWidget;
   final Widget? suffixIcon;
 
+  /// ✅ NEW optional selected value
+  final String? value;
+
   const CustomDropdownField({
     super.key,
     this.focusNode,
@@ -45,6 +48,7 @@ class CustomDropdownField extends StatelessWidget {
     this.labelTextStyle,
     this.helperWidget,
     this.suffixIcon,
+    this.value, // optional selected value
   });
 
   @override
@@ -60,6 +64,7 @@ class CustomDropdownField extends StatelessWidget {
             items: items,
             onChanged: onChanged,
             validator: validator,
+            selectedItem: value, // ✅ BIND VALUE HERE
             dropdownButtonProps: const DropdownButtonProps(
               isVisible: false,
             ),
