@@ -72,21 +72,21 @@ class _LanguageScreenState extends State<LanguageScreen> {
                 LocalizationService().changeLocale("english");
                 Get.find<GeneralController>()
                     .sharedPreferences
-                    .setString(AppUrl.language, "en");
+                    .setString(language, "en");
 
               } else if (selectedIndex == 1) {
                 // Czech
                 LocalizationService().changeLocale("czech");
                 Get.find<GeneralController>()
                     .sharedPreferences
-                    .setString(AppUrl.language, "cs");
+                    .setString(language, "cs");
 
               } else if (selectedIndex == 2) {
                 // Russian
                 LocalizationService().changeLocale("russian");
                 Get.find<GeneralController>()
                     .sharedPreferences
-                    .setString(AppUrl.language, "ru");
+                    .setString(language, "ru");
               }
 
             },

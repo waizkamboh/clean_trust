@@ -165,7 +165,7 @@ class ScanQrCodeController extends GetxController {
         localDb.debugPrintAll();
 
         loading.value = false;
-        Get.to(()=> AttendanceOfflineScreen());
+        Get.toNamed(RouteName.bottomNavScreen);
         showCustomSnackBar('Attendance saved offline');
         return;
       }

@@ -51,9 +51,7 @@ class _AttendanceOfflineScreenState extends State<AttendanceOfflineScreen> {
             TopHeader(title: 'attendanceOffline1'.tr),
             SizedBox(height: getHeight(30)),
 
-            GestureDetector(
-              onTap: controller.syncOfflineAttendance,
-              child: Container(
+            Container(
                 padding: EdgeInsetsGeometry.symmetric(horizontal: getWidth(20), vertical: getHeight(12)),
                 width: getWidth(393),
                 decoration: BoxDecoration(
@@ -93,7 +91,7 @@ class _AttendanceOfflineScreenState extends State<AttendanceOfflineScreen> {
                   ],
                 ),
               ),
-            ),
+
             SizedBox(height: getHeight(20)),
 
             Padding(
@@ -401,15 +399,50 @@ class _AttendanceOfflineScreenState extends State<AttendanceOfflineScreen> {
                    textAlign: TextAlign.center,
                  ),
                  SizedBox(height: getHeight(20),),
-                 Text(
+                 Obx(() => ClipRRect(
+                   borderRadius: BorderRadius.circular(999),
+                   child: LinearProgressIndicator(
+                     value: controller.uploadProgress.value,
+                     minHeight: getHeight(6),
+                     backgroundColor: AppColors.kLightCoolGreyColor.withOpacity(0.3),
+                     valueColor: AlwaysStoppedAnimation<Color>(
+                       AppColors.kSkyBlueColor,
+                     ),
+                   ),
+                 )),
+                 SizedBox(height: getHeight(5),),
+
+                 Obx(() => controller.uploadCompleted.value
+                     ? Text(
                    'backOnline4'.tr,
                    style: kSize16W400KWhiteColorOutfitRegular.copyWith(
-                       color: AppColors.kCoolGreyColor,
-                       fontSize: getFont(12)
+                     color: AppColors.kCoolGreyColor,
+                     fontSize: getFont(12),
                    ),
                    textAlign: TextAlign.center,
+                 )
+                     : SizedBox.shrink(),
                  ),
-                 SizedBox(height: getHeight(30),),
+
+                 SizedBox(height: getHeight(20),),
+                 Obx(() => controller.uploadCompleted.value
+                     ? RoundButton(
+                   onPress: (){
+                     Get.back();
+                   },
+                   radius: BorderRadius.circular(12),
+                   title: 'backOnline5'.tr,
+                   textStyle: kSize16W600KBlackColorOutfitSemiBold.copyWith(fontSize: getFont(14),color: AppColors.kWhiteColor,),
+                   buttonColor: AppColors.kSkyBlueColor,
+                   width: getWidth(263),
+                   height: getHeight(48),
+
+                 )
+                     : SizedBox.shrink(),
+                 ),
+
+
+
 
 
 

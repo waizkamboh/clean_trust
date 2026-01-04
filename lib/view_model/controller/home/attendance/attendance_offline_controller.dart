@@ -21,6 +21,9 @@ class AttendanceOfflineController extends GetxController {
   final AttendanceSyncRepository _syncRepo = AttendanceSyncRepository();
 
   late int currentUserId;
+  RxDouble uploadProgress = 0.0.obs;
+  RxBool uploadCompleted = false.obs;
+
 
 
 
@@ -86,6 +89,11 @@ class AttendanceOfflineController extends GetxController {
     }
 
     syncing.value = true;
+    uploadCompleted.value = false;
+    uploadProgress.value = 0.0;
+
+    final total = offlineList.length;
+    int uploaded = 0;
 
     final token = await _userPreference.getToken();
     if (token == null) {
@@ -99,7 +107,6 @@ class AttendanceOfflineController extends GetxController {
       'Content-Type': 'application/json',
     };
 
-    // Upload one by one
     for (final item in List<OfflineAttendance>.from(offlineList)) {
       final request = AttendanceSyncRequest(
         records: [
@@ -116,15 +123,21 @@ class AttendanceOfflineController extends GetxController {
       await _syncRepo.syncOfflineAttendance(headers, request.toJson());
 
       if (response?['success'] == true) {
-        await box.delete(item.key); // ✅ SAFE
+        await box.delete(item.key);
         offlineList.removeWhere((e) => e.key == item.key);
+
+        uploaded++;
+        uploadProgress.value = uploaded / total; // ⭐ progress update
       }
     }
 
     syncing.value = false;
+    uploadCompleted.value = true;
 
-    // Close Dialog automatically after sync
-    if (Get.isDialogOpen == true) Get.back();
+    // // Auto close dialog (optional delay for UX)
+    // Future.delayed(const Duration(milliseconds: 500), () {
+    //   if (Get.isDialogOpen == true) Get.back();
+    // });
   }
 
 

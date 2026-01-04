@@ -10,15 +10,15 @@ import '../translation/ru.dart';
 class LocalizationService extends Translations {
 
   static final locale = Locale(
-    Get.find<GeneralController>().sharedPreferences.getString(AppUrl.language) == null
+    Get.find<GeneralController>().sharedPreferences.getString(language) == null
         ? "en"
-        : Get.find<GeneralController>().sharedPreferences.getString(AppUrl.language).toString(),
+        : Get.find<GeneralController>().sharedPreferences.getString(language).toString(),
   );
 
   static final fallbackLocale = Locale(
-    Get.find<GeneralController>().sharedPreferences.getString(AppUrl.language) == null
+    Get.find<GeneralController>().sharedPreferences.getString(language) == null
         ? "en"
-        : Get.find<GeneralController>().sharedPreferences.getString(AppUrl.language).toString(),
+        : Get.find<GeneralController>().sharedPreferences.getString(language).toString(),
   );
 
   static final langs = [

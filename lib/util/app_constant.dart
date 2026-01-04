@@ -1,8 +1,8 @@
+ const String language = "language";
 
 
 class AppUrl{
   //Select Language
-  static const String language = "language";
 
    static const String baseUrl = 'https://erpb.techverseo.com/api';
    static const String loginApi = '${baseUrl}/auth/login';
