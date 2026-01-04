@@ -406,8 +406,9 @@ import 'package:clean_trust/util/app_images.dart';
 import 'package:clean_trust/util/size_config.dart';
 import 'package:clean_trust/view/base/top_header.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
-
+import 'package:intl/intl.dart';
 import '../../../util/text_style.dart';
 import '../../../helper/routes/routes_name.dart';
 import '../../../view_model/controller/home/attendance/get_attendance_history_controller.dart';
@@ -427,262 +428,295 @@ class AttendanceHistoryScreen extends StatelessWidget {
 
     return Scaffold(
       backgroundColor: AppColors.kWhiteColor,
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-
-            TopHeader(title: 'attendanceHistory1'.tr),
-            SizedBox(height: getHeight(30),),
-            Container(
-              padding: EdgeInsetsGeometry.symmetric(horizontal: getWidth(16), vertical: getHeight(16)),
-              width: getWidth(373),
-              decoration: BoxDecoration(
-                color: AppColors.kWhiteColor,
-                borderRadius: BorderRadius.all(Radius.circular(12)),
-                border: Border.all(color: AppColors.kLightCoolGreyColor, width: 1),
-                boxShadow: [
-                  BoxShadow(
-                    color: AppColors.kBlackColor.withOpacity(0.10),
-                    offset: const Offset(0, 10),
-                    blurRadius: 15,
-                    spreadRadius: 0,
-                  ),
-
-                  BoxShadow(
-                    color: AppColors.kBlackColor.withOpacity(0.10),
-                    offset: const Offset(0, 4),
-                    blurRadius: 6,
-                    spreadRadius: 0,
-                  ),
-                ],
-              ),
+      body: Column(
+        children: [
+      
+          TopHeader(title: 'attendanceHistory1'.tr),
+          SizedBox(height: getHeight(30),),
+          Expanded(
+            child: SingleChildScrollView(
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-
                 children: [
-                  Text(
-                    'attendanceHistory2'.tr,
-                    style: kSize16W400KWhiteColorOutfitRegular.copyWith(
-                      color: AppColors.kBlackColor,
-
-                    ),
-                  ),
-                  SizedBox(height: getHeight(10),),
-                  Text(
-                    'attendanceHistory3'.tr,
-                    style: kSize16W400KWhiteColorOutfitRegular.copyWith(
-                      fontSize: getFont(14),
-                      color: AppColors.kCoolGreyColor,
-
-                    ),
-                  ),
-                  SizedBox(height: getHeight(5),),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      InputTextField(
-                        width: getWidth(150),
-                        contentPadding: EdgeInsets.symmetric(horizontal: getWidth(12)),
-                        keyBoardType: TextInputType.emailAddress,
-                        readOnly: true,
-                        hintText: 'attendanceHistory4'.tr,
-                        borderSideColor: AppColors.kLightCoolGreyColor,
-                        textFormFieldColor: AppColors.kWhiteColor,
-                      ),
-                      InputTextField(
-                        width: getWidth(150),
-                        contentPadding: EdgeInsets.symmetric(horizontal: getWidth(12)),
-                        keyBoardType: TextInputType.emailAddress,
-                        readOnly: true,
-                        hintText: 'attendanceHistory5'.tr,
-                        borderSideColor: AppColors.kLightCoolGreyColor,
-                        textFormFieldColor: AppColors.kWhiteColor,
-                      ),
-                      Icon(Icons.calendar_today_outlined, color: AppColors.kBlackColor,size: 18,)
-
-                    ],
-                  ),
-                  SizedBox(height: getHeight(10),),
-                  Text(
-                    'attendanceHistory6'.tr,
-                    style: kSize16W400KWhiteColorOutfitRegular.copyWith(
-                      fontSize: getFont(14),
-                      color: AppColors.kCoolGreyColor,
-
-                    ),
-                  ),
-                  SizedBox(height: getHeight(5),),
-                  CustomDropdownField(
-                    width: getWidth(309),
-                    contentPadding: EdgeInsets.symmetric(horizontal: getWidth(12)),
-                    hintText: 'attendanceHistory7'.tr,
-                    hintTextStyle: kSize16W400KWhiteColorOutfitRegular.copyWith(fontSize: getFont(14), color: AppColors.kBlackColor),
-                    borderSideColor: AppColors.kLightCoolGreyColor,
-                    borderRadius: 8,
-                    items:   ['attendanceHistory7'.tr, 'attendanceHistory7'.tr],
-                    dropdownFieldColor: AppColors.kWhiteColor,
-                    suffixIcon: Image.asset(AppImages.dropDownIcon),
-                  ),
-                  SizedBox(height: getHeight(20),),
-                  Row(
-                    //mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      RoundButton(
-                        onPress: (){},
-                        radius: BorderRadius.circular(8),
-                        title: 'attendanceHistory8'.tr,
-                        textStyle: kSize16W400KWhiteColorOutfitRegular,
-                        buttonColor: AppColors.kSkyBlueColor,
-                        width: getWidth(230),
-                        height: getHeight(38),
-
-                      ),
-                      SizedBox(width: getWidth(10),),
-
-                      RoundButton(
-                        onPress: (){},
-                        radius: BorderRadius.circular(8),
-                        title: 'attendanceHistory9'.tr,
-                        textStyle: kSize16W400KWhiteColorOutfitRegular.copyWith(
-                          fontSize: getFont(14),
-                          color: AppColors.kCoolGreyColor,
-
+                  Container(
+                    padding: EdgeInsetsGeometry.symmetric(horizontal: getWidth(16), vertical: getHeight(16)),
+                    width: getWidth(373),
+                    decoration: BoxDecoration(
+                      color: AppColors.kWhiteColor,
+                      borderRadius: BorderRadius.all(Radius.circular(12)),
+                      border: Border.all(color: AppColors.kLightCoolGreyColor, width: 1),
+                      boxShadow: [
+                        BoxShadow(
+                          color: AppColors.kBlackColor.withOpacity(0.10),
+                          offset: const Offset(0, 10),
+                          blurRadius: 15,
+                          spreadRadius: 0,
                         ),
-                        buttonColor: AppColors.kBlackColor.withOpacity(0),
-                        borderColor: AppColors.kLightCoolGreyColor,
-                        width: getWidth(70),
-                        height: getHeight(38),
 
-                      ),
-
-                    ],
-                  )
-
-
-                ],
-              ),
-            ),
-            SizedBox(height: getHeight(20),),
-            Container(
-              padding: EdgeInsetsGeometry.symmetric(horizontal: getWidth(18), vertical: getHeight(18)),
-              width: getWidth(362),
-              decoration: BoxDecoration(
-                gradient: LinearGradient(colors: [
-                  AppColors.kAliceBlue,
-                  AppColors.kLavenderBlue,
-                ]),
-                borderRadius: BorderRadius.all(Radius.circular(12)),
-                border: Border.all(color: AppColors.kLightBlueColor, width: 1),
-              ),
-              child: Column(
-                // crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    'attendanceHistory10'.tr,
-                    style: kSize16W400KWhiteColorOutfitRegular.copyWith(
-                      color: AppColors.kDarkSlateGray,
-
+                        BoxShadow(
+                          color: AppColors.kBlackColor.withOpacity(0.10),
+                          offset: const Offset(0, 4),
+                          blurRadius: 6,
+                          spreadRadius: 0,
+                        ),
+                      ],
                     ),
-                  ),Text(
-                    'attendanceHistory11'.tr,
-                    style: kSize20W700KWhiteColorOutfitBold.copyWith(
-                      fontSize: getFont(32),
-                      color: AppColors.kRoyalBlue,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
 
-                    ),
-                  ),
-                  Text(
-                    'attendanceHistory12'.tr,
-                    style: kSize16W400KWhiteColorOutfitRegular.copyWith(
-                      fontSize: getFont(13),
-                      color: AppColors.kSlateGray,
+                      children: [
+                        Text(
+                          'attendanceHistory2'.tr,
+                          style: kSize16W400KWhiteColorOutfitRegular.copyWith(
+                            color: AppColors.kBlackColor,
 
-                    ),
-                  ),
-
-
-
-                ],
-              ),
-            ),
-            SizedBox(height: getHeight(20),),
-            Padding(
-              padding:  EdgeInsets.symmetric(horizontal: getWidth(20)),
-              child: Align(
-                alignment: Alignment.centerLeft,
-                child: Text(
-                  'attendanceHistory13'.tr,
-                  style: kSize16W400KWhiteColorOutfitRegular.copyWith(
-                    fontSize: getFont(20),
-                    color: AppColors.kMidnightBlueColor,
-
-                  ),
-                ),
-              ),
-            ),
-            Obx(() {
-              if (controller.isLoading.value) {
-                return Padding(
-                  padding: EdgeInsets.only(top: getHeight(50)),
-                  child: CircularProgressIndicator(),
-                );
-              }
-
-              if (controller.attendanceList.isEmpty) {
-                return Padding(
-                  padding: EdgeInsets.only(top: getHeight(50)),
-                  child: Text(
-                    "No attendance found",
-                    style: kSize16W400KWhiteColorOutfitRegular,
-                  ),
-                );
-              }
-
-              return Column(
-                children: controller.groupedByDate.entries.map((entry) {
-                  final date = entry.key;
-                  final records = entry.value;
-
-                  return Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-
-                      Padding(
-                        padding:  EdgeInsets.symmetric(horizontal: getWidth(5), vertical: getHeight(10)),
-                        child: Text(
-                          controller.formatShortDate(date),
-                          style:
-                          kSize16W400KWhiteColorOutfitRegular.copyWith(
-                            color: AppColors.kMidnightBlueColor,
                           ),
                         ),
+                        SizedBox(height: getHeight(10),),
+                        Text(
+                          'attendanceHistory3'.tr,
+                          style: kSize16W400KWhiteColorOutfitRegular.copyWith(
+                            fontSize: getFont(14),
+                            color: AppColors.kCoolGreyColor,
+
+                          ),
+                        ),
+                        SizedBox(height: getHeight(5),),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Obx(()=>
+                                InputTextField(
+                                  width: getWidth(150),
+                                  contentPadding: EdgeInsets.symmetric(horizontal: getWidth(12)),
+                                  keyBoardType: TextInputType.emailAddress,
+                                  readOnly: true,
+                                  hintText: controller.fromDate.value == null
+                                      ? 'From'
+                                      : DateFormat('yyyy-MM-dd')
+                                      .format(controller.fromDate.value!),
+                                  borderSideColor: AppColors.kLightCoolGreyColor,
+                                  textFormFieldColor: AppColors.kWhiteColor,
+                                ),),
+                            Obx(()=>
+                                InputTextField(
+                                  width: getWidth(150),
+                                  contentPadding: EdgeInsets.symmetric(horizontal: getWidth(12)),
+                                  keyBoardType: TextInputType.emailAddress,
+                                  readOnly: true,
+                                  hintText: controller.toDate.value == null
+                                      ? 'To'
+                                      : DateFormat('yyyy-MM-dd')
+                                      .format(controller.toDate.value!),
+                                  borderSideColor: AppColors.kLightCoolGreyColor,
+                                  textFormFieldColor: AppColors.kWhiteColor,
+                                ),),
+                            GestureDetector(
+                              onTap: controller.pickDateRange,
+                              child: Icon(Icons.calendar_today_outlined,
+                                  color: AppColors.kBlackColor, size: 18),
+                            )
+
+
+                          ],
+                        ),
+                        SizedBox(height: getHeight(10),),
+                        Text(
+                          'attendanceHistory6'.tr,
+                          style: kSize16W400KWhiteColorOutfitRegular.copyWith(
+                            fontSize: getFont(14),
+                            color: AppColors.kCoolGreyColor,
+
+                          ),
+                        ),
+                        SizedBox(height: getHeight(5),),
+                        CustomDropdownField(
+                          width: getWidth(309),
+                          contentPadding: EdgeInsets.symmetric(horizontal: getWidth(12)),
+                          items: const ['All', 'Pending', 'Approved'],
+                          hintText: 'All Status',
+                          onChanged: (value) {
+                            controller.selectedStatus.value =
+                                value.toString().toLowerCase();
+                          },
+                          hintTextStyle: kSize16W400KWhiteColorOutfitRegular.copyWith(fontSize: getFont(14), color: AppColors.kBlackColor),
+                          borderSideColor: AppColors.kLightCoolGreyColor,
+                          borderRadius: 8,
+                          dropdownFieldColor: AppColors.kWhiteColor,
+                          suffixIcon: Image.asset(AppImages.dropDownIcon),
+                        ),
+                        SizedBox(height: getHeight(20),),
+                        Row(
+                          //mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            RoundButton(
+                              onPress: (){
+                                controller.applyFilter();
+                              },
+                              radius: BorderRadius.circular(8),
+                              title: 'attendanceHistory8'.tr,
+                              textStyle: kSize16W400KWhiteColorOutfitRegular,
+                              buttonColor: AppColors.kSkyBlueColor,
+                              width: getWidth(230),
+                              height: getHeight(38),
+
+                            ),
+                            SizedBox(width: getWidth(10),),
+
+                            RoundButton(
+                              onPress: (){
+                                controller.resetFilter();
+                              },
+                              radius: BorderRadius.circular(8),
+                              title: 'attendanceHistory9'.tr,
+                              textStyle: kSize16W400KWhiteColorOutfitRegular.copyWith(
+                                fontSize: getFont(14),
+                                color: AppColors.kCoolGreyColor,
+
+                              ),
+                              buttonColor: AppColors.kBlackColor.withOpacity(0),
+                              borderColor: AppColors.kLightCoolGreyColor,
+                              width: getWidth(70),
+                              height: getHeight(38),
+
+                            ),
+
+                          ],
+                        )
+
+
+                      ],
+                    ),
+                  ),
+                  SizedBox(height: getHeight(20),),
+                  Container(
+                    padding: EdgeInsetsGeometry.symmetric(horizontal: getWidth(18), vertical: getHeight(18)),
+                    width: getWidth(362),
+                    decoration: BoxDecoration(
+                      gradient: LinearGradient(colors: [
+                        AppColors.kAliceBlue,
+                        AppColors.kLavenderBlue,
+                      ]),
+                      borderRadius: BorderRadius.all(Radius.circular(12)),
+                      border: Border.all(color: AppColors.kLightBlueColor, width: 1),
+                    ),
+                    child: Column(
+                      // crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'attendanceHistory10'.tr,
+                          style: kSize16W400KWhiteColorOutfitRegular.copyWith(
+                            color: AppColors.kDarkSlateGray,
+
+                          ),
+                        ),
+                        Obx(()=>
+                            Text(
+                              controller.filteredTotalHours.value,
+                              style: kSize20W700KWhiteColorOutfitBold.copyWith(
+                                fontSize: getFont(32),
+                                color: AppColors.kRoyalBlue,
+
+                              ),
+                            ),),
+                        Obx(()=>
+                            Text(
+                              controller.filteredDateRangeText.value,
+                              style: kSize16W400KWhiteColorOutfitRegular.copyWith(
+                                fontSize: getFont(13),
+                                color: AppColors.kSlateGray,
+
+                              ),
+                            ),),
+
+
+
+                      ],
+                    ),
+                  ),
+                  SizedBox(height: getHeight(20),),
+                  Padding(
+                    padding:  EdgeInsets.symmetric(horizontal: getWidth(20)),
+                    child: Align(
+                      alignment: Alignment.centerLeft,
+                      child: Text(
+                        'attendanceHistory13'.tr,
+                        style: kSize16W400KWhiteColorOutfitRegular.copyWith(
+                          fontSize: getFont(20),
+                          color: AppColors.kMidnightBlueColor,
+
+                        ),
                       ),
+                    ),
+                  ),
+                  Obx(() {
+                    if (controller.isLoading.value) {
+                      return Padding(
+                        padding: EdgeInsets.only(top: getHeight(50)),
+                        child: SpinKitSpinningLines(color: AppColors.kSkyBlueColor),
+                      );
+                    }
 
-                      ...records.map(
-                            (record) => reuseContainer(record),
-                      ),
-                    ],
-                  );
-                }).toList(),
-              );
-            }),
-            SizedBox(height: getHeight(50),),
+                    if (controller.attendanceList.isEmpty) {
+                      return Padding(
+                        padding: EdgeInsets.only(top: getHeight(50)),
+                        child: Text(
+                          "No attendance found",
+                          style: kSize16W400KWhiteColorOutfitRegular,
+                        ),
+                      );
+                    }
 
-            RoundButton(
-              onPress: (){},
-              radius: BorderRadius.circular(12),
-              title: 'attendanceHistory23'.tr,
-              textStyle: kSize16W600KBlackColorOutfitSemiBold.copyWith(color: AppColors.kWhiteColor,),
-              buttonColor: AppColors.kSkyBlueColor,
-              width: getWidth(343),
-              height: getHeight(64),
+                    return Column(
+                      children: controller.groupedByDate.entries.map((entry) {
+                        final date = entry.key;
+                        final records = entry.value;
 
+                        return Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+
+                            Padding(
+                              padding:  EdgeInsets.symmetric(horizontal: getWidth(5), vertical: getHeight(10)),
+                              child: Text(
+                                controller.formatShortDate(date),
+                                style:
+                                kSize16W400KWhiteColorOutfitRegular.copyWith(
+                                  color: AppColors.kMidnightBlueColor,
+                                ),
+                              ),
+                            ),
+
+                            ...records.map(
+                                  (record) => reuseContainer(record),
+                            ),
+                          ],
+                        );
+                      }).toList(),
+                    );
+                  }),
+                  SizedBox(height: getHeight(50),),
+
+
+                ],
+              ),
             ),
+          ),
+         
+          // SizedBox(height: getHeight(50),),
+          //
+          // RoundButton(
+          //   onPress: (){},
+          //   radius: BorderRadius.circular(12),
+          //   title: 'attendanceHistory23'.tr,
+          //   textStyle: kSize16W600KBlackColorOutfitSemiBold.copyWith(color: AppColors.kWhiteColor,),
+          //   buttonColor: AppColors.kSkyBlueColor,
+          //   width: getWidth(343),
+          //   height: getHeight(64),
+          //
+          // ),
+      
 
-            SizedBox(height: getHeight(50),),
-
-          ],
-        ),
+        ],
       ),
     );
   }
@@ -773,7 +807,6 @@ class AttendanceHistoryScreen extends StatelessWidget {
                   ],
                 ),
 
-                /// CHECK OUT
                 Row(
                   children: [
                     Image.asset(
@@ -811,7 +844,6 @@ class AttendanceHistoryScreen extends StatelessWidget {
 
             SizedBox(height: getHeight(5)),
 
-            /// ⏱ TOTAL HOURS
             RichText(
               text: TextSpan(
                 children: [
