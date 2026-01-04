@@ -1,7 +1,7 @@
 import 'package:get/get.dart';
 import 'package:hive/hive.dart';
 
-import '../../../../data/model/hive/offline_attendance.dart';
+import '../../../../data/model/hive/offline_attendance_model.dart';
 import '../../../../data/model/home/attendance/SyncOfflineAttendanceModel.dart';
 import '../../../../data/repository/home/attendance/sync_offline_attendance_repository.dart';
 import '../../../../helper/internet_check.dart';
@@ -15,24 +15,40 @@ class AttendanceOfflineController extends GetxController {
   final UserPreference _userPreference = UserPreference();
   final AttendanceSyncRepository _syncRepo = AttendanceSyncRepository();
 
+  late int currentUserId;
 
   @override
   void onInit() {
     super.onInit();
     box = Hive.box<OfflineAttendance>('offline_attendance');
+    _init();
+  }
+
+  Future<void> _init() async {
+    currentUserId = await _userPreference.getUserId() ?? 0;
     loadData();
 
-    // Hive changes listen (auto refresh)
+    // Auto UI refresh on DB change
     box.watch().listen((event) {
       loadData();
     });
-  }
 
+    // 🔁 Auto sync jab net aaye
+    ever(isOnlineRx, (online) {
+      if (online == true) {
+        syncOfflineAttendance();
+      }
+    });
+  }
 
   void loadData() {
-    offlineList.value =
-        box.values.where((e) => e.synced == false).toList().reversed.toList();
+    offlineList.value = box.values
+        .where((e) => e.synced == false && e.userId == currentUserId)
+        .toList()
+        .reversed
+        .toList();
   }
+
 
   int get count => offlineList.length;
 
@@ -61,6 +77,7 @@ class AttendanceOfflineController extends GetxController {
     return '$hour:$minute $amPm';
   }
   RxBool syncing = false.obs;
+
   Future<void> syncOfflineAttendance() async {
     if (offlineList.isEmpty) return;
 
@@ -80,29 +97,25 @@ class AttendanceOfflineController extends GetxController {
       'Content-Type': 'application/json',
     };
 
-    final records = offlineList.map((item) {
-      return AttendanceSyncItem(
-        qrCode: item.qrCode,
-        scanTime: item.scanTime,
-        latitude: item.latitude,
-        longitude: item.longitude,
+    for (final item in List.from(offlineList)) {
+      final request = AttendanceSyncRequest(
+        records: [
+          AttendanceSyncItem(
+            qrCode: item.qrCode,
+            scanTime: item.scanTime,
+            latitude: item.latitude,
+            longitude: item.longitude,
+          ),
+        ],
       );
-    }).toList();
 
-    final request = AttendanceSyncRequest(records: records);
+      final response =
+      await _syncRepo.syncOfflineAttendance(headers, request.toJson());
 
-    final response = await _syncRepo.syncOfflineAttendance(headers, request.toJson());
-
-    if (response?['success'] == true) {
-      // ✅ Mark all as synced
-      for (final item in offlineList) {
-        item.synced = true;
-        await item.save();
+      if (response?['success'] == true) {
+        await item.delete(); // ✅ DB se delete
+        offlineList.remove(item); // ✅ UI se remove
       }
-
-      loadData();
-      Get.back(); // close dialog
-      showCustomSnackBar('Attendance synced successfully');
     }
 
     syncing.value = false;

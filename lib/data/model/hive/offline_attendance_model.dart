@@ -1,6 +1,5 @@
 import 'package:hive/hive.dart';
-part 'offline_attendance.g.dart';
-
+part 'offline_attendance_model.g.dart';
 
 @HiveType(typeId: 1)
 class OfflineAttendance extends HiveObject {
@@ -19,11 +18,15 @@ class OfflineAttendance extends HiveObject {
   @HiveField(4)
   bool synced;
 
+  @HiveField(5)
+  int userId; // ✅ SharedPreferences wali ID
+
   OfflineAttendance({
     required this.qrCode,
     required this.latitude,
     required this.longitude,
     required this.scanTime,
+    required this.userId,
     this.synced = false,
   });
 }

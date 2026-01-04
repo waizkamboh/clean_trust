@@ -105,7 +105,7 @@ class AppRoutes{
 
    GetPage(
       name: RouteName.scanResultScreen,
-      page: () => const ScanResultScreen(),
+      page: () =>  ScanResultScreen(),
       // transition: Transition.rightToLeftWithFade,
       //transitionDuration: const Duration(milliseconds: 250)
     ),

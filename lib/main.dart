@@ -26,7 +26,8 @@ import 'package:clean_trust/view/screens/splash/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hive_flutter/adapters.dart';
-import 'data/model/hive/offline_attendance.dart';
+import 'data/model/hive/offline_attendance_model.dart';
+import 'helper/internet_check.dart';
 import 'helper/routes/routes.dart';
 
 void main() async{
@@ -38,6 +39,7 @@ void main() async{
     Hive.registerAdapter(OfflineAttendanceAdapter());
   }
   await Hive.openBox<OfflineAttendance>('offline_attendance');
+  InternetStatusService().startListening();
   runApp(const MyApp());
 }
 

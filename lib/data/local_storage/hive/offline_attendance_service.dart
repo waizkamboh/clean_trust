@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 
-import '../../model/hive/offline_attendance.dart';
+import '../../model/hive/offline_attendance_model.dart';
 
 class OfflineAttendanceService {
   final box = Hive.box<OfflineAttendance>('offline_attendance');
@@ -10,9 +10,12 @@ class OfflineAttendanceService {
     await box.add(attendance);
   }
 
-  List<OfflineAttendance> getUnSynced() {
-    return box.values.where((e) => e.synced == false).toList();
+  List<OfflineAttendance> getUnSyncedByUser(int userId) {
+    return box.values
+        .where((e) => e.synced == false && e.userId == userId)
+        .toList();
   }
+
   void debugPrintAll() {
     final box = Hive.box<OfflineAttendance>('offline_attendance');
 

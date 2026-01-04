@@ -1,16 +1,18 @@
 import 'package:clean_trust/helper/routes/routes_name.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:flutter/foundation.dart';
 import '../../../../data/local_storage/hive/offline_attendance_service.dart';
 import '../../../../data/model/home/attendance/ScanQRCodeModel.dart';
-import '../../../../data/model/hive/offline_attendance.dart';
+import '../../../../data/model/hive/offline_attendance_model.dart';
 import '../../../../data/repository/home/attendance/scan_qr_code_repository.dart';
 import '../../../../helper/internet_check.dart';
 import '../../../../util/custom_snackbar.dart';
 import '../../../../view/screens/home/scan_qrcode_screen.dart';
 import '../../../user_preference/user_preference.dart';
+import 'package:geocoding/geocoding.dart';
 
 
 class ScanQrCodeController extends GetxController {
@@ -25,6 +27,11 @@ class ScanQrCodeController extends GetxController {
   RxBool loading = false.obs;
   RxBool torchOn = false.obs;
   bool _scanLock = false;
+  RxString scannedTime = ''.obs;
+  RxString scannedDate = ''.obs;
+  RxString addressLine1 = ''.obs; // first 2 words
+  RxString addressLine2 = ''.obs; // remaining address
+
 
 
 
@@ -137,14 +144,24 @@ class ScanQrCodeController extends GetxController {
 
       /// ================= OFFLINE =================
       if (!online) {
+        final int? userId = await userPreference.getUserId();
+
+        if (userId == null) {
+          showCustomSnackBar('User not found');
+          return;
+        }
+
         await localDb.save(
           OfflineAttendance(
             qrCode: qrCode,
             latitude: position.latitude,
             longitude: position.longitude,
             scanTime: DateTime.now().toIso8601String(),
+            userId: userId,
           ),
         );
+
+
         localDb.debugPrintAll();
 
         loading.value = false;
@@ -172,6 +189,15 @@ class ScanQrCodeController extends GetxController {
       loading.value = false;
 
       if (response?['success'] == true) {
+        setScanTimeAndDate();
+
+        await setAddressFromLatLng(
+          position.latitude,
+          position.longitude,
+        );
+
+        Get.offNamed(RouteName.scanResultScreen);
+
         showCustomSnackBar('Attendance marked successfully');
       } else {
         showCustomSnackBar(response?['message'] ?? 'Failed');
@@ -192,8 +218,13 @@ class ScanQrCodeController extends GetxController {
       'Authorization': 'Bearer $token',
       'Content-Type': 'application/json',
     };
+    final int? userId = await userPreference.getUserId();
 
-    final list = localDb.getUnSynced();
+    if (userId == null) {
+      showCustomSnackBar('User not found');
+      return;
+    }
+    final list = localDb.getUnSyncedByUser(userId);
 
     for (final item in list) {
       final data = {
@@ -211,6 +242,49 @@ class ScanQrCodeController extends GetxController {
       }
     }
   }
+  void setScanTimeAndDate() {
+    final now = DateTime.now();
+
+    scannedTime.value = DateFormat('hh:mm a').format(now);
+    scannedDate.value = DateFormat('EEEE, MMM d, yyyy').format(now);
+  }
+  Future<void> setAddressFromLatLng(
+      double lat,
+      double lng,
+      ) async {
+    try {
+      final placemarks = await placemarkFromCoordinates(lat, lng);
+
+      if (placemarks.isNotEmpty) {
+        final place = placemarks.first;
+
+        final fullAddress = '${place.street}, ${place.locality}, ${place.country}';
+
+        splitAddress(fullAddress);
+        debugPrint('FULL ADDRESS: $fullAddress');
+        debugPrint('LINE 1: ${addressLine1.value}');
+        debugPrint('LINE 2: ${addressLine2.value}');
+
+      }
+    } catch (e) {
+      debugPrint('GEOCODING ERROR: $e');
+      addressLine1.value = '--';
+      addressLine2.value = '';
+    }
+  }
+
+  void splitAddress(String fullAddress) {
+    final words = fullAddress.split(' ');
+
+    if (words.length <= 2) {
+      addressLine1.value = fullAddress;
+      addressLine2.value = '';
+    } else {
+      addressLine1.value = words.take(2).join(' ');
+      addressLine2.value = words.skip(2).join(' ');
+    }
+  }
+
 
 
   @override

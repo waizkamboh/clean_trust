@@ -174,6 +174,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
               ),
             ),
+
             Positioned.fill(
 
               top: getHeight(160),
@@ -537,7 +538,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   ],
                 ),
               ),
-            )
+            ),
 
 
 

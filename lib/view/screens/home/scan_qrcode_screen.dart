@@ -352,7 +352,7 @@ class ScanQrcodeScreen extends StatelessWidget {
                     children: [
                       Image.asset(
                         AppImages.QRCodeImage,
-                        width: getWidth(280),
+                        width: getWidth(327),
                       ),
 
                       /// ---- Scanner Overlay ----

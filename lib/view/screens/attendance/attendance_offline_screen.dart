@@ -6,7 +6,7 @@ import 'package:clean_trust/view_model/controller/home/attendance/attendance_off
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../../data/model/hive/offline_attendance.dart';
+import '../../../data/model/hive/offline_attendance_model.dart';
 import '../../../util/text_style.dart';
 import '../../base/input_text_field.dart';
 import '../../base/round_button.dart';

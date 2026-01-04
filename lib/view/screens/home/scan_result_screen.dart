@@ -7,10 +7,12 @@ import 'package:get/get.dart';
 
 import '../../../helper/routes/routes_name.dart';
 import '../../../util/text_style.dart';
+import '../../../view_model/controller/home/attendance/scanqrcode_controller.dart';
 import '../../base/round_button.dart';
 
 class ScanResultScreen extends StatelessWidget {
-  const ScanResultScreen({super.key});
+   ScanResultScreen({super.key});
+  final ScanQrCodeController controller = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -52,20 +54,26 @@ class ScanResultScreen extends StatelessWidget {
           buildScanResultCard(
               iconPath: AppImages.qrScreenIcon3,
               firstText: 'scanResult4',
-              secondText: 'scanResult5',
-              thirdText: 'scanResult6'
+              secondText: controller.scannedTime.value,
+             thirdText: controller.scannedDate.value,
+
           ),
           SizedBox(height: getHeight(20),),
-          buildScanResultCard(
-              iconPath: AppImages.qrScreenIcon1,
-              secondText: 'scanResult7',
-              thirdText: 'scanResult8'
-          ),
+          Obx(() => buildScanResultCard(
+            iconPath: AppImages.qrScreenIcon1,
+            secondText: controller.addressLine1.value.isEmpty
+                ? '--'
+                : controller.addressLine1.value,
+            thirdText: controller.addressLine2.value.isEmpty
+                ? ''
+                : controller.addressLine2.value,
+          )),
+
           SizedBox(height: getHeight(30),),
 
           RoundButton(
             onPress: (){
-
+              Get.toNamed(RouteName.bottomNavScreen);
             },
             radius: BorderRadius.circular(12),
             title: 'scanResult9'.tr,
