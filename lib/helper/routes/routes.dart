@@ -115,12 +115,12 @@ class AppRoutes{
       // transition: Transition.rightToLeftWithFade,
       //transitionDuration: const Duration(milliseconds: 250)
     ),
-    GetPage(
-      name: RouteName.attendanceDetailsScreen,
-      page: () => const AttendanceDetailsScreen(),
-      // transition: Transition.rightToLeftWithFade,
-      //transitionDuration: const Duration(milliseconds: 250)
-    ),
+    // GetPage(
+    //   name: RouteName.attendanceDetailsScreen,
+    //   page: () =>  AttendanceDetailsScreen(),
+    //   // transition: Transition.rightToLeftWithFade,
+    //   //transitionDuration: const Duration(milliseconds: 250)
+    // ),
 
     GetPage(
       name: RouteName.manualEntryScreen,

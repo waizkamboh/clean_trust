@@ -3,12 +3,193 @@ import 'package:clean_trust/util/size_config.dart';
 import 'package:clean_trust/view/base/top_header.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 
+import '../../../data/model/home/attendance/GetAttendanceHistoryModel.dart';
 import '../../../util/app_images.dart';
 import '../../../util/text_style.dart';
+import '../../../view_model/controller/home/attendance/get_attendance_history_controller.dart';
+class AttendanceDetailsScreen extends StatelessWidget {
+  final Records record;
+  final GetAttendanceHistoryController controller = Get.find();
+
+   AttendanceDetailsScreen({super.key, required this.record});
+
+  @override
+  Widget build(BuildContext context) {
+    SizeConfig().init(context);
+    return Scaffold(
+      backgroundColor: AppColors.kWhiteColor,
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            TopHeader(title: 'attendanceDetail1'.tr),
+            SizedBox(height: getHeight(30)),
+            Container(
+              padding: EdgeInsets.symmetric(horizontal: getWidth(25), vertical: getHeight(27)),
+              width: getWidth(343),
+              decoration: BoxDecoration(
+                color: AppColors.kWhiteColor,
+                borderRadius: BorderRadius.circular(12),
+                border: Border.all(color: AppColors.kLightCoolGreyColor, width: 1),
+                boxShadow: [
+                  BoxShadow(
+                    color: AppColors.kBlackColor.withOpacity(0.10),
+                    offset: Offset(0, 10),
+                    blurRadius: 15,
+                  ),
+                  BoxShadow(
+                    color: AppColors.kBlackColor.withOpacity(0.10),
+                    offset: Offset(0, 4),
+                    blurRadius: 6,
+                  ),
+                ],
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  // Date
+                  Text(
+                    controller.formatFullDate(record.date),
+                    style: kSize16W600KBlackColorOutfitSemiBold.copyWith(
+                      fontSize: getFont(18),
+                      color: AppColors.kMidnightBlueColor,
+                    ),
+                  ),
+                  // Day
+                  Text(
+                    DateFormat('EEEE').format(DateTime.parse(record.date!)),
+                    style: kSize16W400KWhiteColorOutfitRegular.copyWith(
+                      fontSize: getFont(14),
+                      color: AppColors.kSlateGray,
+                    ),
+                  ),
+                  SizedBox(height: getHeight(5)),
+                  // Worked on (attendanceDetail4)
+                  Text(
+                    "Worked on ${DateFormat('d MMM').format(DateTime.parse(record.date!))}",
+                    style: kSize16W400KWhiteColorOutfitRegular.copyWith(
+                      fontSize: getFont(14),
+                      color: AppColors.kCoolGreyColor,
+                    ),
+                  ),
+                  // Total hours
+                  Text(
+                    controller.calculateTotalHours(record.checkInTime, record.checkOutTime),
+                    style: kSize20W700KWhiteColorOutfitBold.copyWith(
+                      fontSize: getFont(24),
+                      color: AppColors.kMidnightBlueColor,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            SizedBox(height: getHeight(15)),
+
+            // Address container
+            Container(
+              padding: EdgeInsets.symmetric(horizontal: getWidth(25), vertical: getHeight(23)),
+              width: getWidth(343),
+              decoration: BoxDecoration(
+                color: AppColors.kWhiteColor,
+                borderRadius: BorderRadius.circular(12),
+                boxShadow: [
+                  BoxShadow(
+                    color: AppColors.kBlackColor.withOpacity(0.12),
+                    offset: Offset(0, 1),
+                    blurRadius: 3.5,
+                  ),
+                  BoxShadow(
+                    color: AppColors.kBlackColor.withOpacity(0.10),
+                    offset: Offset(0, 4),
+                    blurRadius: 5.5,
+                  ),
+                ],
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    record.workplace?.address ?? '--',
+                    style: kSize16W600KBlackColorOutfitSemiBold.copyWith(
+                      fontSize: getFont(18),
+                      color: AppColors.kMidnightBlueColor,
+                    ),
+                  ),
+                  SizedBox(height: getHeight(10)),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        'Check In: ${controller.formatTime24To12(record.checkInTime)}',
+                        style: kSize16W400KWhiteColorOutfitRegular.copyWith(
+                          fontSize: getFont(14),
+                          color: AppColors.kSlateGray,
+                        ),
+                      ),
+                      Text(
+                        'Check Out: ${controller.formatTime24To12(record.checkOutTime)}',
+                        style: kSize16W400KWhiteColorOutfitRegular.copyWith(
+                          fontSize: getFont(14),
+                          color: AppColors.kSlateGray,
+                        ),
+                      ),
+                    ],
+                  ),
+                  SizedBox(height: getHeight(10)),
+                  Text(
+                    'Total Hours: ${controller.calculateTotalHours(record.checkInTime, record.checkOutTime)}',
+                    style: kSize16W600KBlackColorOutfitSemiBold.copyWith(
+                      fontSize: getFont(16),
+                    ),
+                  ),
+                  SizedBox(height: getHeight(10)),
+                  Text(
+                    'Type: ${record.type ?? '--'}',
+                    style: kSize16W600KBlackColorOutfitSemiBold.copyWith(
+                      fontSize: getFont(16),
+                    ),
+                  ),
+                  SizedBox(height: getHeight(5)),
+                  Text(
+                    'Status: ${record.status ?? '--'}',
+                    style: kSize16W400KWhiteColorOutfitRegular.copyWith(
+                      fontSize: getFont(14),
+                      color: AppColors.kSlateGray,
+                    ),
+                  ),
+                  SizedBox(height: getHeight(10)),
+                  // Images that open location
+                  Row(
+                    children: [
+                      GestureDetector(
+                        onTap: () => controller.openLocation(record.latitude, record.longitude),
+                        child: Image.asset(AppImages.attendanceDetailImg1, width: getWidth(150)),
+                      ),
+                      SizedBox(width: getWidth(10)),
+                      GestureDetector(
+                        onTap: () => controller.openLocation(record.latitude, record.longitude),
+                        child: Image.asset(AppImages.attendanceDetailImg1, width: getWidth(150)),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+            SizedBox(height: getHeight(50)),
+          ],
+        ),
+      ),
+    );
+  }
+}
 
 class AttendanceDetailsScreen extends StatelessWidget {
-  const AttendanceDetailsScreen({super.key});
+  final Records record;
+  final GetAttendanceHistoryController controller = Get.find();
+
+  AttendanceDetailsScreen({super.key, required this.record});
+
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +215,7 @@ class AttendanceDetailsScreen extends StatelessWidget {
                     blurRadius: 15,
                     spreadRadius: 0,
                   ),
-        
+
                   BoxShadow(
                     color: AppColors.kBlackColor.withOpacity(0.10),
                     offset: const Offset(0, 4),
@@ -45,22 +226,22 @@ class AttendanceDetailsScreen extends StatelessWidget {
               ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
-        
+
                 children: [
                   Text(
-                    'attendanceDetail2'.tr,
+                    controller.formatFullDate(record.date),
                     style: kSize16W600KBlackColorOutfitSemiBold.copyWith(
                       fontSize: getFont(18),
                       color: AppColors.kMidnightBlueColor,
-        
+
                     ),
                   ),
                   Text(
-                    'attendanceDetail3'.tr,
+                    DateFormat('EEEE').format(DateTime.parse(record.date!)),
                     style: kSize16W400KWhiteColorOutfitRegular.copyWith(
                       fontSize: getFont(14),
                       color: AppColors.kSlateGray,
-        
+
                     ),
                   ),
                   SizedBox(height: getHeight(5),),
@@ -72,7 +253,7 @@ class AttendanceDetailsScreen extends StatelessWidget {
                         AppColors.kVeryLightGreenColor,
                         AppColors.kLightGreenColor.withOpacity(0.50),
                       ]),
-        
+
                       borderRadius: BorderRadius.all(Radius.circular(16)),
                       border: Border.all(color: AppColors.kLightCoolGreyColor, width: 1),
                     ),
@@ -87,7 +268,7 @@ class AttendanceDetailsScreen extends StatelessWidget {
                             border: Border.all(color: AppColors.kLightCoolGreyColor, width: 1),
                           ),
                           child: Image.asset(AppImages.attendanceDetailIcon1),
-        
+
                         ),
                         SizedBox(width: getWidth(10)),
                         Column(
@@ -95,15 +276,15 @@ class AttendanceDetailsScreen extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Text(
-                              'attendanceDetail4'.tr,
+                              "Worked on ${DateFormat('d MMM').format(DateTime.parse(record.date!))}",
                               style: kSize16W400KWhiteColorOutfitRegular.copyWith(
                                   color: AppColors.kCoolGreyColor,
                                   fontSize: getFont(13)
                               ),
                             ),
-        
+
                             Text(
-                              'attendanceDetail5'.tr,
+                              controller.calculateTotalHours(record.checkInTime, record.checkOutTime),
                               style: kSize20W700KWhiteColorOutfitBold.copyWith(
                                   color: AppColors.kMidnightBlueColor,
                                   fontSize: getFont(24)
@@ -111,17 +292,17 @@ class AttendanceDetailsScreen extends StatelessWidget {
                             ),
                           ],
                         ),
-        
-        
-        
-        
-        
+
+
+
+
+
                       ],
                     ),
                   ),
-        
-        
-        
+
+
+
                 ],
               ),
             ),
@@ -139,7 +320,7 @@ class AttendanceDetailsScreen extends StatelessWidget {
                     blurRadius: 3.5,
                     spreadRadius: 0,
                   ),
-        
+
                   BoxShadow(
                     color: AppColors.kBlackColor.withOpacity(0.10),
                     offset: const Offset(0, 4),
@@ -150,17 +331,17 @@ class AttendanceDetailsScreen extends StatelessWidget {
               ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
-        
+
                 children: [
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        'attendanceDetail6'.tr,
+                        record.workplace?.address ?? '--',
                         style: kSize16W600KBlackColorOutfitSemiBold.copyWith(
                           fontSize: getFont(18),
                           color: AppColors.kMidnightBlueColor,
-        
+
                         ),
                       ),
                       Container(
@@ -173,7 +354,7 @@ class AttendanceDetailsScreen extends StatelessWidget {
                         ),
                         child: Image.asset(AppImages.qrScreenIcon1),
                       ),
-        
+
                     ],
                   ),
                   Row(
@@ -183,7 +364,7 @@ class AttendanceDetailsScreen extends StatelessWidget {
                         style: kSize16W400KWhiteColorOutfitRegular.copyWith(
                           fontSize: getFont(14),
                           color: AppColors.kCoolGreyColor,
-        
+
                         ),
                       ),
                       SizedBox(width: getWidth(100),),
@@ -192,30 +373,30 @@ class AttendanceDetailsScreen extends StatelessWidget {
                         style: kSize16W400KWhiteColorOutfitRegular.copyWith(
                           fontSize: getFont(14),
                           color: AppColors.kCoolGreyColor,
-        
+
                         ),
                       ),
-        
+
                     ],
                   ),
                   Row(
                     children: [
                       Text(
-                        'attendanceDetail9'.tr,
+                    controller.formatTime24To12(record.checkInTime),
                         style: kSize16W600KBlackColorOutfitSemiBold.copyWith(
                           fontSize: getFont(18),
-        
+
                         ),
                       ),
                       SizedBox(width: getWidth(66),),
                       Text(
-                        'attendanceDetail10'.tr,
+                          controller.formatTime24To12(record.checkOutTime),
                         style: kSize16W600KBlackColorOutfitSemiBold.copyWith(
                           fontSize: getFont(18),
-        
+
                         ),
                       ),
-        
+
                     ],
                   ),
                   SizedBox(height: getHeight(10),),
@@ -224,14 +405,14 @@ class AttendanceDetailsScreen extends StatelessWidget {
                     style: kSize16W400KWhiteColorOutfitRegular.copyWith(
                       fontSize: getFont(14),
                       color: AppColors.kCoolGreyColor,
-        
+
                     ),
                   ),
                   Text(
                     'attendanceDetail12'.tr,
                     style: kSize16W600KBlackColorOutfitSemiBold.copyWith(
                       fontSize: getFont(18),
-        
+
                     ),
                   ),
                   SizedBox(height: getHeight(10),),
@@ -242,7 +423,7 @@ class AttendanceDetailsScreen extends StatelessWidget {
                         style: kSize16W400KWhiteColorOutfitRegular.copyWith(
                           fontSize: getFont(14),
                           color: AppColors.kCoolGreyColor,
-        
+
                         ),
                       ),
                       SizedBox(width: getWidth(90),),
@@ -251,10 +432,10 @@ class AttendanceDetailsScreen extends StatelessWidget {
                         style: kSize16W400KWhiteColorOutfitRegular.copyWith(
                           fontSize: getFont(14),
                           color: AppColors.kCoolGreyColor,
-        
+
                         ),
                       ),
-        
+
                     ],
                   ),
                   Row(
@@ -264,7 +445,7 @@ class AttendanceDetailsScreen extends StatelessWidget {
                         'attendanceDetail15'.tr,
                         style: kSize16W600KBlackColorOutfitSemiBold.copyWith(
                           fontSize: getFont(18),
-        
+
                         ),
                       ),
                       SizedBox(width: getWidth(90),),
@@ -272,23 +453,23 @@ class AttendanceDetailsScreen extends StatelessWidget {
                         'attendanceDetail16'.tr,
                         style: kSize16W600KBlackColorOutfitSemiBold.copyWith(
                           fontSize: getFont(14),
-        
-        
+
+
                         ),
                       ),
-        
+
                     ],
                   ),
                   SizedBox(height: getHeight(10),),
                   Image.asset(AppImages.attendanceDetailImg1),
                   SizedBox(height: getHeight(10),),
                   Image.asset(AppImages.attendanceDetailImg1),
-        
-        
-        
-        
-        
-        
+
+
+
+
+
+
                 ],
               ),
             ),

@@ -146,15 +146,20 @@ class GetAttendanceHistoryController extends GetxController {
   Future<void> openLocation(String? lat, String? lng) async {
     if (lat == null || lng == null) return;
 
-    final uri = Uri.parse(
-        'https://www.google.com/maps/search/?api=1&query=$lat,$lng');
+    final googleMapsUri = Uri.parse(
+      'geo:$lat,$lng?q=$lat,$lng',
+    );
 
-    if (await canLaunchUrl(uri)) {
-      await launchUrl(uri, mode: LaunchMode.externalApplication);
-    } else {
-      showCustomSnackBar("Could not open map");
+    try {
+      await launchUrl(
+        googleMapsUri,
+        mode: LaunchMode.externalApplication,
+      );
+    } catch (e) {
+      showCustomSnackBar("Google Maps not available");
     }
   }
+
 
   // ===================================================
   // 🔹 LOADER HELPERS
