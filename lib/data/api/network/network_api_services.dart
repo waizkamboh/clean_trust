@@ -119,7 +119,7 @@ class NetworkApiServices extends BaseApiServices{
       for (var file in files) {
         request.files.add(
           await http.MultipartFile.fromPath(
-            'documents[]', // backend expects array
+            'documents', // backend expects array
             file.path,
           ),
         );

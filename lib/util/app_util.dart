@@ -1,7 +1,9 @@
+import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 
 import '../helper/routes/routes_name.dart';
+import 'app_colors.dart';
 import 'custom_snackbar.dart';
 
 Future<bool> shouldAskForLocationPermission() async {
@@ -43,4 +45,29 @@ Future<Position> getCurrentLocation() async {
   }
   Get.toNamed(RouteName.scanQRCodeScreen);
   return position;
+}
+Future<void> datePicker(    {
+  required TextEditingController controller,
+}
+    ) async {
+  DateTime? _picked = await showDatePicker(
+    context: Get.context!,
+    initialDate: DateTime.now(),
+    firstDate: DateTime(2000),
+    lastDate: DateTime(2100),
+    builder: (BuildContext context, Widget? child) {
+      return Theme(
+        data: ThemeData(
+          // Change the color of the selected date circle
+          colorScheme: ColorScheme.light(primary: AppColors.kSkyBlueColor), // Change the color as per your preference
+          // Change the text color of the selected date
+
+        ),
+        child: child!,
+      );
+    },
+  );
+  if (_picked != null) {
+    controller.text = _picked.toString().split(" ")[0];
+  }
 }

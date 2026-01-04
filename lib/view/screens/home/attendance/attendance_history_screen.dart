@@ -421,7 +421,7 @@ class _AttendanceHistoryScreenState extends State<AttendanceHistoryScreen> {
                       text: TextSpan(
                         children: [
                           TextSpan(
-                            text: "attendanceHistory16".tr,
+                            text: "attendanceHistory18".tr,
                             style:
                             kSize16W400KWhiteColorOutfitRegular.copyWith(
                               color: AppColors.kCoolGreyColor,
@@ -451,7 +451,7 @@ class _AttendanceHistoryScreenState extends State<AttendanceHistoryScreen> {
               text: TextSpan(
                 children: [
                   TextSpan(
-                    text: "attendanceHistory16".tr,
+                    text: "attendanceHistory20".tr,
                     style: kSize16W400KWhiteColorOutfitRegular.copyWith(
                       color: AppColors.kCoolGreyColor,
                       fontSize: getFont(14),

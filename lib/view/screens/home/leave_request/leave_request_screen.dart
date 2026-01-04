@@ -5,6 +5,7 @@ import 'package:clean_trust/view/base/top_header.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../../../util/app_util.dart';
 import '../../../../util/text_style.dart';
 import '../../../../view_model/controller/home/attendance/manual_attendance_entry_controller.dart';
 import '../../../../view_model/controller/leave_request/leave_request_controller.dart';
@@ -14,8 +15,7 @@ import '../../../base/round_button.dart';
 
 class LeaveRequestScreen extends StatelessWidget {
    LeaveRequestScreen({super.key});
-  final controller = Get.find();
-  ManualAttendanceEntryController manualAttendanceEntryController = Get.find();
+  LeaveRequestController controller = Get.find();
 
 
   @override
@@ -130,7 +130,7 @@ class LeaveRequestScreen extends StatelessWidget {
                             width: getWidth(164),
                             myController: controller.startDateController.value,
                             contentPadding: EdgeInsets.symmetric(horizontal: getWidth(12)),
-                            onTap: ()=> manualAttendanceEntryController.datePicker(controller: controller.startDateController.value),
+                            onTap: ()=> datePicker(controller: controller.startDateController.value),
                             readOnly: true,
                             suffixIcon: Image.asset(AppImages.leaveRequestIcon4),
                             keyBoardType: TextInputType.datetime,
@@ -163,7 +163,7 @@ class LeaveRequestScreen extends StatelessWidget {
                             width: getWidth(164),
                             myController: controller.endDateController.value,
                             contentPadding: EdgeInsets.symmetric(horizontal: getWidth(12)),
-                            onTap: ()=> manualAttendanceEntryController.datePicker(controller: controller.endDateController.value),
+                            onTap: ()=> datePicker(controller: controller.endDateController.value),
                             readOnly: true,
                             suffixIcon: Image.asset(AppImages.leaveRequestIcon4),
                             keyBoardType: TextInputType.datetime,
@@ -195,7 +195,7 @@ class LeaveRequestScreen extends StatelessWidget {
                     height: getHeight(96),
                     myController: controller.reasonController.value,
                     width: getWidth(343),
-                    contentPadding: EdgeInsets.symmetric(horizontal: getWidth(20)),
+                    contentPadding: EdgeInsets.symmetric(horizontal: getWidth(20), vertical: getHeight(12)),
                     keyBoardType: TextInputType.text,
                     borderRadius: 8,
                     maxLines: 4,
@@ -227,6 +227,7 @@ class LeaveRequestScreen extends StatelessWidget {
                   ),
 
                   SizedBox(height: getHeight(5)),
+                  Obx(()=>
                   GestureDetector(
                     onTap: controller.pickDocuments,
                     child: Container(
@@ -256,7 +257,7 @@ class LeaveRequestScreen extends StatelessWidget {
                         ],
                       ),
                     ),
-                  ),
+                  ),),
 
                   // Container(
                   //   padding: EdgeInsetsGeometry.symmetric(horizontal: getWidth(16), vertical: getHeight(34)),

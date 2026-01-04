@@ -22,7 +22,6 @@ class LeaveRequestController extends GetxController {
 
   RxList<File> documents = <File>[].obs;
 
-  /// PICK DOCUMENTS
   void pickDocuments() async {
     try {
       FilePickerResult? result = await FilePicker.platform.pickFiles(
@@ -44,29 +43,45 @@ class LeaveRequestController extends GetxController {
     }
   }
 
-  /// SUBMIT LEAVE REQUEST
   void submitLeaveRequest() async {
+
     String type = selectedLeaveType.value == 'Other'
         ? otherTypeController.value.text
         : selectedLeaveType.value;
+    String startDate = startDateController.value.text.trim();
+    String endDate = endDateController.value.text.trim();
+    String reason = reasonController.value.text.trim();
 
     if (type.isEmpty) {
       showCustomSnackBar('Select leave type');
       return;
     }
 
+    if (startDate.isEmpty) {
+      showCustomSnackBar('Please choose start date');
+      return;
+    }
+   if (endDate.isEmpty) {
+      showCustomSnackBar('Please choose end date');
+      return;
+    }
+   if (reason.isEmpty) {
+      showCustomSnackBar('Enter reason for leave');
+      return;
+    }
+
     loading.value = true;
     final token = await _userPreference.getToken();
 
+    print("DocumentLength${documents.length}");
+    print(documents.map((e) => e.path).toList());
 
     try {
       final headers = {
         'Authorization': 'Bearer $token',
-        'Content-Type': 'application/json',
       };
 
-      // Prepare data in the format expected by the repository
-      Map<String, dynamic> data = {
+      final data = {
         'fields': {
           'type': type,
           'start_date': startDateController.value.text,
@@ -75,6 +90,7 @@ class LeaveRequestController extends GetxController {
         },
         'documents': documents,
       };
+
 
       final response = await _repo.leaveRequestApi(
         headers,
@@ -92,6 +108,7 @@ class LeaveRequestController extends GetxController {
     } catch (e) {
       loading.value = false;
       showCustomSnackBar(e.toString());
+      debugPrint(e.toString());
     }
   }
 }

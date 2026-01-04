@@ -13,8 +13,7 @@ import '../../workplaces/get_workplaces_controller.dart';
 class ManualAttendanceEntryController extends GetxController {
   final _repo = ManualAttendanceEntryRepository();
   final UserPreference _userPreference = UserPreference();
-  final GetWorkplacesController workplacesController =
-  Get.find();
+  final GetWorkplacesController workplacesController = Get.find();
 
   RxBool loading = false.obs;
 
@@ -24,31 +23,7 @@ class ManualAttendanceEntryController extends GetxController {
   final checkOutController = TextEditingController().obs;
   final reasonController = TextEditingController().obs;
 
-  Future<void> datePicker(    {
-      required TextEditingController controller,
-  }
-      ) async {
-    DateTime? _picked = await showDatePicker(
-      context: Get.context!,
-      initialDate: DateTime.now(),
-      firstDate: DateTime(2000),
-      lastDate: DateTime(2100),
-      builder: (BuildContext context, Widget? child) {
-        return Theme(
-          data: ThemeData(
-            // Change the color of the selected date circle
-            colorScheme: ColorScheme.light(primary: AppColors.kSkyBlueColor), // Change the color as per your preference
-            // Change the text color of the selected date
 
-          ),
-          child: child!,
-        );
-      },
-    );
-    if (_picked != null) {
-      controller.text = _picked.toString().split(" ")[0];
-    }
-  }
 
   Future<void> selectTime({
     required BuildContext context,

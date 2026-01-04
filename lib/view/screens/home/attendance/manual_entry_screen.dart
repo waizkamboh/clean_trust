@@ -1,5 +1,6 @@
 import 'package:clean_trust/util/app_colors.dart';
 import 'package:clean_trust/util/app_images.dart';
+import 'package:clean_trust/util/app_util.dart';
 import 'package:clean_trust/util/size_config.dart';
 import 'package:clean_trust/view/base/top_header.dart';
 import 'package:clean_trust/view_model/controller/home/attendance/manual_attendance_entry_controller.dart';
@@ -76,7 +77,7 @@ class ManualEntryScreen extends StatelessWidget {
                           width: getWidth(343),
                           contentPadding: EdgeInsets.symmetric(horizontal: getWidth(20)),
                           readOnly: true,
-                          onTap: ()=> controller.datePicker(controller: controller.dateController.value),
+                          onTap: ()=> datePicker(controller: controller.dateController.value),
                           suffixIcon: Icon(Icons.calendar_today_outlined, color: AppColors.kBlackColor.withOpacity(0.66)),
                           keyBoardType: TextInputType.datetime,
                           borderRadius: 12,
