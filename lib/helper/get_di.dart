@@ -26,7 +26,7 @@ class AppBindings extends Bindings {
     Get.lazyPut(() => ChangePasswordController(), fenix: true);
     Get.lazyPut(() => EditProfileController(), fenix: true);
     Get.lazyPut(() => AttendanceOfflineController(), fenix: true);
-    Get.lazyPut(() => GetAttendanceHistoryController(), fenix: true);
+    Get.lazyPut(() => GetTodayAndMonthlyAttendanceController(), fenix: true);
     Get.lazyPut(() => ManualAttendanceEntryController(), fenix: true);
     Get.lazyPut(() => ScanQrCodeController(), fenix: true);
     Get.lazyPut(() => AppSettingController(), fenix: true);
