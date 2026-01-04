@@ -17,16 +17,12 @@ class GetAttendanceHistoryController extends GetxController {
 
   final UserPreference _userPreference = UserPreference();
 
-  /// Loader
   RxBool isLoading = false.obs;
   int _apiCounter = 0;
-  int _currentPage = 1;
-  final int _limit = 10;
   RxBool isPaginationLoading = false.obs;
   RxBool hasMoreData = true.obs;
 
 
-  /// Attendance List
   RxList<Records> attendanceList = <Records>[].obs;
 
   @override
@@ -35,9 +31,7 @@ class GetAttendanceHistoryController extends GetxController {
     fetchAttendanceHistory();
   }
 
-  // ===================================================
-  // 🔹 FETCH ATTENDANCE HISTORY
-  // ===================================================
+
   Future<void> fetchAttendanceHistory() async {
     try {
       _startLoading();
@@ -67,23 +61,21 @@ class GetAttendanceHistoryController extends GetxController {
     }
   }
 
-  // ===================================================
-  // 🔹 FORMATTERS
-  // ===================================================
 
-  /// 📅 Monday, Jan 15
+
   String formatShortDate(String? date) {
     if (date == null) return '--';
     final parsed = DateTime.parse(date);
     return DateFormat('EEEE, MMM d').format(parsed);
   }
 
-  /// 📅 March 15, 2024, Friday
+  /// 📅 March 15, 2024
   String formatFullDate(String? date) {
     if (date == null) return '--';
     final parsed = DateTime.parse(date);
-    return DateFormat('MMMM d, yyyy, EEEE').format(parsed);
+    return DateFormat('MMMM d, yyyy').format(parsed);
   }
+
 
   /// 🕒 24h → 12h
   String formatTime24To12(String? time) {
@@ -263,6 +255,37 @@ class GetAttendanceHistoryController extends GetxController {
     'Hours worked between ${DateFormat('dd MMM').format(fromDate.value!)} – '
         '${DateFormat('dd MMM yyyy').format(toDate.value!)}';
   }
+  /// ⏱️ TOTAL MINUTES (helper)
+  int _calculateTotalMinutes(String? checkIn, String? checkOut) {
+    if (checkIn == null || checkOut == null) return 0;
+
+    final inParts = checkIn.split(':');
+    final outParts = checkOut.split(':');
+
+    final inMinutes =
+        int.parse(inParts[0]) * 60 + int.parse(inParts[1]);
+    final outMinutes =
+        int.parse(outParts[0]) * 60 + int.parse(outParts[1]);
+
+    return outMinutes - inMinutes;
+  }
+
+
+
+  /// ⏰ OVERTIME (8h = 480 min)
+  String getOvertimeText(String? checkIn, String? checkOut) {
+    final totalMinutes = _calculateTotalMinutes(checkIn, checkOut);
+    const standardMinutes = 8 * 60;
+
+    if (totalMinutes <= standardMinutes) return '0h 0m';
+
+    final overtime = totalMinutes - standardMinutes;
+    final h = overtime ~/ 60;
+    final m = overtime % 60;
+
+    return '${h}h ${m}m';
+  }
+
   /// ---------------- RESET FILTER ----------------
   void resetFilter() {
     fromDate.value = null;
