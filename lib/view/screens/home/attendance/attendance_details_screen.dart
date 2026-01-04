@@ -106,7 +106,7 @@ class AttendanceDetailsScreen extends StatelessWidget {
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
                                     Text(
-                                      "Worked on ${DateFormat('d MMM').format(DateTime.parse(record.date!))}",
+                                      "${"attendanceDetail4".tr} ${DateFormat('d MMM').format(DateTime.parse(record.date!))}",
                                       style: kSize16W400KWhiteColorOutfitRegular.copyWith(
                                           color: AppColors.kCoolGreyColor,
                                           fontSize: getFont(13)

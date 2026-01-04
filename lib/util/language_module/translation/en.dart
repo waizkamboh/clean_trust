@@ -103,7 +103,7 @@ Map<String, String> en = {
   'attendanceDetail1': 'Attendance Details',
   'attendanceDetail2': 'March 15, 2024',
   'attendanceDetail3': 'Friday',
-  'attendanceDetail4': 'Worked on 15 March',
+  'attendanceDetail4': 'Worked on',
   'attendanceDetail5': '142h 35m',
   'attendanceDetail6': 'Office Tower – Level 3',
   'attendanceDetail7': 'Clock In',

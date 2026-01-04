@@ -65,7 +65,6 @@ class GetAttendanceHistoryController extends GetxController {
     return DateFormat('EEEE, MMM d').format(parsed);
   }
 
-  /// 📅 March 15, 2024
   String formatFullDate(String? date) {
     if (date == null) return '--';
     final parsed = DateTime.parse(date);
@@ -73,7 +72,6 @@ class GetAttendanceHistoryController extends GetxController {
   }
 
 
-  /// 🕒 24h → 12h
   String formatTime24To12(String? time) {
     if (time == null || time.isEmpty) return '--:--';
 
@@ -88,7 +86,6 @@ class GetAttendanceHistoryController extends GetxController {
     return '$hour:${minute.toString().padLeft(2, '0')} ${isPM ? 'PM' : 'AM'}';
   }
 
-  /// ⏱️ TOTAL HOURS CALCULATION
   String calculateTotalHours(
       String? checkIn,
       String? checkOut,
@@ -128,9 +125,7 @@ class GetAttendanceHistoryController extends GetxController {
     return map;
   }
 
-  // ===================================================
-  // 🔹 MAP LOCATION (TAP ACTION)
-  // ===================================================
+
   Future<void> openLocation(String? lat, String? lng) async {
     if (lat == null || lng == null) return;
 
@@ -149,9 +144,7 @@ class GetAttendanceHistoryController extends GetxController {
   }
 
 
-  // ===================================================
-  // 🔹 LOADER HELPERS
-  // ===================================================
+
   void _startLoading() {
     _apiCounter++;
     isLoading.value = true;
@@ -165,7 +158,6 @@ class GetAttendanceHistoryController extends GetxController {
     }
   }
 
-  /// ---------------- FILTER STATES ----------------
   Rx<DateTime?> fromDate = Rx<DateTime?>(null);
   Rx<DateTime?> toDate = Rx<DateTime?>(null);
 
@@ -203,7 +195,6 @@ class GetAttendanceHistoryController extends GetxController {
   }
 
 
-  /// ---------------- APPLY FILTER ----------------
   void applyFilter() {
     if (fromDate.value == null || toDate.value == null) return;
 
@@ -224,7 +215,6 @@ class GetAttendanceHistoryController extends GetxController {
     _calculateFilteredHours(filtered);
   }
 
-  /// ---------------- CALCULATE HOURS ----------------
   void _calculateFilteredHours(List records) {
     int totalMinutes = 0;
 
@@ -251,7 +241,6 @@ class GetAttendanceHistoryController extends GetxController {
     'Hours worked between ${DateFormat('dd MMM').format(fromDate.value!)} – '
         '${DateFormat('dd MMM yyyy').format(toDate.value!)}';
   }
-  /// ⏱️ TOTAL MINUTES (helper)
   int _calculateTotalMinutes(String? checkIn, String? checkOut) {
     if (checkIn == null || checkOut == null) return 0;
 
@@ -268,7 +257,6 @@ class GetAttendanceHistoryController extends GetxController {
 
 
 
-  /// ⏰ OVERTIME (8h = 480 min)
   String getOvertimeText(String? checkIn, String? checkOut) {
     final totalMinutes = _calculateTotalMinutes(checkIn, checkOut);
     const standardMinutes = 8 * 60;
@@ -282,7 +270,6 @@ class GetAttendanceHistoryController extends GetxController {
     return '${h}h ${m}m';
   }
 
-  /// ---------------- RESET FILTER ----------------
   void resetFilter() {
     fromDate.value = null;
     toDate.value = null;
@@ -291,7 +278,6 @@ class GetAttendanceHistoryController extends GetxController {
     filteredTotalHours.value = '0h 0m';
     filteredDateRangeText.value = '';
 
-    // original list restore
     attendanceList.refresh();
   }
 
