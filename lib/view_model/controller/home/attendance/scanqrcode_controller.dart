@@ -1,5 +1,4 @@
 import 'package:clean_trust/helper/routes/routes_name.dart';
-import 'package:clean_trust/view/screens/attendance/attendance_offline_screen.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
@@ -11,7 +10,6 @@ import '../../../../data/model/hive/offline_attendance_model.dart';
 import '../../../../data/repository/home/attendance/scan_qr_code_repository.dart';
 import '../../../../helper/internet_check.dart';
 import '../../../../util/custom_snackbar.dart';
-import '../../../../view/screens/home/scan_qrcode_screen.dart';
 import '../../../user_preference/user_preference.dart';
 import 'package:geocoding/geocoding.dart';
 
@@ -49,47 +47,8 @@ class ScanQrCodeController extends GetxController {
    // sync();
   }
 
-  Future<bool> shouldAskForLocationPermission() async {
-    bool serviceEnabled = await Geolocator.isLocationServiceEnabled();
-    LocationPermission permission = await Geolocator.checkPermission();
-    // Ask only if location is not ready
-    if (!serviceEnabled || permission == LocationPermission.denied || permission == LocationPermission.deniedForever) {
-      return true;
-    }
-    return false; // everything is OK
-  }
 
-  Future<Position> getCurrentLocation() async {
-    bool serviceEnabled = await Geolocator.isLocationServiceEnabled();
-    if (!serviceEnabled) {
-      showCustomSnackBar('Please enable location to continue.');
-      await Geolocator.openLocationSettings();
-      throw Exception('Location service disabled');
-    }
-    LocationPermission permission = await Geolocator.checkPermission();
-    if (permission == LocationPermission.denied) {
-      permission = await Geolocator.requestPermission();
-    }
-    if (permission == LocationPermission.deniedForever) {
-      showCustomSnackBar(
-        'Location permission is required for attendance. Enable it from settings.',
-      );
-      await Geolocator.openAppSettings();
-      throw Exception('Permission denied forever');
-    }
-    if (permission == LocationPermission.denied) {
-      throw Exception('Permission denied');
-    }
-    Position position = await Geolocator.getCurrentPosition(
-      desiredAccuracy: LocationAccuracy.high,
-    );
-    // Close dialog before navigation
-    if (Get.isDialogOpen == true) {
-      Get.back();
-    }
-    Get.toNamed(RouteName.scanQRCodeScreen);
-    return position;
-  }
+
   void openScanner() {
     _scanLock = false;
     isScanned.value = false;

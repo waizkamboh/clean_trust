@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 
+import '../../../../data/model/home/attendance/GetMonthlyAttendanceModel.dart';
 import '../../../../data/repository/home/attendance/get_today_attendance_repository.dart';
 import '../../../../data/repository/home/attendance/get_monthly_attendance_repository.dart';
 import '../../../../util/custom_snackbar.dart';
@@ -16,29 +17,16 @@ class GetTodayAndMonthlyAttendanceController extends GetxController {
 
   final UserPreference _userPreference = UserPreference();
 
-  /// Loader
   RxBool isLoading = false.obs;
 
-  /// Internal API counter (VERY IMPORTANT)
   int _apiCounter = 0;
 
-  /// ---------------- TODAY ----------------
   RxString todayTotalHours = '0h 0m'.obs;
   RxString checkInTime = '--:--'.obs;
 
-  /// ---------------- MONTHLY ----------------
   RxString monthlyTotalHours = '0h 0m'.obs;
 
-  @override
-  void onInit() {
-    super.onInit();
-    fetchTodayAttendance();
-    fetchMonthlyAttendance();
-  }
 
-  // ===================================================
-  // 🔹 TODAY ATTENDANCE
-  // ===================================================
   Future<void> fetchTodayAttendance() async {
     try {
       _startLoading();
@@ -74,9 +62,7 @@ class GetTodayAndMonthlyAttendanceController extends GetxController {
     }
   }
 
-  // ===================================================
-  // 🔹 MONTHLY ATTENDANCE (ONLY TOTAL HOURS)
-  // ===================================================
+
   Future<void> fetchMonthlyAttendance() async {
     try {
       _startLoading();
@@ -108,9 +94,7 @@ class GetTodayAndMonthlyAttendanceController extends GetxController {
     }
   }
 
-  // ===================================================
-  // 🔹 LOADER HELPERS
-  // ===================================================
+
   void _startLoading() {
     _apiCounter++;
     isLoading.value = true;
@@ -124,23 +108,32 @@ class GetTodayAndMonthlyAttendanceController extends GetxController {
     }
   }
 
-  // ===================================================
-  // 🔹 FORMATTERS
-  // ===================================================
+
   String formatDecimalHours(num? hours) {
-    if (hours == null) return '0h 0m';
+    if (hours == null || hours <= 0) return '0h 0m';
 
     int h = hours.floor();
     int m = ((hours - h) * 60).round();
 
+    if (m == 60) {
+      h += 1;
+      m = 0;
+    }
+
     return '${h}h ${m}m';
   }
 
-  String formatFromBreakdown(dynamic breakdown) {
+
+
+  String formatFromBreakdown(TotalHoursBreakdown? breakdown) {
     if (breakdown == null) return '0h 0m';
 
-    return '${breakdown.hours ?? 0}h ${breakdown.minutes ?? 0}m';
+    final h = breakdown.hours ?? 0;
+    final m = breakdown.minutes ?? 0;
+
+    return '${h}h ${m}m';
   }
+
 
   String formatTime24To12(String? time) {
     if (time == null || time.isEmpty) return '--:--';

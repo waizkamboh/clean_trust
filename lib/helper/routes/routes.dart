@@ -2,16 +2,10 @@
 
 import 'package:clean_trust/helper/routes/routes_name.dart';
 import 'package:clean_trust/view/base/bottom_nav_bar.dart';
-import 'package:clean_trust/view/screens/attendance/attendance_details_screen.dart';
-import 'package:clean_trust/view/screens/attendance/attendance_history_screen.dart';
-import 'package:clean_trust/view/screens/attendance/leave_request_screen.dart';
-import 'package:clean_trust/view/screens/attendance/manual_entry_screen.dart';
 import 'package:clean_trust/view/screens/auth/confirm_password_screen.dart';
 import 'package:clean_trust/view/screens/auth/forgot_password_screen.dart';
 import 'package:clean_trust/view/screens/auth/login_screen.dart';
 import 'package:clean_trust/view/screens/auth/signup_screen.dart';
-import 'package:clean_trust/view/screens/home/scan_qrcode_screen.dart';
-import 'package:clean_trust/view/screens/home/scan_result_screen.dart';
 import 'package:clean_trust/view/screens/notification/notification_screen.dart';
 import 'package:clean_trust/view/screens/onboarding/onboarding_screen1.dart';
 import 'package:clean_trust/view/screens/onboarding/onboarding_screen2.dart';
@@ -23,6 +17,11 @@ import 'package:clean_trust/view/screens/profile/help_support_screen.dart';
 import 'package:clean_trust/view/screens/profile/language_screen.dart';
 import 'package:get/get.dart';
 
+import '../../view/screens/home/attendance/attendance_history_screen.dart';
+import '../../view/screens/home/attendance/manual_entry_screen.dart';
+import '../../view/screens/home/attendance/scan_qrcode_screen.dart';
+import '../../view/screens/home/attendance/scan_result_screen.dart';
+import '../../view/screens/home/leave_request/leave_request_screen.dart';
 import '../../view/screens/splash/splash_screen.dart';
 
 

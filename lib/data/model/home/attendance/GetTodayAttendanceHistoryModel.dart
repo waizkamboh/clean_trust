@@ -1,7 +1,10 @@
+import 'dart:convert';
 /// success : true
 /// message : "Today's attendance retrieved successfully"
-/// data : {"records":[{"id":1,"user_id":1,"workplace_id":1,"qr_code_id":1,"type":"clock_in","scan_time":"2026-01-02T10:51:43.567Z","date":"2026-01-02","check_in_time":"15:51:43","check_out_time":null,"latitude":40.7128,"longitude":-74.006,"is_valid":true,"validation_message":"Location verified (0m from workplace)","is_manual":false,"manual_reason":null,"status":"approved","approved_by":null,"approved_at":null,"notes":null,"is_offline":false,"synced_at":"2026-01-02T10:51:43.754Z","created_at":"2026-01-02T10:51:43.759Z","updated_at":"2026-01-02T10:51:43.759Z","workplace":{"id":1,"name":"Hamzsa Office 2","address":"12s3 Business St, City"},"qrCode":{"id":1,"company_name":"Tech Solutions Inc","department":"Engineering"}}],"stats":{"status":"in_progress","totalHours":1.03,"regularHours":1.03,"overtimeHours":0,"breakMinutes":0,"isLate":true,"isEarly":false,"lateMinutes":411}}
+/// data : {"records":[{"id":545,"user_id":11,"workplace_id":8,"qr_code_id":8,"type":"clock_in","scan_time":"2026-01-04T23:46:21.717Z","date":"2026-01-04","check_in_time":"16:07:52","check_out_time":"23:46:21","latitude":"30.79253040","longitude":"73.44323400","is_valid":false,"validation_message":"Location invalid: 11387652m from workplace (max 50m allowed)","is_manual":false,"manual_reason":null,"status":"pending","approved_by":null,"approved_at":null,"notes":null,"is_offline":false,"synced_at":"2026-01-04T19:13:52.194Z","created_at":"2026-01-04T16:07:52.906Z","updated_at":"2026-01-04T19:13:52.195Z","workplace":{"id":8,"name":"Noor Office 2","address":"12s3 Business St, City"},"qrCode":{"id":8,"company_name":"Tech Solutions Inc","department":"Engineering"}}],"stats":{"status":"in_progress","totalHours":-2.98,"regularHours":-2.98,"overtimeHours":0,"breakMinutes":0,"isLate":true,"isEarly":false,"lateMinutes":886}}
 
+GetTodayAttendanceHistoryModel getTodayAttendanceHistoryModelFromJson(String str) => GetTodayAttendanceHistoryModel.fromJson(json.decode(str));
+String getTodayAttendanceHistoryModelToJson(GetTodayAttendanceHistoryModel data) => json.encode(data.toJson());
 class GetTodayAttendanceHistoryModel {
   GetTodayAttendanceHistoryModel({
       bool? success, 
@@ -43,9 +46,11 @@ GetTodayAttendanceHistoryModel copyWith({  bool? success,
 
 }
 
-/// records : [{"id":1,"user_id":1,"workplace_id":1,"qr_code_id":1,"type":"clock_in","scan_time":"2026-01-02T10:51:43.567Z","date":"2026-01-02","check_in_time":"15:51:43","check_out_time":null,"latitude":40.7128,"longitude":-74.006,"is_valid":true,"validation_message":"Location verified (0m from workplace)","is_manual":false,"manual_reason":null,"status":"approved","approved_by":null,"approved_at":null,"notes":null,"is_offline":false,"synced_at":"2026-01-02T10:51:43.754Z","created_at":"2026-01-02T10:51:43.759Z","updated_at":"2026-01-02T10:51:43.759Z","workplace":{"id":1,"name":"Hamzsa Office 2","address":"12s3 Business St, City"},"qrCode":{"id":1,"company_name":"Tech Solutions Inc","department":"Engineering"}}]
-/// stats : {"status":"in_progress","totalHours":1.03,"regularHours":1.03,"overtimeHours":0,"breakMinutes":0,"isLate":true,"isEarly":false,"lateMinutes":411}
+/// records : [{"id":545,"user_id":11,"workplace_id":8,"qr_code_id":8,"type":"clock_in","scan_time":"2026-01-04T23:46:21.717Z","date":"2026-01-04","check_in_time":"16:07:52","check_out_time":"23:46:21","latitude":"30.79253040","longitude":"73.44323400","is_valid":false,"validation_message":"Location invalid: 11387652m from workplace (max 50m allowed)","is_manual":false,"manual_reason":null,"status":"pending","approved_by":null,"approved_at":null,"notes":null,"is_offline":false,"synced_at":"2026-01-04T19:13:52.194Z","created_at":"2026-01-04T16:07:52.906Z","updated_at":"2026-01-04T19:13:52.195Z","workplace":{"id":8,"name":"Noor Office 2","address":"12s3 Business St, City"},"qrCode":{"id":8,"company_name":"Tech Solutions Inc","department":"Engineering"}}]
+/// stats : {"status":"in_progress","totalHours":-2.98,"regularHours":-2.98,"overtimeHours":0,"breakMinutes":0,"isLate":true,"isEarly":false,"lateMinutes":886}
 
+Data dataFromJson(String str) => Data.fromJson(json.decode(str));
+String dataToJson(Data data) => json.encode(data.toJson());
 class Data {
   Data({
       List<Records>? records, 
@@ -87,14 +92,16 @@ Data copyWith({  List<Records>? records,
 }
 
 /// status : "in_progress"
-/// totalHours : 1.03
-/// regularHours : 1.03
+/// totalHours : -2.98
+/// regularHours : -2.98
 /// overtimeHours : 0
 /// breakMinutes : 0
 /// isLate : true
 /// isEarly : false
-/// lateMinutes : 411
+/// lateMinutes : 886
 
+Stats statsFromJson(String str) => Stats.fromJson(json.decode(str));
+String statsToJson(Stats data) => json.encode(data.toJson());
 class Stats {
   Stats({
       String? status, 
@@ -174,32 +181,34 @@ Stats copyWith({  String? status,
 
 }
 
-/// id : 1
-/// user_id : 1
-/// workplace_id : 1
-/// qr_code_id : 1
+/// id : 545
+/// user_id : 11
+/// workplace_id : 8
+/// qr_code_id : 8
 /// type : "clock_in"
-/// scan_time : "2026-01-02T10:51:43.567Z"
-/// date : "2026-01-02"
-/// check_in_time : "15:51:43"
-/// check_out_time : null
-/// latitude : 40.7128
-/// longitude : -74.006
-/// is_valid : true
-/// validation_message : "Location verified (0m from workplace)"
+/// scan_time : "2026-01-04T23:46:21.717Z"
+/// date : "2026-01-04"
+/// check_in_time : "16:07:52"
+/// check_out_time : "23:46:21"
+/// latitude : "30.79253040"
+/// longitude : "73.44323400"
+/// is_valid : false
+/// validation_message : "Location invalid: 11387652m from workplace (max 50m allowed)"
 /// is_manual : false
 /// manual_reason : null
-/// status : "approved"
+/// status : "pending"
 /// approved_by : null
 /// approved_at : null
 /// notes : null
 /// is_offline : false
-/// synced_at : "2026-01-02T10:51:43.754Z"
-/// created_at : "2026-01-02T10:51:43.759Z"
-/// updated_at : "2026-01-02T10:51:43.759Z"
-/// workplace : {"id":1,"name":"Hamzsa Office 2","address":"12s3 Business St, City"}
-/// qrCode : {"id":1,"company_name":"Tech Solutions Inc","department":"Engineering"}
+/// synced_at : "2026-01-04T19:13:52.194Z"
+/// created_at : "2026-01-04T16:07:52.906Z"
+/// updated_at : "2026-01-04T19:13:52.195Z"
+/// workplace : {"id":8,"name":"Noor Office 2","address":"12s3 Business St, City"}
+/// qrCode : {"id":8,"company_name":"Tech Solutions Inc","department":"Engineering"}
 
+Records recordsFromJson(String str) => Records.fromJson(json.decode(str));
+String recordsToJson(Records data) => json.encode(data.toJson());
 class Records {
   Records({
       num? id, 
@@ -210,9 +219,9 @@ class Records {
       String? scanTime, 
       String? date, 
       String? checkInTime, 
-      dynamic checkOutTime, 
-      num? latitude, 
-      num? longitude, 
+      String? checkOutTime, 
+      String? latitude, 
+      String? longitude, 
       bool? isValid, 
       String? validationMessage, 
       bool? isManual, 
@@ -289,9 +298,9 @@ class Records {
   String? _scanTime;
   String? _date;
   String? _checkInTime;
-  dynamic _checkOutTime;
-  num? _latitude;
-  num? _longitude;
+  String? _checkOutTime;
+  String? _latitude;
+  String? _longitude;
   bool? _isValid;
   String? _validationMessage;
   bool? _isManual;
@@ -314,9 +323,9 @@ Records copyWith({  num? id,
   String? scanTime,
   String? date,
   String? checkInTime,
-  dynamic checkOutTime,
-  num? latitude,
-  num? longitude,
+  String? checkOutTime,
+  String? latitude,
+  String? longitude,
   bool? isValid,
   String? validationMessage,
   bool? isManual,
@@ -365,9 +374,9 @@ Records copyWith({  num? id,
   String? get scanTime => _scanTime;
   String? get date => _date;
   String? get checkInTime => _checkInTime;
-  dynamic get checkOutTime => _checkOutTime;
-  num? get latitude => _latitude;
-  num? get longitude => _longitude;
+  String? get checkOutTime => _checkOutTime;
+  String? get latitude => _latitude;
+  String? get longitude => _longitude;
   bool? get isValid => _isValid;
   String? get validationMessage => _validationMessage;
   bool? get isManual => _isManual;
@@ -419,10 +428,12 @@ Records copyWith({  num? id,
 
 }
 
-/// id : 1
+/// id : 8
 /// company_name : "Tech Solutions Inc"
 /// department : "Engineering"
 
+QrCode qrCodeFromJson(String str) => QrCode.fromJson(json.decode(str));
+String qrCodeToJson(QrCode data) => json.encode(data.toJson());
 class QrCode {
   QrCode({
       num? id, 
@@ -462,10 +473,12 @@ QrCode copyWith({  num? id,
 
 }
 
-/// id : 1
-/// name : "Hamzsa Office 2"
+/// id : 8
+/// name : "Noor Office 2"
 /// address : "12s3 Business St, City"
 
+Workplace workplaceFromJson(String str) => Workplace.fromJson(json.decode(str));
+String workplaceToJson(Workplace data) => json.encode(data.toJson());
 class Workplace {
   Workplace({
       num? id, 

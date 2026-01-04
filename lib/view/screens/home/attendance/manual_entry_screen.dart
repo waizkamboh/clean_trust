@@ -6,12 +6,12 @@ import 'package:clean_trust/view_model/controller/home/attendance/manual_attenda
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../../helper/routes/routes_name.dart';
-import '../../../util/text_style.dart';
-import '../../../view_model/controller/workplaces/get_workplaces_controller.dart';
-import '../../base/custom_drop_down.dart';
-import '../../base/input_text_field.dart';
-import '../../base/round_button.dart';
+import '../../../../helper/routes/routes_name.dart';
+import '../../../../util/text_style.dart';
+import '../../../../view_model/controller/workplaces/get_workplaces_controller.dart';
+import '../../../base/custom_drop_down.dart';
+import '../../../base/input_text_field.dart';
+import '../../../base/round_button.dart';
 
 class ManualEntryScreen extends StatelessWidget {
   ManualEntryScreen({super.key});

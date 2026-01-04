@@ -5,10 +5,10 @@ import 'package:clean_trust/view/base/top_header.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../../helper/routes/routes_name.dart';
-import '../../../util/text_style.dart';
-import '../../../view_model/controller/home/attendance/scanqrcode_controller.dart';
-import '../../base/round_button.dart';
+import '../../../../helper/routes/routes_name.dart';
+import '../../../../util/text_style.dart';
+import '../../../../view_model/controller/home/attendance/scanqrcode_controller.dart';
+import '../../../base/round_button.dart';
 
 class ScanResultScreen extends StatelessWidget {
    ScanResultScreen({super.key});

@@ -6,11 +6,12 @@ import 'package:clean_trust/view_model/controller/home/attendance/attendance_off
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../../data/model/hive/offline_attendance_model.dart';
-import '../../../helper/internet_check.dart';
-import '../../../util/text_style.dart';
-import '../../base/input_text_field.dart';
-import '../../base/round_button.dart';
+import '../../../../data/model/hive/offline_attendance_model.dart';
+import '../../../../helper/internet_check.dart';
+import '../../../../util/text_style.dart';
+import '../../../base/round_button.dart';
+
+
 
 class AttendanceOfflineScreen extends StatefulWidget {
    AttendanceOfflineScreen({super.key});

@@ -308,21 +308,16 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
 
-import '../../../util/app_images.dart';
-import '../../../util/text_style.dart';
-import '../../../view_model/controller/home/attendance/scanqrcode_controller.dart';
-import '../../base/round_button.dart';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
 
-import '../../../util/app_colors.dart';
-import '../../../util/app_images.dart';
-import '../../../util/size_config.dart';
-import '../../../util/text_style.dart';
-import '../../base/top_header.dart';
-import '../../base/round_button.dart';
+import '../../../../util/app_images.dart';
+import '../../../../util/text_style.dart';
+import '../../../../view_model/controller/home/attendance/scanqrcode_controller.dart';
+import '../../../base/round_button.dart';
+
 
 class ScanQrcodeScreen extends StatelessWidget {
   ScanQrcodeScreen({super.key});

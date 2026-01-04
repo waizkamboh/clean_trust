@@ -5,10 +5,11 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
-import '../../../data/model/home/attendance/GetAttendanceHistoryModel.dart';
-import '../../../util/app_images.dart';
-import '../../../util/text_style.dart';
-import '../../../view_model/controller/home/attendance/get_attendance_history_controller.dart';
+import '../../../../data/model/home/attendance/GetAttendanceHistoryModel.dart';
+import '../../../../util/app_images.dart';
+import '../../../../util/text_style.dart';
+import '../../../../view_model/controller/home/attendance/get_attendance_history_controller.dart';
+
 class AttendanceDetailsScreen extends StatelessWidget {
   final Records record;
   final GetAttendanceHistoryController controller = Get.find();
