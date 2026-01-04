@@ -16,7 +16,7 @@ Future<bool> shouldAskForLocationPermission() async {
 Future<Position> getCurrentLocation() async {
   bool serviceEnabled = await Geolocator.isLocationServiceEnabled();
   if (!serviceEnabled) {
-    showCustomSnackBar('Please enable location to continue.');
+    showCustomSnackBar('locationRequiredDialog1'.tr);
     await Geolocator.openLocationSettings();
     throw Exception('Location service disabled');
   }
@@ -26,7 +26,7 @@ Future<Position> getCurrentLocation() async {
   }
   if (permission == LocationPermission.deniedForever) {
     showCustomSnackBar(
-      'Location permission is required for attendance. Enable it from settings.',
+      'locationRequiredDialog2'.tr,
     );
     await Geolocator.openAppSettings();
     throw Exception('Permission denied forever');

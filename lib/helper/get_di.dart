@@ -5,6 +5,7 @@ import 'package:clean_trust/view_model/controller/auth/login_controller.dart';
 import 'package:clean_trust/view_model/controller/auth/signup_controller.dart';
 import 'package:clean_trust/view_model/controller/employee/editProfileController.dart';
 import 'package:clean_trust/view_model/controller/home/attendance/attendance_offline_controller.dart';
+import 'package:clean_trust/view_model/controller/home/attendance/get_attendance_history_controller.dart';
 import 'package:clean_trust/view_model/controller/home/attendance/get_today_and_monthly_attendance_controller.dart';
 import 'package:clean_trust/view_model/controller/home/attendance/manual_attendance_entry_controller.dart';
 import 'package:clean_trust/view_model/controller/home/attendance/scanqrcode_controller.dart';
@@ -27,6 +28,7 @@ class AppBindings extends Bindings {
     Get.lazyPut(() => EditProfileController(), fenix: true);
     Get.lazyPut(() => AttendanceOfflineController(), fenix: true);
     Get.lazyPut(() => GetTodayAndMonthlyAttendanceController(), fenix: true);
+    Get.lazyPut(() => GetAttendanceHistoryController(), fenix: true);
     Get.lazyPut(() => ManualAttendanceEntryController(), fenix: true);
     Get.lazyPut(() => ScanQrCodeController(), fenix: true);
     Get.lazyPut(() => AppSettingController(), fenix: true);

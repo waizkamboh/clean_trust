@@ -125,7 +125,6 @@ class ScanResultScreen extends StatelessWidget {
            ),
            SizedBox(width: getWidth(12)),
 
-           /// 🔴 IMPORTANT FIX
            Expanded(
              child: Column(
                crossAxisAlignment: CrossAxisAlignment.start,

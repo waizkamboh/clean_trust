@@ -341,7 +341,6 @@ class ScanQrcodeScreen extends StatelessWidget {
                 children: [
                   SizedBox(height: getHeight(30)),
 
-                  /// ================= QR IMAGE + SCANNER OVERLAY =================
                   Stack(
                     alignment: Alignment.center,
                     children: [
@@ -350,7 +349,6 @@ class ScanQrcodeScreen extends StatelessWidget {
                         width: getWidth(327),
                       ),
 
-                      /// ---- Scanner Overlay ----
                       Obx(() {
                         if (!controller.showScanner.value) {
                           return const SizedBox.shrink();
@@ -387,7 +385,6 @@ class ScanQrcodeScreen extends StatelessWidget {
 
                   SizedBox(height: getHeight(20)),
 
-                  /// ================= DRAG ICON =================
                   GestureDetector(
                     onTap: controller.openScanner,
                     child: Container(
@@ -422,7 +419,6 @@ class ScanQrcodeScreen extends StatelessWidget {
 
                   SizedBox(height: getHeight(25)),
 
-                  /// ================= TORCH BUTTON =================
                   Obx(() {
                     return RoundButton(
                       image: Icon(
@@ -447,7 +443,6 @@ class ScanQrcodeScreen extends StatelessWidget {
 
                   SizedBox(height: getHeight(30)),
 
-                  /// ================= STATUS =================
                   Padding(
                     padding: EdgeInsets.symmetric(
                         horizontal: getWidth(35)),
@@ -488,7 +483,6 @@ class ScanQrcodeScreen extends StatelessWidget {
 
                   SizedBox(height: getHeight(15)),
 
-                  /// ================= INFO CARDS =================
                   buildInfoCard(
                     leadingWidget: Image.asset(
                       AppImages.qrScreenIcon1,
@@ -531,7 +525,6 @@ class ScanQrcodeScreen extends StatelessWidget {
     );
   }
 
-  /// ================= INFO CARD WIDGET =================
   Widget buildInfoCard({
     required Widget leadingWidget,
     required String title,

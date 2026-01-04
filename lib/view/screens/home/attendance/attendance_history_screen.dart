@@ -13,11 +13,21 @@ import '../../../base/input_text_field.dart';
 import '../../../base/round_button.dart';
 import 'attendance_details_screen.dart';
 
-class AttendanceHistoryScreen extends StatelessWidget {
-  AttendanceHistoryScreen({super.key});
+class AttendanceHistoryScreen extends StatefulWidget {
+  const AttendanceHistoryScreen({super.key});
 
-  final GetAttendanceHistoryController controller =
-  Get.put(GetAttendanceHistoryController());
+  @override
+  State<AttendanceHistoryScreen> createState() => _AttendanceHistoryScreenState();
+}
+
+class _AttendanceHistoryScreenState extends State<AttendanceHistoryScreen> {
+  GetAttendanceHistoryController controller = Get.find<GetAttendanceHistoryController>();
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    controller.fetchAttendanceHistory();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +37,7 @@ class AttendanceHistoryScreen extends StatelessWidget {
       backgroundColor: AppColors.kWhiteColor,
       body: Column(
         children: [
-      
+
           TopHeader(title: 'attendanceHistory1'.tr),
           SizedBox(height: getHeight(30),),
           Expanded(
@@ -88,7 +98,7 @@ class AttendanceHistoryScreen extends StatelessWidget {
                                   keyBoardType: TextInputType.emailAddress,
                                   readOnly: true,
                                   hintText: controller.fromDate.value == null
-                                      ? 'From'
+                                      ? 'attendanceHistory4'.tr
                                       : DateFormat('yyyy-MM-dd')
                                       .format(controller.fromDate.value!),
                                   borderSideColor: AppColors.kLightCoolGreyColor,
@@ -101,7 +111,7 @@ class AttendanceHistoryScreen extends StatelessWidget {
                                   keyBoardType: TextInputType.emailAddress,
                                   readOnly: true,
                                   hintText: controller.toDate.value == null
-                                      ? 'To'
+                                      ? 'attendanceHistory5'.tr
                                       : DateFormat('yyyy-MM-dd')
                                       .format(controller.toDate.value!),
                                   borderSideColor: AppColors.kLightCoolGreyColor,
@@ -110,7 +120,7 @@ class AttendanceHistoryScreen extends StatelessWidget {
                             GestureDetector(
                               onTap: controller.pickDateRange,
                               child: Icon(Icons.calendar_today_outlined,
-                                  color: AppColors.kBlackColor, size: 18),
+                                  color: AppColors.kBlackColor, size: 20),
                             )
 
 
@@ -129,8 +139,8 @@ class AttendanceHistoryScreen extends StatelessWidget {
                         CustomDropdownField(
                           width: getWidth(309),
                           contentPadding: EdgeInsets.symmetric(horizontal: getWidth(12)),
-                          items: const ['All', 'Pending', 'Approved'],
-                          hintText: 'All Status',
+                          items:  ['attendanceHistory14'.tr, 'attendanceHistory15'.tr, 'attendanceHistory17'.tr],
+                          hintText: 'attendanceHistory7'.tr,
                           onChanged: (value) {
                             controller.selectedStatus.value =
                                 value.toString().toLowerCase();
@@ -257,7 +267,7 @@ class AttendanceHistoryScreen extends StatelessWidget {
                       return Padding(
                         padding: EdgeInsets.only(top: getHeight(50)),
                         child: Text(
-                          "No attendance found",
+                          "attendanceHistory19".tr,
                           style: kSize16W400KWhiteColorOutfitRegular,
                         ),
                       );
@@ -298,7 +308,7 @@ class AttendanceHistoryScreen extends StatelessWidget {
               ),
             ),
           ),
-         
+
           // SizedBox(height: getHeight(50),),
           //
           // RoundButton(
@@ -311,13 +321,12 @@ class AttendanceHistoryScreen extends StatelessWidget {
           //   height: getHeight(64),
           //
           // ),
-      
+
 
         ],
       ),
     );
   }
-
 
   Widget reuseContainer(record) {
     return GestureDetector(
@@ -379,7 +388,7 @@ class AttendanceHistoryScreen extends StatelessWidget {
                       text: TextSpan(
                         children: [
                           TextSpan(
-                            text: "Check In: ",
+                            text: "attendanceHistory16".tr,
                             style:
                             kSize16W400KWhiteColorOutfitRegular.copyWith(
                               color: AppColors.kCoolGreyColor,
@@ -412,7 +421,7 @@ class AttendanceHistoryScreen extends StatelessWidget {
                       text: TextSpan(
                         children: [
                           TextSpan(
-                            text: "Check Out: ",
+                            text: "attendanceHistory16".tr,
                             style:
                             kSize16W400KWhiteColorOutfitRegular.copyWith(
                               color: AppColors.kCoolGreyColor,
@@ -442,7 +451,7 @@ class AttendanceHistoryScreen extends StatelessWidget {
               text: TextSpan(
                 children: [
                   TextSpan(
-                    text: "Total hours: ",
+                    text: "attendanceHistory16".tr,
                     style: kSize16W400KWhiteColorOutfitRegular.copyWith(
                       color: AppColors.kCoolGreyColor,
                       fontSize: getFont(14),

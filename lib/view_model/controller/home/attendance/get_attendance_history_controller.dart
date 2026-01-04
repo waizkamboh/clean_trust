@@ -25,11 +25,7 @@ class GetAttendanceHistoryController extends GetxController {
 
   RxList<Records> attendanceList = <Records>[].obs;
 
-  @override
-  void onInit() {
-    super.onInit();
-    fetchAttendanceHistory();
-  }
+
 
 
   Future<void> fetchAttendanceHistory() async {

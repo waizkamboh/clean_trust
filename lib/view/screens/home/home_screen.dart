@@ -3,6 +3,7 @@ import 'package:clean_trust/util/app_images.dart';
 import 'package:clean_trust/util/app_util.dart';
 import 'package:clean_trust/view_model/controller/home/attendance/get_today_and_monthly_attendance_controller.dart';
 import 'package:clean_trust/view_model/controller/home/attendance/scanqrcode_controller.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../helper/routes/routes_name.dart';
@@ -155,7 +156,14 @@ class _HomeScreenState extends State<HomeScreen> {
                     RoundButton(
                       onPress: () async{
 
-                        getCurrentLocation();
+                        try {
+                          await getCurrentLocation();
+                        } catch (e) {
+                          if (kDebugMode) {
+                            print(e);
+                          }
+                        }
+
                       },
                       radius: BorderRadius.circular(16),
                       title: 'enableLocation3'.tr,
@@ -573,7 +581,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget _leaveRequestCard(){
     return   GestureDetector(
       onTap: () {
-        Get.toNamed(RouteName.manualEntryScreen);
+        Get.toNamed(RouteName.leaveRequestScreen);
       },
       child: Container(
         padding: EdgeInsetsGeometry.symmetric(
@@ -587,7 +595,7 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
         child: Center(
           child: Text(
-            'homeScreen10'.tr,
+            'homeScreen15'.tr,
             style: kSize16W600KBlackColorOutfitSemiBold.copyWith(
                 fontSize: getFont(14),
                 color: AppColors.kMidnightBlueColor.withOpacity(0.50)
