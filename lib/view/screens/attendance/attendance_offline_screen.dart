@@ -7,13 +7,38 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../data/model/hive/offline_attendance_model.dart';
+import '../../../helper/internet_check.dart';
 import '../../../util/text_style.dart';
 import '../../base/input_text_field.dart';
 import '../../base/round_button.dart';
 
-class AttendanceOfflineScreen extends StatelessWidget {
+class AttendanceOfflineScreen extends StatefulWidget {
    AttendanceOfflineScreen({super.key});
-  AttendanceOfflineController controller = Get.put(AttendanceOfflineController());
+
+  @override
+  State<AttendanceOfflineScreen> createState() => _AttendanceOfflineScreenState();
+}
+
+class _AttendanceOfflineScreenState extends State<AttendanceOfflineScreen> {
+  late AttendanceOfflineController controller;
+
+  @override
+  void initState() {
+    super.initState();
+    controller = Get.find<AttendanceOfflineController>();
+    _autoSyncWithDialog();
+  }
+
+  Future<void> _autoSyncWithDialog() async {
+    final online = await isOnline();
+
+    if (online && controller.offlineList.isNotEmpty) {
+      attendanceAutoSyncDialog();
+      controller.syncOfflineAttendance();
+    }
+  }
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +52,7 @@ class AttendanceOfflineScreen extends StatelessWidget {
             SizedBox(height: getHeight(30)),
 
             GestureDetector(
-              onTap: attendanceAutoSyncDialog,
+              onTap: controller.syncOfflineAttendance,
               child: Container(
                 padding: EdgeInsetsGeometry.symmetric(horizontal: getWidth(20), vertical: getHeight(12)),
                 width: getWidth(393),
@@ -225,6 +250,7 @@ class AttendanceOfflineScreen extends StatelessWidget {
       ),
     );
   }
+
   Widget offlineAttendanceContainer(OfflineAttendance attendance) {
     return Container(
       padding: EdgeInsetsGeometry.symmetric(horizontal: getWidth(17), vertical: getHeight(17)),
@@ -317,6 +343,7 @@ class AttendanceOfflineScreen extends StatelessWidget {
 
 
   }
+
    void attendanceAutoSyncDialog() {
      Get.dialog(
        Dialog(
@@ -394,8 +421,6 @@ class AttendanceOfflineScreen extends StatelessWidget {
        ),
      );
    }
-
-
 }
 
 // void attendanceAutoSyncDialog() {

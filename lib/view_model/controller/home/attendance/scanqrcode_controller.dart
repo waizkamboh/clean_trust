@@ -1,4 +1,5 @@
 import 'package:clean_trust/helper/routes/routes_name.dart';
+import 'package:clean_trust/view/screens/attendance/attendance_offline_screen.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
@@ -164,6 +165,7 @@ class ScanQrCodeController extends GetxController {
         localDb.debugPrintAll();
 
         loading.value = false;
+        Get.to(()=> AttendanceOfflineScreen());
         showCustomSnackBar('Attendance saved offline');
         return;
       }
