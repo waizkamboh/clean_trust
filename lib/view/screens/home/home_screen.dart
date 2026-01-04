@@ -322,7 +322,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         if (shouldShowDialog) {
                           showLocationEnabledDialog();
                         } else {
-                          Get.to(() => ScanQrcodeScreen());
+                          Get.toNamed(RouteName.scanQRCodeScreen);
                         }
                       },
 

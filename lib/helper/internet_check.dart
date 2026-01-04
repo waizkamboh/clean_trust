@@ -1,27 +1,19 @@
-import 'dart:async';
+import 'dart:io';
 import 'package:connectivity_plus/connectivity_plus.dart';
-import 'package:get/get.dart';
-
-RxBool isOnlineRx = false.obs;
 
 Future<bool> isOnline() async {
-  final result = await Connectivity().checkConnectivity();
-  return result != ConnectivityResult.none;
-}
+  final connectivityResult = await Connectivity().checkConnectivity();
 
-class InternetStatusService {
-  late StreamSubscription<List<ConnectivityResult>> _subscription;
-
-  void startListening() {
-    _subscription = Connectivity()
-        .onConnectivityChanged
-        .listen((List<ConnectivityResult> results) {
-      isOnlineRx.value = results.isNotEmpty &&
-          !results.contains(ConnectivityResult.none);
-    });
+  if (connectivityResult == ConnectivityResult.none) {
+    return false;
   }
 
-  void dispose() {
-    _subscription.cancel();
+  try {
+    final result = await InternetAddress.lookup('example.com')
+        .timeout(const Duration(seconds: 3));
+
+    return result.isNotEmpty && result[0].rawAddress.isNotEmpty;
+  } catch (_) {
+    return false;
   }
 }

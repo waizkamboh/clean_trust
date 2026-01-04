@@ -61,12 +61,7 @@ class ScanResultScreen extends StatelessWidget {
           SizedBox(height: getHeight(20),),
           Obx(() => buildScanResultCard(
             iconPath: AppImages.qrScreenIcon1,
-            secondText: controller.addressLine1.value.isEmpty
-                ? '--'
-                : controller.addressLine1.value,
-            thirdText: controller.addressLine2.value.isEmpty
-                ? ''
-                : controller.addressLine2.value,
+            firstText: controller.fullAddress.value ,
           )),
 
           SizedBox(height: getHeight(30),),
@@ -89,73 +84,85 @@ class ScanResultScreen extends StatelessWidget {
       ),
     );
   }
-  Widget buildScanResultCard({
-    required String iconPath,
-    String? firstText, // Optional
-    required String secondText, // Optional
-    required String thirdText, // Optional
-  }) {
-    return Container(
-      padding: EdgeInsets.symmetric(horizontal: getWidth(24), vertical: getHeight(24)),
-      width: getWidth(327),
-      decoration: BoxDecoration(
-        color: AppColors.kWhiteColor,
-        borderRadius: BorderRadius.all(Radius.circular(12)),
-        boxShadow: [
-          BoxShadow(
-            color: AppColors.kBlackColor.withOpacity(0.11),
-            offset: const Offset(0, 1),
-            blurRadius: 2,
-            spreadRadius: 0,
-          ),
-        ],
-      ),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Container(
-            width: getWidth(48),
-            height: getHeight(48),
-            decoration: BoxDecoration(
-              color: AppColors.kLightBlueColor,
-              borderRadius: BorderRadius.all(Radius.circular(8)),
-              border: Border.all(color: AppColors.kLightCoolGreyColor, width: 1),
-            ),
-            child: Image.asset(iconPath),
-          ),
-          SizedBox(width: getWidth(12)),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              if (firstText != null)
-                Text(
-                firstText.tr,
-                style: kSize16W400KWhiteColorOutfitRegular.copyWith(
-                  fontSize: getFont(14),
-                  color: AppColors.kCoolGreyColor,
-                ),
-              ),
-              Text(
-                secondText.tr,
-                style: kSize20W700KWhiteColorOutfitBold.copyWith(
-                  fontSize: getFont(30),
-                  color: AppColors.kMidnightBlueColor,
-                ),
-              ),
-              Text(
-                thirdText.tr,
-                style: kSize16W400KWhiteColorOutfitRegular.copyWith(
-                  fontSize: getFont(14),
-                  color: AppColors.kCoolGreyColor,
-                ),
-              ),
-            ],
-          ),
+   Widget buildScanResultCard({
+     required String iconPath,
+     String? firstText,
+     String? secondText,
+     String? thirdText,
+   }) {
+     return Container(
+       padding: EdgeInsets.symmetric(
+         horizontal: getWidth(24),
+         vertical: getHeight(24),
+       ),
+       width: getWidth(327),
+       decoration: BoxDecoration(
+         color: AppColors.kWhiteColor,
+         borderRadius: BorderRadius.circular(12),
+         boxShadow: [
+           BoxShadow(
+             color: AppColors.kBlackColor.withOpacity(0.11),
+             offset: const Offset(0, 1),
+             blurRadius: 2,
+           ),
+         ],
+       ),
+       child: Row(
+         crossAxisAlignment: CrossAxisAlignment.start,
+         children: [
+           Container(
+             width: getWidth(48),
+             height: getHeight(48),
+             decoration: BoxDecoration(
+               color: AppColors.kLightBlueColor,
+               borderRadius: BorderRadius.circular(8),
+               border: Border.all(
+                 color: AppColors.kLightCoolGreyColor,
+                 width: 1,
+               ),
+             ),
+             child: Image.asset(iconPath),
+           ),
+           SizedBox(width: getWidth(12)),
 
-        ],
-      ),
-    );
+           /// 🔴 IMPORTANT FIX
+           Expanded(
+             child: Column(
+               crossAxisAlignment: CrossAxisAlignment.start,
+               children: [
+                 if (firstText != null)
+                   Text(
+                     firstText.tr,
+                     maxLines: 6, // ✅ allow 5–6 lines
+                     overflow: TextOverflow.ellipsis,
+                     style: kSize16W400KWhiteColorOutfitRegular.copyWith(
+                       fontSize: getFont(14),
+                       color: AppColors.kCoolGreyColor,
+                     ),
+                   ),
 
-  }
+                 if (secondText != null)
+                   Text(
+                     secondText.tr,
+                     style: kSize20W700KWhiteColorOutfitBold.copyWith(
+                       fontSize: getFont(30),
+                       color: AppColors.kMidnightBlueColor,
+                     ),
+                   ),
+
+                 if (thirdText != null)
+                   Text(
+                     thirdText.tr,
+                     style: kSize16W400KWhiteColorOutfitRegular.copyWith(
+                       fontSize: getFont(14),
+                       color: AppColors.kCoolGreyColor,
+                     ),
+                   ),
+               ],
+             ),
+           ),
+         ],
+       ),
+     );
+   }
 }

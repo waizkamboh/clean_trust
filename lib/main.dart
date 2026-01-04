@@ -39,7 +39,6 @@ void main() async{
     Hive.registerAdapter(OfflineAttendanceAdapter());
   }
   await Hive.openBox<OfflineAttendance>('offline_attendance');
-  InternetStatusService().startListening();
   runApp(const MyApp());
 }
 

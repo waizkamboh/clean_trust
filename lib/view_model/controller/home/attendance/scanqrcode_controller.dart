@@ -29,8 +29,7 @@ class ScanQrCodeController extends GetxController {
   bool _scanLock = false;
   RxString scannedTime = ''.obs;
   RxString scannedDate = ''.obs;
-  RxString addressLine1 = ''.obs; // first 2 words
-  RxString addressLine2 = ''.obs; // remaining address
+  RxString fullAddress = ''.obs; // first 2 words
 
 
 
@@ -46,7 +45,7 @@ class ScanQrCodeController extends GetxController {
     );
 
     // try syncing when controller starts
-    sync();
+   // sync();
   }
 
   Future<bool> shouldAskForLocationPermission() async {
@@ -208,82 +207,64 @@ class ScanQrCodeController extends GetxController {
     }
   }
 
-  Future<void> sync() async {
-    if (!await isOnline()) return;
-
-    final token = await userPreference.getToken();
-    if (token == null) return;
-
-    final headers = {
-      'Authorization': 'Bearer $token',
-      'Content-Type': 'application/json',
-    };
-    final int? userId = await userPreference.getUserId();
-
-    if (userId == null) {
-      showCustomSnackBar('User not found');
-      return;
-    }
-    final list = localDb.getUnSyncedByUser(userId);
-
-    for (final item in list) {
-      final data = {
-        "qr_code": item.qrCode,
-        "latitude": item.latitude,
-        "longitude": item.longitude,
-        "is_offline": true,
-      };
-
-      final res = await repo.scanQRCodeApi(headers, data);
-
-      if (res != null && res['success'] == true) {
-        item.synced = true;
-        await item.save();
-      }
-    }
-  }
+  // Future<void> sync() async {
+  //   if (!await isOnline()) return;
+  //
+  //   final token = await userPreference.getToken();
+  //   if (token == null) return;
+  //
+  //   final headers = {
+  //     'Authorization': 'Bearer $token',
+  //     'Content-Type': 'application/json',
+  //   };
+  //   final int? userId = await userPreference.getUserId();
+  //
+  //   if (userId == null) {
+  //     showCustomSnackBar('User not found');
+  //     return;
+  //   }
+  //   final list = localDb.getUnSyncedByUser(userId);
+  //
+  //   for (final item in list) {
+  //     final data = {
+  //       "qr_code": item.qrCode,
+  //       "latitude": item.latitude,
+  //       "longitude": item.longitude,
+  //       "is_offline": true,
+  //     };
+  //
+  //     final res = await repo.scanQRCodeApi(headers, data);
+  //
+  //     if (res != null && res['success'] == true) {
+  //       item.synced = true;
+  //       await item.save();
+  //     }
+  //   }
+  // }
   void setScanTimeAndDate() {
     final now = DateTime.now();
 
     scannedTime.value = DateFormat('hh:mm a').format(now);
     scannedDate.value = DateFormat('EEEE, MMM d, yyyy').format(now);
   }
-  Future<void> setAddressFromLatLng(
-      double lat,
-      double lng,
-      ) async {
+  Future<void> setAddressFromLatLng(double lat, double lng) async {
     try {
       final placemarks = await placemarkFromCoordinates(lat, lng);
 
       if (placemarks.isNotEmpty) {
         final place = placemarks.first;
 
-        final fullAddress = '${place.street}, ${place.locality}, ${place.country}';
+        // Update the controller's observable
+        fullAddress.value = '${place.street}, ${place.locality}, ${place.country}';
 
-        splitAddress(fullAddress);
-        debugPrint('FULL ADDRESS: $fullAddress');
-        debugPrint('LINE 1: ${addressLine1.value}');
-        debugPrint('LINE 2: ${addressLine2.value}');
-
+        debugPrint('FULL ADDRESS: ${fullAddress.value}');
       }
     } catch (e) {
       debugPrint('GEOCODING ERROR: $e');
-      addressLine1.value = '--';
-      addressLine2.value = '';
     }
   }
 
-  void splitAddress(String fullAddress) {
-    final words = fullAddress.split(' ');
 
-    if (words.length <= 2) {
-      addressLine1.value = fullAddress;
-      addressLine2.value = '';
-    } else {
-      addressLine1.value = words.take(2).join(' ');
-      addressLine2.value = words.skip(2).join(' ');
-    }
-  }
 
 
 

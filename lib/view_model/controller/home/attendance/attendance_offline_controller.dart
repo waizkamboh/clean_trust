@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hive/hive.dart';
 
@@ -5,7 +6,11 @@ import '../../../../data/model/hive/offline_attendance_model.dart';
 import '../../../../data/model/home/attendance/SyncOfflineAttendanceModel.dart';
 import '../../../../data/repository/home/attendance/sync_offline_attendance_repository.dart';
 import '../../../../helper/internet_check.dart';
+import '../../../../util/app_colors.dart';
+import '../../../../util/app_images.dart';
 import '../../../../util/custom_snackbar.dart';
+import '../../../../util/size_config.dart';
+import '../../../../util/text_style.dart';
 import '../../../user_preference/user_preference.dart';
 
 class AttendanceOfflineController extends GetxController {
@@ -34,9 +39,10 @@ class AttendanceOfflineController extends GetxController {
     });
 
     // 🔁 Auto sync jab net aaye
-    ever(isOnlineRx, (online) {
-      if (online == true) {
-        syncOfflineAttendance();
+    ever(isOnlineRx, (online) async {
+      if (online == true && offlineList.isNotEmpty && !syncing.value) {
+        // ✅ Auto show dialog + start sync
+        attendanceAutoSync();
       }
     });
   }
@@ -47,6 +53,80 @@ class AttendanceOfflineController extends GetxController {
         .toList()
         .reversed
         .toList();
+  }
+  void attendanceAutoSync() {
+    if (offlineList.isEmpty) return;
+
+    // Show Dialog only once
+    if (Get.isDialogOpen != true) {
+      Get.dialog(
+        Dialog(
+          backgroundColor: AppColors.kWhiteColor,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(16),
+          ),
+          child: SizedBox(
+            width: getWidth(327),
+            child: Padding(
+              padding: EdgeInsets.symmetric(horizontal: getWidth(32), vertical: getHeight(34)),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Container(
+                    width: getWidth(64),
+                    height: getHeight(64),
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: AppColors.kSkyBlueColor.withOpacity(0.08),
+                      border: Border.all(color: AppColors.kLightCoolGreyColor, width: 1),
+                    ),
+                    child: Image.asset(AppImages.profileScreenIcon7, color: AppColors.kSkyBlueColor,),
+                  ),
+                  SizedBox(height: getHeight(10)),
+                  Text('backOnline1'.tr,
+                    style: kSize16W600KBlackColorOutfitSemiBold.copyWith(
+                      color: AppColors.kMidnightBlueColor,
+                      fontSize: getFont(20),
+                    ),
+                  ),
+                  SizedBox(height: getHeight(5)),
+                  Text('backOnline2'.tr,
+                    style: kSize16W400KWhiteColorOutfitRegular.copyWith(
+                      color: AppColors.kDarkSlateGray,
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
+                  SizedBox(height: getHeight(5)),
+                  Text('backOnline3'.tr,
+                    style: kSize16W400KWhiteColorOutfitRegular.copyWith(
+                      color: AppColors.kCoolGreyColor,
+                      fontSize: getFont(14),
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
+                  SizedBox(height: getHeight(20)),
+                  Text('backOnline4'.tr,
+                    style: kSize16W400KWhiteColorOutfitRegular.copyWith(
+                      color: AppColors.kCoolGreyColor,
+                      fontSize: getFont(12),
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
+                  SizedBox(height: getHeight(30)),
+                  Obx(() => syncing.value
+                      ? CircularProgressIndicator()
+                      : SizedBox.shrink()),
+                ],
+              ),
+            ),
+          ),
+        ),
+        barrierDismissible: false, // Prevent close by tapping outside
+      );
+    }
+
+    // Start syncing
+    syncOfflineAttendance();
   }
 
 
@@ -79,16 +159,17 @@ class AttendanceOfflineController extends GetxController {
   RxBool syncing = false.obs;
 
   Future<void> syncOfflineAttendance() async {
-    if (offlineList.isEmpty) return;
-
-    final online = await isOnline();
-    if (!online) return;
+    if (offlineList.isEmpty) {
+      if (Get.isDialogOpen == true) Get.back();
+      return;
+    }
 
     syncing.value = true;
 
     final token = await _userPreference.getToken();
     if (token == null) {
       syncing.value = false;
+      if (Get.isDialogOpen == true) Get.back();
       return;
     }
 
@@ -97,6 +178,7 @@ class AttendanceOfflineController extends GetxController {
       'Content-Type': 'application/json',
     };
 
+    // Upload one by one
     for (final item in List.from(offlineList)) {
       final request = AttendanceSyncRequest(
         records: [
@@ -109,17 +191,18 @@ class AttendanceOfflineController extends GetxController {
         ],
       );
 
-      final response =
-      await _syncRepo.syncOfflineAttendance(headers, request.toJson());
+      final response = await _syncRepo.syncOfflineAttendance(headers, request.toJson());
 
       if (response?['success'] == true) {
-        await item.delete(); // ✅ DB se delete
-        offlineList.remove(item); // ✅ UI se remove
+        await item.delete(); // Remove from local DB
+        offlineList.remove(item); // Remove from UI
       }
     }
 
     syncing.value = false;
-  }
 
+    // Close Dialog automatically after sync
+    if (Get.isDialogOpen == true) Get.back();
+  }
 
 }
