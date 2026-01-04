@@ -111,7 +111,7 @@ class AppRoutes{
     ),
     GetPage(
       name: RouteName.attendanceHistoryScreen,
-      page: () => const AttendanceHistoryScreen(),
+      page: () =>  AttendanceHistoryScreen(),
       // transition: Transition.rightToLeftWithFade,
       //transitionDuration: const Duration(milliseconds: 250)
     ),

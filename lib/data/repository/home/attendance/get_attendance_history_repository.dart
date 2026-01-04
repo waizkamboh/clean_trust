@@ -14,7 +14,7 @@ class GetAttendanceHistoryRepository{
   final _api = NetworkApiServices();
 
   Future<GetAttendanceHistoryModel> getAttendanceHistoryApi(Map<String, String>? headers)async{
-    final response = await _api.getApi(AppUrl.getMonthlyAttendanceApi, headers: headers);
+    final response = await _api.getApi(AppUrl.getAttendanceHistoryApi, headers: headers);
 
     return GetAttendanceHistoryModel.fromJson(response);
 

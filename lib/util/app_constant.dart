@@ -16,6 +16,7 @@ class AppUrl{
    static const String manualAttendanceEntryApi = '${baseUrl}/attendance/manual';
    static const String getTodayAttendanceApi = '${baseUrl}/attendance/today';
    static const String getMonthlyAttendanceApi = '${baseUrl}/attendance/monthly-hours?month=2025-12';
+   static const String getAttendanceHistoryApi = '${baseUrl}/attendance/history';
    static const String leaveRequestApi = '${baseUrl}/leave-requests';
    static const String getAllNotificationApi = '${baseUrl}/notifications?page=1&limit=20';
    static const String getUnreadCountNotificationApi = '${baseUrl}/notifications/unread-count';

@@ -1,7 +1,7 @@
 import 'package:clean_trust/util/app_colors.dart';
 import 'package:clean_trust/util/app_images.dart';
 import 'package:clean_trust/view/screens/home/scan_qrcode_screen.dart';
-import 'package:clean_trust/view_model/controller/home/attendance/get_attendance_history_controller.dart';
+import 'package:clean_trust/view_model/controller/home/attendance/get_today_and_monthly_attendance_controller.dart';
 import 'package:clean_trust/view_model/controller/home/attendance/scanqrcode_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -470,7 +470,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             ),
                             GestureDetector(
                               onTap: () {
-                                Get.toNamed(RouteName.leaveRequestScreen);
+                                Get.toNamed(RouteName.attendanceHistoryScreen);
                               },
                               child: Container(
                                 padding: EdgeInsetsGeometry.symmetric(
@@ -481,7 +481,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                     AppColors.kVeryLightGreenColor,
                                     AppColors.kLightGreenColor.withOpacity(0.50),
                                   ]),
-                  
+
                                   borderRadius: BorderRadius.all(Radius.circular(16)),
                                   border: Border.all(
                                       color: AppColors.kLightCoolGreyColor, width: 1),
@@ -667,7 +667,7 @@ class _HomeScreenState extends State<HomeScreen> {
 // import 'package:clean_trust/util/app_colors.dart';
 // import 'package:clean_trust/util/app_images.dart';
 // import 'package:clean_trust/view/screens/home/scan_qrcode_screen.dart';
-// import 'package:clean_trust/view_model/controller/home/attendance/get_attendance_history_controller.dart';
+// import 'package:clean_trust/view_model/controller/home/attendance/get_today_and_monthly_attendance_controller.dart';
 // import 'package:clean_trust/view_model/controller/home/attendance/scanqrcode_controller.dart';
 // import 'package:flutter/material.dart';
 // import 'package:get/get.dart';

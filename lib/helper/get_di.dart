@@ -5,7 +5,7 @@ import 'package:clean_trust/view_model/controller/auth/login_controller.dart';
 import 'package:clean_trust/view_model/controller/auth/signup_controller.dart';
 import 'package:clean_trust/view_model/controller/employee/editProfileController.dart';
 import 'package:clean_trust/view_model/controller/home/attendance/attendance_offline_controller.dart';
-import 'package:clean_trust/view_model/controller/home/attendance/get_attendance_history_controller.dart';
+import 'package:clean_trust/view_model/controller/home/attendance/get_today_and_monthly_attendance_controller.dart';
 import 'package:clean_trust/view_model/controller/home/attendance/manual_attendance_entry_controller.dart';
 import 'package:clean_trust/view_model/controller/home/attendance/scanqrcode_controller.dart';
 import 'package:clean_trust/view_model/controller/leave_request/leave_request_controller.dart';
