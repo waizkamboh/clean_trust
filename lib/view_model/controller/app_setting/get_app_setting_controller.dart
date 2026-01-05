@@ -27,6 +27,7 @@ class AppSettingController extends GetxController {
   RxBool isFetching = false.obs;
   RxBool isUpdating = false.obs;
 
+
   @override
   void onInit() {
     super.onInit();

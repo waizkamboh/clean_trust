@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 
 import '../../../../data/model/home/attendance/ManualAttendanceEntryModel.dart';
 import '../../../../data/repository/home/attendance/manual_attendance_entry_repository.dart';
+import '../../../../helper/internet_check.dart';
 import '../../../../util/app_colors.dart';
 import '../../../../util/custom_snackbar.dart';
 import '../../../user_preference/user_preference.dart';
@@ -99,6 +100,13 @@ class ManualAttendanceEntryController extends GetxController {
       return;
     }
 
+    final online = await isOnline();
+
+    if (!online) {
+      debugPrint('OFFLINE → API not called');
+      showCustomSnackBar('Please check internet connection');
+      return;
+    }
     loading.value = true;
     final position = await Geolocator.getCurrentPosition(
       desiredAccuracy: LocationAccuracy.high,

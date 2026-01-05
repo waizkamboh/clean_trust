@@ -1,6 +1,7 @@
 import 'package:clean_trust/util/app_colors.dart';
 import 'package:clean_trust/util/app_images.dart';
 import 'package:clean_trust/util/app_util.dart';
+import 'package:clean_trust/util/custom_snackbar.dart';
 import 'package:clean_trust/view_model/controller/home/attendance/get_today_and_monthly_attendance_controller.dart';
 import 'package:clean_trust/view_model/controller/home/attendance/scanqrcode_controller.dart';
 import 'package:flutter/foundation.dart';
@@ -41,13 +42,13 @@ class _HomeScreenState extends State<HomeScreen> {
 
     if (!online) {
       debugPrint('OFFLINE → API not called');
+      showCustomSnackBar('Please check internet connection');
       return;
     }
 
     getAttendanceHistoryController.fetchTodayAttendance();
     getAttendanceHistoryController.fetchMonthlyAttendance();
     unreadCountController.fetchUnreadCount();
-    controller.fetchEmployee();
   }
 
   final EditProfileController controller = Get.find();

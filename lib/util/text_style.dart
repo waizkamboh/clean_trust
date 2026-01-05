@@ -27,3 +27,10 @@ TextStyle  kSize16W600KBlackColorOutfitSemiBold =  TextStyle(
   fontFamily: AppFonts.outfitSemiBold,
 
 );
+TextStyle  kSize16W600KBlackColorOpenSansSemiBold =  TextStyle(
+  color: AppColors.kBlackColor,
+  fontWeight: FontWeight.w600,
+  fontSize: getFont(16),
+  fontFamily: AppFonts.openSansSemiBold,
+
+);

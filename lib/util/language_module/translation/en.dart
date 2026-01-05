@@ -1,7 +1,7 @@
 Map<String, String> en = {
 
 
-  'onboardingScreen1': 'Smart Attendance,Made Simple',
+  'onboardingScreen1': 'Smart Attendance, Made Simple',
   'onboardingScreen2': 'Track work hours effortlessly with quick and secure QR code scans.',
   'onboardingScreen3': 'Gets start',
   'onboardingScreen4': 'Works Even Offline',

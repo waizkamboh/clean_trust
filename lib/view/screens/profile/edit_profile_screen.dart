@@ -21,14 +21,7 @@ class EditProfileScreen extends StatefulWidget {
 class _EditProfileScreenState extends State<EditProfileScreen> {
    final EditProfileController controller =
    Get.find();
-   @override
-   void initState() {
-     super.initState();
 
-     WidgetsBinding.instance.addPostFrameCallback((_) {
-       controller.fetchEmployee();
-     });
-   }
 
   @override
   Widget build(BuildContext context) {
@@ -223,7 +216,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                   SizedBox(height: getHeight(50),),
                   Obx(()=>
                       RoundButton(
-                        loading: controller.isLoading1.value,
+                        loading: controller.isLoading.value,
                         onPress: (){
                           controller.updateProfile();
                         },

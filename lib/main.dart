@@ -1,5 +1,8 @@
 import 'package:clean_trust/helper/get_di.dart';
 import 'package:clean_trust/util/language_module/utils/localization_page.dart';
+import 'package:clean_trust/view/screens/auth/login_screen.dart';
+import 'package:clean_trust/view/screens/onboarding/onboarding_screen1.dart';
+import 'package:clean_trust/view/screens/splash/splash_screen.dart';
 import 'package:clean_trust/view_model/controller/general_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -24,11 +27,11 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
       ),
-      //home: OnboardingScreen3(),
+      home: OnboardingScreen1(),
       locale: LocalizationService.locale ,
       fallbackLocale: LocalizationService.fallbackLocale,
       translations: LocalizationService(),
-      getPages: AppRoutes.appRoutes(),
+      //getPages: AppRoutes.appRoutes(),
     );
   }
 }

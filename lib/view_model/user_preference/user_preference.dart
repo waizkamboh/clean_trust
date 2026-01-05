@@ -1,37 +1,8 @@
-// import 'package:car_project/models/signup/UserModel.dart';
-// import 'package:shared_preferences/shared_preferences.dart';
-//
-//
-// class UserPreference {
-//
-//
-//   Future<bool> saveUser(UserModel responseModel) async{
-//     SharedPreferences sp = await SharedPreferences.getInstance();
-//     sp.setString('token', responseModel.token.toString());
-//     return true;
-//   }
-//
-//   Future<UserModel> getUser() async{
-//     SharedPreferences sp = await SharedPreferences.getInstance();
-//     String? token = sp.getString('token');
-//     print(token);
-//     return UserModel(
-//       token: token
-//     );
-//   }
-//
-//   Future<bool> removeUser() async{
-//     SharedPreferences sp = await SharedPreferences.getInstance();
-//     sp.clear();
-//     return true;
-//
-//   }
-// }
-
-
 import 'package:shared_preferences/shared_preferences.dart';
 
 class UserPreference {
+
+  // ================= ONBOARDING =================
 
   Future<void> setOnboardingSeen() async {
     final prefs = await SharedPreferences.getInstance();
@@ -40,37 +11,37 @@ class UserPreference {
 
   Future<bool> isOnboardingSeen() async {
     final prefs = await SharedPreferences.getInstance();
-    return prefs.getBool('onboarding_seen') ?? false; // default false
+    return prefs.getBool('onboarding_seen') ?? false;
   }
-  /// Save token
+
+  // ================= AUTH =================
+
   Future<bool> saveToken(String token) async {
-    SharedPreferences sp = await SharedPreferences.getInstance();
-    print('token:$token');
-    return await sp.setString('token', token);
+    final prefs = await SharedPreferences.getInstance();
+    return prefs.setString('token', token);
   }
 
-  /// Get token
   Future<String?> getToken() async {
-    SharedPreferences sp = await SharedPreferences.getInstance();
-    return sp.getString('token');
+    final prefs = await SharedPreferences.getInstance();
+    return prefs.getString('token');
   }
 
-  /// Remove token (logout)
   Future<bool> removeToken() async {
-    SharedPreferences sp = await SharedPreferences.getInstance();
-    return await sp.remove('token');
+    final prefs = await SharedPreferences.getInstance();
+    return prefs.remove('token');
   }
 
   Future<bool> saveUserId(int userId) async {
-    SharedPreferences sp = await SharedPreferences.getInstance();
-    return await sp.setInt('user_id', userId);
+    final prefs = await SharedPreferences.getInstance();
+    return prefs.setInt('user_id', userId);
   }
 
-  /// Get User ID
   Future<int?> getUserId() async {
-    SharedPreferences sp = await SharedPreferences.getInstance();
-    return sp.getInt('user_id');
+    final prefs = await SharedPreferences.getInstance();
+    return prefs.getInt('user_id');
   }
+
+  // ================= APP SETTINGS =================
 
   Future<void> saveSettings({
     required bool allowNotifications,
@@ -98,6 +69,7 @@ class UserPreference {
     return prefs.getBool('auto_sync') ?? false;
   }
 
+  // ================= APP INFO =================
 
   Future<void> saveAppVersion(String version) async {
     final prefs = await SharedPreferences.getInstance();
@@ -128,4 +100,53 @@ class UserPreference {
     final prefs = await SharedPreferences.getInstance();
     return prefs.getString('last_updated');
   }
+
+  // ================= PROFILE =================
+
+  Future<void> saveProfile({
+    required String fullName,
+    required String email,
+    required String role,
+    required String position,
+    required String phoneNumber,
+    required String profilePicture,
+    required String createdAt,
+  }) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setString('full_name', fullName);
+    await prefs.setString('profile_email', email);
+    await prefs.setString('role', role);
+    await prefs.setString('position', position);
+    await prefs.setString('phone_number', phoneNumber);
+    await prefs.setString('profile_picture', profilePicture);
+    await prefs.setString('created_at', createdAt);
+  }
+
+  Future<Map<String, String>> getProfile() async {
+    final prefs = await SharedPreferences.getInstance();
+    return {
+      'full_name': prefs.getString('full_name') ?? '',
+      'profile_email': prefs.getString('profile_email') ?? '',
+      'role': prefs.getString('role') ?? '',
+      'position': prefs.getString('position') ?? '',
+      'phone_number': prefs.getString('phone_number') ?? '',
+      'profile_picture': prefs.getString('profile_picture') ?? '',
+      'created_at': prefs.getString('created_at') ?? '',
+    };
+  }
+
+  Future<void> clearProfile() async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.remove('full_name');
+    await prefs.remove('profile_email');
+    await prefs.remove('role');
+    await prefs.remove('position');
+    await prefs.remove('phone_number');
+    await prefs.remove('profile_picture');
+    await prefs.remove('created_at');
+  }
+
+
+
+
 }

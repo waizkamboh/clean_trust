@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:file_picker/file_picker.dart';
 import '../../../data/repository/leave_request/leave_request_repository.dart';
+import '../../../helper/internet_check.dart';
 import '../../../util/custom_snackbar.dart';
 import '../../user_preference/user_preference.dart';
 
@@ -69,7 +70,13 @@ class LeaveRequestController extends GetxController {
       showCustomSnackBar('Enter reason for leave');
       return;
     }
+    final online = await isOnline();
 
+    if (!online) {
+      debugPrint('OFFLINE → API not called');
+      showCustomSnackBar('Please check internet connection');
+      return;
+    }
     loading.value = true;
     final token = await _userPreference.getToken();
 

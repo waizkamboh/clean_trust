@@ -26,22 +26,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   final RxInt selectedIndex = (-1).obs;
 
-  @override
-  void initState() {
-    super.initState();
-    _loadData();
-  }
-  Future<void> _loadData() async {
-    final online = await isOnline();
 
-    if (!online) {
-      debugPrint('OFFLINE → API not called');
-      return;
-    }
-    controller.fetchEmployee();
-
-
-  }
   @override
   Widget build(BuildContext context) {
     SizeConfig().init(context);
@@ -446,6 +431,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   onPress: () async {
                     UserPreference userPreference = UserPreference();
                     await userPreference.removeToken();
+                    await userPreference.clearProfile();
 
                     Get.offAllNamed(RouteName.loginScreen);
                   },

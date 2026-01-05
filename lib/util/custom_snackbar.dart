@@ -1,14 +1,21 @@
+import 'package:clean_trust/util/size_config.dart';
+import 'package:clean_trust/util/text_style.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import 'app_colors.dart';
 
 void showCustomSnackBar(String message, {bool isError = true}) {
-  if (Get.context != null) { // Check if context is available
+  if (Get.context != null) {
     Get.showSnackbar(
       GetSnackBar(
-        backgroundColor: isError ? AppColors.kDeepBlueColor : AppColors.kDeepBlueColor,
-        message: message,
+        backgroundColor: AppColors.kGradientColor5,
+        messageText: Text(
+          message,
+          style:  TextStyle(
+            color: AppColors.kWhiteColor
+          )
+        ),
         duration: const Duration(seconds: 3),
         snackStyle: SnackStyle.FLOATING,
         margin: const EdgeInsets.all(5),
