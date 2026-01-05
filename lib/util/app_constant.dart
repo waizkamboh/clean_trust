@@ -9,6 +9,7 @@ class AppUrl{
    static const String signUpApi = '${baseUrl}/auth/signup';
    static const String changePasswordApi = '${baseUrl}/auth/change-password';
    static const String forgetPasswordApi = '${baseUrl}/auth/forgot-password';
+   static const String resetPasswordApi = '${baseUrl}/auth/reset-password';
    static const String getAppSettingApi = '${baseUrl}/app-settings';
    static const String updateAppSettingApi = '${baseUrl}/app-settings';
    static const String getAppVersionApi = '${baseUrl}/app-settings/version';

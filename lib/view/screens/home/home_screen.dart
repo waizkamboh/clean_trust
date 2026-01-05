@@ -9,6 +9,7 @@ import 'package:get/get.dart';
 import '../../../helper/routes/routes_name.dart';
 import '../../../util/size_config.dart';
 import '../../../util/text_style.dart';
+import '../../../view_model/controller/employee/editProfileController.dart';
 import '../../../view_model/controller/notification/get_unread_count_controller.dart';
 import '../../../view_model/controller/notification/notification_controller.dart';
 import '../../base/round_button.dart';
@@ -29,18 +30,23 @@ class _HomeScreenState extends State<HomeScreen> {
     getAttendanceHistoryController.fetchTodayAttendance();
     getAttendanceHistoryController.fetchMonthlyAttendance();
     unreadCountController.fetchUnreadCount();
+    controller.fetchEmployee();
+
 
     ever(notificationController.unreadCount, (_) {
       unreadCountController.fetchUnreadCount();
     });
 
   }
+  final EditProfileController controller = Get.find();
+
 
  NotificationController notificationController = Get.find();
 
  GetTodayAndMonthlyAttendanceController getAttendanceHistoryController = Get.find<GetTodayAndMonthlyAttendanceController>();
 
    final UnreadCountController unreadCountController = Get.find<UnreadCountController>();
+
 
 
   @override
@@ -245,13 +251,14 @@ class _HomeScreenState extends State<HomeScreen> {
 
                   Row(
                     children: [
+                      Obx(()=>
                       Text(
-                        'homeScreen2'.tr,
+                      controller.fullName.value,
                         style: kSize16W400KWhiteColorOutfitRegular
                             .copyWith(
                           fontSize: getFont(20),
                         ),
-                      ),
+                      ),),
 
                       SizedBox(width: getWidth(6)),
 

@@ -3,6 +3,7 @@ import 'package:clean_trust/util/size_config.dart';
 import 'package:clean_trust/view/base/top_header.dart';
 import 'package:clean_trust/view_model/controller/notification/mark_all_notification_read_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
 import '../../../util/app_images.dart';
 import '../../../util/text_style.dart';
@@ -69,7 +70,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
             child: Obx(() {
               if (controller.isLoading.value) {
                 return const Center(
-                  child: CircularProgressIndicator(),
+                  child: SpinKitSpinningLines(color: AppColors.kSkyBlueColor),
                 );
               }
 

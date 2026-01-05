@@ -81,7 +81,7 @@ class SignupScreen extends StatelessWidget {
                           onValidator: (email){
                             return null;
                           },
-                          keyBoardType: TextInputType.emailAddress,
+                          keyBoardType: TextInputType.phone,
 
                           obscureText: false,
                           hintText: 'signupScreen6'.tr,

@@ -37,19 +37,19 @@ class AppRoutes{
     GetPage(
       name: RouteName.onboardingScreen1,
       page: () => const OnboardingScreen1(),
-      // transition: Transition.rightToLeftWithFade,
+      transition: Transition.rightToLeftWithFade,
       //transitionDuration: const Duration(milliseconds: 250)
     ),
     GetPage(
       name: RouteName.onboardingScreen2,
       page: () => const OnboardingScreen2(),
-      // transition: Transition.rightToLeftWithFade,
+      transition: Transition.rightToLeftWithFade,
       //transitionDuration: const Duration(milliseconds: 250)
     ),
     GetPage(
       name: RouteName.onboardingScreen3,
-      page: () => const OnboardingScreen3(),
-      // transition: Transition.rightToLeftWithFade,
+      page: () =>  OnboardingScreen3(),
+      transition: Transition.rightToLeftWithFade,
       //transitionDuration: const Duration(milliseconds: 250)
     ),
     GetPage(
@@ -73,13 +73,7 @@ class AppRoutes{
     ),
     GetPage(
       name: RouteName.confirmPasswordScreen,
-      page: () => const ConfirmPasswordScreen(),
-      // transition: Transition.rightToLeftWithFade,
-      //transitionDuration: const Duration(milliseconds: 250)
-    ),
-    GetPage(
-      name: RouteName.confirmPasswordScreen,
-      page: () => const ConfirmPasswordScreen(),
+      page: () =>  ConfirmPasswordScreen(),
       // transition: Transition.rightToLeftWithFade,
       //transitionDuration: const Duration(milliseconds: 250)
     ),

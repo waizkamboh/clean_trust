@@ -35,7 +35,6 @@ class SignupController extends GetxController{
 
     final passwordRegex = RegExp(
         r'^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[!@#$%^&*(),.?":{}|<>]).{8,}$');
-    final phoneNumberRegex = RegExp(r'^(\+?1)?\d{10,15}$'); // example regex
 
     // Frontend Validation
     if (email.isEmpty) {
@@ -53,8 +52,9 @@ class SignupController extends GetxController{
       return;
     }
 
-    if (!phoneNumberRegex.hasMatch(phoneNumber)) {
-      showCustomSnackBar('Enter a valid Phone Number');
+
+    if (!GetUtils.isPhoneNumber(phoneNumber)) {
+      showCustomSnackBar('Enter valid phone number');
       return;
     }
 

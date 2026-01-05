@@ -26,17 +26,16 @@ class OnboardingItem extends StatelessWidget {
 
     return Scaffold(
       backgroundColor: AppColors.kWhiteColor,
-      body: Column(
+      body:Column(
         children: [
-          SizedBox(height: getHeight(200)),
-
-          Image.asset(imagePath),
-
-          const Spacer(),
-
+          Expanded(
+            flex: 5,
+            child: Center(
+              child: Image.asset(imagePath, fit: BoxFit.contain),
+            ),
+          ),
           Container(
-            width: getWidth(393),
-            height: getHeight(339),
+            width: double.infinity,
             decoration: BoxDecoration(
               gradient: LinearGradient(
                 colors: [
@@ -49,39 +48,47 @@ class OnboardingItem extends StatelessWidget {
                 topRight: Radius.circular(40),
               ),
             ),
-            child: Column(
-              children: [
-                SizedBox(height: getHeight(57)),
+            child: Padding(
+              padding: EdgeInsets.symmetric(
+                vertical: getHeight(50),
+                horizontal: getWidth(30),
+              ),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Column(
+                    children: [
+                      Text(
+                        title.tr,
+                        style: kSize20W700KWhiteColorOutfitBold,
+                        textAlign: TextAlign.center,
+                      ),
+                      SizedBox(height: getHeight(10)),
+                      Text(
+                        subtitle.tr,
+                        style: kSize16W400KWhiteColorOutfitRegular,
+                        textAlign: TextAlign.center,
+                      ),
 
-                Text(
-                  title.tr,
-                  style: kSize20W700KWhiteColorOutfitBold,
-                  textAlign: TextAlign.center,
-                ),
+                    ],
+                  ),
 
-                SizedBox(height: getHeight(10)),
-
-                Text(
-                  subtitle.tr,
-                  style: kSize16W400KWhiteColorOutfitRegular,
-                  textAlign: TextAlign.center,
-                ),
-
-                SizedBox(height: getHeight(50)),
-
-                RoundButton(
-                  onPress: onButtonPress,
-                  radius: BorderRadius.circular(8),
-                  title: 'onboardingScreen3'.tr,
-                  textStyle: kSize16W600KBlackColorOutfitSemiBold,
-                  width: getWidth(332),
-                  height: getHeight(54),
-                ),
-              ],
+                  SizedBox(height: getHeight(40)),
+                  RoundButton(
+                    onPress: onButtonPress,
+                    radius: BorderRadius.circular(8),
+                    title: 'onboardingScreen3'.tr,
+                    textStyle: kSize16W600KBlackColorOutfitSemiBold,
+                    width: getWidth(332),
+                    height: getHeight(54),
+                  ),
+                ],
+              ),
             ),
           ),
         ],
-      ),
+      )
+
     );
   }
 }

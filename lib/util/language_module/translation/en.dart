@@ -1,13 +1,13 @@
 Map<String, String> en = {
 
 
-  'onboardingScreen1': 'Smart Attendance,\nMade Simple',
-  'onboardingScreen2': 'Track work hours effortlessly with\nquick and secure QR code scans.',
+  'onboardingScreen1': 'Smart Attendance,Made Simple',
+  'onboardingScreen2': 'Track work hours effortlessly with quick and secure QR code scans.',
   'onboardingScreen3': 'Gets start',
   'onboardingScreen4': 'Works Even Offline',
-  'onboardingScreen5': 'No network? No problem. Your scans\nare saved and synced automatically\nwhen online.',
-  'onboardingScreen6': 'View and Manage Your\nRecords',
-  'onboardingScreen7': 'Check attendance history and\nsubmit manual requests anytime.',
+  'onboardingScreen5': 'No network? No problem. Your scans are saved and synced automatically\nwhen online.',
+  'onboardingScreen6': 'View and Manage Your Records',
+  'onboardingScreen7': 'Check attendance history and submit manual requests anytime.',
 
 
   'loginScreen1': 'Welcome To Smart Attendance',
@@ -41,7 +41,7 @@ Map<String, String> en = {
   'forgotPassword2': 'Enter Your email adress',
   'forgotPassword3': 'Enter Email',
   'forgotPassword4': 'email@gmail,com',
-  'forgotPassword5': 'Send Code',
+  'forgotPassword5': 'Send Email',
 
 
   'conformPassword1': 'Enter Your Confirm Password',
@@ -135,12 +135,12 @@ Map<String, String> en = {
 
 
   'manualEntry1': 'Manual Entry',
-  'manualEntry2': 'Submit Manual Attendance\nEntry',
-  'manualEntry3': 'Fill in the details below to request a manual\nattendance entry',
+  'manualEntry2': 'Submit Manual Attendance Entry',
+  'manualEntry3': 'Fill in the details below to request a manual attendance entry',
   'manualEntry4': 'Date',
   'manualEntry5': 'mm/dd/yyyy',
-  'manualEntry6': 'Select Object',
-  'manualEntry7': 'Choose Object',
+  'manualEntry6': 'Select Workplace',
+  'manualEntry7': 'Choose Workplace',
   'manualEntry8': 'Employee MUST select an object (cannot submit without it)',
   'manualEntry9': 'Clock In Time',
   'manualEntry10': '--:-- --',
@@ -150,13 +150,13 @@ Map<String, String> en = {
   'manualEntry14': 'Please explain why you need a manual entry',
   'manualEntry15': 'Minimum 20 characters',
   'manualEntry16': 'Submit Entry',
-  'manualEntry17': 'Submit Leave Request',
+  'manualEntry17': 'Submit Other Entry',
 
   'leaveRequest1': 'Leave Request',
   'leaveRequest2': 'Request Time Off',
   'leaveRequest3': 'Fill out the form below to submit your leave request',
   'leaveRequest4': 'Request Time Off',
-  'leaveRequest5': 'Fill out the form below to submit your\nleave request',
+  'leaveRequest5': 'Fill out the form below to submit your leave request',
   'leaveRequest6': 'Leave Type',
   'leaveRequest7': 'Sick',
   'leaveRequest8': 'Vacation',
@@ -175,7 +175,7 @@ Map<String, String> en = {
 
   'attendanceOffline1': 'Attendance',
   'attendanceOffline2': 'You are offline',
-  'attendanceOffline3': 'Attendance will sync automatically when connection is\nrestored.',
+  'attendanceOffline3': 'Attendance will sync automatically when connection is restored.',
   'attendanceOffline4': 'Pending Sync',
   'attendanceOffline5': 'items waiting to upload',
   'attendanceOffline6': 'Unsynced Attendance',
@@ -184,7 +184,7 @@ Map<String, String> en = {
   'attendanceOffline9': 'Building A - Floor 3',
   'attendanceOffline10': 'Pending',
   'attendanceOffline11': 'Auto-Sync Information',
-  'attendanceOffline12': 'Your attendance data is stored locally and\nwill automatically sync when you reconnect\nto the internet. No data will be lost.',
+  'attendanceOffline12': 'Your attendance data is stored locally and will automatically sync when you reconnect to the internet. No data will be lost.',
 
   'backOnline1': 'Back Online',
   'backOnline2': 'All pending attendance scans are being uploaded now.',

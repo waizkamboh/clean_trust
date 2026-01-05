@@ -46,6 +46,8 @@ class ManualEntryScreen extends StatelessWidget {
 
                           ),
                         ),
+                        SizedBox(height: getHeight(5),),
+
                         Text(
                           'manualEntry3'.tr,
                           style: kSize16W400KWhiteColorOutfitRegular.copyWith(
@@ -90,7 +92,7 @@ class ManualEntryScreen extends StatelessWidget {
                         Row(
                           children: [
                             Text(
-                              'Select Workplace'.tr,
+                              'manualEntry6'.tr,
                               style: kSize16W600KBlackColorOutfitSemiBold.copyWith(
                                 fontSize: getFont(14),
                                 color: AppColors.kDarkSlateGray,
@@ -110,7 +112,7 @@ class ManualEntryScreen extends StatelessWidget {
                           EdgeInsets.symmetric(horizontal: getWidth(20)),
                           //value: workplaceController.selectedWorkplaceId.value,
 
-                          hintText: 'Select Workplace',
+                          hintText: 'manualEntry6'.tr,
                           hintTextStyle:
                           kSize16W400KWhiteColorOutfitRegular.copyWith(fontSize: getFont(14), color: AppColors.kBlackColor),
                           borderSideColor: AppColors.kLightCoolGray,
@@ -223,7 +225,7 @@ class ManualEntryScreen extends StatelessWidget {
                           height: getHeight(126),
                           myController: controller.reasonController.value,
                           width: getWidth(343),
-                          contentPadding: EdgeInsets.symmetric(horizontal: getWidth(20)),
+                          contentPadding: EdgeInsets.symmetric(horizontal: getWidth(20), vertical: getHeight(12)),
                           keyBoardType: TextInputType.text,
                           maxLines: 4,
                           borderRadius: 12,

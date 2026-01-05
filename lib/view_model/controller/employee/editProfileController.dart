@@ -12,12 +12,11 @@ class EditProfileController extends GetxController {
   final UpdateEmployeeRepository _updateRepo = UpdateEmployeeRepository();
   final UserPreference _userPreference = UserPreference();
 
-  /// 🔹 Editable controllers
   final emailController = TextEditingController().obs;
   final phoneController = TextEditingController().obs;
   final passwordController = TextEditingController().obs;
+  var isPasswordHidden = true.obs;
 
-  /// 🔹 Read-only values
   RxString fullName = ''.obs;
   RxString email = ''.obs;
   RxString createdAt = ''.obs;
@@ -27,8 +26,8 @@ class EditProfileController extends GetxController {
   RxString profilePicture = ''.obs;
 
   RxBool isLoading = false.obs;
+  RxBool isLoading1 = false.obs;
 
-  /// ================= GET EMPLOYEE =================
   Future<void> fetchEmployee() async {
     try {
       isLoading.value = true;
@@ -69,7 +68,6 @@ class EditProfileController extends GetxController {
     }
   }
 
-  /// ================= UPDATE EMPLOYEE =================
   Future<void> updateProfile() async {
     String email = emailController.value.text.trim();
     String password = passwordController.value.text.trim();
@@ -78,32 +76,25 @@ class EditProfileController extends GetxController {
         r'^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[!@#$%^&*(),.?":{}|<>]).{8,}$');
 
     // Frontend Validation
-    if (email.isEmpty) {
-      showCustomSnackBar('Enter email address');
-      return;
-    }
 
     if (!GetUtils.isEmail(email)) {
       showCustomSnackBar('Enter a valid email address');
       return;
     }
 
-    if (phoneNo.isEmpty) {
-      showCustomSnackBar('Enter phoneNo');
-      return;
-    }
-    if (password.isEmpty) {
-      showCustomSnackBar('Enter password');
+    if (phoneNo.isNotEmpty && !GetUtils.isPhoneNumber(phoneNo)) {
+      showCustomSnackBar('Enter valid phone number');
       return;
     }
 
-    if (!passwordRegex.hasMatch(password)) {
+    if (password.isNotEmpty && !passwordRegex.hasMatch(password)) {
       showCustomSnackBar(
           'Password must contain at least 1 uppercase letter, 1 lowercase letter, 1 number, 1 special character, and be at least 8 characters long');
       return;
     }
+
     try {
-      isLoading.value = true;
+      isLoading1.value = true;
 
       final token = await _userPreference.getToken();
       final employeeId = await _userPreference.getUserId();
@@ -129,7 +120,11 @@ class EditProfileController extends GetxController {
           response.message ?? "Profile updated",
           isError: false,
         );
+        emailController.value.clear();
+        phoneController.value.clear();
         passwordController.value.clear();
+        isLoading1.value = false;
+
       }
     } catch (e, s) {
       if (kDebugMode) {
@@ -138,11 +133,10 @@ class EditProfileController extends GetxController {
       }
       showCustomSnackBar("Update failed");
     } finally {
-      isLoading.value = false;
+      isLoading1.value = false;
     }
   }
 
-  /// 🔹 Date formatter
   String formatDate(String? date) {
     if (date == null || date.isEmpty) return '';
     final d = DateTime.parse(date);

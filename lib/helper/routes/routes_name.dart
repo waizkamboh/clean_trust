@@ -7,7 +7,7 @@ class RouteName{
   static const String loginScreen = '/login_screen';
   static const String signUpScreen = '/signUp_screen';
   static const String forGetPasswordScreen = '/forGetPassword_screen';
-  static const String confirmPasswordScreen = '/confirmPassword_screen';
+  static const String confirmPasswordScreen = '/confirm-password';
   static const String bottomNavScreen = '/bottomNav_screen';
   static const String notificationScreen = '/notification_screen';
   static const String scanQRCodeScreen = '/scanQRCode_screen';

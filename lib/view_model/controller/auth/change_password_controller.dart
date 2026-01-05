@@ -113,9 +113,6 @@ class ChangePasswordController extends GetxController {
 
       showCustomSnackBar(response['message'] ?? 'Password changed successfully');
 
-      // Remove token and navigate to login
-      await userPreference.removeToken();
-      Get.offAllNamed(RouteName.loginScreen); // clears navigation stack
 
       clearFields();
     } catch (error) {

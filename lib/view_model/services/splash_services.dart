@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 import '../../helper/routes/routes_name.dart';
 import '../user_preference/user_preference.dart';
@@ -8,15 +9,21 @@ class SplashServices {
 
   void isLogin() async {
     String? token = await userPreference.getToken();
+    bool seenOnboarding = await userPreference.isOnboardingSeen();
 
-    print('Saved Token: $token');
+    if (kDebugMode) {
+      print('Saved Token: $token, Onboarding Seen: $seenOnboarding');
+    }
 
     Timer(const Duration(seconds: 3), () {
-      if (token == null || token.isEmpty) {
-        Get.toNamed(RouteName.loginScreen);
+      if (!seenOnboarding) {
+        Get.offAllNamed(RouteName.onboardingScreen1);
+      } else if (token == null || token.isEmpty) {
+        Get.offAllNamed(RouteName.loginScreen);
       } else {
-        Get.toNamed(RouteName.bottomNavScreen);
+        Get.offAllNamed(RouteName.bottomNavScreen);
       }
     });
+
   }
 }

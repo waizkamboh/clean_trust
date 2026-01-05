@@ -64,25 +64,27 @@ class _AttendanceOfflineScreenState extends State<AttendanceOfflineScreen> {
                   children: [
                     Image.asset(AppImages.networkIcon, color: AppColors.kSkyBlueColor,),
                     SizedBox(width: getWidth(10)),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          'attendanceOffline2'.tr,
-                          style: kSize16W400KWhiteColorOutfitRegular.copyWith(
-                            color: AppColors.kBlackColor,
-                          ),
-                        ),
-
-                        Text(
-                          'attendanceOffline3'.tr,
-                          style: kSize16W400KWhiteColorOutfitRegular.copyWith(
+                    Flexible(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            'attendanceOffline2'.tr,
+                            style: kSize16W400KWhiteColorOutfitRegular.copyWith(
                               color: AppColors.kBlackColor,
-                              fontSize: getFont(12)
+                            ),
                           ),
-                        ),
-                      ],
+
+                          Text(
+                            'attendanceOffline3'.tr,
+                            style: kSize16W400KWhiteColorOutfitRegular.copyWith(
+                                color: AppColors.kBlackColor,
+                                fontSize: getFont(12)
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
 
 
