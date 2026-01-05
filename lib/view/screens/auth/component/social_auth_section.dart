@@ -24,13 +24,14 @@ class SocialAuthSection extends StatelessWidget {
           children: [
             ImageIcon(
               AssetImage(AppImages.googleIcon,),
+
             ),
-            SizedBox(width: getWidth(10),),
+            SizedBox(width: getWidth(15),),
 
             ImageIcon(
               AssetImage(AppImages.facebookIcon),
             ),
-            SizedBox(width: getWidth(10),),
+            SizedBox(width: getWidth(15),),
 
             ImageIcon(
               AssetImage(AppImages.appleIcon),
@@ -41,14 +42,13 @@ class SocialAuthSection extends StatelessWidget {
         SizedBox(height: getHeight(10),),
         Text(
           text1.tr,
-          style: kSize16W400KWhiteColorOutfitRegular.copyWith(fontSize: getFont(13), color: AppColors.kBlackColor.withOpacity(0.60)),
+          style: kSize16W400KWhiteColorOutfitRegular.copyWith(fontSize: getFont(12.32), color: AppColors.kCharcoalBlackColor.withOpacity(0.60)),
         ),
-        SizedBox(height: getHeight(10),),
         GestureDetector(
           onTap: onTap,
           child: Text(
             text2.tr,
-            style: kSize16W600KBlackColorOutfitSemiBold.copyWith(fontSize: getFont(13),),
+            style: kSize16W600KBlackColorOutfitSemiBold.copyWith(fontSize: getFont(12.32),),
           ),
         ),
       ],

@@ -43,7 +43,7 @@ class ForgotPasswordScreen extends StatelessWidget {
                           ),
                           Text(
                             'forgotPassword2'.tr,
-                            style: kSize16W400KWhiteColorOutfitRegular.copyWith(color: AppColors.kBlackColor),
+                            style: kSize16W400KWhiteColorOutfitRegular.copyWith(color: AppColors.kCharcoalBlackColor, fontSize: getFont(15)),
                           ),
                           SizedBox(height: getHeight(30)),
                           InputTextField(

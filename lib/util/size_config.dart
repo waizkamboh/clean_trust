@@ -39,5 +39,5 @@ double getHeight(double inputHeight) {
 double getWidth(double inputWidth) {
   double screenWidth = SizeConfig.screenWidth!;
   // 375 is the layout width that Figma provides
-  return (inputWidth / 393.0) * screenWidth;
+  return (inputWidth / 402.0) * screenWidth;
 }

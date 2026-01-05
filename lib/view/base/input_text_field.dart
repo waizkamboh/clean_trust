@@ -37,7 +37,7 @@ class InputTextField extends StatelessWidget {
     this.enableBorder = true,
     this.cursorColor,
     this.labelText,
-    this.labelTextStyle,
+    this.labelTextStyle, this.borderSideWidth,
   });
 
   final double? height;
@@ -50,6 +50,7 @@ class InputTextField extends StatelessWidget {
   final bool obscureText;
   final bool enable, autoFocus;
   final Color textFormFieldColor, borderSideColor;
+  final double? borderSideWidth;
   final String? hintText, labelText;
   final Widget? prefixIcon;
   final Widget? suffixIcon;
@@ -102,9 +103,9 @@ class InputTextField extends StatelessWidget {
           hintText: hintText,
           labelText: labelText,
           labelStyle: labelTextStyle ??
-              kSize16W400KWhiteColorOutfitRegular.copyWith(fontSize: getFont(12), color: AppColors.kCharcoalBlackColor),
+              kSize16W400KWhiteColorOutfitRegular.copyWith(fontSize: getFont(12.61), color: AppColors.kCharcoalBlackColor),
           hintStyle: hintTextStyle ??
-              kSize16W400KWhiteColorOutfitRegular.copyWith(fontSize: getFont(12), color: AppColors.kBlackColor.withOpacity(0.66)),
+              kSize16W400KWhiteColorOutfitRegular.copyWith(fontSize: getFont(12.61), color: AppColors.kBlackColor.withOpacity(0.66)),
           prefixIcon: prefixIcon,
           suffixIcon: suffixIcon != null
               ? Padding(
@@ -120,13 +121,13 @@ class InputTextField extends StatelessWidget {
             BorderRadius.circular(borderRadius ?? 4.5),
             borderSide: BorderSide(
               color: borderSideColor,
-              width: 1,
+              width: borderSideWidth?? 1,
             ),
           )
               : UnderlineInputBorder(
             borderSide: BorderSide(
               color: borderSideColor,
-              width: 1,
+              width: borderSideWidth?? 1,
             ),
           ),
 
@@ -137,13 +138,13 @@ class InputTextField extends StatelessWidget {
             BorderRadius.circular(borderRadius ?? 4.5),
             borderSide: BorderSide(
               color: borderSideColor,
-              width: 1,
+              width: borderSideWidth?? 1,
             ),
           )
               : UnderlineInputBorder(
             borderSide: BorderSide(
               color: borderSideColor,
-              width: 1,
+              width: borderSideWidth?? 1,
             ),
           ),
 
@@ -154,13 +155,13 @@ class InputTextField extends StatelessWidget {
             BorderRadius.circular(borderRadius ?? 4.5),
             borderSide: BorderSide(
               color: borderSideColor,
-              width: 1,
+              width: borderSideWidth?? 1,
             ),
           )
               : UnderlineInputBorder(
             borderSide: BorderSide(
               color: borderSideColor,
-              width: 1,
+              width: borderSideWidth?? 1,
             ),
           ),
 
@@ -171,13 +172,13 @@ class InputTextField extends StatelessWidget {
             BorderRadius.circular(borderRadius ?? 4.5),
             borderSide: BorderSide(
               color: borderSideColor,
-              width: 1,
+              width: borderSideWidth?? 1,
             ),
           )
               : UnderlineInputBorder(
             borderSide: BorderSide(
               color: borderSideColor,
-              width: 1,
+              width: borderSideWidth?? 1,
             ),
           ),
 
@@ -187,13 +188,13 @@ class InputTextField extends StatelessWidget {
             BorderRadius.circular(borderRadius ?? 4.5),
             borderSide: BorderSide(
               color: borderSideColor,
-              width: 1,
+              width: borderSideWidth?? 1,
             ),
           )
               : UnderlineInputBorder(
             borderSide: BorderSide(
               color: borderSideColor,
-              width: 1,
+              width: borderSideWidth?? 1,
             ),
           ),
         ),

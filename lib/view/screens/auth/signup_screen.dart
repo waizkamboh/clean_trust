@@ -31,182 +31,195 @@ class SignupScreen extends StatelessWidget {
               children: [
                 AuthCard(
                   size: getHeight(180),
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      crossAxisAlignment: CrossAxisAlignment.start,
+                    child: Padding(
+                      padding:  EdgeInsets.symmetric(vertical: getHeight(34)),
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        crossAxisAlignment: CrossAxisAlignment.start,
 
-                      children: [
-                        SizedBox(height: getHeight(34)),
-                        Text(
-                          'signupScreen1'.tr,
-                          style: kSize16W600KBlackColorOutfitSemiBold.copyWith(fontSize: getFont(18)),
-                        ),
-                        Text(
-                          'signupScreen2'.tr,
-                          style: kSize16W400KWhiteColorOutfitRegular.copyWith(color: AppColors.kBlackColor),
-                        ),
-                        SizedBox(height: getHeight(20)),
-                        InputTextField(
-                          //height: getHeight(42),
-                          myController: signupController.emailController.value,
-                          width: getWidth(300),
-                          contentPadding: EdgeInsets.symmetric(horizontal: getWidth(20)),
-                          focusNode: signupController.emailFocusNode.value,
-                          onFiledSubmittedValue: (value){
-                            FocusScope.of(context)
-                                .requestFocus(signupController.phoneFocusNode.value);
-                          },
-                          onValidator: (email){
-                            return null;
-                          },
-                          keyBoardType: TextInputType.emailAddress,
-
-                          obscureText: false,
-                          hintText: 'signupScreen4'.tr,
-                          labelText: 'signupScreen3'.tr,
-                          borderSideColor: AppColors.kBlackColor.withOpacity(0.37),
-                          textFormFieldColor: AppColors.kWhiteColor,
-                        ),
-                        SizedBox(height: getHeight(20)),
-                        InputTextField(
-                          //height: getHeight(42),
-                          myController: signupController.phoneController.value,
-                          width: getWidth(300),
-                          contentPadding: EdgeInsets.symmetric(horizontal: getWidth(20)),
-                          focusNode: signupController.phoneFocusNode.value,
-                          onFiledSubmittedValue: (value){
-                            FocusScope.of(context)
-                                .requestFocus(signupController.passwordFocusNode.value);
-                          },
-                          onValidator: (email){
-                            return null;
-                          },
-                          keyBoardType: TextInputType.phone,
-
-                          obscureText: false,
-                          hintText: 'signupScreen6'.tr,
-                          labelText: 'signupScreen5'.tr,
-                          borderSideColor: AppColors.kBlackColor.withOpacity(0.37),
-                          textFormFieldColor: AppColors.kWhiteColor,
-                        ),
-                        SizedBox(height: getHeight(20)),
-                        Obx(() {
-                          return  InputTextField(
+                        children: [
+                          Text(
+                            'signupScreen1'.tr,
+                            style: kSize18W500kBlackColorOutfitMedium,
+                          ),
+                          Text(
+                            'signupScreen2'.tr,
+                            style: kSize15W300kCharcoalBlackColorOutfitLight
+                          ),
+                          SizedBox(height: getHeight(30)),
+                          InputTextField(
                             //height: getHeight(42),
-                            myController: signupController.passwordController.value,
-                            width: getWidth(300),
+                            myController: signupController.emailController.value,
+                            width: getWidth(298.21),
                             contentPadding: EdgeInsets.symmetric(horizontal: getWidth(20)),
-                            focusNode: signupController.passwordFocusNode.value,
+                            focusNode: signupController.emailFocusNode.value,
                             onFiledSubmittedValue: (value){
-
+                              FocusScope.of(context)
+                                  .requestFocus(signupController.phoneFocusNode.value);
                             },
                             onValidator: (email){
                               return null;
                             },
                             keyBoardType: TextInputType.emailAddress,
-                            obscureText: signupController.isPasswordHidden.value,
-                            suffixIcon: InkWell(
-                              onTap: () {
-                                signupController.isPasswordHidden.toggle();
-                              },
-                              child: Icon(
-                                signupController.isPasswordHidden.value
-                                    ? Icons.remove_red_eye_outlined
-                                    : Icons.remove_red_eye,
-                              ),
-                            ),
-                            hintText: 'signupScreen8'.tr,
-                            labelText: 'signupScreen7'.tr,
+
+                            obscureText: false,
+                            hintText: 'signupScreen4'.tr,
+                            hintTextStyle: kSize16W400KWhiteColorOutfitRegular.copyWith(fontSize: getFont(12.54), color: AppColors.kBlackColor.withOpacity(0.66)),
+                            labelTextStyle: kSize16W400KWhiteColorOutfitRegular.copyWith(fontSize: getFont(12.54), color: AppColors.kCharcoalBlackColor),
+                            labelText: 'signupScreen3'.tr,
                             borderSideColor: AppColors.kBlackColor.withOpacity(0.37),
+                            borderSideWidth: 0.9,
                             textFormFieldColor: AppColors.kWhiteColor,
-                          );
+                          ),
+                          SizedBox(height: getHeight(20)),
+                          InputTextField(
+                            //height: getHeight(42),
+                            myController: signupController.phoneController.value,
+                            width: getWidth(300),
+                            contentPadding: EdgeInsets.symmetric(horizontal: getWidth(20)),
+                            focusNode: signupController.phoneFocusNode.value,
+                            onFiledSubmittedValue: (value){
+                              FocusScope.of(context)
+                                  .requestFocus(signupController.passwordFocusNode.value);
+                            },
+                            onValidator: (email){
+                              return null;
+                            },
+                            keyBoardType: TextInputType.phone,
 
-                        }
-                        ),
-                        SizedBox(height: getHeight(20)),
-                        Text(
-                          'signupScreen9'.tr,
-                          textAlign: TextAlign.center,
-                          style: kSize16W400KWhiteColorOutfitRegular.copyWith(fontSize: getFont(12), color: AppColors.kBlackColor.withOpacity(0.66)),
-                        ),
+                            obscureText: false,
+                            hintText: 'signupScreen6'.tr,
+                            labelText: 'signupScreen5'.tr,
+                            hintTextStyle: kSize16W400KWhiteColorOutfitRegular.copyWith(fontSize: getFont(12.54), color: AppColors.kBlackColor.withOpacity(0.66)),
+                            labelTextStyle: kSize16W400KWhiteColorOutfitRegular.copyWith(fontSize: getFont(12.54), color: AppColors.kCharcoalBlackColor),
+                            borderSideColor: AppColors.kBlackColor.withOpacity(0.37),
+                            borderSideWidth: 0.9,
 
-                        SizedBox(height: getHeight(40)),
-                        Padding(
-                          padding:  EdgeInsets.symmetric(horizontal: getWidth(17)),
-                          child: Obx((){
-                            return  RoundButton(
-                              loading: signupController.loading.value,
-
-                              onPress: ()  {
-
-
-                                signupController.signupApi();
+                            textFormFieldColor: AppColors.kWhiteColor,
+                          ),
+                          SizedBox(height: getHeight(20)),
+                          Obx(() {
+                            return  InputTextField(
+                              //height: getHeight(42),
+                              myController: signupController.passwordController.value,
+                              width: getWidth(300),
+                              contentPadding: EdgeInsets.symmetric(horizontal: getWidth(20)),
+                              focusNode: signupController.passwordFocusNode.value,
+                              onFiledSubmittedValue: (value){
 
                               },
+                              onValidator: (email){
+                                return null;
+                              },
+                              keyBoardType: TextInputType.emailAddress,
+                              obscureText: signupController.isPasswordHidden.value,
+                              suffixIcon: InkWell(
+                                onTap: () {
+                                  signupController.isPasswordHidden.toggle();
+                                },
+                                child: Icon(
+                                  signupController.isPasswordHidden.value
+                                      ? Icons.remove_red_eye_outlined
+                                      : Icons.remove_red_eye,
+                                  color: AppColors.kBlackColor.withOpacity(0.66),
+                                ),
+                              ),
+                              hintText: 'signupScreen8'.tr,
+                              labelText: 'signupScreen7'.tr,
+                              hintTextStyle: kSize16W400KWhiteColorOutfitRegular.copyWith(fontSize: getFont(12.54), color: AppColors.kBlackColor.withOpacity(0.66)),
+                              labelTextStyle: kSize16W400KWhiteColorOutfitRegular.copyWith(fontSize: getFont(12.54), color: AppColors.kCharcoalBlackColor),
+                              borderSideColor: AppColors.kBlackColor.withOpacity(0.37),
+                              borderSideWidth: 0.9,
 
-                              radius: BorderRadius.circular(8),
-                              title: 'signupScreen10'.tr,
-                              textStyle: kSize16W600KBlackColorOutfitSemiBold.copyWith(fontSize: getFont(14.11), color: AppColors.kWhiteColor),
-                              buttonColor: AppColors.kSkyBlueColor,
-                              width: getWidth(269),
-                              height: getHeight(44),
-
+                              textFormFieldColor: AppColors.kWhiteColor,
                             );
-                          }),
-                        ),
-                        SizedBox(height: getHeight(20)),
-                        Row(
-                          children: [
-                            Expanded(
-                              child: Container(
-                                height: 1,
-                                decoration: BoxDecoration(
-                                  gradient: LinearGradient(
-                                    begin: Alignment.centerLeft,
-                                    end: Alignment.centerRight,
-                                    colors: [
-                                      AppColors.kWhiteColor,
-                                      AppColors.kBlueGreenColor,
-                                    ],
+
+                          }
+                          ),
+                          SizedBox(height: getHeight(20)),
+                          Text(
+                            'signupScreen9'.tr,
+                            textAlign: TextAlign.center,
+                            style: kSize16W400KWhiteColorOutfitRegular.copyWith(fontSize: getFont(10.75), color: AppColors.kBlackColor.withOpacity(0.64)),
+                          ),
+
+                          SizedBox(height: getHeight(40)),
+                          Padding(
+                            padding:  EdgeInsets.symmetric(horizontal: getWidth(17)),
+                            child: Obx((){
+                              return  RoundButton(
+                                loading: signupController.loading.value,
+
+                                onPress: ()  {
+
+
+                                  signupController.signupApi();
+
+                                },
+
+                                radius: BorderRadius.circular(50),
+                                title: 'signupScreen10'.tr,
+                                textStyle: kSize16W600KBlackColorOutfitSemiBold.copyWith(fontSize: getFont(14.11), color: AppColors.kWhiteColor),
+                                buttonColor: AppColors.kSkyBlueColor,
+                                width: getWidth(269),
+                                height: getHeight(44),
+
+                              );
+                            }),
+                          ),
+                          SizedBox(height: getHeight(20)),
+                          Row(
+                            children: [
+                              Expanded(
+                                child: Container(
+                                  height: 1,
+                                  decoration: BoxDecoration(
+                                    gradient: LinearGradient(
+                                      begin: Alignment.centerLeft,
+                                      end: Alignment.centerRight,
+                                      colors: [
+                                        AppColors.kWhiteColor,
+                                        AppColors.kBlueGreenColor,
+                                      ],
+                                    ),
                                   ),
                                 ),
                               ),
-                            ),
-                            SizedBox(width: getWidth(10)),
+                              SizedBox(width: getWidth(10)),
 
-                            Text(
-                              'signupScreen11'.tr,
-                              style: kSize16W400KWhiteColorOutfitRegular.copyWith(fontSize: getFont(18), color: AppColors.kBlackColor),
-                            ),
-                            SizedBox(width: getWidth(10)),
-                            Expanded(
-                              child: Container(
-                                height: 1,
-                                decoration: BoxDecoration(
-                                  gradient: LinearGradient(
-                                    begin: Alignment.centerLeft,
-                                    end: Alignment.centerRight,
-                                    colors: [
-                                      AppColors.kBlueGreenColor,
-                                      AppColors.kWhiteColor,
-                                    ],
+                              Text(
+                                'signupScreen11'.tr,
+                                style: kSize17W400KCharcoalBlackColorInterRegular,
+                              ),
+                              SizedBox(width: getWidth(10)),
+                              Expanded(
+                                child: Container(
+                                  height: 1,
+                                  decoration: BoxDecoration(
+                                    gradient: LinearGradient(
+                                      begin: Alignment.centerLeft,
+                                      end: Alignment.centerRight,
+                                      colors: [
+                                        AppColors.kBlueGreenColor,
+                                        AppColors.kWhiteColor,
+                                      ],
+                                    ),
                                   ),
                                 ),
                               ),
-                            ),
 
 
-                          ],
-                        ),
-                        SizedBox(height: getHeight(40)),
-                        SocialAuthSection(text1: 'signupScreen12', text2: 'signupScreen13',onTap: (){
-                          Get.toNamed(RouteName.loginScreen);
-                        },),
-                        SizedBox(height: getHeight(34),),
+                            ],
+                          ),
+                          SizedBox(height: getHeight(40)),
+                          SocialAuthSection(text1: 'signupScreen12', text2: 'signupScreen13',onTap: (){
+                            Get.toNamed(RouteName.loginScreen);
+                          },),
 
 
 
-                      ],
+                        ],
+                      ),
                     )
                 ),
                 SizedBox(height: getHeight(50),),

@@ -11,7 +11,7 @@ class AuthHeader extends StatelessWidget {
   Widget build(BuildContext context) {
     SizeConfig().init(context);
     return Container(
-      width: getWidth(393),
+      width: double.infinity,
       height: getHeight(218),
       decoration: BoxDecoration(
         gradient: LinearGradient(
@@ -22,7 +22,7 @@ class AuthHeader extends StatelessWidget {
             ]),
         borderRadius: BorderRadius.only(bottomLeft: Radius.circular(25),bottomRight: Radius.circular(25)),
       ),
-      child: Image.asset(AppImages.appLogo, width: getWidth(97), height: getHeight(77),),
+      child: Center(child: Image.asset(AppImages.appLogo, width: getWidth(97), height: getHeight(77),)),
     );
   }
 }

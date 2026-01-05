@@ -1,7 +1,10 @@
 import 'package:clean_trust/helper/get_di.dart';
 import 'package:clean_trust/util/language_module/utils/localization_page.dart';
+import 'package:clean_trust/view/screens/auth/forgot_password_screen.dart';
 import 'package:clean_trust/view/screens/auth/login_screen.dart';
+import 'package:clean_trust/view/screens/auth/signup_screen.dart';
 import 'package:clean_trust/view/screens/onboarding/onboarding_screen1.dart';
+import 'package:clean_trust/view/screens/onboarding/onboarding_screen2.dart';
 import 'package:clean_trust/view/screens/splash/splash_screen.dart';
 import 'package:clean_trust/view_model/controller/general_controller.dart';
 import 'package:flutter/material.dart';
@@ -27,7 +30,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
       ),
-      home: OnboardingScreen1(),
+      home: ForgotPasswordScreen(),
       locale: LocalizationService.locale ,
       fallbackLocale: LocalizationService.fallbackLocale,
       translations: LocalizationService(),

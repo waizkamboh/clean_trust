@@ -34,3 +34,28 @@ TextStyle  kSize16W600KBlackColorOpenSansSemiBold =  TextStyle(
   fontFamily: AppFonts.openSansSemiBold,
 
 );
+TextStyle  kSize10W400KBlackColorlatoRegular =  TextStyle(
+  color: AppColors.kBlackColor,
+  fontWeight: FontWeight.w400,
+  fontSize: getFont(10),
+  fontFamily: AppFonts.latoRegular,
+
+);TextStyle  kSize17W400KCharcoalBlackColorInterRegular =  TextStyle(
+  color: AppColors.kCharcoalBlackColor,
+  fontWeight: FontWeight.w400,
+  fontSize: getFont(17.18),
+  fontFamily: AppFonts.interRegular,
+
+);TextStyle  kSize18W500kBlackColorOutfitMedium =  TextStyle(
+  color: AppColors.kBlackColor,
+  fontWeight: FontWeight.w500,
+  fontSize: getFont(18),
+  fontFamily: AppFonts.outfitMedium,
+
+);TextStyle  kSize15W300kCharcoalBlackColorOutfitLight =  TextStyle(
+  color: AppColors.kCharcoalBlackColor,
+  fontWeight: FontWeight.w300,
+  fontSize: getFont(15),
+  fontFamily: AppFonts.outfitLight,
+
+);
