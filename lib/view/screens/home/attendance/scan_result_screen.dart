@@ -68,7 +68,7 @@ class ScanResultScreen extends StatelessWidget {
 
           RoundButton(
             onPress: (){
-              Get.toNamed(RouteName.bottomNavScreen);
+              Get.offAllNamed(RouteName.bottomNavScreen);
             },
             radius: BorderRadius.circular(12),
             title: 'scanResult9'.tr,

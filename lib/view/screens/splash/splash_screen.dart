@@ -5,8 +5,6 @@ import 'package:clean_trust/view_model/services/splash_services.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../../helper/get_di.dart';
-
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
 
@@ -17,9 +15,8 @@ class SplashScreen extends StatefulWidget {
 class _SplashScreenState extends State<SplashScreen> {
   SplashServices splashServices = SplashServices();
   @override
-  void initState() async{
+  void initState() {
     // TODO: implement initState
-    await init();
 
     super.initState();
     splashServices.isLogin();

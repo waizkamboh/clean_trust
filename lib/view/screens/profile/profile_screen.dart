@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
 
+import '../../../helper/internet_check.dart';
 import '../../../helper/routes/routes_name.dart';
 import '../../../util/app_colors.dart';
 import '../../../util/size_config.dart';
@@ -28,9 +29,19 @@ class _ProfileScreenState extends State<ProfileScreen> {
   @override
   void initState() {
     super.initState();
-    controller.fetchEmployee();
+    _loadData();
   }
+  Future<void> _loadData() async {
+    final online = await isOnline();
 
+    if (!online) {
+      debugPrint('OFFLINE → API not called');
+      return;
+    }
+    controller.fetchEmployee();
+
+
+  }
   @override
   Widget build(BuildContext context) {
     SizeConfig().init(context);
@@ -66,7 +77,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             );
                           }
 
-                          // Show profile data once loaded
                           return Column(
                             children: [
                               Stack(

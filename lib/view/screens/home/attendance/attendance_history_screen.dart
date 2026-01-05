@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import '../../../../helper/internet_check.dart';
 import '../../../../util/text_style.dart';
 import '../../../../view_model/controller/home/attendance/get_attendance_history_controller.dart';
 import '../../../base/custom_drop_down.dart';
@@ -26,9 +27,19 @@ class _AttendanceHistoryScreenState extends State<AttendanceHistoryScreen> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    controller.fetchAttendanceHistory();
+    _loadData();
   }
+  Future<void> _loadData() async {
+    final online = await isOnline();
 
+    if (!online) {
+      debugPrint('OFFLINE → API not called');
+      return;
+    }
+
+    controller.fetchAttendanceHistory();
+
+  }
   @override
   Widget build(BuildContext context) {
     SizeConfig().init(context);
@@ -241,20 +252,7 @@ class _AttendanceHistoryScreenState extends State<AttendanceHistoryScreen> {
                     ),
                   ),
                   SizedBox(height: getHeight(20),),
-                  Padding(
-                    padding:  EdgeInsets.symmetric(horizontal: getWidth(20)),
-                    child: Align(
-                      alignment: Alignment.centerLeft,
-                      child: Text(
-                        'attendanceHistory13'.tr,
-                        style: kSize16W400KWhiteColorOutfitRegular.copyWith(
-                          fontSize: getFont(20),
-                          color: AppColors.kMidnightBlueColor,
 
-                        ),
-                      ),
-                    ),
-                  ),
                   Obx(() {
                     if (controller.isLoading.value) {
                       return Padding(
@@ -265,13 +263,22 @@ class _AttendanceHistoryScreenState extends State<AttendanceHistoryScreen> {
 
                     if (controller.attendanceList.isEmpty) {
                       return Padding(
-                        padding: EdgeInsets.only(top: getHeight(50)),
-                        child: Text(
-                          "attendanceHistory19".tr,
-                          style: kSize16W400KWhiteColorOutfitRegular,
+                        padding: EdgeInsets.symmetric(
+                          vertical: getHeight(40),
+                          horizontal: getWidth(20),
+                        ),
+                        child: Center(
+                          child: Text(
+                            "attendanceHistory19".tr,
+                            textAlign: TextAlign.center,
+                            style: kSize16W400KWhiteColorOutfitRegular.copyWith(
+                              color: AppColors.kCoolGreyColor,
+                            ),
+                          ),
                         ),
                       );
                     }
+
 
                     return Column(
                       children: controller.groupedByDate.entries.map((entry) {
@@ -281,7 +288,20 @@ class _AttendanceHistoryScreenState extends State<AttendanceHistoryScreen> {
                         return Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
+                            Padding(
+                              padding:  EdgeInsets.symmetric(horizontal: getWidth(20)),
+                              child: Align(
+                                alignment: Alignment.centerLeft,
+                                child: Text(
+                                  'attendanceHistory13'.tr,
+                                  style: kSize16W400KWhiteColorOutfitRegular.copyWith(
+                                    fontSize: getFont(20),
+                                    color: AppColors.kMidnightBlueColor,
 
+                                  ),
+                                ),
+                              ),
+                            ),
                             Padding(
                               padding:  EdgeInsets.symmetric(horizontal: getWidth(5), vertical: getHeight(10)),
                               child: Text(

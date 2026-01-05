@@ -5,7 +5,9 @@ import 'package:clean_trust/view_model/controller/home/attendance/get_today_and_
 import 'package:clean_trust/view_model/controller/home/attendance/scanqrcode_controller.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
+import '../../../helper/internet_check.dart';
 import '../../../helper/routes/routes_name.dart';
 import '../../../util/size_config.dart';
 import '../../../util/text_style.dart';
@@ -25,19 +27,29 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
-    getAttendanceHistoryController.fetchTodayAttendance();
-    getAttendanceHistoryController.fetchMonthlyAttendance();
-    unreadCountController.fetchUnreadCount();
-    controller.fetchEmployee();
 
+    _loadData();
 
     ever(notificationController.unreadCount, (_) {
       unreadCountController.fetchUnreadCount();
     });
-
   }
+
+  Future<void> _loadData() async {
+    final online = await isOnline();
+
+    if (!online) {
+      debugPrint('OFFLINE → API not called');
+      return;
+    }
+
+    getAttendanceHistoryController.fetchTodayAttendance();
+    getAttendanceHistoryController.fetchMonthlyAttendance();
+    unreadCountController.fetchUnreadCount();
+    controller.fetchEmployee();
+  }
+
   final EditProfileController controller = Get.find();
 
 
@@ -59,7 +71,13 @@ class _HomeScreenState extends State<HomeScreen> {
           clipBehavior: Clip.none,
           children: [
             _topHeader(),
-            Positioned.fill(
+            Obx((){
+              if (getAttendanceHistoryController.isLoading.value) {
+                return Center(
+                  child: SpinKitSpinningLines(color: AppColors.kSkyBlueColor),
+                );
+              }
+           return Positioned.fill(
 
               top: getHeight(160),
               child: SingleChildScrollView(
@@ -81,9 +99,9 @@ class _HomeScreenState extends State<HomeScreen> {
                   ],
                 ),
               ),
-            ),
+            );
 
-
+            }),
 
           ],
         ),
@@ -729,6 +747,8 @@ class _HomeScreenState extends State<HomeScreen> {
 
 
 }
+
+
 // import 'package:clean_trust/util/app_colors.dart';
 // import 'package:clean_trust/util/app_images.dart';
 // import 'package:clean_trust/view/screens/home/scan_qrcode_screen.dart';

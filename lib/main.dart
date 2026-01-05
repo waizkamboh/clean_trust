@@ -1,11 +1,14 @@
 import 'package:clean_trust/helper/get_di.dart';
 import 'package:clean_trust/util/language_module/utils/localization_page.dart';
+import 'package:clean_trust/view_model/controller/general_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'helper/routes/routes.dart';
 
 void main() async{
-  WidgetsFlutterBinding.ensureInitialized();
+ await init();
+
   runApp(const MyApp());
 }
 

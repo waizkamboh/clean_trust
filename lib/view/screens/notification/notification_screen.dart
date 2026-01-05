@@ -5,6 +5,7 @@ import 'package:clean_trust/view_model/controller/notification/mark_all_notifica
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
+import '../../../helper/internet_check.dart';
 import '../../../util/app_images.dart';
 import '../../../util/text_style.dart';
 import '../../../view_model/controller/notification/get_unread_count_controller.dart';
@@ -25,6 +26,17 @@ class _NotificationScreenState extends State<NotificationScreen> {
   void initState() {
     // TODO: implement initState
     super.initState();
+    _loadData();
+
+  }
+  Future<void> _loadData() async {
+    final online = await isOnline();
+
+    if (!online) {
+      debugPrint('OFFLINE → API not called');
+      return;
+    }
+
     controller.fetchNotifications(isInitial: true);
     Get.find<UnreadCountController>().fetchUnreadCount();
 
@@ -77,14 +89,28 @@ class _NotificationScreenState extends State<NotificationScreen> {
               if (controller.notifications.isEmpty) {
                 return RefreshIndicator(
                   onRefresh: controller.refreshNotifications,
+                  color: AppColors.kSkyBlueColor,
+                  backgroundColor: AppColors.kWhiteColor,
                   child: ListView(
                     physics: const AlwaysScrollableScrollPhysics(),
-                    children: const [
-                      SizedBox(height: 200),
-                      Center(child: Text('No notifications found')),
+                    children: [
+                      SizedBox(height: MediaQuery.of(context).size.height * 0.3),
+                      Padding(
+                        padding: EdgeInsets.symmetric(horizontal: getWidth(20)),
+                        child: Center(
+                          child: Text(
+                            'No notifications found, please check your internet connection',
+                            textAlign: TextAlign.center,
+                            style: kSize16W400KWhiteColorOutfitRegular.copyWith(
+                              color: AppColors.kCoolGreyColor,
+                            ),
+                          ),
+                        ),
+                      ),
                     ],
                   ),
                 );
+
               }
 
               return RefreshIndicator(

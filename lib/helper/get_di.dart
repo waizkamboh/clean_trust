@@ -42,7 +42,6 @@ Future<void> init() async {
 
   MyBindings binding = MyBindings();
   await binding.dependencies();
-  await SharedPreferences.getInstance();
 
 
 }
@@ -68,7 +67,6 @@ class MyBindings implements Bindings {
     Get.lazyPut(() => MarkNotificationReadController(), fenix: true);
     Get.lazyPut(() => NotificationController(), fenix: true);
     Get.lazyPut(() => ConfirmPasswordController(), fenix: true);
-    Get.lazyPut(() => GeneralController(sharedPreferences: Get.find()), fenix: true);
 
   }
 

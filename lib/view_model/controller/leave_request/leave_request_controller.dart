@@ -101,7 +101,8 @@ class LeaveRequestController extends GetxController {
 
       if (response['success'] == true) {
         showCustomSnackBar(response['message'] ?? 'Leave request submitted');
-        Get.toNamed(RouteName.bottomNavScreen);
+        Get.until((route) => route.settings.name == RouteName.bottomNavScreen);
+
       } else {
         showCustomSnackBar(response['message'] ?? 'Something went wrong');
       }
