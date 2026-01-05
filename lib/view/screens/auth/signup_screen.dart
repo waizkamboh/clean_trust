@@ -32,7 +32,7 @@ class SignupScreen extends StatelessWidget {
                 AuthCard(
                   size: getHeight(180),
                     child: Padding(
-                      padding:  EdgeInsets.symmetric(vertical: getHeight(34)),
+                      padding:  EdgeInsets.symmetric(vertical: getHeight(28)),
                       child: Column(
                         mainAxisSize: MainAxisSize.min,
                         crossAxisAlignment: CrossAxisAlignment.start,

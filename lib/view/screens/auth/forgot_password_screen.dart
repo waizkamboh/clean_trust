@@ -30,13 +30,12 @@ class ForgotPasswordScreen extends StatelessWidget {
                 AuthCard(
                     size: getHeight(180),
                     child: Padding(
-                      padding:  EdgeInsets.symmetric(horizontal: getWidth(17)),
+                      padding:  EdgeInsets.symmetric(horizontal: getWidth(17), vertical: getHeight(35)),
                       child: Column(
                         mainAxisSize: MainAxisSize.min,
                         mainAxisAlignment: MainAxisAlignment.start,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          SizedBox(height: getHeight(34)),
                           Text(
                             'forgotPassword1'.tr,
                             style: kSize16W600KBlackColorOutfitSemiBold.copyWith(fontSize: getFont(18)),
@@ -45,10 +44,10 @@ class ForgotPasswordScreen extends StatelessWidget {
                             'forgotPassword2'.tr,
                             style: kSize16W400KWhiteColorOutfitRegular.copyWith(color: AppColors.kCharcoalBlackColor, fontSize: getFont(15)),
                           ),
-                          SizedBox(height: getHeight(30)),
+                          SizedBox(height: getHeight(40)),
                           InputTextField(
                             myController: controller.emailController.value,
-                            width: getWidth(300),
+                            width: getWidth(298.21),
                             contentPadding: EdgeInsets.symmetric(horizontal: getWidth(20)),
                             onValidator: (email){
                               return null;
@@ -58,11 +57,16 @@ class ForgotPasswordScreen extends StatelessWidget {
                             obscureText: false,
                             hintText: 'forgotPassword4'.tr,
                             labelText: 'forgotPassword3'.tr,
+                            hintTextStyle: kSize16W400KWhiteColorOutfitRegular.copyWith(fontSize: getFont(12.54), color: AppColors.kBlackColor.withOpacity(0.66)),
+                            labelTextStyle: kSize16W400KWhiteColorOutfitRegular.copyWith(fontSize: getFont(12.54), color: AppColors.kCharcoalBlackColor),
                             borderSideColor: AppColors.kBlackColor.withOpacity(0.37),
+                            borderSideWidth: 0.9,
+
                             textFormFieldColor: AppColors.kWhiteColor,
+
                           ),
                       
-                          SizedBox(height: getHeight(80)),
+                          SizedBox(height: getHeight(50)),
 
                           Obx((){
                             return RoundButton(
@@ -81,8 +85,7 @@ class ForgotPasswordScreen extends StatelessWidget {
                             );
 
                           }),
-                          SizedBox(height: getHeight(100),),
-                      
+
                       
                       
                         ],
