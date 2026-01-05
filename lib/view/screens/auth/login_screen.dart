@@ -62,7 +62,7 @@ class LoginScreen extends StatelessWidget {
                       borderSideColor: AppColors.kBlackColor.withOpacity(0.37),
                       textFormFieldColor: AppColors.kWhiteColor,
                     ),
-                    SizedBox(height: getHeight(20)),
+                    SizedBox(height: getHeight(25)),
                     Obx(() {
                       return  InputTextField(
                         //height: getHeight(42),

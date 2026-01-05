@@ -71,7 +71,7 @@ class SignupScreen extends StatelessWidget {
                             borderSideWidth: 0.9,
                             textFormFieldColor: AppColors.kWhiteColor,
                           ),
-                          SizedBox(height: getHeight(20)),
+                          SizedBox(height: getHeight(25)),
                           InputTextField(
                             //height: getHeight(42),
                             myController: signupController.phoneController.value,
@@ -97,7 +97,7 @@ class SignupScreen extends StatelessWidget {
 
                             textFormFieldColor: AppColors.kWhiteColor,
                           ),
-                          SizedBox(height: getHeight(20)),
+                          SizedBox(height: getHeight(25)),
                           Obx(() {
                             return  InputTextField(
                               //height: getHeight(42),

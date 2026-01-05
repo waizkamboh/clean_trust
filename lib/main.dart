@@ -1,5 +1,6 @@
 import 'package:clean_trust/helper/get_di.dart';
 import 'package:clean_trust/util/language_module/utils/localization_page.dart';
+import 'package:clean_trust/view/screens/auth/confirm_password_screen.dart';
 import 'package:clean_trust/view/screens/auth/forgot_password_screen.dart';
 import 'package:clean_trust/view/screens/auth/login_screen.dart';
 import 'package:clean_trust/view/screens/auth/signup_screen.dart';
@@ -30,7 +31,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
       ),
-      home: ForgotPasswordScreen(),
+      home: ConfirmPasswordScreen(),
       locale: LocalizationService.locale ,
       fallbackLocale: LocalizationService.fallbackLocale,
       translations: LocalizationService(),
