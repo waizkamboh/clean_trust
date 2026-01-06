@@ -27,139 +27,156 @@ class ChangePasswordScreen extends StatelessWidget {
             SingleChildScrollView(
               child: Column(
                 children: [
-                  Obx(() {
-                    return  InputTextField(
-                      //height: getHeight(42),
-                      myController: changePasswordController.oldPasswordController.value,
-                      width: getWidth(333),
-                      contentPadding: EdgeInsets.symmetric(horizontal: getWidth(20)),
-                      focusNode: changePasswordController.oldPasswordFocus.value,
-                      onFiledSubmittedValue: (value){
-                        FocusScope.of(context)
-                            .requestFocus(changePasswordController.newPasswordFocus.value);
-
-                      },
-                      onValidator: (email){
-                        return null;
-                      },
-                      keyBoardType: TextInputType.emailAddress,
-                      obscureText: changePasswordController.oldPasswordHidden.value,
-                      suffixIcon: InkWell(
-                        onTap: () {
-                          changePasswordController.oldPasswordHidden.toggle();
-                        },
-                        child: Icon(
-                          changePasswordController.oldPasswordHidden.value
-                              ? Icons.remove_red_eye_outlined
-                              : Icons.remove_red_eye,
+                  Padding(
+                    padding:  EdgeInsets.symmetric(horizontal: getWidth(39)),
+                    child: Column(
+                      children: [
+                        Obx(() {
+                          return  InputTextField(
+                            //height: getHeight(42),
+                            myController: changePasswordController.oldPasswordController.value,
+                            width: getWidth(333),
+                            contentPadding: EdgeInsets.symmetric(horizontal: getWidth(20)),
+                            focusNode: changePasswordController.oldPasswordFocus.value,
+                            onFiledSubmittedValue: (value){
+                              FocusScope.of(context)
+                                  .requestFocus(changePasswordController.newPasswordFocus.value);
+                    
+                            },
+                            onValidator: (email){
+                              return null;
+                            },
+                            keyBoardType: TextInputType.emailAddress,
+                            obscureText: changePasswordController.oldPasswordHidden.value,
+                            suffixIcon: InkWell(
+                              onTap: () {
+                                changePasswordController.oldPasswordHidden.toggle();
+                              },
+                              child: Icon(
+                                changePasswordController.oldPasswordHidden.value
+                                    ? Icons.remove_red_eye_outlined
+                                    : Icons.remove_red_eye,
+                                color: AppColors.kBlackColor.withOpacity(0.66),
+                    
+                              ),
+                            ),
+                            labelTextStyle: kSize17W400KCharcoalBlackColorInterRegular.copyWith(fontSize: getFont(12.54), color: AppColors.kCharcoalBlackColor),
+                            hintTextStyle: kSize10W400KBlackColorlatoRegular.copyWith(fontSize: getFont(21.49), color: AppColors.kBlackColor.withOpacity(0.66)),
+                            hintText: 'changePasswordScreen3'.tr,
+                            labelText: 'changePasswordScreen2'.tr,
+                            borderRadius: 5,
+                            borderSideColor: AppColors.kBlackColor.withOpacity(0.37),
+                            textFormFieldColor: AppColors.kWhiteColor,
+                          );
+                    
+                        }
                         ),
-                      ),
-                      labelTextStyle: kSize16W400KWhiteColorOutfitRegular.copyWith(fontSize: getFont(14), color: AppColors.kCharcoalBlackColor),
-                      hintTextStyle: kSize16W400KWhiteColorOutfitRegular.copyWith(fontSize: getFont(14), color: AppColors.kBlackColor.withOpacity(0.66)),
-                      hintText: 'changePasswordScreen3'.tr,
-                      labelText: 'changePasswordScreen2'.tr,
-                      borderRadius: 5,
-                      borderSideColor: AppColors.kBlackColor.withOpacity(0.37),
-                      textFormFieldColor: AppColors.kWhiteColor,
-                    );
-
-                  }
-                  ),
-                  SizedBox(height: getHeight(20),),
-
-                  Obx(() {
-                    return  InputTextField(
-                      //height: getHeight(42),
-                      myController: changePasswordController.newPasswordController.value,
-                      width: getWidth(333),
-                      contentPadding: EdgeInsets.symmetric(horizontal: getWidth(20)),
-                      focusNode: changePasswordController.newPasswordFocus.value,
-                      onFiledSubmittedValue: (value){
-                        FocusScope.of(context)
-                            .requestFocus(changePasswordController.confirmPasswordFocus.value);
-
-                      },
-                      onValidator: (email){
-                        return null;
-                      },
-                      keyBoardType: TextInputType.emailAddress,
-                      obscureText: changePasswordController.newPasswordHidden.value,
-                      suffixIcon: InkWell(
-                        onTap: () {
-                          changePasswordController.newPasswordHidden.toggle();
-                        },
-                        child: Icon(
-                          changePasswordController.newPasswordHidden.value
-                              ? Icons.remove_red_eye_outlined
-                              : Icons.remove_red_eye,
+                        SizedBox(height: getHeight(30),),
+                    
+                        Obx(() {
+                          return  InputTextField(
+                            //height: getHeight(42),
+                            myController: changePasswordController.newPasswordController.value,
+                            width: getWidth(333),
+                            contentPadding: EdgeInsets.symmetric(horizontal: getWidth(20)),
+                            focusNode: changePasswordController.newPasswordFocus.value,
+                            onFiledSubmittedValue: (value){
+                              FocusScope.of(context)
+                                  .requestFocus(changePasswordController.confirmPasswordFocus.value);
+                    
+                            },
+                            onValidator: (email){
+                              return null;
+                            },
+                            keyBoardType: TextInputType.emailAddress,
+                            obscureText: changePasswordController.newPasswordHidden.value,
+                            suffixIcon: InkWell(
+                              onTap: () {
+                                changePasswordController.newPasswordHidden.toggle();
+                              },
+                              child: Icon(
+                                changePasswordController.newPasswordHidden.value
+                                    ? Icons.remove_red_eye_outlined
+                                    : Icons.remove_red_eye,
+                                color: AppColors.kBlackColor.withOpacity(0.66),
+                              ),
+                            ),
+                            labelTextStyle: kSize17W400KCharcoalBlackColorInterRegular.copyWith(fontSize: getFont(12.54), color: AppColors.kCharcoalBlackColor),
+                            hintTextStyle: kSize10W400KBlackColorlatoRegular.copyWith(fontSize: getFont(21.49), color: AppColors.kBlackColor.withOpacity(0.66)),
+                            hintText: 'changePasswordScreen3'.tr,
+                            labelText: 'changePasswordScreen4'.tr,
+                            borderRadius: 5,
+                            borderSideColor: AppColors.kBlackColor.withOpacity(0.37),
+                            textFormFieldColor: AppColors.kWhiteColor,
+                          );
+                    
+                        }
                         ),
-                      ),
-                      labelTextStyle: kSize16W400KWhiteColorOutfitRegular.copyWith(fontSize: getFont(14), color: AppColors.kCharcoalBlackColor),
-                      hintTextStyle: kSize16W400KWhiteColorOutfitRegular.copyWith(fontSize: getFont(14), color: AppColors.kBlackColor.withOpacity(0.66)),
-                      hintText: 'changePasswordScreen3'.tr,
-                      labelText: 'changePasswordScreen4'.tr,
-                      borderRadius: 5,
-                      borderSideColor: AppColors.kBlackColor.withOpacity(0.37),
-                      textFormFieldColor: AppColors.kWhiteColor,
-                    );
-
-                  }
-                  ),
-                  SizedBox(height: getHeight(20),),
-
-                  Obx(() {
-                    return  InputTextField(
-                      //height: getHeight(42),
-                      myController: changePasswordController.confirmPasswordController.value,
-                      width: getWidth(333),
-                      contentPadding: EdgeInsets.symmetric(horizontal: getWidth(20)),
-                      focusNode: changePasswordController.confirmPasswordFocus.value,
-                      onFiledSubmittedValue: (value){
-
-                      },
-                      onValidator: (email){
-                        return null;
-                      },
-                      keyBoardType: TextInputType.emailAddress,
-                      obscureText: changePasswordController.confirmPasswordHidden.value,
-                      suffixIcon: InkWell(
-                        onTap: () {
-                          changePasswordController.confirmPasswordHidden.toggle();
-                        },
-                        child: Icon(
-                          changePasswordController.confirmPasswordHidden.value
-                              ? Icons.remove_red_eye_outlined
-                              : Icons.remove_red_eye,
+                        SizedBox(height: getHeight(30),),
+                    
+                        Obx(() {
+                          return  InputTextField(
+                            //height: getHeight(42),
+                            myController: changePasswordController.confirmPasswordController.value,
+                            width: getWidth(333),
+                            contentPadding: EdgeInsets.symmetric(horizontal: getWidth(20)),
+                            focusNode: changePasswordController.confirmPasswordFocus.value,
+                            onFiledSubmittedValue: (value){
+                    
+                            },
+                            onValidator: (email){
+                              return null;
+                            },
+                            keyBoardType: TextInputType.emailAddress,
+                            obscureText: changePasswordController.confirmPasswordHidden.value,
+                            suffixIcon: InkWell(
+                              onTap: () {
+                                changePasswordController.confirmPasswordHidden.toggle();
+                              },
+                              child: Icon(
+                                changePasswordController.confirmPasswordHidden.value
+                                    ? Icons.remove_red_eye_outlined
+                                    : Icons.remove_red_eye,
+                                color: AppColors.kBlackColor.withOpacity(0.66),
+                    
+                              ),
+                            ),
+                            labelTextStyle: kSize17W400KCharcoalBlackColorInterRegular.copyWith(fontSize: getFont(12.54), color: AppColors.kCharcoalBlackColor),
+                            hintTextStyle: kSize10W400KBlackColorlatoRegular.copyWith(fontSize: getFont(21.49), color: AppColors.kBlackColor.withOpacity(0.66)),
+                            hintText: 'changePasswordScreen3'.tr,
+                            labelText: 'changePasswordScreen5'.tr,
+                            borderRadius: 5,
+                            borderSideColor: AppColors.kBlackColor.withOpacity(0.37),
+                            textFormFieldColor: AppColors.kWhiteColor,
+                          );
+                    
+                        }
                         ),
-                      ),
-                      labelTextStyle: kSize16W400KWhiteColorOutfitRegular.copyWith(fontSize: getFont(14), color: AppColors.kCharcoalBlackColor),
-                      hintTextStyle: kSize16W400KWhiteColorOutfitRegular.copyWith(fontSize: getFont(14), color: AppColors.kBlackColor.withOpacity(0.66)),
-                      hintText: 'changePasswordScreen3'.tr,
-                      labelText: 'changePasswordScreen5'.tr,
-                      borderRadius: 5,
-                      borderSideColor: AppColors.kBlackColor.withOpacity(0.37),
-                      textFormFieldColor: AppColors.kWhiteColor,
-                    );
-
-                  }
+                    
+                      ],
+                    ),
                   ),
+
                   SizedBox(height: getHeight(100),),
-                  Obx((){
-                    return RoundButton(
-                      loading: changePasswordController.loading.value,
-                      onPress: (){
-                        changePasswordController.changePasswordApi();
-                      },
-                      radius: BorderRadius.circular(12),
-                      title: 'changePasswordScreen6'.tr,
-                      textStyle: kSize16W600KBlackColorOutfitSemiBold.copyWith(color: AppColors.kWhiteColor,),
-                      buttonColor: AppColors.kSkyBlueColor,
-                      width: getWidth(343),
-                      height: getHeight(56),
+                  Padding(
+                    padding:  EdgeInsets.symmetric(horizontal: getWidth(30)),
+                    child: Obx((){
+                      return RoundButton(
+                        loading: changePasswordController.loading.value,
+                        onPress: (){
+                          changePasswordController.changePasswordApi();
+                        },
+                        radius: BorderRadius.circular(12),
+                        title: 'changePasswordScreen6'.tr,
+                        textStyle: kSize16W600kMidnightBlueColorInterSemiBold.copyWith(color: AppColors.kWhiteColor,),
+                        buttonColor: AppColors.kSkyBlueColor,
+                        width: getWidth(343),
+                        height: getHeight(56),
 
-                    );
+                      );
 
-                  })
+                    }),
+                  )
 
                 ],
               ),

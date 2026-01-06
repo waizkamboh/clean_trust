@@ -87,165 +87,172 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
 
 
                   SizedBox(height: getHeight(40),),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Obx(()=>
-                          InputTextField(
-                            width: getWidth(333),
-                            contentPadding: EdgeInsets.symmetric(horizontal: getWidth(20)),
-                            keyBoardType: TextInputType.emailAddress,
-                            readOnly: true,
-                            labelTextStyle: kSize17W400KCharcoalBlackColorInterRegular.copyWith(fontSize: getFont(14), color: AppColors.kCharcoalBlackColor),
-                            hintTextStyle: kSize17W400KCharcoalBlackColorInterRegular.copyWith(fontSize: getFont(14), color: AppColors.kBlackColor.withOpacity(0.66)),
-                            obscureText: false,
-                            hintText: controller.fullName.value,
-                            labelText: 'EditProfileScreen3'.tr,
-                            borderRadius: 5,
-                            borderSideColor: AppColors.kBlackColor.withOpacity(0.37),
-                            textFormFieldColor: AppColors.kWhiteColor,
-                          ),),
-                      SizedBox(height: getHeight(5),),
+                  Padding(
+                    padding:  EdgeInsets.symmetric(horizontal: getWidth(34)),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Obx(()=>
+                            InputTextField(
+                              width: getWidth(333),
+                              contentPadding: EdgeInsets.symmetric(horizontal: getWidth(20)),
+                              keyBoardType: TextInputType.emailAddress,
+                              readOnly: true,
+                              labelTextStyle: kSize17W400KCharcoalBlackColorInterRegular.copyWith(fontSize: getFont(14), color: AppColors.kCharcoalBlackColor),
+                              hintTextStyle: kSize17W400KCharcoalBlackColorInterRegular.copyWith(fontSize: getFont(14), color: AppColors.kBlackColor.withOpacity(0.66)),
+                              obscureText: false,
+                              hintText: controller.fullName.value,
+                              labelText: 'EditProfileScreen3'.tr,
+                              borderRadius: 5,
+                              borderSideColor: AppColors.kBlackColor.withOpacity(0.37),
+                              textFormFieldColor: AppColors.kWhiteColor,
+                            ),),
+                        SizedBox(height: getHeight(5),),
 
-                      Text('EditProfileScreen14'.tr,style: kSize17W400KCharcoalBlackColorInterRegular.copyWith(fontSize: getFont(12), color: AppColors.kCoolGreyColor),),
+                        Text('EditProfileScreen14'.tr,style: kSize17W400KCharcoalBlackColorInterRegular.copyWith(fontSize: getFont(12), color: AppColors.kCoolGreyColor),),
 
-                      SizedBox(height: getHeight(25),),
-                      Obx(()=>
-                          InputTextField(
-                            myController: controller.emailController.value,
-                            width: getWidth(333),
-                            contentPadding: EdgeInsets.symmetric(horizontal: getWidth(20)),
-                            onValidator: (email){
-                              return null;
-                            },
-                            keyBoardType: TextInputType.emailAddress,
-                            labelTextStyle: kSize17W400KCharcoalBlackColorInterRegular.copyWith(fontSize: getFont(14), color: AppColors.kCharcoalBlackColor),
-                            hintTextStyle: kSize17W400KCharcoalBlackColorInterRegular.copyWith(fontSize: getFont(14), color: AppColors.kBlackColor.withOpacity(0.66)),
-                            obscureText: false,
-                            hintText: controller.email.value,
-                            labelText: 'EditProfileScreen4'.tr,
-                            borderRadius: 5,
-                            borderSideColor: AppColors.kBlackColor.withOpacity(0.37),
-                            textFormFieldColor: AppColors.kWhiteColor,
-                          ),),
-                      SizedBox(height: getHeight(25),),
-                      Obx(()=>
-                          InputTextField(
-                            width: getWidth(333),
-                            contentPadding: EdgeInsets.symmetric(horizontal: getWidth(20)),
-                            keyBoardType: TextInputType.emailAddress,
-                            readOnly: true,
-                            labelTextStyle: kSize17W400KCharcoalBlackColorInterRegular.copyWith(fontSize: getFont(14), color: AppColors.kCharcoalBlackColor),
-                            hintTextStyle: kSize17W400KCharcoalBlackColorInterRegular.copyWith(fontSize: getFont(14), color: AppColors.kBlackColor.withOpacity(0.66)),
-                            obscureText: false,
-                            hintText: controller.createdAt.value,
-                            labelText: 'EditProfileScreen6'.tr,
-                            borderRadius: 5,
-                            borderSideColor: AppColors.kBlackColor.withOpacity(0.37),
-                            textFormFieldColor: AppColors.kWhiteColor,
-                          ),),
-                      SizedBox(height: getHeight(5),),
-
-                      Text('EditProfileScreen14'.tr,style: kSize17W400KCharcoalBlackColorInterRegular.copyWith(fontSize: getFont(12), color: AppColors.kCoolGreyColor),),
-                      SizedBox(height: getHeight(25),),
-                      Obx(()=>
-                          InputTextField(
-                            width: getWidth(333),
-                            contentPadding: EdgeInsets.symmetric(horizontal: getWidth(20)),
-                            keyBoardType: TextInputType.emailAddress,
-                            readOnly: true,
-                            labelTextStyle: kSize17W400KCharcoalBlackColorInterRegular.copyWith(fontSize: getFont(14), color: AppColors.kCharcoalBlackColor),
-                            hintTextStyle: kSize17W400KCharcoalBlackColorInterRegular.copyWith(fontSize: getFont(14), color: AppColors.kBlackColor.withOpacity(0.66)),
-                            obscureText: false,
-                            hintText: controller.role.value,
-                            labelText: 'EditProfileScreen7'.tr,
-                            borderRadius: 5,
-                            borderSideColor: AppColors.kBlackColor.withOpacity(0.37),
-                            textFormFieldColor: AppColors.kWhiteColor,
-                          ),),
-                      SizedBox(height: getHeight(5),),
-
-                      Text('EditProfileScreen14'.tr,style: kSize17W400KCharcoalBlackColorInterRegular.copyWith(fontSize: getFont(12), color: AppColors.kCoolGreyColor),),
-                      SizedBox(height: getHeight(25),),
-                      Obx(()=>
-                          InputTextField(
-                            width: getWidth(333),
-                            contentPadding: EdgeInsets.symmetric(horizontal: getWidth(20)),
-                            keyBoardType: TextInputType.emailAddress,
-                            readOnly: true,
-                            labelTextStyle: kSize17W400KCharcoalBlackColorInterRegular.copyWith(fontSize: getFont(14), color: AppColors.kCharcoalBlackColor),
-                            hintTextStyle: kSize17W400KCharcoalBlackColorInterRegular.copyWith(fontSize: getFont(14), color: AppColors.kBlackColor.withOpacity(0.66)),
-                            obscureText: false,
-                            hintText: controller.position.value,
-                            labelText: 'EditProfileScreen8'.tr,
-                            borderRadius: 5,
-                            borderSideColor: AppColors.kBlackColor.withOpacity(0.37),
-                            textFormFieldColor: AppColors.kWhiteColor,
-                          ),),
-                      SizedBox(height: getHeight(5),),
-
-                      Text('EditProfileScreen14'.tr,style: kSize17W400KCharcoalBlackColorInterRegular.copyWith(fontSize: getFont(12), color: AppColors.kCoolGreyColor),),
-                      SizedBox(height: getHeight(25),),
-                      Obx(()=>
-                          InputTextField(
-                            myController: controller.phoneController.value,
-                            width: getWidth(333),
-                            contentPadding: EdgeInsets.symmetric(horizontal: getWidth(20)),
-                            keyBoardType: TextInputType.phone,
-                            labelTextStyle: kSize17W400KCharcoalBlackColorInterRegular.copyWith(fontSize: getFont(14), color: AppColors.kCharcoalBlackColor),
-                            hintTextStyle: kSize17W400KCharcoalBlackColorInterRegular.copyWith(fontSize: getFont(14), color: AppColors.kBlackColor.withOpacity(0.66)),
-                            obscureText: false,
-                            hintText: controller.phoneNumber.value,
-                            labelText: 'EditProfileScreen9'.tr,
-                            borderRadius: 5,
-                            borderSideColor: AppColors.kBlackColor.withOpacity(0.37),
-                            textFormFieldColor: AppColors.kWhiteColor,
-                          ),),
-                      SizedBox(height: getHeight(25),),
-                      Obx(()=>
-                          InputTextField(
-                            myController: controller.passwordController.value,
-                            width: getWidth(333),
-                            contentPadding: EdgeInsets.symmetric(horizontal: getWidth(20)),
-                            keyBoardType: TextInputType.visiblePassword,
-                            labelTextStyle: kSize17W400KCharcoalBlackColorInterRegular.copyWith(fontSize: getFont(14), color: AppColors.kCharcoalBlackColor),
-                            hintTextStyle: kSize17W400KCharcoalBlackColorInterRegular.copyWith(fontSize: getFont(14), color: AppColors.kBlackColor.withOpacity(0.66)),
-                            obscureText: controller.isPasswordHidden.value,
-                            suffixIcon: InkWell(
-                              onTap: () {
-                                controller.isPasswordHidden.toggle();
+                        SizedBox(height: getHeight(25),),
+                        Obx(()=>
+                            InputTextField(
+                              myController: controller.emailController.value,
+                              width: getWidth(333),
+                              contentPadding: EdgeInsets.symmetric(horizontal: getWidth(20)),
+                              onValidator: (email){
+                                return null;
                               },
-                              child: Icon(
-                                controller.isPasswordHidden.value
-                                    ? Icons.remove_red_eye_outlined
-                                    : Icons.remove_red_eye,
+                              keyBoardType: TextInputType.emailAddress,
+                              labelTextStyle: kSize17W400KCharcoalBlackColorInterRegular.copyWith(fontSize: getFont(14), color: AppColors.kCharcoalBlackColor),
+                              hintTextStyle: kSize17W400KCharcoalBlackColorInterRegular.copyWith(fontSize: getFont(14), color: AppColors.kBlackColor.withOpacity(0.66)),
+                              obscureText: false,
+                              hintText: controller.email.value,
+                              labelText: 'EditProfileScreen4'.tr,
+                              borderRadius: 5,
+                              borderSideColor: AppColors.kBlackColor.withOpacity(0.37),
+                              textFormFieldColor: AppColors.kWhiteColor,
+                            ),),
+                        SizedBox(height: getHeight(25),),
+                        Obx(()=>
+                            InputTextField(
+                              width: getWidth(333),
+                              contentPadding: EdgeInsets.symmetric(horizontal: getWidth(20)),
+                              keyBoardType: TextInputType.emailAddress,
+                              readOnly: true,
+                              labelTextStyle: kSize17W400KCharcoalBlackColorInterRegular.copyWith(fontSize: getFont(14), color: AppColors.kCharcoalBlackColor),
+                              hintTextStyle: kSize17W400KCharcoalBlackColorInterRegular.copyWith(fontSize: getFont(14), color: AppColors.kBlackColor.withOpacity(0.66)),
+                              obscureText: false,
+                              hintText: controller.createdAt.value,
+                              labelText: 'EditProfileScreen6'.tr,
+                              borderRadius: 5,
+                              borderSideColor: AppColors.kBlackColor.withOpacity(0.37),
+                              textFormFieldColor: AppColors.kWhiteColor,
+                            ),),
+                        SizedBox(height: getHeight(5),),
+
+                        Text('EditProfileScreen14'.tr,style: kSize17W400KCharcoalBlackColorInterRegular.copyWith(fontSize: getFont(12), color: AppColors.kCoolGreyColor),),
+                        SizedBox(height: getHeight(25),),
+                        Obx(()=>
+                            InputTextField(
+                              width: getWidth(333),
+                              contentPadding: EdgeInsets.symmetric(horizontal: getWidth(20)),
+                              keyBoardType: TextInputType.emailAddress,
+                              readOnly: true,
+                              labelTextStyle: kSize17W400KCharcoalBlackColorInterRegular.copyWith(fontSize: getFont(14), color: AppColors.kCharcoalBlackColor),
+                              hintTextStyle: kSize17W400KCharcoalBlackColorInterRegular.copyWith(fontSize: getFont(14), color: AppColors.kBlackColor.withOpacity(0.66)),
+                              obscureText: false,
+                              hintText: controller.role.value,
+                              labelText: 'EditProfileScreen7'.tr,
+                              borderRadius: 5,
+                              borderSideColor: AppColors.kBlackColor.withOpacity(0.37),
+                              textFormFieldColor: AppColors.kWhiteColor,
+                            ),),
+                        SizedBox(height: getHeight(5),),
+
+                        Text('EditProfileScreen14'.tr,style: kSize17W400KCharcoalBlackColorInterRegular.copyWith(fontSize: getFont(12), color: AppColors.kCoolGreyColor),),
+                        SizedBox(height: getHeight(25),),
+                        Obx(()=>
+                            InputTextField(
+                              width: getWidth(333),
+                              contentPadding: EdgeInsets.symmetric(horizontal: getWidth(20)),
+                              keyBoardType: TextInputType.emailAddress,
+                              readOnly: true,
+                              labelTextStyle: kSize17W400KCharcoalBlackColorInterRegular.copyWith(fontSize: getFont(14), color: AppColors.kCharcoalBlackColor),
+                              hintTextStyle: kSize17W400KCharcoalBlackColorInterRegular.copyWith(fontSize: getFont(14), color: AppColors.kBlackColor.withOpacity(0.66)),
+                              obscureText: false,
+                              hintText: controller.position.value,
+                              labelText: 'EditProfileScreen8'.tr,
+                              borderRadius: 5,
+                              borderSideColor: AppColors.kBlackColor.withOpacity(0.37),
+                              textFormFieldColor: AppColors.kWhiteColor,
+                            ),),
+                        SizedBox(height: getHeight(5),),
+
+                        Text('EditProfileScreen14'.tr,style: kSize17W400KCharcoalBlackColorInterRegular.copyWith(fontSize: getFont(12), color: AppColors.kCoolGreyColor),),
+                        SizedBox(height: getHeight(25),),
+                        Obx(()=>
+                            InputTextField(
+                              myController: controller.phoneController.value,
+                              width: getWidth(333),
+                              contentPadding: EdgeInsets.symmetric(horizontal: getWidth(20)),
+                              keyBoardType: TextInputType.phone,
+                              labelTextStyle: kSize17W400KCharcoalBlackColorInterRegular.copyWith(fontSize: getFont(14), color: AppColors.kCharcoalBlackColor),
+                              hintTextStyle: kSize17W400KCharcoalBlackColorInterRegular.copyWith(fontSize: getFont(14), color: AppColors.kBlackColor.withOpacity(0.66)),
+                              obscureText: false,
+                              hintText: controller.phoneNumber.value,
+                              labelText: 'EditProfileScreen9'.tr,
+                              borderRadius: 5,
+                              borderSideColor: AppColors.kBlackColor.withOpacity(0.37),
+                              textFormFieldColor: AppColors.kWhiteColor,
+                            ),),
+                        SizedBox(height: getHeight(25),),
+                        Obx(()=>
+                            InputTextField(
+                              myController: controller.passwordController.value,
+                              width: getWidth(333),
+                              contentPadding: EdgeInsets.symmetric(horizontal: getWidth(20)),
+                              keyBoardType: TextInputType.visiblePassword,
+                              labelTextStyle: kSize17W400KCharcoalBlackColorInterRegular.copyWith(fontSize: getFont(14), color: AppColors.kCharcoalBlackColor),
+                              hintTextStyle: kSize17W400KCharcoalBlackColorInterRegular.copyWith(fontSize: getFont(14), color: AppColors.kBlackColor.withOpacity(0.66)),
+                              obscureText: controller.isPasswordHidden.value,
+                              suffixIcon: InkWell(
+                                onTap: () {
+                                  controller.isPasswordHidden.toggle();
+                                },
+                                child: Icon(
+                                  controller.isPasswordHidden.value
+                                      ? Icons.remove_red_eye_outlined
+                                      : Icons.remove_red_eye,
+                                ),
                               ),
-                            ),
-                            hintText: 'EditProfileScreen12'.tr,
-                            labelText: 'EditProfileScreen11'.tr,
-                            borderRadius: 5,
-                            borderSideColor: AppColors.kBlackColor.withOpacity(0.37),
-                            textFormFieldColor: AppColors.kWhiteColor,
-                          ),),
+                              hintText: 'EditProfileScreen12'.tr,
+                              labelText: 'EditProfileScreen11'.tr,
+                              borderRadius: 5,
+                              borderSideColor: AppColors.kBlackColor.withOpacity(0.37),
+                              textFormFieldColor: AppColors.kWhiteColor,
+                            ),),
 
 
-                      SizedBox(height: getHeight(60),),
-                      Obx(()=>
-                          RoundButton(
-                            loading: controller.isLoading.value,
-                            onPress: (){
-                              controller.updateProfile();
-                            },
-                            radius: BorderRadius.circular(12),
-                            title: 'EditProfileScreen13'.tr,
-                            textStyle: kSize16W600kMidnightBlueColorInterSemiBold.copyWith(color: AppColors.kWhiteColor,),
-                            buttonColor: AppColors.kSkyBlueColor,
-                            width: getWidth(343),
-                            height: getHeight(56),
 
-                          ),),
+                      ],
+                    ),
+                  ),
 
-                    ],
+                  SizedBox(height: getHeight(60),),
+                  Padding(
+                    padding:  EdgeInsets.symmetric(horizontal: getWidth(30)),
+                    child: Obx(()=>
+                        RoundButton(
+                          loading: controller.isLoading.value,
+                          onPress: (){
+                            controller.updateProfile();
+                          },
+                          radius: BorderRadius.circular(12),
+                          title: 'EditProfileScreen13'.tr,
+                          textStyle: kSize16W600kMidnightBlueColorInterSemiBold.copyWith(color: AppColors.kWhiteColor,),
+                          buttonColor: AppColors.kSkyBlueColor,
+                          width: getWidth(343),
+                          height: getHeight(56),
+
+                        ),),
                   ),
 
                   SizedBox(height: getHeight(50),),
