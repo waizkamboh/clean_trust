@@ -184,6 +184,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
     required bool isUnread,
   }) {
     return Container(
+      width: getWidth(362),
       margin: EdgeInsets.only(bottom: getHeight(12)),
       padding: EdgeInsets.symmetric(
         horizontal: getWidth(16),
@@ -201,9 +202,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
             width: getWidth(40),
             height: getHeight(40),
             decoration: BoxDecoration(
-              color: isUnread
-                  ? AppColors.kAliceBlue   // 🔵 Unread
-                  : AppColors.kWhiteColor, // ⚪ Read
+              color: AppColors.kIceBlueColor,
               border: Border.all(
                 color: AppColors.kLightCoolGreyColor,
 
@@ -224,25 +223,26 @@ class _NotificationScreenState extends State<NotificationScreen> {
                 Text(
                   title,
                   style:
-                  kSize16W600KBlackColorOutfitSemiBold.copyWith(
+                  kSize14W500kForestGreenColorInterMedium.copyWith(
                     fontSize: getFont(14),
+                    color: AppColors.kMidnightBlueColor
                   ),
                 ),
                 Text(
                   message,
                   style:
-                  kSize16W400KWhiteColorOutfitRegular.copyWith(
-                    fontSize: getFont(13),
+                  kSize17W400KCharcoalBlackColorInterRegular.copyWith(
+                    fontSize: getFont(14),
                     color: AppColors.kCoolGreyColor,
                   ),
                 ),
                 Text(
                   time,
                   style:
-                  kSize16W400KWhiteColorOutfitRegular.copyWith(
+                  kSize17W400KCharcoalBlackColorInterRegular.copyWith(
                     fontSize: getFont(12),
                     color:
-                    AppColors.kCoolGreyColor.withOpacity(0.7),
+                    AppColors.kMediumGrey,
                   ),
                 ),
               ],

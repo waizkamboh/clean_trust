@@ -1,11 +1,11 @@
 Map<String, String> en = {
 
 
-  'onboardingScreen1': 'Smart Attendance, Made Simple',
+  'onboardingScreen1': 'Smart Attendance,\nMade Simple',
   'onboardingScreen2': 'Track work hours effortlessly with quick and secure QR code scans.',
   'onboardingScreen3': 'Gets start',
   'onboardingScreen4': 'Works Even Offline',
-  'onboardingScreen5': 'No network? No problem. Your scans are saved and synced automatically\nwhen online.',
+  'onboardingScreen5': 'No network? No problem. Your scans are saved and synced automatically when online.',
   'onboardingScreen6': 'View and Manage Your Records',
   'onboardingScreen7': 'Check attendance history and submit manual requests anytime.',
 
@@ -246,6 +246,13 @@ Map<String, String> en = {
   'EditProfileScreen12': '..........',
   'EditProfileScreen13': 'Save Changes',
   'EditProfileScreen14': 'Read Only',
+
+
+  'bottomNav1': 'Home',
+  'bottomNav2': 'Offline Mode',
+  'bottomNav3': 'Notification',
+  'bottomNav4': 'Profile',
+
 
 
   'changePasswordScreen1': 'Change Password',

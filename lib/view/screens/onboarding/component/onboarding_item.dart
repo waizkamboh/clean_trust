@@ -60,31 +60,31 @@ class OnboardingItem extends StatelessWidget {
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  Column(
-                    children: [
-                      ConstrainedBox(
-                        constraints: BoxConstraints(
-                          maxWidth: getWidth(220),
-                        ),
-                        child: Text(
+                  SizedBox(
+                    width: getWidth(280),
+                    child: Column(
+                      children: [
+                        Text(
                           title.tr,
-                          style: kSize20W700KWhiteColorOutfitBold,
                           textAlign: TextAlign.center,
+                          maxLines: 2,
+                          softWrap: true,
+                          style: kSize20W700KWhiteColorOutfitBold.copyWith(
+                            height: 1.3,
+                          ),
                         ),
-                      ),
-                      SizedBox(height: getHeight(10)),
-                      ConstrainedBox(
-                        constraints: BoxConstraints(
-                          maxWidth: getWidth(281),
-                        ),
-                        child: Text(
+                        SizedBox(height: getHeight(12)),
+                        Text(
                           subtitle.tr,
-                          style: kSize16W400KWhiteColorOutfitRegular,
                           textAlign: TextAlign.center,
+                          maxLines: 3,
+                          softWrap: true,
+                          style: kSize16W400KWhiteColorOutfitRegular.copyWith(
+                            height: 1.5,
+                          ),
                         ),
-                      ),
-
-                    ],
+                      ],
+                    ),
                   ),
 
                   SizedBox(height: getHeight(60)),

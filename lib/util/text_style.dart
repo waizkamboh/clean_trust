@@ -83,4 +83,10 @@ TextStyle  kSize14W500kForestGreenColorInterMedium =  TextStyle(
   fontSize: getFont(16),
   fontFamily: AppFonts.openSansRegular,
 
+);TextStyle  kSize16W500kGradientColor5DMSansMedium =  TextStyle(
+  color: AppColors.kGradientColor5,
+  fontWeight: FontWeight.w500,
+  fontSize: getFont(16.7),
+  fontFamily: AppFonts.dMSansMedium,
+
 );

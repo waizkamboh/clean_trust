@@ -52,52 +52,49 @@ class _AttendanceOfflineScreenState extends State<AttendanceOfflineScreen> {
             TopHeader(title: 'attendanceOffline1'.tr),
             SizedBox(height: getHeight(30)),
 
-            GestureDetector(
-              onTap: attendanceAutoSyncDialog,
-              child: Container(
-                  padding: EdgeInsetsGeometry.symmetric(horizontal: getWidth(20), vertical: getHeight(12)),
-                  width: double.infinity,
-                  decoration: BoxDecoration(
-                    color: AppColors.kSkyBlueColor.withOpacity(0.05),
-                    borderRadius: BorderRadius.all(Radius.circular(8)),
-                    border: Border(left: BorderSide(color: AppColors.kSkyBlueColor, width: 4)),
-                  ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Image.asset(AppImages.networkIcon, color: AppColors.kSkyBlueColor, width: getWidth(22.5),),
-                      SizedBox(width: getWidth(20)),
-                      Flexible(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text(
-                              'attendanceOffline2'.tr,
-                              style: kSize14W500kForestGreenColorInterMedium.copyWith(
-                                color: AppColors.kBlackColor,
-                              ),
-                            ),
-
-                            Text(
-                              'attendanceOffline3'.tr,
-                              style: kSize17W400KCharcoalBlackColorInterRegular.copyWith(
-                                  color: AppColors.kBlackColor,
-                                  fontSize: getFont(12)
-                              ),
-                            ),
-                          ],
+            Container(
+              padding: EdgeInsetsGeometry.symmetric(horizontal: getWidth(20), vertical: getHeight(12)),
+              width: double.infinity,
+              decoration: BoxDecoration(
+                color: AppColors.kSkyBlueColor.withOpacity(0.05),
+                borderRadius: BorderRadius.all(Radius.circular(8)),
+                border: Border(left: BorderSide(color: AppColors.kSkyBlueColor, width: 4)),
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Image.asset(AppImages.networkIcon, color: AppColors.kSkyBlueColor, width: getWidth(22.5),),
+                  SizedBox(width: getWidth(20)),
+                  Flexible(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          'attendanceOffline2'.tr,
+                          style: kSize14W500kForestGreenColorInterMedium.copyWith(
+                            color: AppColors.kBlackColor,
+                          ),
                         ),
-                      ),
 
-
-
-
-
-                    ],
+                        Text(
+                          'attendanceOffline3'.tr,
+                          style: kSize17W400KCharcoalBlackColorInterRegular.copyWith(
+                              color: AppColors.kBlackColor,
+                              fontSize: getFont(12)
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
-                ),
+
+
+
+
+
+                ],
+              ),
             ),
 
             SizedBox(height: getHeight(30)),

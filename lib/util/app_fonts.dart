@@ -11,6 +11,7 @@ class AppFonts{
   static const String interBold = 'Inter_Bold';
   static const String interSemiBold = 'Inter_SemiBold';
   static const String openSansRegular = 'OpenSans-Regular';
+  static const String dMSansMedium = 'DMSans_Medium';
 
 
 

@@ -478,8 +478,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget _leaveRequestCard(){
     return   GestureDetector(
       onTap: () {
-        //Get.toNamed(RouteName.leaveRequestScreen);
-        showLocationEnabledDialog();
+        Get.toNamed(RouteName.leaveRequestScreen);
       },
       child: Container(
         padding: EdgeInsetsGeometry.symmetric(

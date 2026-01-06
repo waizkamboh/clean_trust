@@ -5,6 +5,7 @@ import 'package:clean_trust/util/app_images.dart';
 import 'package:clean_trust/util/size_config.dart';
 import 'package:clean_trust/view/screens/notification/notification_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:persistent_bottom_nav_bar/persistent_bottom_nav_bar.dart';
 
 import '../../util/text_style.dart';
@@ -45,8 +46,8 @@ class _BottomNavScreenState extends State<BottomNavScreen> {
       PersistentBottomNavBarItem(
         icon: Image.asset(AppImages.homeIcon, color: AppColors.kGradientColor5,),
         inactiveIcon: Image.asset(AppImages.homeIcon, color: AppColors.kLightSkyBlueColor,),
-        title: "Home",
-        textStyle: kSize16W400KWhiteColorOutfitRegular.copyWith(fontSize: getFont(18), color: AppColors.kGradientColor5),
+        title: "bottomNav1".tr,
+        textStyle: kSize16W500kGradientColor5DMSansMedium,
         activeColorPrimary: AppColors.kWhiteColor,
         inactiveColorPrimary: AppColors.kLightSkyBlueColor,
         activeColorSecondary: AppColors.kGradientColor5,
@@ -57,8 +58,8 @@ class _BottomNavScreenState extends State<BottomNavScreen> {
       PersistentBottomNavBarItem(
         icon: Image.asset(AppImages.networkIcon, color: AppColors.kGradientColor5,),
         inactiveIcon: Image.asset(AppImages.networkIcon, color: AppColors.kLightSkyBlueColor,),
-        title: "Offline Mode",
-        textStyle: kSize16W400KWhiteColorOutfitRegular.copyWith(fontSize: getFont(18), color: AppColors.kGradientColor5),
+        title: "bottomNav2".tr,
+        textStyle: kSize16W500kGradientColor5DMSansMedium,
         activeColorPrimary: AppColors.kWhiteColor,
         inactiveColorPrimary: AppColors.kLightSkyBlueColor,
         activeColorSecondary: AppColors.kGradientColor5,
@@ -67,8 +68,8 @@ class _BottomNavScreenState extends State<BottomNavScreen> {
       PersistentBottomNavBarItem(
         icon: Image.asset(AppImages.bellIcon, color: AppColors.kGradientColor5,),
         inactiveIcon: Image.asset(AppImages.bellIcon, color: AppColors.kLightSkyBlueColor,),
-        title: "Notification",
-        textStyle: kSize16W400KWhiteColorOutfitRegular.copyWith(fontSize: getFont(18), color: AppColors.kGradientColor5),
+        title: "bottomNav3".tr,
+        textStyle: kSize16W500kGradientColor5DMSansMedium,
         activeColorPrimary: AppColors.kWhiteColor,
         inactiveColorPrimary: AppColors.kLightSkyBlueColor,
         activeColorSecondary: AppColors.kGradientColor5,
@@ -77,8 +78,8 @@ class _BottomNavScreenState extends State<BottomNavScreen> {
       PersistentBottomNavBarItem(
         icon: Image.asset(AppImages.profileIcon, color: AppColors.kGradientColor5,),
         inactiveIcon: Image.asset(AppImages.profileIcon, color: AppColors.kLightSkyBlueColor,),
-        title: "Profile",
-        textStyle: kSize16W400KWhiteColorOutfitRegular.copyWith(fontSize: getFont(18), color: AppColors.kGradientColor5),
+        title: "bottomNav4".tr,
+        textStyle: kSize16W500kGradientColor5DMSansMedium,
         activeColorPrimary: AppColors.kWhiteColor,
         inactiveColorPrimary: AppColors.kLightSkyBlueColor,
         activeColorSecondary: AppColors.kGradientColor5,
