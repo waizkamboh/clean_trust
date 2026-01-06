@@ -52,50 +52,55 @@ class _AttendanceOfflineScreenState extends State<AttendanceOfflineScreen> {
             TopHeader(title: 'attendanceOffline1'.tr),
             SizedBox(height: getHeight(30)),
 
-            Container(
-                padding: EdgeInsetsGeometry.symmetric(horizontal: getWidth(20), vertical: getHeight(12)),
-                width: getWidth(393),
-                decoration: BoxDecoration(
-                  color: AppColors.kSkyBlueColor.withOpacity(0.1),
-                  borderRadius: BorderRadius.all(Radius.circular(8)),
-                  border: Border(left: BorderSide(color: AppColors.kSkyBlueColor, width: 4)),
-                ),
-                child: Row(
-                  children: [
-                    Image.asset(AppImages.networkIcon, color: AppColors.kSkyBlueColor,),
-                    SizedBox(width: getWidth(10)),
-                    Flexible(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                            'attendanceOffline2'.tr,
-                            style: kSize16W400KWhiteColorOutfitRegular.copyWith(
-                              color: AppColors.kBlackColor,
-                            ),
-                          ),
-
-                          Text(
-                            'attendanceOffline3'.tr,
-                            style: kSize16W400KWhiteColorOutfitRegular.copyWith(
+            GestureDetector(
+              onTap: attendanceAutoSyncDialog,
+              child: Container(
+                  padding: EdgeInsetsGeometry.symmetric(horizontal: getWidth(20), vertical: getHeight(12)),
+                  width: double.infinity,
+                  decoration: BoxDecoration(
+                    color: AppColors.kSkyBlueColor.withOpacity(0.05),
+                    borderRadius: BorderRadius.all(Radius.circular(8)),
+                    border: Border(left: BorderSide(color: AppColors.kSkyBlueColor, width: 4)),
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Image.asset(AppImages.networkIcon, color: AppColors.kSkyBlueColor, width: getWidth(22.5),),
+                      SizedBox(width: getWidth(20)),
+                      Flexible(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              'attendanceOffline2'.tr,
+                              style: kSize14W500kForestGreenColorInterMedium.copyWith(
                                 color: AppColors.kBlackColor,
-                                fontSize: getFont(12)
+                              ),
                             ),
-                          ),
-                        ],
+
+                            Text(
+                              'attendanceOffline3'.tr,
+                              style: kSize17W400KCharcoalBlackColorInterRegular.copyWith(
+                                  color: AppColors.kBlackColor,
+                                  fontSize: getFont(12)
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
-                    ),
 
 
 
 
 
-                  ],
+                    ],
+                  ),
                 ),
-              ),
+            ),
 
-            SizedBox(height: getHeight(20)),
+            SizedBox(height: getHeight(30)),
 
             Padding(
               padding:  EdgeInsets.symmetric(horizontal: getWidth(20)),
@@ -137,16 +142,17 @@ class _AttendanceOfflineScreenState extends State<AttendanceOfflineScreen> {
                           children: [
                             Text(
                               'attendanceOffline4'.tr,
-                              style: kSize16W600KBlackColorOutfitSemiBold.copyWith(
+                              style: kSize14W500kForestGreenColorInterMedium.copyWith(
+                                fontSize: getFont(16),
                                 color: AppColors.kMidnightBlueColor,
                               ),
                             ),
 
                             Obx(() => Text(
                               '${controller.count} ${'attendanceOffline5'.tr}',
-                              style: kSize16W400KWhiteColorOutfitRegular.copyWith(
-                                color: AppColors.kCoolGreyColor,
-                                fontSize: getFont(14),
+                              style: kSize17W400KCharcoalBlackColorInterRegular.copyWith(
+                                  color: AppColors.kCoolGreyColor,
+                                  fontSize: getFont(14)
                               ),
                             )),
 
@@ -172,15 +178,15 @@ class _AttendanceOfflineScreenState extends State<AttendanceOfflineScreen> {
                       ],
                     ),
                   ),
-                  SizedBox(height: getHeight(20)),
+                  SizedBox(height: getHeight(40)),
                   Text(
                     'attendanceOffline6'.tr,
-                    style: kSize16W600KBlackColorOutfitSemiBold.copyWith(
+                    style: kSize16W600kMidnightBlueColorInterSemiBold.copyWith(
                       fontSize: getFont(18),
                       color: AppColors.kMidnightBlueColor,
                     ),
                   ),
-                  SizedBox(height: getHeight(10)),
+                  SizedBox(height: getHeight(20)),
                   Obx(() => Column(
                     children: controller.offlineList
                         .map((item) => offlineAttendanceContainer(item))
@@ -195,44 +201,52 @@ class _AttendanceOfflineScreenState extends State<AttendanceOfflineScreen> {
                       color: AppColors.kAliceBlue,
                       borderRadius: BorderRadius.all(Radius.circular(8)),
                     ),
-                    child: Column(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Row(
-                          children: [
-                            Image.asset(AppImages.attendanceDetailIcon2),
-                            SizedBox(width: getWidth(5),),
-                            Text(
-                              'attendanceOffline11'.tr,
-                              style: kSize16W600KBlackColorOutfitSemiBold.copyWith(
-                                fontSize: getFont(14),
+                        Image.asset(AppImages.attendanceDetailIcon2),
+                        SizedBox(width: getWidth(10),),
+                        Flexible(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                'attendanceOffline11'.tr,
+                                style: kSize14W500kForestGreenColorInterMedium.copyWith(
+                                  fontSize: getFont(16),
+                                  color: AppColors.kBlackColor
 
+                                ),
                               ),
-                            ),
+                              SizedBox(height: getHeight(5),),
+                              Text(
+                                'attendanceOffline12'.tr,
+                                style: kSize17W400KCharcoalBlackColorInterRegular.copyWith(
+                                  fontSize: getFont(14),
+                                  color: AppColors.kBlackColor,
 
 
-
-                          ],
-
-
-                        ),
-                        Text(
-                          'attendanceOffline12'.tr,
-                          style: kSize16W400KWhiteColorOutfitRegular.copyWith(
-                            fontSize: getFont(14),
-                            color: AppColors.kBlackColor,
-
-
+                                ),
+                                textAlign: TextAlign.left,
+                              ),
+                            ],
                           ),
-                          textAlign: TextAlign.left,
-                        ),
-
-
+                        )
 
 
 
 
                       ],
+
+
                     ),
+
+
+
+
+
+
                   ),
 
 
@@ -271,6 +285,8 @@ class _AttendanceOfflineScreenState extends State<AttendanceOfflineScreen> {
         ],
       ),
       child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.start,
         children: [
           Container(
             width: getWidth(40),
@@ -285,18 +301,19 @@ class _AttendanceOfflineScreenState extends State<AttendanceOfflineScreen> {
           SizedBox(width: getWidth(10)),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.start,
             children: [
               Text(
                 'attendanceOffline7'.tr,
-                style: kSize16W600KBlackColorOutfitSemiBold.copyWith(
+                style: kSize14W500kForestGreenColorInterMedium.copyWith(
+                  fontSize: getFont(16),
                   color: AppColors.kMidnightBlueColor,
                 ),
               ),
 
               Text(
                 controller.formatAttendanceTime(attendance.scanTime),
-                style: kSize16W400KWhiteColorOutfitRegular.copyWith(
+                style: kSize17W400KCharcoalBlackColorInterRegular.copyWith(
                   color: AppColors.kCoolGreyColor,
                   fontSize: getFont(14),
                 ),
@@ -307,9 +324,8 @@ class _AttendanceOfflineScreenState extends State<AttendanceOfflineScreen> {
           ),
           Spacer(),
           Container(
-            padding: EdgeInsetsGeometry.symmetric(horizontal: getWidth(8), ),
-            width: getWidth(85),
-            height: getHeight(30),
+            width: getWidth(76.05),
+            height: getHeight(24),
             decoration: BoxDecoration(
                 color: AppColors.kSoftPeach,
                 borderRadius: BorderRadius.circular(9999)
@@ -318,10 +334,10 @@ class _AttendanceOfflineScreenState extends State<AttendanceOfflineScreen> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Image.asset(AppImages.qrScreenIcon3, color: AppColors.kVividOrange,),
-                SizedBox(width: getWidth(5),),
+                SizedBox(width: getWidth(2),),
                 Text(
                   'attendanceOffline10'.tr,
-                  style: kSize16W400KWhiteColorOutfitRegular.copyWith(
+                  style: kSize14W500kForestGreenColorInterMedium.copyWith(
                       color: AppColors.kBurntOrange,
                       fontSize: getFont(12)
                   ),
@@ -372,36 +388,37 @@ class _AttendanceOfflineScreenState extends State<AttendanceOfflineScreen> {
                        width: 1,
                      ),
                    ),
-                   child: Image.asset(AppImages.profileScreenIcon7, color: AppColors.kSkyBlueColor,),
+                   child: Icon(Icons.wifi, size: 30, color: AppColors.kSkyBlueColor,),
                  ),
-                 SizedBox(height: getHeight(10),),
+                 SizedBox(height: getHeight(20),),
                  Text(
                    'backOnline1'.tr,
-                   style: kSize16W600KBlackColorOutfitSemiBold.copyWith(
+                   style: kSize16W600kMidnightBlueColorInterSemiBold.copyWith(
                        color: AppColors.kMidnightBlueColor,
                        fontSize: getFont(20)
                    ),
                  ),
-                 SizedBox(height: getHeight(5),),
+                 SizedBox(height: getHeight(10),),
 
                  Text(
                    'backOnline2'.tr,
-                   style: kSize16W400KWhiteColorOutfitRegular.copyWith(
+                   style: kSize17W400KCharcoalBlackColorInterRegular.copyWith(
+                     fontSize: getFont(16),
                      color: AppColors.kDarkSlateGray,
                    ),
                    textAlign: TextAlign.center,
                  ),
-                 SizedBox(height: getHeight(5),),
+                 SizedBox(height: getHeight(20),),
 
                  Text(
                    'backOnline3'.tr,
-                   style: kSize16W400KWhiteColorOutfitRegular.copyWith(
+                   style: kSize17W400KCharcoalBlackColorInterRegular.copyWith(
+                     fontSize: getFont(14),
                      color: AppColors.kCoolGreyColor,
-                     fontSize: getFont(14)
                    ),
                    textAlign: TextAlign.center,
                  ),
-                 SizedBox(height: getHeight(20),),
+                 SizedBox(height: getHeight(30),),
                  Obx(() => ClipRRect(
                    borderRadius: BorderRadius.circular(999),
                    child: LinearProgressIndicator(
@@ -418,7 +435,7 @@ class _AttendanceOfflineScreenState extends State<AttendanceOfflineScreen> {
                  Obx(() => controller.uploadCompleted.value
                      ? Text(
                    'backOnline4'.tr,
-                   style: kSize16W400KWhiteColorOutfitRegular.copyWith(
+                   style: kSize17W400KCharcoalBlackColorInterRegular.copyWith(
                      color: AppColors.kCoolGreyColor,
                      fontSize: getFont(12),
                    ),
@@ -427,7 +444,7 @@ class _AttendanceOfflineScreenState extends State<AttendanceOfflineScreen> {
                      : SizedBox.shrink(),
                  ),
 
-                 SizedBox(height: getHeight(20),),
+                 SizedBox(height: getHeight(30),),
                  Obx(() => controller.uploadCompleted.value
                      ? RoundButton(
                    onPress: (){
@@ -435,7 +452,7 @@ class _AttendanceOfflineScreenState extends State<AttendanceOfflineScreen> {
                    },
                    radius: BorderRadius.circular(12),
                    title: 'backOnline5'.tr,
-                   textStyle: kSize16W600KBlackColorOutfitSemiBold.copyWith(fontSize: getFont(14),color: AppColors.kWhiteColor,),
+                   textStyle: kSize14W500kForestGreenColorInterMedium.copyWith(fontSize: getFont(16),color: AppColors.kWhiteColor,),
                    buttonColor: AppColors.kSkyBlueColor,
                    width: getWidth(263),
                    height: getHeight(48),

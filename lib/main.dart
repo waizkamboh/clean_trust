@@ -13,6 +13,7 @@ import 'package:clean_trust/view/screens/home/home_screen.dart';
 import 'package:clean_trust/view/screens/home/leave_request/leave_request_screen.dart';
 import 'package:clean_trust/view/screens/onboarding/onboarding_screen1.dart';
 import 'package:clean_trust/view/screens/onboarding/onboarding_screen2.dart';
+import 'package:clean_trust/view/screens/profile/profile_screen.dart';
 import 'package:clean_trust/view/screens/splash/splash_screen.dart';
 import 'package:clean_trust/view_model/controller/general_controller.dart';
 import 'package:flutter/material.dart';
@@ -38,7 +39,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
       ),
-      home: AttendanceOfflineScreen(),
+      home: ProfileScreen(),
       locale: LocalizationService.locale ,
       fallbackLocale: LocalizationService.fallbackLocale,
       translations: LocalizationService(),
