@@ -245,6 +245,7 @@ Map<String, String> en = {
   'EditProfileScreen11': 'Password',
   'EditProfileScreen12': '..........',
   'EditProfileScreen13': 'Save Changes',
+  'EditProfileScreen14': 'Read Only',
 
 
   'changePasswordScreen1': 'Change Password',
