@@ -141,7 +141,7 @@ Map<String, String> en = {
   'manualEntry5': 'mm/dd/yyyy',
   'manualEntry6': 'Select Workplace',
   'manualEntry7': 'Choose Workplace',
-  'manualEntry8': 'Employee MUST select an object (cannot submit without it)',
+  'manualEntry8': 'Employee MUST select an workplace (cannot submit without it)',
   'manualEntry9': 'Clock In Time',
   'manualEntry10': '--:-- --',
   'manualEntry11': 'Clock Out Time',
