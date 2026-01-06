@@ -39,15 +39,15 @@ class ScanResultScreen extends StatelessWidget {
 
           Text(
             'scanResult2'.tr,
-            style: kSize20W700KWhiteColorOutfitBold.copyWith(
-              fontSize: getFont(24),
+            style: kSize24W700kMidnightBlueColorInterBold.copyWith(
               color: AppColors.kMidnightBlueColor,
             ),
           ),
           Text(
             'scanResult3'.tr,
-            style: kSize16W400KWhiteColorOutfitRegular.copyWith(
-              color: AppColors.kCoolGreyColor,
+            style: kSize17W400KCharcoalBlackColorInterRegular.copyWith(
+              fontSize: getFont(16),
+              color: AppColors.kSlateGray,
             ),
           ),
           SizedBox(height: getHeight(30),),
@@ -64,7 +64,7 @@ class ScanResultScreen extends StatelessWidget {
             firstText: controller.fullAddress.value ,
           )),
 
-          SizedBox(height: getHeight(30),),
+          SizedBox(height: getHeight(40),),
 
           RoundButton(
             onPress: (){
@@ -72,7 +72,7 @@ class ScanResultScreen extends StatelessWidget {
             },
             radius: BorderRadius.circular(12),
             title: 'scanResult9'.tr,
-            textStyle: kSize16W600KBlackColorOutfitSemiBold.copyWith(color: AppColors.kWhiteColor, fontSize: getFont(18)),
+            textStyle: kSize16W600kMidnightBlueColorInterSemiBold.copyWith(color: AppColors.kWhiteColor, fontSize: getFont(18)),
             buttonColor: AppColors.kSkyBlueColor,
             width: getWidth(327),
             height: getHeight(60),
@@ -104,6 +104,7 @@ class ScanResultScreen extends StatelessWidget {
              color: AppColors.kBlackColor.withOpacity(0.11),
              offset: const Offset(0, 1),
              blurRadius: 2,
+             spreadRadius: 0
            ),
          ],
        ),
@@ -121,7 +122,7 @@ class ScanResultScreen extends StatelessWidget {
                  width: 1,
                ),
              ),
-             child: Image.asset(iconPath),
+             child: Image.asset(iconPath, color: AppColors.kSkyBlueColor,),
            ),
            SizedBox(width: getWidth(12)),
 
@@ -132,9 +133,8 @@ class ScanResultScreen extends StatelessWidget {
                  if (firstText != null)
                    Text(
                      firstText.tr,
-                     maxLines: 6, // ✅ allow 5–6 lines
                      overflow: TextOverflow.ellipsis,
-                     style: kSize16W400KWhiteColorOutfitRegular.copyWith(
+                     style: kSize17W400KCharcoalBlackColorInterRegular.copyWith(
                        fontSize: getFont(14),
                        color: AppColors.kCoolGreyColor,
                      ),
@@ -143,7 +143,7 @@ class ScanResultScreen extends StatelessWidget {
                  if (secondText != null)
                    Text(
                      secondText.tr,
-                     style: kSize20W700KWhiteColorOutfitBold.copyWith(
+                     style:  kSize24W700kMidnightBlueColorInterBold.copyWith(
                        fontSize: getFont(30),
                        color: AppColors.kMidnightBlueColor,
                      ),
@@ -152,7 +152,7 @@ class ScanResultScreen extends StatelessWidget {
                  if (thirdText != null)
                    Text(
                      thirdText.tr,
-                     style: kSize16W400KWhiteColorOutfitRegular.copyWith(
+                     style:kSize17W400KCharcoalBlackColorInterRegular.copyWith(
                        fontSize: getFont(14),
                        color: AppColors.kCoolGreyColor,
                      ),
