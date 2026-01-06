@@ -112,7 +112,7 @@ flutter:
           weight: 500
     - family: Outfit_Light
       fonts:
-        - asset: assets/fonts/Outfit_Light.ttf
+        - asset: assets/fonts/Outfit-Light.ttf
           weight: 300
     - family: OpenSans_SemiBold.ttf
       fonts:
@@ -126,6 +126,23 @@ flutter:
       fonts:
         - asset: assets/fonts/Inter_18pt-Regular.ttf
           weight: 400
+    - family: Inter_Medium
+      fonts:
+        - asset: assets/fonts/Inter_18pt-Medium.ttf
+          weight: 500
+    - family: Inter_Bold
+      fonts:
+        - asset: assets/fonts/Inter_18pt-Bold.ttf
+          weight: 700
+    - family: Inter_SemiBold
+      fonts:
+        - asset: assets/fonts/Inter_18pt-SemiBold.ttf
+          weight: 600
+
+
+
+
+
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/to/font-from-package

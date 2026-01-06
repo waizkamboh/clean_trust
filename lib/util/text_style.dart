@@ -59,3 +59,22 @@ TextStyle  kSize10W400KBlackColorlatoRegular =  TextStyle(
   fontFamily: AppFonts.outfitLight,
 
 );
+TextStyle  kSize14W500kForestGreenColorInterMedium =  TextStyle(
+  color: AppColors.kForestGreenColor,
+  fontWeight: FontWeight.w500,
+  fontSize: getFont(14),
+  fontFamily: AppFonts.interMedium,
+
+);TextStyle  kSize24W700kMidnightBlueColorInterBold =  TextStyle(
+  color: AppColors.kMidnightBlueColor,
+  fontWeight: FontWeight.w700,
+  fontSize: getFont(24),
+  fontFamily: AppFonts.interBold,
+
+);TextStyle  kSize16W600kMidnightBlueColorInterSemiBold =  TextStyle(
+  color: AppColors.kMidnightBlueColor,
+  fontWeight: FontWeight.w600,
+  fontSize: getFont(16),
+  fontFamily: AppFonts.interSemiBold,
+
+);

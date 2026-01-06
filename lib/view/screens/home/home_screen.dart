@@ -87,13 +87,13 @@ class _HomeScreenState extends State<HomeScreen> {
                 child: Column(
                   children: [
                     _todayAttendanceCard(),
-                    SizedBox(height: getHeight(20)),
-                    _scanQRCard(),
-                    SizedBox(height: getHeight(10)),
-                    _manualAttendanceEntry(),
-                    SizedBox(height: getHeight(10)),
-                    _leaveRequestCard(),
                     SizedBox(height: getHeight(30)),
+                    _scanQRCard(),
+                    SizedBox(height: getHeight(20)),
+                    _manualAttendanceEntry(),
+                    SizedBox(height: getHeight(20)),
+                    _leaveRequestCard(),
+                    SizedBox(height: getHeight(40)),
                     _monthlyAttendanceCard(),
                     SizedBox(height: getHeight(50),)
 
@@ -412,10 +412,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 SizedBox(width: getWidth(10),),
                 Text(
                   'homeScreen3'.tr,
-                  style: kSize16W400KWhiteColorOutfitRegular
-                      .copyWith(
-                    color: AppColors.kForestGreenColor,
-                  ),
+                  style: kSize14W500kForestGreenColorInterMedium
                 ),
 
 
@@ -427,16 +424,13 @@ class _HomeScreenState extends State<HomeScreen> {
             return Text(
               getAttendanceHistoryController.todayTotalHours
                   .value,
-              style: const TextStyle(
-                fontSize: 18,
-                fontWeight: FontWeight.bold,
-              ),
+              style: kSize24W700kMidnightBlueColorInterBold
             );
           }),
 
           Text(
             'homeScreen5'.tr,
-            style: kSize16W400KWhiteColorOutfitRegular.copyWith(
+            style: kSize17W400KCharcoalBlackColorInterRegular.copyWith(
                 color: AppColors.kCoolGreyColor,
                 fontSize: getFont(14)
             ),
@@ -446,7 +440,7 @@ class _HomeScreenState extends State<HomeScreen> {
             padding: EdgeInsetsGeometry.symmetric(
                 horizontal: getWidth(12),
                 vertical: getHeight(12)),
-            width: getWidth(131),
+            width: getWidth(131.5),
             decoration: BoxDecoration(
               color: AppColors.kColor1,
               borderRadius: BorderRadius.all(
@@ -460,7 +454,7 @@ class _HomeScreenState extends State<HomeScreen> {
               children: [
                 Text(
                   'homeScreen6'.tr,
-                  style: kSize16W400KWhiteColorOutfitRegular
+                  style: kSize17W400KCharcoalBlackColorInterRegular
                       .copyWith(
                       color: AppColors.kCoolGreyColor,
                       fontSize: getFont(12)
@@ -470,10 +464,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   return Text(
                     getAttendanceHistoryController.checkInTime
                         .value,
-                    style: const TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w500,
-                    ),
+                    style: kSize16W600kMidnightBlueColorInterSemiBold
                   );
                 })
 
@@ -527,48 +518,43 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
           ],
         ),
-        child: Column(
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
+            Image.asset(
+              AppImages.dragHandleIcon,
+              width: getWidth(21),
+              height: getHeight(24),
+            ),
+
+            SizedBox(width: getWidth(20)),
+
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Image.asset(
-                  AppImages.dragHandleIcon,
-                  width: getWidth(21),
-                  height: getHeight(24),
+                Text(
+                  'homeScreen8'.tr,
+                  style: kSize16W600kMidnightBlueColorInterSemiBold
+                      .copyWith(
+                      fontSize: getFont(18),
+                      color: AppColors.kWhiteColor
+
+                  ),
                 ),
 
-                SizedBox(width: getWidth(20)),
+                Text(
+                  'homeScreen9'.tr,
+                  style: kSize17W400KCharcoalBlackColorInterRegular
+                      .copyWith(
+                    fontSize: getFont(14),
+                    color: AppColors.kLightBlueColor
 
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      'homeScreen8'.tr,
-                      style: kSize16W600KBlackColorOutfitSemiBold
-                          .copyWith(
-                          fontSize: getFont(18),
-                          color: AppColors.kWhiteColor
-
-                      ),
-                    ),
-
-                    Text(
-                      'homeScreen9'.tr,
-                      style: kSize16W400KWhiteColorOutfitRegular
-                          .copyWith(
-                        fontSize: getFont(14),
-
-                      ),
-                    ),
-                  ],
+                  ),
                 ),
-
-
               ],
-            )
+            ),
 
 
           ],
@@ -584,7 +570,7 @@ class _HomeScreenState extends State<HomeScreen> {
       },
       child: Container(
         padding: EdgeInsetsGeometry.symmetric(
-            horizontal: getWidth(29), vertical: getHeight(22)),
+           vertical: getHeight(22)),
         width: getWidth(327),
         decoration: BoxDecoration(
           color: AppColors.kColor1,
@@ -595,9 +581,9 @@ class _HomeScreenState extends State<HomeScreen> {
         child: Center(
           child: Text(
             'homeScreen10'.tr,
-            style: kSize16W600KBlackColorOutfitSemiBold.copyWith(
-                fontSize: getFont(14),
-                color: AppColors.kMidnightBlueColor.withOpacity(0.50)
+            style: kSize14W500kForestGreenColorInterMedium.copyWith(
+                fontSize: getFont(16),
+                color: AppColors.kMidnightBlueColor.withOpacity(0.58)
 
             ),
           ),
@@ -613,7 +599,7 @@ class _HomeScreenState extends State<HomeScreen> {
       },
       child: Container(
         padding: EdgeInsetsGeometry.symmetric(
-            horizontal: getWidth(29), vertical: getHeight(22)),
+           vertical: getHeight(22)),
         width: getWidth(327),
         decoration: BoxDecoration(
           color: AppColors.kColor1,
@@ -624,9 +610,9 @@ class _HomeScreenState extends State<HomeScreen> {
         child: Center(
           child: Text(
             'homeScreen15'.tr,
-            style: kSize16W600KBlackColorOutfitSemiBold.copyWith(
-                fontSize: getFont(14),
-                color: AppColors.kMidnightBlueColor.withOpacity(0.50)
+            style:  kSize14W500kForestGreenColorInterMedium.copyWith(
+                fontSize: getFont(16),
+                color: AppColors.kMidnightBlueColor.withOpacity(0.58)
 
             ),
           ),
@@ -646,10 +632,10 @@ class _HomeScreenState extends State<HomeScreen> {
             horizontal: getWidth(21), vertical: getHeight(21)),
         width: getWidth(335),
         decoration: BoxDecoration(
-          color: AppColors.kWhiteColor,
+          color: AppColors.kWhiteColor.withOpacity(0.60),
           borderRadius: BorderRadius.all(Radius.circular(24)),
           border: Border.all(
-              color: AppColors.kLightGreyColor, width: 1),
+              color: AppColors.kLightGreyColor, width: 0.5),
           boxShadow: [
             BoxShadow(
               color: AppColors.kBlackColor.withOpacity(0.25),
@@ -665,19 +651,19 @@ class _HomeScreenState extends State<HomeScreen> {
           children: [
             Text(
               'homeScreen11'.tr,
-              style: kSize20W700KWhiteColorOutfitBold.copyWith(
-                  color: AppColors.kMidnightBlueColor,
+              style: kSize24W700kMidnightBlueColorInterBold.copyWith(
+                  color: AppColors.darkSlateBlue,
                   fontSize: getFont(16)
               ),
             ),
             Text(
               'homeScreen12'.tr,
-              style: kSize16W400KWhiteColorOutfitRegular.copyWith(
-                  color: AppColors.kCoolGreyColor,
-                  fontSize: getFont(14)
+              style: kSize14W500kForestGreenColorInterMedium.copyWith(
+                  color: AppColors.kSlateGray,
+                  fontSize: getFont(10)
               ),
             ),
-            SizedBox(height: getHeight(10),),
+            SizedBox(height: getHeight(20),),
             Container(
                 padding: EdgeInsetsGeometry.symmetric(
                     horizontal: getWidth(12), vertical: getHeight(18)),
@@ -690,13 +676,13 @@ class _HomeScreenState extends State<HomeScreen> {
 
                   borderRadius: BorderRadius.all(Radius.circular(16)),
                   border: Border.all(
-                      color: AppColors.kLightCoolGreyColor, width: 1),
+                      color: AppColors.kLightGreen, width: 0.30),
                 ),
                 child: Row(
                   children: [
                     Container(
-                      width: getWidth(45),
-                      height: getHeight(50),
+                      width: getWidth(40),
+                      height: getHeight(40),
                       decoration: BoxDecoration(
                         color: AppColors.kGreenColor.withOpacity(0.10),
                         borderRadius: BorderRadius.all(
@@ -715,20 +701,17 @@ class _HomeScreenState extends State<HomeScreen> {
                       children: [
                         Text(
                           'homeScreen13'.tr,
-                          style: kSize16W400KWhiteColorOutfitRegular
-                              .copyWith(
-                              color: AppColors.kCoolGreyColor,
-                              fontSize: getFont(13)
+                          style: kSize14W500kForestGreenColorInterMedium.copyWith(
+                              color: AppColors.kSlateGray,
+                              fontSize: getFont(12)
                           ),
                         ),
                         Obx(() =>
                             Text(
                               getAttendanceHistoryController
                                   .monthlyTotalHours.value,
-                              style: kSize20W700KWhiteColorOutfitBold
-                                  .copyWith(
-                                  color: AppColors.kMidnightBlueColor,
-                                  fontSize: getFont(24)
+                              style: kSize24W700kMidnightBlueColorInterBold.copyWith(
+                                  color: AppColors.darkSlateBlue,
                               ),
                             ),),
                       ],

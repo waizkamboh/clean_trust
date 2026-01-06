@@ -7,6 +7,9 @@ class AppFonts{
   static const String openSansSemiBold = 'OpenSans_SemiBold';
   static const String latoRegular = 'Lato_Regular';
   static const String interRegular = 'Inter_Regular';
+  static const String interMedium = 'Inter_Medium';
+  static const String interBold = 'Inter_Bold';
+  static const String interSemiBold = 'Inter_SemiBold';
 
 
 
