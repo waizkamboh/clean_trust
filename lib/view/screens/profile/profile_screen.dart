@@ -67,7 +67,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               Stack(
                                 clipBehavior: Clip.none,
                                 children: [
-                                  // Profile Circle
+                                  SizedBox(height: getHeight(10),),
                                   Container(
                                     width: getWidth(120),
                                     height: getHeight(120),
@@ -125,15 +125,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               // Name & Email
                               Text(
                                 controller.fullName.value,
-                                style: kSize20W700KWhiteColorOutfitBold
-                                    .copyWith(color: AppColors.kBlackColor),
+                                style: kSize24W700kMidnightBlueColorInterBold
+                                    .copyWith(color: AppColors.kMidnightBlueColor, fontSize: getFont(20)),
                               ),
-                              SizedBox(height: getHeight(10)),
                               Text(
-                                controller.email.value,
-                                style: kSize16W400KWhiteColorOutfitRegular.copyWith(
+                                controller.position.value,
+                                style: kSize17W400KCharcoalBlackColorInterRegular.copyWith(
                                   fontSize: getFont(14),
-                                  color: AppColors.kBlackColor.withOpacity(0.66),
+                                  color: AppColors.kCoolGreyColor,
                                 ),
                               ),
                               SizedBox(height: getHeight(20)),
@@ -169,7 +168,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         });
                       },
                     ),
-                    SizedBox(height: getHeight(20)),
+                    SizedBox(height: getHeight(10)),
 
                     profileOptionTile(
                       index: 1,
@@ -182,7 +181,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         });
                       },
                     ),
-                    SizedBox(height: getHeight(20)),
+                    SizedBox(height: getHeight(10)),
 
                     profileOptionTile(
                       index: 2,
@@ -195,7 +194,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         });
                       },
                     ),
-                    SizedBox(height: getHeight(20)),
+                    SizedBox(height: getHeight(10)),
 
                     profileOptionTile(
                       index: 3,
@@ -208,7 +207,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         });
                       },
                     ),
-                    SizedBox(height: getHeight(20)),
+                    SizedBox(height: getHeight(10)),
 
                     profileOptionTile(
                       index: 4,
@@ -221,7 +220,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         });
                       },
                     ),
-                    SizedBox(height: getHeight(20)),
+                    SizedBox(height: getHeight(10)),
 
                     profileOptionTile(
                       index: 5,
@@ -264,6 +263,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
         border: Border.all(color: AppColors.kLightCoolGreyColor, width: 1),
       ),
       child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Container(
             width: getWidth(40),
@@ -283,16 +283,15 @@ class _ProfileScreenState extends State<ProfileScreen> {
               children: [
                 Text(
                   title.tr,
-                  style: kSize16W400KWhiteColorOutfitRegular.copyWith(
+                  style: kSize17W400KCharcoalBlackColorInterRegular.copyWith(
                     fontSize: getFont(12),
-                    color: AppColors.kBlackColor.withOpacity(0.66),
+                    color: AppColors.kCoolGreyColor,
                   ),
                 ),
                 Text(
                   subtitle.tr,
-                  style: kSize16W600KBlackColorOutfitSemiBold.copyWith(
-                    fontSize: getFont(14),
-                    color: AppColors.kBlackColor,
+                  style: kSize14W500kForestGreenColorInterMedium.copyWith(
+                    color: AppColors.kMidnightBlueColor,
                   ),
                 ),
               ],
@@ -319,14 +318,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
           width: getWidth(327),
           height: getHeight(74),
           padding: EdgeInsets.symmetric(
-            horizontal: getWidth(17),
-            vertical: getHeight(17),
+            horizontal: getWidth(16),
+            vertical: getHeight(16),
           ),
           decoration: BoxDecoration(
             color: isSelected ? AppColors.kSkyBlueColor : AppColors.kWhiteColor,
             borderRadius: BorderRadius.circular(12),
             border: Border.all(
-              color: AppColors.kBlackColor.withOpacity(0.6),
+              color: AppColors.kBlackColor.withOpacity(0.06),
               width: 1,
             ),
           ),
@@ -340,7 +339,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       ? AppColors.kWhiteColor.withOpacity(0.2)
                       : isLogout
                       ? AppColors.kLightRed
-                      : AppColors.kColor3,
+                      : AppColors.kVeryLightGreenColor,
                   borderRadius: BorderRadius.circular(8),
                 ),
                 child: Image.asset(
@@ -355,7 +354,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               SizedBox(width: getWidth(5)),
               Text(
                 title.tr,
-                style: kSize16W600KBlackColorOutfitSemiBold.copyWith(
+                style: kSize16W600kMidnightBlueColorInterSemiBold.copyWith(
                   color: isSelected
                       ? AppColors.kWhiteColor
                       : isLogout
@@ -368,10 +367,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 Icons.arrow_forward_ios_outlined,
                 size: 16,
                 color: isSelected
-                    ? AppColors.kWhiteColor.withOpacity(0.50)
+                    ? AppColors.kWhiteColor
                     : isLogout
                     ? AppColors.kSoftRed
-                    : AppColors.kBlackColor.withOpacity(0.50),
+                    : AppColors.kMediumGrey,
               ),
             ],
           ),
@@ -410,23 +409,25 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   child: Image.asset(
                     AppImages.profileScreenIcon7,
                     color: AppColors.kSkyBlueColor,
+
                   ),
+                ),
+                SizedBox(height: getHeight(20)),
+                Text(
+                  'logout1'.tr,
+                  style: kSize16W600kMidnightBlueColorInterSemiBold.copyWith(
+                      color: AppColors.kMidnightBlueColor, fontSize: getFont(20)),
                 ),
                 SizedBox(height: getHeight(10)),
                 Text(
-                  'logout1'.tr,
-                  style: kSize16W600KBlackColorOutfitSemiBold.copyWith(
-                      color: AppColors.kMidnightBlueColor, fontSize: getFont(20)),
-                ),
-                SizedBox(height: getHeight(5)),
-                Text(
                   'logout2'.tr,
-                  style: kSize16W400KWhiteColorOutfitRegular.copyWith(
+                  style: kSize17W400KCharcoalBlackColorInterRegular.copyWith(
+                    fontSize: getFont(16),
                     color: AppColors.kDarkSlateGray,
                   ),
                   textAlign: TextAlign.center,
                 ),
-                SizedBox(height: getHeight(30)),
+                SizedBox(height: getHeight(50)),
                 RoundButton(
                   onPress: () async {
                     UserPreference userPreference = UserPreference();
@@ -437,7 +438,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   },
                   radius: BorderRadius.circular(12),
                   title: 'logout3'.tr,
-                  textStyle: kSize16W400KWhiteColorOutfitRegular,
+                  textStyle: kSize14W500kForestGreenColorInterMedium.copyWith(color: AppColors.kWhiteColor, fontSize: getFont(16)),
                   buttonColor: AppColors.kSkyBlueColor,
                   borderColor: AppColors.kLightCoolGreyColor,
                   width: getWidth(263),
@@ -450,8 +451,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   },
                   radius: BorderRadius.circular(12),
                   title: 'logout4'.tr,
-                  textStyle: kSize16W400KWhiteColorOutfitRegular
-                      .copyWith(color: AppColors.kSkyBlueColor),
+                  textStyle: kSize14W500kForestGreenColorInterMedium.copyWith(color: AppColors.kDarkSlateGray, fontSize: getFont(16)),
+
                   buttonColor: AppColors.kLightGrayBackground,
                   borderColor: AppColors.kLightCoolGreyColor,
                   width: getWidth(263),
