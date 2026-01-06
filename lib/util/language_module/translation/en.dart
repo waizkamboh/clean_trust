@@ -166,7 +166,7 @@ Map<String, String> en = {
   'leaveRequest12': 'End Date',
   'leaveRequest13': 'yyyy-mm-dd',
   'leaveRequest14': 'Reason',
-  'leaveRequest15': 'Upload Document',
+  'leaveRequest15': 'Upload Document ',
   'leaveRequest16': '(optional)',
   'leaveRequest17': 'Tap to upload a file',
   'leaveRequest18': 'PDF, DOC, or Image files',

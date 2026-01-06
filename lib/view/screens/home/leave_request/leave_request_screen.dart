@@ -28,304 +28,253 @@ class LeaveRequestScreen extends StatelessWidget {
           TopHeader(title: 'leaveRequest1'.tr),
           Expanded(
             child: SingleChildScrollView(
-              child: Column(
-                children: [
-                  Padding(
-                    padding:  EdgeInsets.symmetric(horizontal: getWidth(29)),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        SizedBox(height: getHeight(20)),
-                        Container(
-                          padding: EdgeInsetsGeometry.symmetric(horizontal: getWidth(16), vertical: getHeight(34)),
-                          width: getWidth(343),
-                          decoration: BoxDecoration(
-                            color: AppColors.kAliceBlue,
-                            borderRadius: BorderRadius.all(Radius.circular(8)),
-                            border: Border.all(color: AppColors.kLightCoolGreyColor, width: 1),
-                          ),
-                          child: Row(
-                            children: [
-                              Container(
-                                width: getWidth(36),
-                                height: getHeight(34),
-                                decoration: BoxDecoration(
-                                  color: AppColors.kSkyBlueColor,
-                                  borderRadius: BorderRadius.all(Radius.circular(8)),
-                                  border: Border.all(color: AppColors.kLightCoolGreyColor, width: 1),
-                                ),
-                                child: Icon(Icons.calendar_month_outlined, color: AppColors.kWhiteColor,),
-
-                              ),
-                              SizedBox(width: getWidth(10)),
-                              Flexible(
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Text(
-                                      'leaveRequest4'.tr,
-                                      style: kSize16W600KBlackColorOutfitSemiBold.copyWith(
-                                        color: AppColors.kBlackColor,
-                                      ),
-                                    ),
-
-                                    Text(
-                                      'leaveRequest5'.tr,
-                                      style: kSize16W400KWhiteColorOutfitRegular.copyWith(
-                                          color: AppColors.kSlateGray,
-                                          fontSize: getFont(14)
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-
-
-
-
-
-                            ],
-                          ),
-                        ),
-                        SizedBox(height: getHeight(20)),
-                        Text(
-                          'leaveRequest6'.tr,
-                          style: kSize16W400KWhiteColorOutfitRegular.copyWith(
-                            color: AppColors.kDarkSlateGray,
-                          ),
-                        ),
-                        SizedBox(height: getHeight(10)),
-                        Obx(() {
-                          return SingleChildScrollView(
-                            scrollDirection: Axis.horizontal,
-                            child: Row(
-                              children: [
-                                leaveTypeContainer(
-                                    controller, Image.asset(AppImages.leaveRequestIcon1), 'sick'),
-                                leaveTypeContainer(
-                                    controller, Image.asset(AppImages.leaveRequestIcon2), 'vacation'),
-                                leaveTypeContainer(
-                                    controller, Icon(Icons.person, size: 18,color: AppColors.kCoolGreyColor,), 'personal'),
-                                leaveTypeContainer(
-                                    controller, Image.asset(AppImages.leaveRequestIcon3), 'other'),
-                              ],
-                            ),
-                          );
-                        }),
-                        SizedBox(height: getHeight(20)),
-
-
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              child: Padding(
+                padding:  EdgeInsets.symmetric(horizontal: getWidth(29)),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    SizedBox(height: getHeight(30)),
+                    _requestTimeCard(),
+                    SizedBox(height: getHeight(20)),
+                    Text(
+                      'leaveRequest6'.tr,
+                      style: kSize14W500kForestGreenColorInterMedium.copyWith(
+                        color: AppColors.kDarkSlateGray,
+                      ),
+                    ),
+                    SizedBox(height: getHeight(10)),
+                    Obx(() {
+                      return SingleChildScrollView(
+                        scrollDirection: Axis.horizontal,
+                        child: Row(
                           children: [
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  'leaveRequest10'.tr,
-                                  style: kSize16W400KWhiteColorOutfitRegular.copyWith(
-                                    color: AppColors.kDarkSlateGray,
-                                  ),
-                                ),
-                                SizedBox(height: getHeight(5)),
+                            leaveTypeContainer(
+                                controller, Image.asset(AppImages.leaveRequestIcon1), 'sick'),
+                            leaveTypeContainer(
+                                controller, Image.asset(AppImages.leaveRequestIcon2), 'vacation'),
+                            leaveTypeContainer(
+                                controller, Icon(Icons.person, size: 18,color: AppColors.kCoolGreyColor,), 'personal'),
+                            leaveTypeContainer(
+                                controller, Image.asset(AppImages.leaveRequestIcon3), 'other'),
+                          ],
+                        ),
+                      );
+                    }),
+                    SizedBox(height: getHeight(30)),
 
-                                InputTextField(
-                                  height: getHeight(48),
-                                  width: getWidth(164),
-                                  myController: controller.startDateController.value,
-                                  contentPadding: EdgeInsets.symmetric(horizontal: getWidth(12)),
-                                  onTap: ()=> datePicker(controller: controller.startDateController.value),
-                                  readOnly: true,
-                                  suffixIcon: Image.asset(AppImages.leaveRequestIcon4),
-                                  keyBoardType: TextInputType.datetime,
-                                  borderRadius: 8,
-                                  obscureText: false,
-                                  hintText: 'leaveRequest13'.tr,
-                                  hintTextStyle: kSize16W400KWhiteColorOutfitRegular
-                                      .copyWith(
-                                      fontSize: getFont(13),
-                                      color: AppColors.kBlackColor),
-                                  borderSideColor: AppColors.kLightCoolGray,
-                                  textFormFieldColor: AppColors.kWhiteColor,
-                                ),
-                              ],
+
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              'leaveRequest10'.tr,
+                              style: kSize14W500kForestGreenColorInterMedium.copyWith(
+                                color: AppColors.kDarkSlateGray,
+                              ),
                             ),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  'leaveRequest12'.tr,
-                                  style: kSize16W400KWhiteColorOutfitRegular.copyWith(
-                                    color: AppColors.kDarkSlateGray,
-                                  ),
-                                ),
+                            SizedBox(height: getHeight(5)),
 
-                                SizedBox(height: getHeight(5)),
-
-                                InputTextField(
-                                  height: getHeight(48),
-                                  width: getWidth(164),
-                                  myController: controller.endDateController.value,
-                                  contentPadding: EdgeInsets.symmetric(horizontal: getWidth(12)),
-                                  onTap: ()=> datePicker(controller: controller.endDateController.value),
-                                  readOnly: true,
-                                  suffixIcon: Image.asset(AppImages.leaveRequestIcon4),
-                                  keyBoardType: TextInputType.datetime,
-                                  borderRadius: 8,
-                                  obscureText: false,
-                                  hintText: 'leaveRequest13'.tr,
-                                  hintTextStyle: kSize16W400KWhiteColorOutfitRegular
-                                      .copyWith(
-                                      fontSize: getFont(13),
-                                      color: AppColors.kBlackColor),
-                                  borderSideColor: AppColors.kLightCoolGray,
-                                  textFormFieldColor: AppColors.kWhiteColor,
-                                ),
-                              ],
+                            InputTextField(
+                              height: getHeight(48),
+                              width: getWidth(163.5),
+                              myController: controller.startDateController.value,
+                              contentPadding: EdgeInsets.symmetric(horizontal: getWidth(12)),
+                              onTap: ()=> datePicker(controller: controller.startDateController.value),
+                              readOnly: true,
+                              suffixIcon: Image.asset(AppImages.leaveRequestIcon4),
+                              keyBoardType: TextInputType.datetime,
+                              borderRadius: 8,
+                              obscureText: false,
+                              hintText: 'leaveRequest13'.tr,
+                              hintTextStyle: kSize17W400KCharcoalBlackColorInterRegular
+                                  .copyWith(
+                                  fontSize: getFont(13),
+                                  color: AppColors.kBlackColor),
+                              borderSideColor: AppColors.kLightCoolGray,
+                              textFormFieldColor: AppColors.kWhiteColor,
                             ),
                           ],
                         ),
-                        SizedBox(height: getHeight(20)),
-
-                        Text(
-                          'leaveRequest14'.tr,
-                          style: kSize16W400KWhiteColorOutfitRegular.copyWith(
-                            color: AppColors.kDarkSlateGray,
-                          ),
-                        ),
-                        SizedBox(height: getHeight(5)),
-
-                        InputTextField(
-                          height: getHeight(96),
-                          myController: controller.reasonController.value,
-                          width: getWidth(343),
-                          contentPadding: EdgeInsets.symmetric(horizontal: getWidth(20), vertical: getHeight(12)),
-                          keyBoardType: TextInputType.text,
-                          borderRadius: 8,
-                          maxLines: 4,
-                          obscureText: false,
-                          hintText: 'leaveRequest14'.tr,
-                          hintTextStyle: kSize16W400KWhiteColorOutfitRegular.copyWith(fontSize: getFont(13), color: AppColors.kBlackColor),
-                          borderSideColor: AppColors.kLightCoolGray,
-                          textFormFieldColor: AppColors.kWhiteColor,
-                        ),
-                        SizedBox(height: getHeight(20)),
-                        RichText(
-                          text: TextSpan(
-                            children: [
-                              TextSpan(
-                                text: "leaveRequest15".tr,
-                                style: kSize16W400KWhiteColorOutfitRegular.copyWith(
-                                  color: AppColors.kDarkSlateGray,
-                                ),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              'leaveRequest12'.tr,
+                              style: kSize14W500kForestGreenColorInterMedium.copyWith(
+                                color: AppColors.kDarkSlateGray,
                               ),
-                              TextSpan(
-                                text: "leaveRequest16".tr,
-                                style: kSize16W400KWhiteColorOutfitRegular.copyWith(
-                                  color: AppColors.kCoolGreyColor,
+                            ),
 
-                                ),
-                              ),
-                            ],
-                          ),
+                            SizedBox(height: getHeight(5)),
+
+                            InputTextField(
+                              height: getHeight(48),
+                              width: getWidth(163.5),
+                              myController: controller.endDateController.value,
+                              contentPadding: EdgeInsets.symmetric(horizontal: getWidth(12)),
+                              onTap: ()=> datePicker(controller: controller.endDateController.value),
+                              readOnly: true,
+                              suffixIcon: Image.asset(AppImages.leaveRequestIcon4),
+                              keyBoardType: TextInputType.datetime,
+                              borderRadius: 8,
+                              obscureText: false,
+                              hintText: 'leaveRequest13'.tr,
+                              hintTextStyle: kSize17W400KCharcoalBlackColorInterRegular
+                                  .copyWith(
+                                  fontSize: getFont(13),
+                                  color: AppColors.kBlackColor),
+                              borderSideColor: AppColors.kLightCoolGray,
+                              textFormFieldColor: AppColors.kWhiteColor,
+                            ),
+                          ],
                         ),
-
-                        SizedBox(height: getHeight(5)),
-                        Obx(()=>
-                            GestureDetector(
-                              onTap: controller.pickDocuments,
-                              child: Container(
-                                padding: EdgeInsets.symmetric(
-                                    horizontal: getWidth(16), vertical: getHeight(34)),
-                                width: getWidth(343),
-                                decoration: BoxDecoration(
-                                  color: AppColors.kWhiteColor,
-                                  borderRadius: BorderRadius.all(Radius.circular(8)),
-                                  border: Border.all(color: AppColors.kLightCoolGray, width: 2),
-                                ),
-                                child: Column(
-                                  children: [
-                                    Image.asset(AppImages.leaveRequestIcon5),
-                                    Text(
-                                      controller.documents.isEmpty
-                                          ? 'leaveRequest17'.tr
-                                          : '${controller.documents.length} file(s) selected',
-                                      style: kSize16W400KWhiteColorOutfitRegular.copyWith(
-                                          fontSize: getFont(14), color: AppColors.kSlateGray),
-                                    ),
-                                    Text(
-                                      'leaveRequest18'.tr,
-                                      style: kSize16W400KWhiteColorOutfitRegular.copyWith(
-                                          fontSize: getFont(12), color: AppColors.kCoolGreyColor),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),),
-
-                        // Container(
-                        //   padding: EdgeInsetsGeometry.symmetric(horizontal: getWidth(16), vertical: getHeight(34)),
-                        //   width: getWidth(343),
-                        //   decoration: BoxDecoration(
-                        //     color: AppColors.kWhiteColor,
-                        //     borderRadius: BorderRadius.all(Radius.circular(8)),
-                        //
-                        //     border: Border.all(color: AppColors.kLightCoolGray, width: 2),
-                        //   ),
-                        //   child: Column(
-                        //     children: [
-                        //       Image.asset(AppImages.leaveRequestIcon5),
-                        //       Text(
-                        //         'leaveRequest17'.tr,
-                        //         style: kSize16W400KWhiteColorOutfitRegular.copyWith(
-                        //           fontSize: getFont(14),
-                        //           color: AppColors.kSlateGray,
-                        //         ),
-                        //       ),
-                        //       Text(
-                        //         'leaveRequest18'.tr,
-                        //         style: kSize16W400KWhiteColorOutfitRegular.copyWith(
-                        //           fontSize: getFont(12),
-                        //           color: AppColors.kCoolGreyColor,
-                        //         ),
-                        //       ),
-                        //     ],
-                        //   ),
-                        // ),
-                        SizedBox(height: getHeight(30)),
-                        Obx((){
-                          return RoundButton(
-                            loading: controller.loading.value,
-                            onPress: controller.submitLeaveRequest,
-                            radius: BorderRadius.circular(12),
-                            title: 'leaveRequest19'.tr,
-                            textStyle: kSize16W600KBlackColorOutfitSemiBold
-                                .copyWith(color: AppColors.kWhiteColor),
-                            buttonColor: AppColors.kSkyBlueColor,
-                            width: getWidth(343),
-                            height: getHeight(56),
-                          );
-
-                        }),
-
-
-
-
-
-
-
-
-
-
-
                       ],
                     ),
-                  ),
-                  SizedBox(height: getHeight(50)),
+                    SizedBox(height: getHeight(30)),
 
-                ],
+                    Text(
+                      'leaveRequest14'.tr,
+                      style: kSize14W500kForestGreenColorInterMedium.copyWith(
+                        color: AppColors.kDarkSlateGray,
+                      ),
+                    ),
+                    SizedBox(height: getHeight(5)),
+
+                    InputTextField(
+                      height: getHeight(96),
+                      myController: controller.reasonController.value,
+                      width: getWidth(343),
+                      contentPadding: EdgeInsets.symmetric(horizontal: getWidth(20), vertical: getHeight(12)),
+                      keyBoardType: TextInputType.text,
+                      borderRadius: 8,
+                      maxLines: 4,
+                      obscureText: false,
+                      hintText: 'leaveRequest14'.tr,
+                      hintTextStyle:kSize17W400KCharcoalBlackColorInterRegular
+                          .copyWith(
+                          fontSize: getFont(13),
+                          color: AppColors.kBlackColor),
+                      borderSideColor: AppColors.kLightCoolGray,
+                      textFormFieldColor: AppColors.kWhiteColor,
+                    ),
+                    SizedBox(height: getHeight(30)),
+                    RichText(
+                      text: TextSpan(
+                        children: [
+                          TextSpan(
+                            text: "leaveRequest15".tr,
+                            style: kSize14W500kForestGreenColorInterMedium.copyWith(
+                              color: AppColors.kDarkSlateGray,
+                            ),
+                          ),
+                          TextSpan(
+                            text: "leaveRequest16".tr,
+                            style: kSize14W500kForestGreenColorInterMedium.copyWith(
+                              color: AppColors.kMediumGrey,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+
+                    SizedBox(height: getHeight(10)),
+                    Obx(()=>
+                        GestureDetector(
+                          onTap: controller.pickDocuments,
+                          child: Container(
+                            padding: EdgeInsets.symmetric(
+                                horizontal: getWidth(16), vertical: getHeight(34)),
+                            width: getWidth(343),
+                            decoration: BoxDecoration(
+                              color: AppColors.kBlackColor.withOpacity(0),
+                              borderRadius: BorderRadius.all(Radius.circular(8)),
+                              border: Border.all(color: AppColors.kLightCoolGray, width: 2),
+                            ),
+                            child: Column(
+                              children: [
+                                Image.asset(AppImages.leaveRequestIcon5),
+                                Text(
+                                  controller.documents.isEmpty
+                                      ? 'leaveRequest17'.tr
+                                      : '${controller.documents.length} file(s) selected',
+                                  style: kSize17W400KCharcoalBlackColorInterRegular.copyWith(
+                                      fontSize: getFont(14), color: AppColors.kSlateGray),
+                                ),
+                                Text(
+                                  'leaveRequest18'.tr,
+                                  style: kSize17W400KCharcoalBlackColorInterRegular.copyWith(
+                                      fontSize: getFont(12), color: AppColors.kMediumGrey),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),),
+
+
+                    // Container(
+                    //   padding: EdgeInsetsGeometry.symmetric(horizontal: getWidth(16), vertical: getHeight(34)),
+                    //   width: getWidth(343),
+                    //   decoration: BoxDecoration(
+                    //     color: AppColors.kWhiteColor,
+                    //     borderRadius: BorderRadius.all(Radius.circular(8)),
+                    //
+                    //     border: Border.all(color: AppColors.kLightCoolGray, width: 2),
+                    //   ),
+                    //   child: Column(
+                    //     children: [
+                    //       Image.asset(AppImages.leaveRequestIcon5),
+                    //       Text(
+                    //         'leaveRequest17'.tr,
+                    //         style: kSize16W400KWhiteColorOutfitRegular.copyWith(
+                    //           fontSize: getFont(14),
+                    //           color: AppColors.kSlateGray,
+                    //         ),
+                    //       ),
+                    //       Text(
+                    //         'leaveRequest18'.tr,
+                    //         style: kSize16W400KWhiteColorOutfitRegular.copyWith(
+                    //           fontSize: getFont(12),
+                    //           color: AppColors.kCoolGreyColor,
+                    //         ),
+                    //       ),
+                    //     ],
+                    //   ),
+                    // ),
+                    SizedBox(height: getHeight(60)),
+                    Obx((){
+                      return RoundButton(
+                        loading: controller.loading.value,
+                        onPress: controller.submitLeaveRequest,
+                        radius: BorderRadius.circular(12),
+                        title: 'leaveRequest19'.tr,
+                        textStyle: kSize16W600kMidnightBlueColorInterSemiBold
+                            .copyWith(color: AppColors.kWhiteColor),
+                        buttonColor: AppColors.kSkyBlueColor,
+                        width: getWidth(343),
+                        height: getHeight(56),
+                      );
+
+                    }),
+                    SizedBox(height: getHeight(30)),
+
+
+
+
+
+
+
+
+
+
+
+
+                  ],
+                ),
               ),
+
             ),
           )
 
@@ -346,7 +295,7 @@ class LeaveRequestScreen extends StatelessWidget {
         padding: EdgeInsets.symmetric(vertical: getHeight(14)),
         margin: EdgeInsets.only(right: getWidth(5)),
         width: getWidth(109),
-        height: getHeight(90),
+        height: getHeight(86),
         decoration: BoxDecoration(
           color: controller.selectedLeaveType.value == type
               ? AppColors.kSkyBlueColor
@@ -365,11 +314,11 @@ class LeaveRequestScreen extends StatelessWidget {
                   : type == 'personal'
                   ? 'leaveRequest11'.tr
                   : 'leaveRequest9'.tr,
-              style: kSize16W400KWhiteColorOutfitRegular.copyWith(
+              style: kSize14W500kForestGreenColorInterMedium.copyWith(
                   color: controller.selectedLeaveType.value == type
                       ? AppColors.kWhiteColor
                       : AppColors.kDarkSlateGray,
-                   fontSize: getFont(14)),
+                   fontSize: getFont(12)),
             ),
           ],
         ),
@@ -378,6 +327,61 @@ class LeaveRequestScreen extends StatelessWidget {
   }
 }
 
+Widget _requestTimeCard(){
+  return Container(
+    padding: EdgeInsetsGeometry.symmetric(horizontal: getWidth(16), vertical: getHeight(34)),
+    width: getWidth(343),
+    decoration: BoxDecoration(
+      color: AppColors.kAliceBlue,
+      borderRadius: BorderRadius.all(Radius.circular(8)),
+      border: Border.all(color: AppColors.kLightCoolGreyColor, width: 1),
+    ),
+    child: Row(
+      children: [
+        Container(
+          width: getWidth(36),
+          height: getHeight(34),
+          decoration: BoxDecoration(
+            color: AppColors.kSkyBlueColor,
+            borderRadius: BorderRadius.all(Radius.circular(8)),
+            border: Border.all(color: AppColors.kLightCoolGreyColor, width: 1),
+          ),
+          child: Icon(Icons.calendar_month_outlined, color: AppColors.kWhiteColor,weight: 12.54,),
+
+        ),
+        SizedBox(width: getWidth(20)),
+        Flexible(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                'leaveRequest4'.tr,
+                style: kSize16W600kMidnightBlueColorInterSemiBold.copyWith(
+                  color: AppColors.darkSlateBlue,
+                ),
+              ),
+
+              Text(
+                'leaveRequest5'.tr,
+                style: kSize17W400KCharcoalBlackColorInterRegular.copyWith(
+                    color: AppColors.kSlateGray,
+                    fontSize: getFont(14)
+                ),
+              ),
+            ],
+          ),
+        ),
+
+
+
+
+
+      ],
+    ),
+  );
+
+}
 
 
 // }
