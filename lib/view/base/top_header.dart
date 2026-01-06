@@ -22,7 +22,7 @@ class TopHeader extends StatelessWidget {
     SizeConfig().init(context);
 
     return Container(
-      width: getWidth(393),
+      width: double.infinity,
       height: getHeight(156),
       decoration: BoxDecoration(
         gradient: LinearGradient(
@@ -41,7 +41,6 @@ class TopHeader extends StatelessWidget {
         child: Stack(
           alignment: Alignment.center,
           children: [
-            /// 🔙 Back button
             Align(
               alignment: Alignment.centerLeft,
               child: GestureDetector(
@@ -50,27 +49,31 @@ class TopHeader extends StatelessWidget {
                   width: getWidth(40),
                   height: getHeight(40),
                   decoration: BoxDecoration(
-                    color: AppColors.kDeepSkyBlueColor,
+                    color: AppColors.kSkyBlue.withOpacity(0.57),
                     shape: BoxShape.circle,
+                    border: Border.all(
+                      color: AppColors.kLightCoolGreyColor,
+                      width: 1
+                    )
                   ),
-                  child: const Icon(
+                  child:  Icon(
+
                     Icons.arrow_back,
                     color: AppColors.kWhiteColor,
+
                   ),
                 ),
               ),
             ),
 
-            /// 🏷 Title
             Text(
               title,
-              style: kSize16W600KBlackColorOutfitSemiBold.copyWith(
+              style: kSize16W600kMidnightBlueColorInterSemiBold.copyWith(
                 fontSize: getFont(18),
                 color: AppColors.kWhiteColor,
               ),
             ),
 
-            /// ⚙️ Right actions (optional)
             if (actions != null)
               Align(
                 alignment: Alignment.centerRight,

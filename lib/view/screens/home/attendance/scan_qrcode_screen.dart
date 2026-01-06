@@ -341,105 +341,11 @@ class ScanQrcodeScreen extends StatelessWidget {
                 children: [
                   SizedBox(height: getHeight(30)),
 
-                  Stack(
-                    alignment: Alignment.center,
-                    children: [
-                      Image.asset(
-                        AppImages.QRCodeImage,
-                        width: getWidth(327),
-                      ),
+                  _qrScanner(),
 
-                      Obx(() {
-                        if (!controller.showScanner.value) {
-                          return const SizedBox.shrink();
-                        }
 
-                        return Container(
-                          width: getWidth(240),
-                          height: getWidth(240),
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(16),
-                            border: Border.all(
-                              color: AppColors.kSkyBlueColor,
-                              width: 2,
-                            ),
-                          ),
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.circular(16),
-                            child: MobileScanner(
-                              controller:
-                              controller.scannerController,
-                              onDetect: (barcodeCapture) {
-                                final qrCode = barcodeCapture
-                                    .barcodes.first.rawValue;
-                                if (qrCode != null) {
-                                  controller.onQrDetected(qrCode);
-                                }
-                              },
-                            ),
-                          ),
-                        );
-                      }),
-                    ],
-                  ),
 
-                  SizedBox(height: getHeight(20)),
 
-                  GestureDetector(
-                    onTap: controller.openScanner,
-                    child: Container(
-                      width: getWidth(64),
-                      height: getHeight(64),
-                      decoration: BoxDecoration(
-                        color: AppColors.kSkyBlueColor,
-                        shape: BoxShape.circle,
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.black.withOpacity(0.15),
-                            blurRadius: 10,
-                          ),
-                        ],
-                      ),
-                      child: Image.asset(
-                        AppImages.dragHandleIcon,
-                      ),
-                    ),
-                  ),
-
-                  SizedBox(height: getHeight(6)),
-
-                  Text(
-                    'scanQrCode5'.tr,
-                    style:
-                    kSize16W600KBlackColorOutfitSemiBold.copyWith(
-                      fontSize: getFont(12),
-                      color: AppColors.kMidnightBlueColor,
-                    ),
-                  ),
-
-                  SizedBox(height: getHeight(25)),
-
-                  Obx(() {
-                    return RoundButton(
-                      image: Icon(
-                        controller.torchOn.value
-                            ? Icons.flash_on
-                            : Icons.flash_off,
-                        color: Colors.white,
-                      ),
-                      onPress: controller.toggleTorch,
-                      radius: BorderRadius.circular(16),
-                      title: 'scanQrCode6'.tr,
-                      textStyle:
-                      kSize16W600KBlackColorOutfitSemiBold
-                          .copyWith(
-                        color: AppColors.kWhiteColor,
-                      ),
-                      buttonColor: AppColors.kSkyBlueColor,
-                      width: getWidth(287),
-                      height: getHeight(60),
-                    );
-                  }),
 
                   SizedBox(height: getHeight(30)),
 
@@ -450,7 +356,7 @@ class ScanQrcodeScreen extends StatelessWidget {
                       children: [
                         Text(
                           'scanQrCode7'.tr,
-                          style: kSize16W600KBlackColorOutfitSemiBold
+                          style: kSize16W600kMidnightBlueColorInterSemiBold
                               .copyWith(
                             fontSize: getFont(18),
                             color:
@@ -459,22 +365,20 @@ class ScanQrcodeScreen extends StatelessWidget {
                         ),
                         const Spacer(),
                         Container(
-                          width: getWidth(8),
-                          height: getHeight(8),
+                          width: getWidth(8.48),
+                          height: getHeight(8.48),
                           decoration: BoxDecoration(
                             color:
-                            AppColors.kForestGreenColor,
+                            AppColors.kTealGreenLight,
                             shape: BoxShape.circle,
                           ),
                         ),
                         SizedBox(width: getWidth(4)),
                         Text(
                           'scanQrCode8'.tr,
-                          style: kSize16W600KBlackColorOutfitSemiBold
+                          style: kSize14W500kForestGreenColorInterMedium
                               .copyWith(
-                            fontSize: getFont(12),
-                            color:
-                            AppColors.kForestGreenColor,
+                            color: AppColors.kTealGreenLight,
                           ),
                         ),
                       ],
@@ -542,8 +446,10 @@ class ScanQrcodeScreen extends StatelessWidget {
         borderRadius: BorderRadius.circular(16),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.1),
+            offset: const Offset(0, 4),
             blurRadius: 8,
+            spreadRadius: 0,
+            color: Colors.black.withOpacity(0.9),
           ),
         ],
       ),
@@ -563,15 +469,16 @@ class ScanQrcodeScreen extends StatelessWidget {
               Text(
                 title,
                 style:
-                kSize16W600KBlackColorOutfitSemiBold
+                kSize14W500kForestGreenColorInterMedium
                     .copyWith(
-                  fontSize: getFont(13),
+                  color: AppColors.kMidnightBlueColor
+
                 ),
               ),
               Text(
                 subtitle,
                 style:
-                kSize16W400KWhiteColorOutfitRegular
+                kSize17W400KCharcoalBlackColorInterRegular
                     .copyWith(
                   fontSize: getFont(12),
                   color:
@@ -590,6 +497,111 @@ class ScanQrcodeScreen extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  Widget _qrScanner(){
+    return Column(
+      children: [
+        Stack(
+          alignment: Alignment.center,
+          children: [
+            Image.asset(
+              AppImages.QRCodeImage,
+              width: getWidth(327),
+            ),
+
+            Obx(() {
+              if (!controller.showScanner.value) {
+                return const SizedBox.shrink();
+              }
+
+              return Container(
+                width: getWidth(240),
+                height: getWidth(240),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(16),
+                  border: Border.all(
+                    color: AppColors.kSkyBlueColor,
+                    width: 2,
+                  ),
+                ),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(16),
+                  child: MobileScanner(
+                    controller:
+                    controller.scannerController,
+                    onDetect: (barcodeCapture) {
+                      final qrCode = barcodeCapture
+                          .barcodes.first.rawValue;
+                      if (qrCode != null) {
+                        controller.onQrDetected(qrCode);
+                      }
+                    },
+                  ),
+                ),
+              );
+            }),
+          ],
+        ),
+        //SizedBox(height: getHeight(10)),
+
+        GestureDetector(
+          onTap: controller.openScanner,
+          child: Container(
+            width: getWidth(64),
+            height: getHeight(64),
+            decoration: BoxDecoration(
+              color: AppColors.kSkyBlueColor,
+              shape: BoxShape.circle,
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black.withOpacity(0.15),
+                  blurRadius: 10,
+                ),
+              ],
+            ),
+            child: Image.asset(
+              AppImages.dragHandleIcon,
+            ),
+          ),
+        ),
+        SizedBox(height: getHeight(6)),
+
+        Text(
+          'scanQrCode5'.tr,
+          style:
+          kSize16W600KBlackColorOutfitSemiBold.copyWith(
+            fontSize: getFont(12),
+            color: AppColors.kMidnightBlueColor,
+          ),
+        ),
+        SizedBox(height: getHeight(25)),
+
+        Obx(() {
+          return RoundButton(
+            image: Icon(
+              controller.torchOn.value
+                  ? Icons.flash_on
+                  : Icons.flash_off,
+              color: Colors.white,
+            ),
+            onPress: controller.toggleTorch,
+            radius: BorderRadius.circular(16),
+            title: 'scanQrCode6'.tr,
+            textStyle:
+            kSize16W600kMidnightBlueColorInterSemiBold
+                .copyWith(
+              color: AppColors.kWhiteColor,
+            ),
+            buttonColor: AppColors.kSkyBlueColor,
+            width: getWidth(287),
+            height: getHeight(60),
+          );
+        }),
+
+      ],
+    );
+
   }
 }
 

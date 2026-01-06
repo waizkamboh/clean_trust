@@ -4,6 +4,7 @@ import 'package:clean_trust/view/screens/auth/confirm_password_screen.dart';
 import 'package:clean_trust/view/screens/auth/forgot_password_screen.dart';
 import 'package:clean_trust/view/screens/auth/login_screen.dart';
 import 'package:clean_trust/view/screens/auth/signup_screen.dart';
+import 'package:clean_trust/view/screens/home/attendance/scan_qrcode_screen.dart';
 import 'package:clean_trust/view/screens/home/home_screen.dart';
 import 'package:clean_trust/view/screens/onboarding/onboarding_screen1.dart';
 import 'package:clean_trust/view/screens/onboarding/onboarding_screen2.dart';
@@ -32,7 +33,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
       ),
-      home: HomeScreen(),
+      home: ScanQrcodeScreen(),
       locale: LocalizationService.locale ,
       fallbackLocale: LocalizationService.fallbackLocale,
       translations: LocalizationService(),
