@@ -5,6 +5,7 @@ import 'package:clean_trust/view/screens/auth/forgot_password_screen.dart';
 import 'package:clean_trust/view/screens/auth/login_screen.dart';
 import 'package:clean_trust/view/screens/auth/signup_screen.dart';
 import 'package:clean_trust/view/screens/home/attendance/attendance_history_screen.dart';
+import 'package:clean_trust/view/screens/home/attendance/manual_entry_screen.dart';
 import 'package:clean_trust/view/screens/home/attendance/scan_qrcode_screen.dart';
 import 'package:clean_trust/view/screens/home/attendance/scan_result_screen.dart';
 import 'package:clean_trust/view/screens/home/home_screen.dart';
@@ -35,7 +36,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
       ),
-      home: AttendanceHistoryScreen(),
+      home: ManualEntryScreen(),
       locale: LocalizationService.locale ,
       fallbackLocale: LocalizationService.fallbackLocale,
       translations: LocalizationService(),
