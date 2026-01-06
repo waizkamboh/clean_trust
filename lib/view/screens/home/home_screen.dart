@@ -230,7 +230,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   Widget _topHeader(){
     return Container(
-      width: getWidth(393),
+      width: double.infinity,
       height: getHeight(201),
       decoration: BoxDecoration(
         gradient: LinearGradient(
@@ -262,9 +262,10 @@ class _HomeScreenState extends State<HomeScreen> {
                 children: [
                   Text(
                     'homeScreen1'.tr,
-                    style: kSize16W400KWhiteColorOutfitRegular
+                    style: kSize10W400KBlackColorlatoRegular
                         .copyWith(
                       fontSize: getFont(14),
+                      color: AppColors.kWhiteColor,
                     ),
                   ),
 
@@ -273,9 +274,11 @@ class _HomeScreenState extends State<HomeScreen> {
                       Obx(()=>
                       Text(
                       controller.fullName.value,
-                        style: kSize16W400KWhiteColorOutfitRegular
+                        style: kSize10W400KBlackColorlatoRegular
                             .copyWith(
                           fontSize: getFont(20),
+                          color: AppColors.kWhiteColor,
+
                         ),
                       ),),
 
@@ -307,7 +310,6 @@ class _HomeScreenState extends State<HomeScreen> {
                       child: Image.asset(AppImages.bellIcon),
                     ),
 
-                    /// 🔴 Unread Badge
                     Obx(() {
                       if (unreadCountController.unreadCount
                           .value == 0) {

@@ -31,7 +31,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
       ),
-      home: ConfirmPasswordScreen(),
+      home: HomeScreen(),
       locale: LocalizationService.locale ,
       fallbackLocale: LocalizationService.fallbackLocale,
       translations: LocalizationService(),

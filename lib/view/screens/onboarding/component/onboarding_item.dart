@@ -12,6 +12,7 @@ class OnboardingItem extends StatelessWidget {
   final String subtitle;
   final VoidCallback onButtonPress;
 
+
   const OnboardingItem({
     super.key,
     required this.imagePath,
@@ -59,26 +60,31 @@ class OnboardingItem extends StatelessWidget {
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  Padding(
-                    padding:  EdgeInsets.symmetric(
-                      horizontal: getWidth(60),
-                    ),
-                    child: Column(
-                      children: [
-                        Text(
+                  Column(
+                    children: [
+                      ConstrainedBox(
+                        constraints: BoxConstraints(
+                          maxWidth: getWidth(220),
+                        ),
+                        child: Text(
                           title.tr,
                           style: kSize20W700KWhiteColorOutfitBold,
                           textAlign: TextAlign.center,
                         ),
-                        SizedBox(height: getHeight(10)),
-                        Text(
+                      ),
+                      SizedBox(height: getHeight(10)),
+                      ConstrainedBox(
+                        constraints: BoxConstraints(
+                          maxWidth: getWidth(281),
+                        ),
+                        child: Text(
                           subtitle.tr,
                           style: kSize16W400KWhiteColorOutfitRegular,
                           textAlign: TextAlign.center,
                         ),
+                      ),
 
-                      ],
-                    ),
+                    ],
                   ),
 
                   SizedBox(height: getHeight(60)),
