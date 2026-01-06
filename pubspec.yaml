@@ -138,7 +138,10 @@ flutter:
       fonts:
         - asset: assets/fonts/Inter_18pt-SemiBold.ttf
           weight: 600
-
+    - family: OpenSans-Regular
+      fonts:
+        - asset: assets/fonts/OpenSans-Regular.ttf
+          weight: 400
 
 
 
