@@ -110,123 +110,6 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  void showLocationEnabledDialog() {
-    Get.dialog(
-      Dialog(
-        backgroundColor: AppColors.kWhiteColor,
-        shadowColor: AppColors.kBlackColor.withOpacity(0.10),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(16),
-
-        ),
-        child: SizedBox(
-          width: getWidth(335),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Container(
-                width: getWidth(335),
-                height: getHeight(188),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.only(topRight: Radius.circular(16), topLeft: Radius.circular(16)),
-                  color: AppColors.kGradientColor5,
-                  border: Border.all(
-                    color: AppColors.kLightCoolGreyColor,
-                    width: 1,
-                  ),
-                ),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Container(
-                      width: getWidth(80),
-                      height: getHeight(80),
-                      decoration: BoxDecoration(
-                        color: AppColors.kWhiteColor.withOpacity(0.2),
-                        shape: BoxShape.circle,
-                        border: Border.all(
-                          color: AppColors.kLightCoolGreyColor,
-                          width: 1,
-                        ),
-                      ),
-                      child: Image.asset(AppImages.locationIcon, color: AppColors.kWhiteColor,)
-
-                    ),
-                    SizedBox(height: getHeight(10),),
-                    Text(
-                      'enableLocation1'.tr,
-                      style: kSize20W700KWhiteColorOutfitBold
-                    ),
-
-
-                  ],
-                ),
-              ),
-              SizedBox(height: getHeight(20),),
-              Padding(
-                padding:  EdgeInsets.symmetric(horizontal: getWidth(24), vertical: getHeight(34)),
-                child: Column(
-                  children: [
-                    Text(
-                      'enableLocation2'.tr,
-                      textAlign: TextAlign.center,
-                      style: kSize16W400KWhiteColorOutfitRegular.copyWith(
-                        color: AppColors.kDarkSlateGray,
-                      ),
-                    ),
-
-                    SizedBox(height: getHeight(30),),
-
-                    RoundButton(
-                      onPress: () async{
-
-                        try {
-                          await getCurrentLocation();
-                        } catch (e) {
-                          if (kDebugMode) {
-                            print(e);
-                          }
-                        }
-
-                      },
-                      radius: BorderRadius.circular(16),
-                      title: 'enableLocation3'.tr,
-                      textStyle: kSize16W600KBlackColorOutfitSemiBold.copyWith(color: AppColors.kWhiteColor),
-                      buttonColor: AppColors.kSkyBlueColor,
-                      borderColor: AppColors.kLightCoolGreyColor,
-                      width: getWidth(287),
-                      height: getHeight(56),
-
-                    ),
-                    SizedBox(height: getHeight(10),),
-
-                    RoundButton(
-                      onPress: () async{
-
-                        Get.back();
-
-                      },
-                      radius: BorderRadius.circular(16),
-                      title: 'enableLocation4'.tr,
-                      textStyle: kSize16W600KBlackColorOutfitSemiBold.copyWith(color: AppColors.kDarkSlateGray),
-                      buttonColor: AppColors.kLightGrayBackground,
-                      borderColor: AppColors.kLightCoolGreyColor,
-                      width: getWidth(287),
-                      height: getHeight(56),
-
-                    ),
-
-                  ],
-                ),
-              )
-
-            ],
-          ),
-        ),
-      ),
-    );
-  }
 
   Widget _topHeader(){
     return Container(
@@ -595,7 +478,8 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget _leaveRequestCard(){
     return   GestureDetector(
       onTap: () {
-        Get.toNamed(RouteName.leaveRequestScreen);
+        //Get.toNamed(RouteName.leaveRequestScreen);
+        showLocationEnabledDialog();
       },
       child: Container(
         padding: EdgeInsetsGeometry.symmetric(
@@ -729,6 +613,117 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
     );
 
+  }
+  void showLocationEnabledDialog() {
+    Get.dialog(
+      Dialog(
+        backgroundColor: AppColors.kWhiteColor,
+        shadowColor: AppColors.kBlackColor.withOpacity(0.10),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(16),
+
+        ),
+        child: SizedBox(
+          width: getWidth(335),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Container(
+                width: getWidth(335),
+                height: getHeight(188),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.only(topRight: Radius.circular(16), topLeft: Radius.circular(16)),
+                  color: AppColors.kGradientColor5,
+
+                ),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Container(
+                        width: getWidth(80),
+                        height: getHeight(80),
+                        decoration: BoxDecoration(
+                          color: AppColors.kWhiteColor.withOpacity(0.2),
+                          shape: BoxShape.circle,
+                        ),
+                        child: Image.asset(AppImages.locationIcon, color: AppColors.kWhiteColor,)
+
+                    ),
+                    SizedBox(height: getHeight(20),),
+                    Text(
+                        'enableLocation1'.tr,
+                        style: kSize24W700kMidnightBlueColorInterBold.copyWith(fontSize: getFont(20), color: AppColors.kWhiteColor)
+                    ),
+
+
+                  ],
+                ),
+              ),
+              SizedBox(height: getHeight(20),),
+              Padding(
+                padding:  EdgeInsets.symmetric(horizontal: getWidth(24), vertical: getHeight(34)),
+                child: Column(
+                  children: [
+                    Text(
+                      'enableLocation2'.tr,
+                      textAlign: TextAlign.center,
+                      style: kSize17W400KCharcoalBlackColorInterRegular.copyWith(
+                        color: AppColors.kDarkSlateGray,
+                        fontSize: getFont(16),
+                      ),
+                    ),
+
+                    SizedBox(height: getHeight(30),),
+
+                    RoundButton(
+                      onPress: () async{
+
+                        try {
+                          await getCurrentLocation();
+                        } catch (e) {
+                          if (kDebugMode) {
+                            print(e);
+                          }
+                        }
+
+                      },
+                      radius: BorderRadius.circular(16),
+                      title: 'enableLocation3'.tr,
+                      textStyle: kSize16W600kMidnightBlueColorInterSemiBold.copyWith(color: AppColors.kWhiteColor),
+                      buttonColor: AppColors.kSkyBlueColor,
+                      borderColor: Colors.transparent,
+                      width: getWidth(287),
+                      height: getHeight(56),
+
+                    ),
+                    SizedBox(height: getHeight(10),),
+
+                    RoundButton(
+                      onPress: () async{
+
+                        Get.back();
+
+                      },
+                      radius: BorderRadius.circular(16),
+                      title: 'enableLocation4'.tr,
+                      textStyle: kSize16W600kMidnightBlueColorInterSemiBold.copyWith(color: AppColors.kDarkSlateGray),
+                      buttonColor: AppColors.kLightGrayBackground,
+                      borderColor: AppColors.kLightCoolGreyColor,
+                      width: getWidth(287),
+                      height: getHeight(56),
+
+                    ),
+
+                  ],
+                ),
+              )
+
+            ],
+          ),
+        ),
+      ),
+    );
   }
 
 
