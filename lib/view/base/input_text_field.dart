@@ -84,7 +84,7 @@ class InputTextField extends StatelessWidget {
         controller: myController,
         focusNode: focusNode,
         obscureText: obscureText,
-        obscuringCharacter: '*',
+        obscuringCharacter: '.',
         maxLines: maxLines ?? 1,
         enabled: enable,
         maxLength: maxLength,
@@ -103,7 +103,7 @@ class InputTextField extends StatelessWidget {
           hintText: hintText,
           labelText: labelText,
           labelStyle: labelTextStyle ??
-              kSize16W400KWhiteColorOutfitRegular.copyWith(fontSize: getFont(12.61), color: AppColors.kCharcoalBlackColor),
+              kSize16W400KWhiteColorOutfitRegular.copyWith(fontSize: getFont(14), color: AppColors.kCharcoalBlackColor),
           hintStyle: hintTextStyle ??
               kSize16W400KWhiteColorOutfitRegular.copyWith(fontSize: getFont(12.61), color: AppColors.kBlackColor.withOpacity(0.66)),
           prefixIcon: prefixIcon,
