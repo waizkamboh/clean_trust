@@ -31,6 +31,15 @@ class UserPreference {
     return prefs.remove('token');
   }
 
+  Future<bool> saveUserName(String name) async {
+    final prefs = await SharedPreferences.getInstance();
+    return prefs.setString('user_name', name);
+  }
+
+  Future<String?> getUserName() async {
+    final prefs = await SharedPreferences.getInstance();
+    return prefs.getString('user_name');
+  }
   Future<bool> saveUserId(int userId) async {
     final prefs = await SharedPreferences.getInstance();
     return prefs.setInt('user_id', userId);

@@ -36,8 +36,8 @@ class EditProfileController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    _loadProfileFromCache(); // 🚀 instant data
-    _loadData();       // 🔄 API refresh
+    _loadProfileFromCache();
+    _loadData();
   }
 
 
@@ -49,7 +49,8 @@ class EditProfileController extends GetxController {
       showCustomSnackBar('Please check internet connection');
       return;
     }
-  fetchEmployee();
+    debugPrint(' API  called');
+    fetchEmployee();
 
 
   }

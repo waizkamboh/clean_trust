@@ -84,15 +84,16 @@ class LoginController extends GetxController{
       }
 
       String accessToken = response['data']['accessToken'];
+      String userName = response['data']['user']['full_name'];
       int userId = response['data']['user']['id'];
 
+      await userPreference.saveUserId(userId);
+      await userPreference.saveUserName(userName);
 
       if (rememberMe.value) {
         await userPreference.saveToken(accessToken);
-        await userPreference.saveUserId(userId);
-      } else {
-        await userPreference.removeToken();
       }
+
 
 
       clearFields();

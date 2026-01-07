@@ -51,7 +51,7 @@ class _HomeScreenState extends State<HomeScreen> {
     unreadCountController.fetchUnreadCount();
   }
 
-  final EditProfileController controller = Get.find();
+
 
 
  NotificationController notificationController = Get.find();
@@ -156,7 +156,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     children: [
                       Obx(()=>
                       Text(
-                      controller.fullName.value,
+                      getAttendanceHistoryController.userName.value,
                         style: kSize10W400KBlackColorlatoRegular
                             .copyWith(
                           fontSize: getFont(20),

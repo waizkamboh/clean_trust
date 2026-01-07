@@ -14,8 +14,23 @@ class GetTodayAndMonthlyAttendanceController extends GetxController {
 
   final GetMonthlyAttendanceRepository _monthlyRepo =
   GetMonthlyAttendanceRepository();
-
   final UserPreference _userPreference = UserPreference();
+
+
+  RxString userName = ''.obs; // reactive
+
+  @override
+  void onInit() {
+    super.onInit();
+    _loadUserName();
+  }
+
+  void _loadUserName() async {
+    final name = await _userPreference.getUserName();
+    userName.value = name ?? '';
+  }
+
+
 
   RxBool isLoading = false.obs;
 
