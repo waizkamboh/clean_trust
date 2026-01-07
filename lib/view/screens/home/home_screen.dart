@@ -519,15 +519,6 @@ class _HomeScreenState extends State<HomeScreen> {
           borderRadius: BorderRadius.all(Radius.circular(24)),
           border: Border.all(
               color: AppColors.kLightGreyColor, width: 0.5),
-          boxShadow: [
-            BoxShadow(
-              color: AppColors.kBlackColor.withOpacity(0.25),
-              offset: const Offset(0, 1),
-              blurRadius: 4,
-              spreadRadius: 0,
-            ),
-
-          ],
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
