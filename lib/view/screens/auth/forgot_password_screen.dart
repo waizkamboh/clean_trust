@@ -27,79 +27,82 @@ class ForgotPasswordScreen extends StatelessWidget {
           SingleChildScrollView(
             child: Column(
               children: [
-                AuthCard(
-                    size: getHeight(180),
-                    child: Padding(
-                      padding:  EdgeInsets.symmetric(horizontal: getWidth(17), vertical: getHeight(35)),
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            'forgotPassword1'.tr,
-                            style: kSize16W600KBlackColorOutfitSemiBold.copyWith(fontSize: getFont(18)),
-                          ),
-                          Text(
-                            'forgotPassword2'.tr,
-                            style: kSize16W400KWhiteColorOutfitRegular.copyWith(color: AppColors.kCharcoalBlackColor, fontSize: getFont(15)),
-                          ),
-                          SizedBox(height: getHeight(40)),
-                          InputTextField(
-                            myController: controller.emailController.value,
-                            width: getWidth(298.21),
-                            contentPadding: EdgeInsets.symmetric(horizontal: getWidth(20)),
-                            onValidator: (email){
-                              return null;
-                            },
-                            keyBoardType: TextInputType.emailAddress,
-                      
-                            obscureText: false,
-                            hintText: 'forgotPassword4'.tr,
-                            labelText: 'forgotPassword3'.tr,
-                            hintTextStyle: kSize16W400KWhiteColorOutfitRegular.copyWith(fontSize: getFont(12.54), color: AppColors.kBlackColor.withOpacity(0.66)),
-                            labelTextStyle: kSize16W400KWhiteColorOutfitRegular.copyWith(fontSize: getFont(12.54), color: AppColors.kCharcoalBlackColor),
-                            borderSideColor: AppColors.kBlackColor.withOpacity(0.37),
-                            borderSideWidth: 0.9,
-
-                            textFormFieldColor: AppColors.kWhiteColor,
-
-                          ),
-                      
-                          SizedBox(height: getHeight(50)),
-
-                          Obx((){
-                            return RoundButton(
-                              loading: controller.loading.value,
-                              onPress: (){
-                                controller.forgetPasswordApi();
-
-                              },
-                              radius: BorderRadius.circular(8),
-                              title: 'forgotPassword5'.tr,
-                              textStyle: kSize16W600KBlackColorOutfitSemiBold.copyWith(fontSize: getFont(14.11), color: AppColors.kWhiteColor),
-                              buttonColor: AppColors.kSkyBlueColor,
-                              width: getWidth(269),
-                              height: getHeight(44),
-
-                            );
-
-                          }),
-
-                      
-                      
-                        ],
-                      ),
-                    )
-                ),
+                _forgetPasswordCard(context),
 
               ],
             ),
-          ),
+          )
 
 
         ],
       ),
     );
+  }
+
+  Widget _forgetPasswordCard(BuildContext context) {
+    return AuthCard(
+        size: getHeight(180),
+        child: Padding(
+          padding:  EdgeInsets.symmetric(horizontal: getWidth(17), vertical: getHeight(35)),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                'forgotPassword1'.tr,
+                style: kSize16W600KBlackColorOutfitSemiBold.copyWith(fontSize: getFont(18)),
+              ),
+              Text(
+                'forgotPassword2'.tr,
+                style: kSize16W400KWhiteColorOutfitRegular.copyWith(color: AppColors.kCharcoalBlackColor, fontSize: getFont(15)),
+              ),
+              SizedBox(height: getHeight(40)),
+              InputTextField(
+                myController: controller.emailController.value,
+                width: getWidth(298.21),
+                contentPadding: EdgeInsets.symmetric(horizontal: getWidth(20)),
+                onValidator: (email){
+                  return null;
+                },
+                keyBoardType: TextInputType.emailAddress,
+
+                obscureText: false,
+                hintText: 'forgotPassword4'.tr,
+                labelText: 'forgotPassword3'.tr,
+                borderSideColor: AppColors.kBlackColor.withOpacity(0.37),
+                borderSideWidth: 0.9,
+
+                textFormFieldColor: AppColors.kWhiteColor,
+
+              ),
+
+              SizedBox(height: getHeight(50)),
+
+              Obx((){
+                return RoundButton(
+                  loading: controller.loading.value,
+                  onPress: (){
+                    controller.forgetPasswordApi();
+
+                  },
+                  radius: BorderRadius.circular(8),
+                  title: 'forgotPassword5'.tr,
+                  textStyle: kSize16W600KBlackColorOutfitSemiBold.copyWith(fontSize: getFont(14.11), color: AppColors.kWhiteColor),
+                  buttonColor: AppColors.kSkyBlueColor,
+                  width: getWidth(269),
+                  height: getHeight(44),
+
+                );
+
+              }),
+
+
+
+            ],
+          ),
+        )
+    );
+
   }
 }

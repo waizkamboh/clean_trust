@@ -30,125 +30,7 @@ class ConfirmPasswordScreen extends StatelessWidget {
           SingleChildScrollView(
             child: Column(
               children: [
-                AuthCard(
-                    size: getHeight(180),
-                    child: Padding(
-                      padding:  EdgeInsets.symmetric(horizontal: getWidth(17), vertical: getHeight(32)),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Text(
-                            'conformPassword1'.tr,
-                            style: kSize16W600KBlackColorOutfitSemiBold.copyWith(fontSize: getFont(18)),
-                          ),
-                          SizedBox(height: getHeight(40)),
-                          Obx(() {
-                            return  InputTextField(
-                              myController: controller.passwordController.value,
-                              width: getWidth(298.21),
-                              contentPadding: EdgeInsets.symmetric(horizontal: getWidth(20)),
-                              focusNode: controller.passwordFocusNode.value,
-                              onFiledSubmittedValue: (value){
-                                FocusScope.of(context)
-                                    .requestFocus(controller.confirmPasswordFocusNode.value);
-
-                              },
-                              onValidator: (email){
-                                return null;
-                              },
-                              keyBoardType: TextInputType.emailAddress,
-                              obscureText: controller.isPasswordHidden.value,
-                              suffixIcon: InkWell(
-                                onTap: () {
-                                  controller.isPasswordHidden.toggle();
-                                },
-                                child: Icon(
-                                  controller.isPasswordHidden.value
-                                      ? Icons.remove_red_eye_outlined
-                                      : Icons.remove_red_eye,
-                                  color: AppColors.kBlackColor.withOpacity(0.66),
-
-                                ),
-                              ),
-                              hintText: 'conformPassword3'.tr,
-                              labelText: 'conformPassword2'.tr,
-                              hintTextStyle: kSize16W400KWhiteColorOutfitRegular.copyWith(fontSize: getFont(12.54), color: AppColors.kBlackColor.withOpacity(0.66)),
-                              labelTextStyle: kSize16W400KWhiteColorOutfitRegular.copyWith(fontSize: getFont(12.54), color: AppColors.kCharcoalBlackColor),
-                              borderSideColor: AppColors.kBlackColor.withOpacity(0.37),
-                              borderSideWidth: 0.9,
-
-                              textFormFieldColor: AppColors.kWhiteColor,
-                            );
-
-                          }
-                          ),
-
-                          SizedBox(height: getHeight(25)),
-                          Obx(() {
-                            return  InputTextField(
-                              //height: getHeight(42),
-                              myController: controller.confirmPasswordController.value,
-                              width: getWidth(300),
-                              contentPadding: EdgeInsets.symmetric(horizontal: getWidth(20)),
-                              focusNode: controller.confirmPasswordFocusNode.value,
-                              onFiledSubmittedValue: (value){
-
-                              },
-                              onValidator: (email){
-                                return null;
-                              },
-                              keyBoardType: TextInputType.emailAddress,
-                              obscureText: controller.isPasswordHidden1.value,
-                              suffixIcon: InkWell(
-                                onTap: () {
-                                  controller.isPasswordHidden1.toggle();
-                                },
-                                child: Icon(
-                                  controller.isPasswordHidden1.value
-                                      ? Icons.remove_red_eye_outlined
-                                      : Icons.remove_red_eye,
-                                  color: AppColors.kBlackColor.withOpacity(0.66),
-                                ),
-                              ),
-                              hintText: 'conformPassword3'.tr,
-                              labelText: 'conformPassword4'.tr,
-                              hintTextStyle: kSize16W400KWhiteColorOutfitRegular.copyWith(fontSize: getFont(12.54), color: AppColors.kBlackColor.withOpacity(0.66)),
-                              labelTextStyle: kSize16W400KWhiteColorOutfitRegular.copyWith(fontSize: getFont(12.54), color: AppColors.kCharcoalBlackColor),
-                              borderSideColor: AppColors.kBlackColor.withOpacity(0.37),
-                              borderSideWidth: 0.9,
-
-                              textFormFieldColor: AppColors.kWhiteColor,
-                            );
-
-                          }
-                          ),
-                          SizedBox(height: getHeight(60)),
-
-                          RoundButton(
-                            loading: controller.loading.value,
-                            onPress: (){
-                              controller.resetPasswordApi();
-                            },
-                            radius: BorderRadius.circular(8),
-                            title: 'conformPassword5'.tr,
-                            textStyle: kSize16W600KBlackColorOutfitSemiBold.copyWith(fontSize: getFont(14.11), color: AppColors.kWhiteColor),
-                            buttonColor: AppColors.kSkyBlueColor,
-                            width: getWidth(269),
-                            height: getHeight(44),
-
-                          ),
-                          SizedBox(height: getHeight(40)),
-
-
-
-
-                        ],
-                      ),
-                    )
-                ),
-
+                _confirmPasswordCard(context),
 
               ],
             ),
@@ -158,5 +40,124 @@ class ConfirmPasswordScreen extends StatelessWidget {
         ],
       ),
     );
+  }
+  Widget _confirmPasswordCard(BuildContext context) {
+    return AuthCard(
+        size: getHeight(180),
+        child: Padding(
+          padding:  EdgeInsets.symmetric(horizontal: getWidth(17), vertical: getHeight(32)),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Text(
+                'conformPassword1'.tr,
+                style: kSize16W600KBlackColorOutfitSemiBold.copyWith(fontSize: getFont(18)),
+              ),
+              SizedBox(height: getHeight(40)),
+              Obx(() {
+                return  InputTextField(
+                  myController: controller.passwordController.value,
+                  width: getWidth(298.21),
+                  contentPadding: EdgeInsets.symmetric(horizontal: getWidth(20)),
+                  focusNode: controller.passwordFocusNode.value,
+                  onFiledSubmittedValue: (value){
+                    FocusScope.of(context)
+                        .requestFocus(controller.confirmPasswordFocusNode.value);
+
+                  },
+                  onValidator: (email){
+                    return null;
+                  },
+                  keyBoardType: TextInputType.emailAddress,
+                  obscureText: controller.isPasswordHidden.value,
+                  suffixIcon: InkWell(
+                    onTap: () {
+                      controller.isPasswordHidden.toggle();
+                    },
+                    child: Icon(
+                      controller.isPasswordHidden.value
+                          ? Icons.remove_red_eye_outlined
+                          : Icons.remove_red_eye,
+                      color: AppColors.kBlackColor.withOpacity(0.66),
+
+                    ),
+                  ),
+                  hintText: 'conformPassword3'.tr,
+                  labelText: 'conformPassword2'.tr,
+                  hintTextStyle: kSize16W400KWhiteColorOutfitRegular.copyWith(fontSize: getFont(12.54), color: AppColors.kBlackColor.withOpacity(0.66)),
+                  labelTextStyle: kSize16W400KWhiteColorOutfitRegular.copyWith(fontSize: getFont(12.54), color: AppColors.kCharcoalBlackColor),
+                  borderSideColor: AppColors.kBlackColor.withOpacity(0.37),
+                  borderSideWidth: 0.9,
+
+                  textFormFieldColor: AppColors.kWhiteColor,
+                );
+
+              }
+              ),
+
+              SizedBox(height: getHeight(25)),
+              Obx(() {
+                return  InputTextField(
+                  //height: getHeight(42),
+                  myController: controller.confirmPasswordController.value,
+                  width: getWidth(300),
+                  contentPadding: EdgeInsets.symmetric(horizontal: getWidth(20)),
+                  focusNode: controller.confirmPasswordFocusNode.value,
+                  onFiledSubmittedValue: (value){
+
+                  },
+                  onValidator: (email){
+                    return null;
+                  },
+                  keyBoardType: TextInputType.emailAddress,
+                  obscureText: controller.isPasswordHidden1.value,
+                  suffixIcon: InkWell(
+                    onTap: () {
+                      controller.isPasswordHidden1.toggle();
+                    },
+                    child: Icon(
+                      controller.isPasswordHidden1.value
+                          ? Icons.remove_red_eye_outlined
+                          : Icons.remove_red_eye,
+                      color: AppColors.kBlackColor.withOpacity(0.66),
+                    ),
+                  ),
+                  hintText: 'conformPassword3'.tr,
+                  labelText: 'conformPassword4'.tr,
+                  borderSideColor: AppColors.kBlackColor.withOpacity(0.37),
+                  borderSideWidth: 0.9,
+
+                  textFormFieldColor: AppColors.kWhiteColor,
+                );
+
+              }
+              ),
+              SizedBox(height: getHeight(60)),
+
+              RoundButton(
+                loading: controller.loading.value,
+                onPress: (){
+                  controller.resetPasswordApi();
+                },
+                radius: BorderRadius.circular(8),
+                title: 'conformPassword5'.tr,
+                textStyle: kSize16W600KBlackColorOutfitSemiBold.copyWith(fontSize: getFont(14.11), color: AppColors.kWhiteColor),
+                buttonColor: AppColors.kSkyBlueColor,
+                width: getWidth(269),
+                height: getHeight(44),
+
+              ),
+              SizedBox(height: getHeight(40)),
+
+
+
+
+            ],
+          ),
+        )
+    );
+
   }
 }

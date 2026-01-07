@@ -40,7 +40,7 @@ Map<String, String> en = {
   'forgotPassword1': 'Forgot Password',
   'forgotPassword2': 'Enter Your email adress',
   'forgotPassword3': 'Enter Email',
-  'forgotPassword4': 'email@gmail,com',
+  'forgotPassword4': 'email@gmail.com',
   'forgotPassword5': 'Send Email',
 
 
