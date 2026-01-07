@@ -22,19 +22,21 @@ class SocialAuthSection extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            ImageIcon(
-              AssetImage(AppImages.googleIcon,),
+            Image.asset(
+              AppImages.googleIcon,
 
             ),
             SizedBox(width: getWidth(15),),
 
-            ImageIcon(
-              AssetImage(AppImages.facebookIcon),
+            Image.asset(
+                AppImages.facebookIcon,
+
             ),
             SizedBox(width: getWidth(15),),
 
-            ImageIcon(
-              AssetImage(AppImages.appleIcon),
+            Image.asset(
+                AppImages.appleIcon,
+
             ),
 
           ],
