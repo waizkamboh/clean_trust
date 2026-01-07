@@ -315,6 +315,7 @@ import 'package:mobile_scanner/mobile_scanner.dart';
 
 import '../../../../util/app_images.dart';
 import '../../../../util/text_style.dart';
+import '../../../../view_model/controller/home/attendance/get_today_and_monthly_attendance_controller.dart';
 import '../../../../view_model/controller/home/attendance/scanqrcode_controller.dart';
 import '../../../base/round_button.dart';
 
@@ -324,6 +325,7 @@ class ScanQrcodeScreen extends StatelessWidget {
 
   final ScanQrCodeController controller =
   Get.find();
+  GetTodayAndMonthlyAttendanceController getAttendanceHistoryController = Get.find<GetTodayAndMonthlyAttendanceController>();
 
   @override
   Widget build(BuildContext context) {
@@ -387,37 +389,51 @@ class ScanQrcodeScreen extends StatelessWidget {
 
                   SizedBox(height: getHeight(15)),
 
-                  buildInfoCard(
-                    leadingWidget: Image.asset(
-                      AppImages.qrScreenIcon1,
-                      width: 24,
-                      height: 24,
-                    ),
-                    title: 'scanQrCode9'.tr,
-                    subtitle: 'scanQrCode10'.tr,
-                    trailingWidget: Image.asset(
-                      AppImages.qrScreenIcon2,
-                      width: 20,
-                      height: 20,
-                    ),
-                  ),
 
+                  Obx(() {
+                    final isReady = controller.latitude.value != 0.0 &&
+                        controller.longitude.value != 0.0;
+                    return buildInfoCard(
+                      leadingWidget: Image.asset(
+                        AppImages.qrScreenIcon1,
+                        width: 24,
+                        height: 24,
+                      ),
+                      title: isReady
+                          ? controller.latitude.value.toString()
+                          : 'Loading...',
+                      subtitle: isReady
+                          ? controller.longitude.value.toString()
+                          : 'Loading...',
+                      trailingWidget: Image.asset(
+                        AppImages.qrScreenIcon2,
+                        width: 20,
+                        height: 20,
+                      ),
+                    );
+                  } ),
                   SizedBox(height: getHeight(12)),
 
-                  buildInfoCard(
-                    leadingWidget: Image.asset(
-                      AppImages.qrScreenIcon3,
-                      width: 24,
-                      height: 24,
-                    ),
-                    title: 'scanQrCode11'.tr,
-                    subtitle: 'scanQrCode12'.tr,
-                    trailingWidget: Image.asset(
-                      AppImages.qrScreenIcon4,
-                      width: 20,
-                      height: 20,
-                    ),
-                  ),
+                  Obx(() {
+                    final checkIn = getAttendanceHistoryController.checkInTime.value;
+                    final displayCheckIn = (checkIn.isEmpty || checkIn == '--:--') ? 'scanQrCode12'.tr : checkIn;
+
+                    return buildInfoCard(
+                      leadingWidget: Image.asset(
+                        AppImages.qrScreenIcon3,
+                        width: 24,
+                        height: 24,
+                      ),
+                      title: 'scanQrCode11'.tr,
+                      subtitle: displayCheckIn,
+                      trailingWidget: Image.asset(
+                        AppImages.qrScreenIcon4,
+                        width: 20,
+                        height: 20,
+                      ),
+                    );
+                  }),
+
 
                   SizedBox(height: getHeight(40)),
                 ],
@@ -498,8 +514,7 @@ class ScanQrcodeScreen extends StatelessWidget {
       ),
     );
   }
-
-  Widget _qrScanner(){
+  Widget _qrScanner() {
     return Column(
       children: [
         Stack(
@@ -511,39 +526,42 @@ class ScanQrcodeScreen extends StatelessWidget {
             ),
 
             Obx(() {
-              if (!controller.showScanner.value) {
-                return const SizedBox.shrink();
-              }
-
-              return Container(
-                width: getWidth(240),
-                height: getWidth(240),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(16),
-                  border: Border.all(
-                    color: AppColors.kSkyBlueColor,
-                    width: 2,
+              return Visibility(
+                visible: controller.showScanner.value,
+                maintainState: true,
+                maintainAnimation: true,
+                maintainSize: true,
+                child: Container(
+                  width: getWidth(240),
+                  height: getWidth(240),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(16),
+                    border: Border.all(
+                      color: AppColors.kSkyBlueColor,
+                      width: 2,
+                    ),
                   ),
-                ),
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(16),
-                  child: MobileScanner(
-                    controller:
-                    controller.scannerController,
-                    onDetect: (barcodeCapture) {
-                      final qrCode = barcodeCapture
-                          .barcodes.first.rawValue;
-                      if (qrCode != null) {
-                        controller.onQrDetected(qrCode);
-                      }
-                    },
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(16),
+                    child: MobileScanner(
+                      key: const ValueKey('qr_scanner'), // 🔥 IMPORTANT
+                      controller: controller.scannerController,
+                      onDetect: (barcodeCapture) {
+                        final qrCode =
+                            barcodeCapture.barcodes.first.rawValue;
+                        if (qrCode != null) {
+                          controller.onQrDetected(qrCode);
+                        }
+                      },
+                    ),
                   ),
                 ),
               );
             }),
           ],
         ),
-        //SizedBox(height: getHeight(10)),
+
+        SizedBox(height: getHeight(10)),
 
         GestureDetector(
           onTap: controller.openScanner,
@@ -560,9 +578,7 @@ class ScanQrcodeScreen extends StatelessWidget {
                 ),
               ],
             ),
-            child: Image.asset(
-              AppImages.dragHandleIcon,
-            ),
+            child: Image.asset(AppImages.dragHandleIcon),
           ),
         ),
         SizedBox(height: getHeight(6)),
@@ -598,10 +614,9 @@ class ScanQrcodeScreen extends StatelessWidget {
             height: getHeight(60),
           );
         }),
-
       ],
     );
-
   }
+
 }
 

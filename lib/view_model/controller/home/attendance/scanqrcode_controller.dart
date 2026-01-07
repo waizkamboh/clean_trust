@@ -29,31 +29,37 @@ class ScanQrCodeController extends GetxController {
   RxString scannedTime = ''.obs;
   RxString scannedDate = ''.obs;
   RxString fullAddress = ''.obs; // first 2 words
-
-
+  RxDouble latitude = 0.0.obs;
+  RxDouble longitude = 0.0.obs;
 
 
 
   @override
   void onInit() {
     super.onInit();
+    fetchCurrentLocation();
     scannerController = MobileScannerController(
       facing: CameraFacing.back,
       torchEnabled: false,
       detectionSpeed: DetectionSpeed.noDuplicates,
     );
 
-
   }
 
 
 
-  void openScanner() {
+  // void openScanner() {
+  //   _scanLock = false;
+  //   isScanned.value = false;
+  //   showScanner.value = true;
+  // }
+
+
+  void openScanner() async {
     _scanLock = false;
-    isScanned.value = false;
     showScanner.value = true;
 
-    scannerController.start();
+    await scannerController.start();
   }
 
 
@@ -62,15 +68,14 @@ class ScanQrCodeController extends GetxController {
     scannerController.toggleTorch();
     torchOn.value = !torchOn.value;
   }
+
   Future<void> onQrDetected(String qrCode) async {
     if (_scanLock) return;
 
     _scanLock = true;
-    isScanned.value = true;
-    showScanner.value = false;
-
-    // 📷 STOP camera immediately
     await scannerController.stop();
+
+    showScanner.value = false;
 
     await _markAttendance(qrCode);
   }
@@ -79,13 +84,31 @@ class ScanQrCodeController extends GetxController {
 
 
 
-  Future<void> _markAttendance(String qrCode) async {
+  Future<void> fetchCurrentLocation() async {
     try {
-      loading.value = true;
-
       final position = await Geolocator.getCurrentPosition(
         desiredAccuracy: LocationAccuracy.high,
       );
+
+      latitude.value = position.latitude;
+      longitude.value = position.longitude;
+
+      await setAddressFromLatLng(
+        latitude.value,
+        longitude.value,
+      );
+      debugPrint('latitude: ${latitude.value}');
+      debugPrint('longitude: ${longitude.value}');
+
+    } catch (e) {
+      debugPrint('LOCATION ERROR: $e');
+    }
+  }
+
+
+  Future<void> _markAttendance(String qrCode) async {
+    try {
+      loading.value = true;
 
       final online = await isOnline();
       debugPrint('INTERNET STATUS: $online');
@@ -103,8 +126,8 @@ class ScanQrCodeController extends GetxController {
         await localDb.save(
           OfflineAttendance(
             qrCode: qrCode,
-            latitude: position.latitude,
-            longitude: position.longitude,
+            latitude: latitude.value,
+            longitude: longitude.value,
             scanTime: DateTime.now().toIso8601String(),
             userId: userId,
           ),
@@ -128,8 +151,8 @@ class ScanQrCodeController extends GetxController {
 
       final data = {
         "qr_code": qrCode,
-        "latitude": position.latitude,
-        "longitude": position.longitude,
+        "latitude": latitude.value,
+        "longitude": longitude.value,
         "is_offline": false,
       };
 
@@ -141,8 +164,8 @@ class ScanQrCodeController extends GetxController {
         setScanTimeAndDate();
 
         await setAddressFromLatLng(
-          position.latitude,
-          position.longitude,
+          latitude.value,
+          longitude.value,
         );
 
         Get.offNamed(RouteName.scanResultScreen);
@@ -187,8 +210,10 @@ class ScanQrCodeController extends GetxController {
 
   @override
   void onClose() {
+    scannerController.stop();
     scannerController.dispose();
     super.onClose();
   }
-  }
+
+}
 

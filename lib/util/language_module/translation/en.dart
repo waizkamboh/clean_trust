@@ -62,7 +62,7 @@ Map<String, String> en = {
   'scanQrCode9': 'GPS Coordinates',
   'scanQrCode10': '37.7749° N, 122.4194° W',
   'scanQrCode11': 'Attendance Time',
-  'scanQrCode12': 'Ready to capture',
+  'scanQrCode12': 'N/A',
 
 
   'scanResult1': 'Scan Result',
