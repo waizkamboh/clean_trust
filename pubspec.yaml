@@ -101,11 +101,9 @@ flutter:
 # flutter_native_splash must be outside flutter section
 flutter_native_splash:
   color: "#0A2841"
-  image: assets/images/splash_logo.png
 
   android_12:
     color: "#0A2841"
-    image: assets/images/splash_logo.png
 
   android: true
   ios: true
