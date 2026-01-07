@@ -100,22 +100,49 @@ class LoginScreen extends StatelessWidget {
                     SizedBox(height: getHeight(20)),
                     Row(
                       children: [
-                        Row(
-                          children: [
-                            ImageIcon(
-                              AssetImage(AppImages.checkCircle, ),
-                              size: 12.21,
-                              color: AppColors.kBlackColor.withOpacity(0.66),
+                        Obx(() {
+                          return GestureDetector(
+                            onTap: () {
+                              loginController.rememberMe.toggle();
+                            },
+                            child: Row(
+                              children: [
+                                Container(
+                                  width: getWidth(16),
+                                  height: getHeight(16),
+                                  decoration: BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    border: Border.all(
+                                      color: loginController.rememberMe.value
+                                          ? AppColors.kSkyBlueColor
+                                          : AppColors.kBlackColor.withOpacity(0.66),
+                                      width: 1.4,
+                                    ),
+
+                                  ),
+                                  child: loginController.rememberMe.value
+                                      ?  Icon(
+                                    Icons.check,
+                                    size: 12,
+                                    color: AppColors.kSkyBlueColor,
+                                  )
+                                      : null,
+                                ),
+                                SizedBox(width: getWidth(6)),
+                                Text(
+                                  'loginScreen5'.tr,
+                                  style: kSize10W400KBlackColorlatoRegular.copyWith(
+                                    fontSize: getFont(10),
+                                    color: loginController.rememberMe.value
+                                           ?AppColors.kSkyBlueColor
+                                           :AppColors.kBlackColor.withOpacity(0.66),
+                                  ),
+                                ),
+                              ],
                             ),
+                          );
+                        }),
 
-                            Text(
-                              'loginScreen5'.tr,
-                              style: kSize10W400KBlackColorlatoRegular.copyWith(fontSize: getFont(10), color: AppColors.kBlackColor.withOpacity(0.66)),
-                            ),
-
-
-                          ],
-                        ),
                         Spacer(),
                         GestureDetector(
                           onTap: (){

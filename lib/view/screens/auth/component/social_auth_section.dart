@@ -24,18 +24,23 @@ class SocialAuthSection extends StatelessWidget {
           children: [
             Image.asset(
               AppImages.googleIcon,
+              width: getWidth(22.82),
 
             ),
             SizedBox(width: getWidth(15),),
 
             Image.asset(
                 AppImages.facebookIcon,
+              width: getWidth(22.82),
+
 
             ),
             SizedBox(width: getWidth(15),),
 
             Image.asset(
                 AppImages.appleIcon,
+              width: getWidth(22.82),
+
 
             ),
 

@@ -22,6 +22,8 @@ class LoginController extends GetxController{
   final passwordFocusNode = FocusNode().obs;
   var isPasswordHidden = true.obs;
   RxBool loading = false.obs;
+  RxBool rememberMe = false.obs;
+
 
 
 
@@ -87,8 +89,12 @@ class LoginController extends GetxController{
       int userId = response['data']['user']['id'];
 
 
-      await userPreference.saveToken(accessToken);
-      await userPreference.saveUserId(userId);
+      if (rememberMe.value) {
+        await userPreference.saveToken(accessToken);
+        await userPreference.saveUserId(userId);
+      } else {
+        await userPreference.removeToken();
+      }
 
 
       clearFields();
