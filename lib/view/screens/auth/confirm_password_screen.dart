@@ -61,16 +61,8 @@ class ConfirmPasswordScreen extends StatelessWidget {
                   myController: controller.passwordController.value,
                   width: getWidth(298.21),
                   contentPadding: EdgeInsets.symmetric(horizontal: getWidth(20)),
-                  focusNode: controller.passwordFocusNode.value,
-                  onFiledSubmittedValue: (value){
-                    FocusScope.of(context)
-                        .requestFocus(controller.confirmPasswordFocusNode.value);
-
-                  },
-                  onValidator: (email){
-                    return null;
-                  },
-                  keyBoardType: TextInputType.emailAddress,
+                  textInputAction: TextInputAction.next,
+                  keyBoardType: TextInputType.visiblePassword,
                   obscureText: controller.isPasswordHidden.value,
                   suffixIcon: InkWell(
                     onTap: () {
@@ -100,18 +92,11 @@ class ConfirmPasswordScreen extends StatelessWidget {
               SizedBox(height: getHeight(25)),
               Obx(() {
                 return  InputTextField(
-                  //height: getHeight(42),
                   myController: controller.confirmPasswordController.value,
                   width: getWidth(300),
                   contentPadding: EdgeInsets.symmetric(horizontal: getWidth(20)),
-                  focusNode: controller.confirmPasswordFocusNode.value,
-                  onFiledSubmittedValue: (value){
-
-                  },
-                  onValidator: (email){
-                    return null;
-                  },
-                  keyBoardType: TextInputType.emailAddress,
+                  textInputAction: TextInputAction.next,
+                  keyBoardType: TextInputType.visiblePassword,
                   obscureText: controller.isPasswordHidden1.value,
                   suffixIcon: InkWell(
                     onTap: () {

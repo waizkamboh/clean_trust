@@ -61,20 +61,11 @@ class SignupScreen extends StatelessWidget {
               ),
               SizedBox(height: getHeight(30)),
               InputTextField(
-                //height: getHeight(42),
                 myController: signupController.emailController.value,
                 width: getWidth(298.21),
                 contentPadding: EdgeInsets.symmetric(horizontal: getWidth(20)),
-                focusNode: signupController.emailFocusNode.value,
-                onFiledSubmittedValue: (value){
-                  FocusScope.of(context)
-                      .requestFocus(signupController.phoneFocusNode.value);
-                },
-                onValidator: (email){
-                  return null;
-                },
                 keyBoardType: TextInputType.emailAddress,
-
+                textInputAction: TextInputAction.next,
                 obscureText: false,
                 hintText: 'signupScreen4'.tr,
                 labelText: 'signupScreen3'.tr,
@@ -84,18 +75,11 @@ class SignupScreen extends StatelessWidget {
               ),
               SizedBox(height: getHeight(25)),
               InputTextField(
-                //height: getHeight(42),
                 myController: signupController.phoneController.value,
                 width: getWidth(300),
                 contentPadding: EdgeInsets.symmetric(horizontal: getWidth(20)),
-                focusNode: signupController.phoneFocusNode.value,
-                onFiledSubmittedValue: (value){
-                  FocusScope.of(context)
-                      .requestFocus(signupController.passwordFocusNode.value);
-                },
-                onValidator: (email){
-                  return null;
-                },
+                textInputAction: TextInputAction.next,
+
                 keyBoardType: TextInputType.phone,
 
                 obscureText: false,
@@ -109,18 +93,11 @@ class SignupScreen extends StatelessWidget {
               SizedBox(height: getHeight(25)),
               Obx(() {
                 return  InputTextField(
-                  //height: getHeight(42),
                   myController: signupController.passwordController.value,
                   width: getWidth(300),
                   contentPadding: EdgeInsets.symmetric(horizontal: getWidth(20)),
-                  focusNode: signupController.passwordFocusNode.value,
-                  onFiledSubmittedValue: (value){
-
-                  },
-                  onValidator: (email){
-                    return null;
-                  },
-                  keyBoardType: TextInputType.emailAddress,
+                  textInputAction: TextInputAction.done,
+                  keyBoardType: TextInputType.visiblePassword,
                   obscureText: signupController.isPasswordHidden.value,
                   suffixIcon: InkWell(
                     onTap: () {

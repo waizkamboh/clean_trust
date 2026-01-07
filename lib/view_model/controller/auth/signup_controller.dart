@@ -20,9 +20,6 @@ class SignupController extends GetxController{
   final emailController = TextEditingController().obs;
   final passwordController = TextEditingController().obs;
   final phoneController = TextEditingController().obs;
-  final emailFocusNode = FocusNode().obs;
-  final passwordFocusNode = FocusNode().obs;
-  final phoneFocusNode = FocusNode().obs;
   var isPasswordHidden = true.obs;
   RxBool loading = false.obs;
 
@@ -124,13 +121,6 @@ class SignupController extends GetxController{
     emailController.value.dispose();
     passwordController.value.dispose();
     phoneController.value.dispose();
-
-    // // Dispose of FocusNode
-    emailFocusNode.value.dispose();
-    passwordFocusNode.value.dispose();
-    phoneFocusNode.value.dispose();
-
-
     super.dispose();
   }
 
@@ -140,12 +130,6 @@ class SignupController extends GetxController{
     emailController.value.clear();
     passwordController.value.clear();
     phoneController.value.clear();
-
-
-    // // Remove focus from FocusNode
-    emailFocusNode.value.unfocus();
-    passwordFocusNode.value.unfocus();
-    phoneFocusNode.value.unfocus();
   }
 
 

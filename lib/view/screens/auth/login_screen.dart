@@ -52,18 +52,10 @@ class LoginScreen extends StatelessWidget {
               ),
               SizedBox(height: getHeight(20)),
               InputTextField(
-                //height: getHeight(42),
                 myController: loginController.emailController.value,
                 width: getWidth(300),
                 contentPadding: EdgeInsets.symmetric(horizontal: getWidth(20)),
-                focusNode: loginController.emailFocusNode.value,
-                onFiledSubmittedValue: (value){
-                  FocusScope.of(context)
-                      .requestFocus(loginController.passwordFocusNode.value);
-                },
-                onValidator: (email){
-                  return null;
-                },
+                textInputAction: TextInputAction.next,
                 keyBoardType: TextInputType.emailAddress,
                 obscureText: false,
                 hintText: 'loginScreen2'.tr,
@@ -74,18 +66,11 @@ class LoginScreen extends StatelessWidget {
               SizedBox(height: getHeight(25)),
               Obx(() {
                 return  InputTextField(
-                  //height: getHeight(42),
                   myController: loginController.passwordController.value,
                   width: getWidth(300),
                   contentPadding: EdgeInsets.symmetric(horizontal: getWidth(20)),
-                  focusNode: loginController.passwordFocusNode.value,
-                  onFiledSubmittedValue: (value){
-
-                  },
-                  onValidator: (email){
-                    return null;
-                  },
-                  keyBoardType: TextInputType.emailAddress,
+                  textInputAction: TextInputAction.done,
+                  keyBoardType: TextInputType.visiblePassword,
                   obscureText: loginController.isPasswordHidden.value,
                   suffixIcon: InkWell(
                     onTap: () {

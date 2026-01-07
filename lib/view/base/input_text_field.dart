@@ -38,6 +38,8 @@ class InputTextField extends StatelessWidget {
     this.cursorColor,
     this.labelText,
     this.labelTextStyle, this.borderSideWidth,
+    this.textInputAction,
+
   });
 
   final double? height;
@@ -45,6 +47,8 @@ class InputTextField extends StatelessWidget {
   final TextEditingController? myController;
   final FocusNode? focusNode;
   final FormFieldSetter? onFiledSubmittedValue;
+  final TextInputAction? textInputAction;
+
   final FormFieldValidator? onValidator;
   final TextInputType? keyBoardType;
   final bool obscureText;
@@ -75,6 +79,7 @@ class InputTextField extends StatelessWidget {
       width: width,
       height: height,
       child: TextFormField(
+        textInputAction: textInputAction,
         autovalidateMode:
         autoValidateMode ?? AutovalidateMode.onUserInteraction,
         onTap: onTap,

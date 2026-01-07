@@ -12,8 +12,6 @@ class ConfirmPasswordController extends GetxController {
   final confirmPasswordController = TextEditingController().obs;
   var isPasswordHidden = true.obs;
   var isPasswordHidden1 = true.obs;
-  final passwordFocusNode = FocusNode().obs;
-  final confirmPasswordFocusNode = FocusNode().obs;
 
 
   RxBool loading = false.obs;

@@ -62,9 +62,7 @@ class ForgotPasswordScreen extends StatelessWidget {
                 myController: controller.emailController.value,
                 width: getWidth(298.21),
                 contentPadding: EdgeInsets.symmetric(horizontal: getWidth(20)),
-                onValidator: (email){
-                  return null;
-                },
+                textInputAction: TextInputAction.done,
                 keyBoardType: TextInputType.emailAddress,
 
                 obscureText: false,
