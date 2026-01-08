@@ -28,9 +28,11 @@ class ScanQrCodeController extends GetxController {
   bool _scanLock = false;
   RxString scannedTime = ''.obs;
   RxString scannedDate = ''.obs;
-  RxString fullAddress = ''.obs; // first 2 words
   RxDouble latitude = 0.0.obs;
   RxDouble longitude = 0.0.obs;
+  RxString workplaceName = ''.obs;
+  RxString workplaceAddress = ''.obs;
+
 
 
 
@@ -47,12 +49,6 @@ class ScanQrCodeController extends GetxController {
   }
 
 
-
-  // void openScanner() {
-  //   _scanLock = false;
-  //   isScanned.value = false;
-  //   showScanner.value = true;
-  // }
 
 
   void openScanner() async {
@@ -93,10 +89,6 @@ class ScanQrCodeController extends GetxController {
       latitude.value = position.latitude;
       longitude.value = position.longitude;
 
-      await setAddressFromLatLng(
-        latitude.value,
-        longitude.value,
-      );
       debugPrint('latitude: ${latitude.value}');
       debugPrint('longitude: ${longitude.value}');
 
@@ -161,12 +153,18 @@ class ScanQrCodeController extends GetxController {
       loading.value = false;
 
       if (response?['success'] == true) {
+        final workplace = response['data']?['workplace'];
+
+        if (workplace != null) {
+          workplaceName.value = workplace['name'] ?? '';
+          workplaceAddress.value = workplace['address'] ?? '';
+        }
+        debugPrint('WORKPLACE NAME: ${workplaceName.value}');
+        debugPrint('WORKPLACE ADDRESS: ${workplaceAddress.value}');
+
         setScanTimeAndDate();
 
-        await setAddressFromLatLng(
-          latitude.value,
-          longitude.value,
-        );
+
 
         Get.offNamed(RouteName.scanResultScreen);
 
@@ -186,22 +184,6 @@ class ScanQrCodeController extends GetxController {
 
     scannedTime.value = DateFormat('hh:mm a').format(now);
     scannedDate.value = DateFormat('EEEE, MMM d, yyyy').format(now);
-  }
-  Future<void> setAddressFromLatLng(double lat, double lng) async {
-    try {
-      final placemarks = await placemarkFromCoordinates(lat, lng);
-
-      if (placemarks.isNotEmpty) {
-        final place = placemarks.first;
-
-        // Update the controller's observable
-        fullAddress.value = '${place.street}, ${place.locality}, ${place.country}';
-
-        debugPrint('FULL ADDRESS: ${fullAddress.value}');
-      }
-    } catch (e) {
-      debugPrint('GEOCODING ERROR: $e');
-    }
   }
 
 

@@ -416,7 +416,7 @@ class ScanQrcodeScreen extends StatelessWidget {
 
                   Obx(() {
                     final checkIn = getAttendanceHistoryController.checkInTime.value;
-                    final displayCheckIn = (checkIn.isEmpty || checkIn == '--:--') ? 'scanQrCode12'.tr : checkIn;
+                    final displayCheckIn = (checkIn.isEmpty ||checkIn == '--:--') ? 'scanQrCode12'.tr : checkIn;
 
                     return buildInfoCard(
                       leadingWidget: Image.asset(

@@ -6,7 +6,7 @@ import '../../../../data/repository/notification/mark_notification_read_reposito
 import '../../../../util/custom_snackbar.dart';
 import '../../user_preference/user_preference.dart';
 import 'get_unread_count_controller.dart';
-import 'notification_controller.dart';
+import 'get_notification_controller.dart';
 
 class MarkNotificationReadController extends GetxController {
   final MarkNotificationReadRepository _repo =
@@ -44,7 +44,7 @@ class MarkNotificationReadController extends GetxController {
       }
 
       /// 🔹 Update notification list locally
-      Get.find<NotificationController>()
+      Get.find<GetNotificationController>()
           .markNotificationReadLocally(notificationId);
 
       /// 🔹 Update unread badge

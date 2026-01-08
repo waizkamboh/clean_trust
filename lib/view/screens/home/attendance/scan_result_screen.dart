@@ -23,62 +23,74 @@ class ScanResultScreen extends StatelessWidget {
         children: [
           TopHeader(title: 'scanResult1'.tr),
           SizedBox(height: getHeight(30),),
-          Container(
-            width: getWidth(96.38),
-            height: getHeight(96.38),
-            decoration: BoxDecoration(
-              color: AppColors.kSkyBlueColor.withOpacity(0.11),
-              shape: BoxShape.circle,
-              border: Border.all(color: AppColors.kLightCoolGreyColor, width: 1),
+          Expanded(
+            child: SingleChildScrollView(
+              physics: BouncingScrollPhysics(),
+              child: Column(
+                children: [
+                  Container(
+                    width: getWidth(96.38),
+                    height: getHeight(96.38),
+                    decoration: BoxDecoration(
+                      color: AppColors.kSkyBlueColor.withOpacity(0.11),
+                      shape: BoxShape.circle,
+                      border: Border.all(color: AppColors.kLightCoolGreyColor, width: 1),
+                    ),
+                    child: Center(
+                        child: Icon(Icons.check, color: AppColors.kSkyBlueColor, size: 50,)
+                    ),
+                  ),
+                  SizedBox(height: getHeight(20),),
+
+                  Text(
+                    'scanResult2'.tr,
+                    style: kSize24W700kMidnightBlueColorInterBold.copyWith(
+                      color: AppColors.kMidnightBlueColor,
+                    ),
+                  ),
+                  Text(
+                    'scanResult3'.tr,
+                    style: kSize17W400KCharcoalBlackColorInterRegular.copyWith(
+                      fontSize: getFont(16),
+                      color: AppColors.kSlateGray,
+                    ),
+                  ),
+                  SizedBox(height: getHeight(30),),
+                  buildScanResultCard(
+                    iconPath: AppImages.qrScreenIcon3,
+                    firstText: 'scanResult4',
+                    secondText: controller.scannedTime.value,
+                    thirdText: controller.scannedDate.value,
+
+                  ),
+                  SizedBox(height: getHeight(20),),
+                  Obx(() => buildScanResultCard(
+                    iconPath: AppImages.qrScreenIcon1,
+                    secondText: controller.workplaceName.value,
+                    thirdText: controller.workplaceAddress.value,
+                  )),
+
+                  SizedBox(height: getHeight(40),),
+
+                  RoundButton(
+                    onPress: (){
+                      Get.offAllNamed(RouteName.bottomNavScreen);
+                    },
+                    radius: BorderRadius.circular(12),
+                    title: 'scanResult9'.tr,
+                    textStyle: kSize16W600kMidnightBlueColorInterSemiBold.copyWith(color: AppColors.kWhiteColor, fontSize: getFont(18)),
+                    buttonColor: AppColors.kSkyBlueColor,
+                    width: getWidth(327),
+                    height: getHeight(60),
+
+                  ),
+
+
+
+                ],
+              ),
             ),
-            child: Center(
-                child: Icon(Icons.check, color: AppColors.kSkyBlueColor, size: 50,)
-            ),
-          ),
-          SizedBox(height: getHeight(20),),
-
-          Text(
-            'scanResult2'.tr,
-            style: kSize24W700kMidnightBlueColorInterBold.copyWith(
-              color: AppColors.kMidnightBlueColor,
-            ),
-          ),
-          Text(
-            'scanResult3'.tr,
-            style: kSize17W400KCharcoalBlackColorInterRegular.copyWith(
-              fontSize: getFont(16),
-              color: AppColors.kSlateGray,
-            ),
-          ),
-          SizedBox(height: getHeight(30),),
-          buildScanResultCard(
-              iconPath: AppImages.qrScreenIcon3,
-              firstText: 'scanResult4',
-              secondText: controller.scannedTime.value,
-             thirdText: controller.scannedDate.value,
-
-          ),
-          SizedBox(height: getHeight(20),),
-          Obx(() => buildScanResultCard(
-            iconPath: AppImages.qrScreenIcon1,
-            firstText: controller.fullAddress.value ,
-          )),
-
-          SizedBox(height: getHeight(40),),
-
-          RoundButton(
-            onPress: (){
-              Get.offAllNamed(RouteName.bottomNavScreen);
-            },
-            radius: BorderRadius.circular(12),
-            title: 'scanResult9'.tr,
-            textStyle: kSize16W600kMidnightBlueColorInterSemiBold.copyWith(color: AppColors.kWhiteColor, fontSize: getFont(18)),
-            buttonColor: AppColors.kSkyBlueColor,
-            width: getWidth(327),
-            height: getHeight(60),
-
-          ),
-
+          )
 
         ],
       ),
@@ -133,7 +145,6 @@ class ScanResultScreen extends StatelessWidget {
                  if (firstText != null)
                    Text(
                      firstText.tr,
-                     overflow: TextOverflow.ellipsis,
                      style: kSize17W400KCharcoalBlackColorInterRegular.copyWith(
                        fontSize: getFont(14),
                        color: AppColors.kCoolGreyColor,

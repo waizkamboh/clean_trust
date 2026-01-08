@@ -15,7 +15,7 @@ import 'package:clean_trust/view_model/controller/leave_request/leave_request_co
 import 'package:clean_trust/view_model/controller/notification/get_unread_count_controller.dart';
 import 'package:clean_trust/view_model/controller/notification/mark_all_notification_read_controller.dart';
 import 'package:clean_trust/view_model/controller/notification/mark_notification_read_controller.dart';
-import 'package:clean_trust/view_model/controller/notification/notification_controller.dart';
+import 'package:clean_trust/view_model/controller/notification/get_notification_controller.dart';
 import 'package:clean_trust/view_model/controller/workplaces/get_workplaces_controller.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
@@ -65,7 +65,7 @@ class MyBindings implements Bindings {
     Get.lazyPut(() => UnreadCountController(), fenix: true);
     Get.lazyPut(() => MarkAllNotificationReadController(), fenix: true);
     Get.lazyPut(() => MarkNotificationReadController(), fenix: true);
-    Get.lazyPut(() => NotificationController(), fenix: true);
+    Get.lazyPut(() => GetNotificationController(), fenix: true);
     Get.lazyPut(() => ConfirmPasswordController(), fenix: true);
 
   }

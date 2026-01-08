@@ -1,21 +1,18 @@
 import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
-
 import '../../../../data/model/notification/GetAllNotificationModel.dart';
 import '../../../../data/repository/notification/get_all_notification_repository.dart';
 import '../../../../util/custom_snackbar.dart';
 import '../../user_preference/user_preference.dart';
 
-class NotificationController extends GetxController {
+class GetNotificationController extends GetxController {
   final GetAllNotificationRepository _repo =
   GetAllNotificationRepository();
   final UserPreference _userPreference = UserPreference();
 
   RxBool isLoading = false.obs;
   RxBool isPaginationLoading = false.obs;
-
   RxList<Notifications> notifications = <Notifications>[].obs;
-
   RxInt unreadCount = 0.obs;
 
   int page = 1;

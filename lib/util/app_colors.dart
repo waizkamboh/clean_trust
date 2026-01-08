@@ -49,6 +49,7 @@ class AppColors {
   static const kMediumGrey = Color(0xff9CA3AF);
   static const kDeepGreen = Color(0xff15803D);
   static const kDarkGraphite = Color(0xff1E1E1E);
+  static const kOrangeColor = Color(0xffF97316);
 
 
 

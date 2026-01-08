@@ -13,33 +13,10 @@ import '../../../base/round_button.dart';
 
 
 
-class AttendanceOfflineScreen extends StatefulWidget {
+class AttendanceOfflineScreen extends StatelessWidget {
    AttendanceOfflineScreen({super.key});
 
-  @override
-  State<AttendanceOfflineScreen> createState() => _AttendanceOfflineScreenState();
-}
-
-class _AttendanceOfflineScreenState extends State<AttendanceOfflineScreen> {
-  late AttendanceOfflineController controller;
-
-  @override
-  void initState() {
-    super.initState();
-    controller = Get.find<AttendanceOfflineController>();
-    _autoSyncWithDialog();
-  }
-
-  Future<void> _autoSyncWithDialog() async {
-    final online = await isOnline();
-
-    if (online && controller.offlineList.isNotEmpty) {
-      attendanceAutoSyncDialog();
-      controller.syncOfflineAttendance();
-    }
-  }
-
-
+  AttendanceOfflineController controller = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -51,51 +28,7 @@ class _AttendanceOfflineScreenState extends State<AttendanceOfflineScreen> {
           children: [
             TopHeader(title: 'attendanceOffline1'.tr),
             SizedBox(height: getHeight(30)),
-
-            Container(
-              padding: EdgeInsetsGeometry.symmetric(horizontal: getWidth(20), vertical: getHeight(12)),
-              width: double.infinity,
-              decoration: BoxDecoration(
-                color: AppColors.kSkyBlueColor.withOpacity(0.05),
-                borderRadius: BorderRadius.all(Radius.circular(8)),
-                border: Border(left: BorderSide(color: AppColors.kSkyBlueColor, width: 4)),
-              ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Image.asset(AppImages.networkIcon, color: AppColors.kSkyBlueColor, width: getWidth(22.5),),
-                  SizedBox(width: getWidth(20)),
-                  Flexible(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          'attendanceOffline2'.tr,
-                          style: kSize14W500kForestGreenColorInterMedium.copyWith(
-                            color: AppColors.kBlackColor,
-                          ),
-                        ),
-
-                        Text(
-                          'attendanceOffline3'.tr,
-                          style: kSize17W400KCharcoalBlackColorInterRegular.copyWith(
-                              color: AppColors.kBlackColor,
-                              fontSize: getFont(12)
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-
-
-
-
-
-                ],
-              ),
-            ),
+            _checkOfflineOrOnlineCard(),
 
             SizedBox(height: getHeight(30)),
 
@@ -104,77 +37,7 @@ class _AttendanceOfflineScreenState extends State<AttendanceOfflineScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Container(
-                    padding: EdgeInsetsGeometry.symmetric(horizontal: getWidth(17), vertical: getHeight(17)),
-                    width: getWidth(361),
-                    decoration: BoxDecoration(
-                      color: AppColors.kWhiteColor,
-                      borderRadius: BorderRadius.all(Radius.circular(8)),
-                      border: Border.all(color: AppColors.kLightCoolGreyColor, width: 1),
-                      boxShadow: [
-                        BoxShadow(
-                          color: AppColors.kBlackColor.withOpacity(0.05),
-                          offset: const Offset(0, 1),
-                          blurRadius: 2,
-                          spreadRadius: 0,
-                        ),
-                      ],
-                    ),
-                    child: Row(
-                      children: [
-                        Container(
-                          width: getWidth(40),
-                          height: getHeight(40),
-                          decoration: BoxDecoration(
-                            color: AppColors.kLightGreenColor,
-                            shape: BoxShape.circle
-                          ),
-                          child: Image.asset(AppImages.qrScreenIcon3, color: AppColors.kSkyBlueColor,),
-
-                        ),
-                        SizedBox(width: getWidth(10)),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text(
-                              'attendanceOffline4'.tr,
-                              style: kSize14W500kForestGreenColorInterMedium.copyWith(
-                                fontSize: getFont(16),
-                                color: AppColors.kMidnightBlueColor,
-                              ),
-                            ),
-
-                            Obx(() => Text(
-                              '${controller.count} ${'attendanceOffline5'.tr}',
-                              style: kSize17W400KCharcoalBlackColorInterRegular.copyWith(
-                                  color: AppColors.kCoolGreyColor,
-                                  fontSize: getFont(14)
-                              ),
-                            )),
-
-                          ],
-                        ),
-                        Spacer(),
-                        Container(
-                          width: getWidth(8),
-                          height: getHeight(8),
-                          decoration: BoxDecoration(
-                              color: AppColors.kSoftPeach,
-                              shape: BoxShape.circle
-                          ),
-
-                        ),
-
-
-
-
-
-
-
-                      ],
-                    ),
-                  ),
+                  _pendingSyncCard(),
                   SizedBox(height: getHeight(40)),
                   Text(
                     'attendanceOffline6'.tr,
@@ -190,63 +53,10 @@ class _AttendanceOfflineScreenState extends State<AttendanceOfflineScreen> {
                         .toList(),
                   )),
 
-
-                  Container(
-                    padding: EdgeInsetsGeometry.symmetric(horizontal: getWidth(16), vertical: getHeight(16)),
-                    width: getWidth(358),
-                    decoration: BoxDecoration(
-                      color: AppColors.kAliceBlue,
-                      borderRadius: BorderRadius.all(Radius.circular(8)),
-                    ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Image.asset(AppImages.attendanceDetailIcon2),
-                        SizedBox(width: getWidth(10),),
-                        Flexible(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                'attendanceOffline11'.tr,
-                                style: kSize14W500kForestGreenColorInterMedium.copyWith(
-                                  fontSize: getFont(16),
-                                  color: AppColors.kBlackColor
-
-                                ),
-                              ),
-                              SizedBox(height: getHeight(5),),
-                              Text(
-                                'attendanceOffline12'.tr,
-                                style: kSize17W400KCharcoalBlackColorInterRegular.copyWith(
-                                  fontSize: getFont(14),
-                                  color: AppColors.kBlackColor,
+                  SizedBox(height: getHeight(10)),
 
 
-                                ),
-                                textAlign: TextAlign.left,
-                              ),
-                            ],
-                          ),
-                        )
-
-
-
-
-                      ],
-
-
-                    ),
-
-
-
-
-
-
-                  ),
-
-
+                 _autoSyncInformationCard(),
 
 
 
@@ -260,6 +70,134 @@ class _AttendanceOfflineScreenState extends State<AttendanceOfflineScreen> {
           ],
         ),
       ),
+    );
+  }
+
+  Widget _checkOfflineOrOnlineCard(){
+    return Container(
+      padding: EdgeInsetsGeometry.symmetric(horizontal: getWidth(20), vertical: getHeight(12)),
+      width: double.infinity,
+      decoration: BoxDecoration(
+        color: AppColors.kSkyBlueColor.withOpacity(0.05),
+        borderRadius: BorderRadius.all(Radius.circular(8)),
+        border: Border(left: BorderSide(color: AppColors.kSkyBlueColor, width: 4)),
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Image.asset(AppImages.networkIcon, color: AppColors.kSkyBlueColor, width: getWidth(22.5),),
+          SizedBox(width: getWidth(20)),
+          Flexible(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  'attendanceOffline2'.tr,
+                  style: kSize14W500kForestGreenColorInterMedium.copyWith(
+                    color: AppColors.kBlackColor,
+                  ),
+                ),
+
+                Text(
+                  'attendanceOffline3'.tr,
+                  style: kSize17W400KCharcoalBlackColorInterRegular.copyWith(
+                      color: AppColors.kBlackColor,
+                      fontSize: getFont(12)
+                  ),
+                ),
+              ],
+            ),
+          ),
+
+
+
+
+
+        ],
+      ),
+    );
+
+
+  }
+
+  Widget _pendingSyncCard(){
+    return Container(
+      padding: EdgeInsetsGeometry.symmetric(horizontal: getWidth(17), vertical: getHeight(17)),
+      width: getWidth(361),
+      decoration: BoxDecoration(
+        color: AppColors.kWhiteColor,
+        borderRadius: BorderRadius.all(Radius.circular(8)),
+        border: Border.all(color: AppColors.kLightCoolGreyColor, width: 1),
+        boxShadow: [
+          BoxShadow(
+            color: AppColors.kBlackColor.withOpacity(0.05),
+            offset: const Offset(0, 1),
+            blurRadius: 2,
+            spreadRadius: 0,
+          ),
+        ],
+      ),
+      child: Row(
+        children: [
+          Container(
+            width: getWidth(40),
+            height: getHeight(40),
+            decoration: BoxDecoration(
+                color: AppColors.kLightGreenColor,
+                shape: BoxShape.circle
+            ),
+            child: Image.asset(AppImages.offlineScreenIcon1, color: AppColors.kSkyBlueColor,),
+
+          ),
+          SizedBox(width: getWidth(10)),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                'attendanceOffline4'.tr,
+                style: kSize14W500kForestGreenColorInterMedium.copyWith(
+                  fontSize: getFont(16),
+                  color: AppColors.kMidnightBlueColor,
+                ),
+              ),
+
+              Obx(() => Text(
+                '${controller.count} ${'attendanceOffline5'.tr}',
+                style: kSize17W400KCharcoalBlackColorInterRegular.copyWith(
+                    color: AppColors.kCoolGreyColor,
+                    fontSize: getFont(14)
+                ),
+              )),
+
+            ],
+          ),
+          Spacer(),
+          _dotContainer(dotContainerColor: AppColors.kOrangeColor,)
+
+
+
+
+
+
+
+        ],
+      ),
+    );
+
+  }
+
+  Widget _dotContainer({required Color dotContainerColor}) {
+    return Container(
+      width: getWidth(8),
+      height: getHeight(8),
+      decoration: BoxDecoration(
+          color: dotContainerColor,
+          shape: BoxShape.circle
+      ),
+
     );
   }
 
@@ -292,7 +230,7 @@ class _AttendanceOfflineScreenState extends State<AttendanceOfflineScreen> {
                 color: AppColors.kLightGreenColor,
                 shape: BoxShape.circle
             ),
-            child: Image.asset(AppImages.dragHandleIcon, color: AppColors.kSkyBlueColor,),
+            child: Image.asset(AppImages.offlineScreenIcon2, color: AppColors.kSkyBlueColor,),
 
           ),
           SizedBox(width: getWidth(10)),
@@ -321,17 +259,18 @@ class _AttendanceOfflineScreenState extends State<AttendanceOfflineScreen> {
           ),
           Spacer(),
           Container(
-            width: getWidth(76.05),
-            height: getHeight(24),
+            padding: EdgeInsetsGeometry.symmetric(horizontal: getWidth(8), vertical: getHeight(4)),
+
             decoration: BoxDecoration(
                 color: AppColors.kSoftPeach,
                 borderRadius: BorderRadius.circular(9999)
             ),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Image.asset(AppImages.qrScreenIcon3, color: AppColors.kVividOrange,),
-                SizedBox(width: getWidth(2),),
+                Image.asset(AppImages.offlineScreenIcon3, color: AppColors.kVividOrange,),
+                SizedBox(width: getWidth(3),),
                 Text(
                   'attendanceOffline10'.tr,
                   style: kSize14W500kForestGreenColorInterMedium.copyWith(
@@ -358,167 +297,187 @@ class _AttendanceOfflineScreenState extends State<AttendanceOfflineScreen> {
 
   }
 
-   void attendanceAutoSyncDialog() {
-     Get.dialog(
-       Dialog(
-         backgroundColor: AppColors.kWhiteColor,
-         shadowColor: AppColors.kBlackColor.withOpacity(0.10),
-         shape: RoundedRectangleBorder(
-           borderRadius: BorderRadius.circular(16),
+  Widget _autoSyncInformationCard(){
+    return Container(
+      padding: EdgeInsetsGeometry.symmetric(horizontal: getWidth(16), vertical: getHeight(16)),
+      width: getWidth(358),
+      decoration: BoxDecoration(
+        color: AppColors.kAliceBlue,
+        borderRadius: BorderRadius.all(Radius.circular(8)),
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Image.asset(AppImages.offlineScreenIcon, width: getWidth(18),),
+          SizedBox(width: getWidth(10),),
+          Flexible(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  'attendanceOffline11'.tr,
+                  style: kSize14W500kForestGreenColorInterMedium.copyWith(
+                      fontSize: getFont(16),
+                      color: AppColors.kBlackColor
 
-         ),
-         child: SizedBox(
-           width: getWidth(327),
-           child: Padding(
-             padding:  EdgeInsets.symmetric(horizontal: getWidth(32), vertical: getHeight(34)),
-             child: Column(
-               mainAxisSize: MainAxisSize.min,
-               children: [
-                 Container(
-                   width: getWidth(64),
-                   height: getHeight(64),
-                   decoration: BoxDecoration(
-                     shape: BoxShape.circle,
-                     color: AppColors.kSkyBlueColor.withOpacity(0.08),
-                     border: Border.all(
-                       color: AppColors.kLightCoolGreyColor,
-                       width: 1,
-                     ),
-                   ),
-                   child: Icon(Icons.wifi, size: 30, color: AppColors.kSkyBlueColor,),
-                 ),
-                 SizedBox(height: getHeight(20),),
-                 Text(
-                   'backOnline1'.tr,
-                   style: kSize16W600kMidnightBlueColorInterSemiBold.copyWith(
-                       color: AppColors.kMidnightBlueColor,
-                       fontSize: getFont(20)
-                   ),
-                 ),
-                 SizedBox(height: getHeight(10),),
+                  ),
+                ),
+                SizedBox(height: getHeight(5),),
+                Text(
+                  'attendanceOffline12'.tr,
+                  style: kSize17W400KCharcoalBlackColorInterRegular.copyWith(
+                    fontSize: getFont(14),
+                    color: AppColors.kBlackColor,
 
-                 Text(
-                   'backOnline2'.tr,
-                   style: kSize17W400KCharcoalBlackColorInterRegular.copyWith(
-                     fontSize: getFont(16),
-                     color: AppColors.kDarkSlateGray,
-                   ),
-                   textAlign: TextAlign.center,
-                 ),
-                 SizedBox(height: getHeight(20),),
 
-                 Text(
-                   'backOnline3'.tr,
-                   style: kSize17W400KCharcoalBlackColorInterRegular.copyWith(
-                     fontSize: getFont(14),
-                     color: AppColors.kCoolGreyColor,
-                   ),
-                   textAlign: TextAlign.center,
-                 ),
-                 SizedBox(height: getHeight(30),),
-                 Obx(() => ClipRRect(
-                   borderRadius: BorderRadius.circular(999),
-                   child: LinearProgressIndicator(
-                     value: controller.uploadProgress.value,
-                     minHeight: getHeight(6),
-                     backgroundColor: AppColors.kLightCoolGreyColor.withOpacity(0.3),
-                     valueColor: AlwaysStoppedAnimation<Color>(
-                       AppColors.kSkyBlueColor,
-                     ),
-                   ),
-                 )),
-                 SizedBox(height: getHeight(5),),
+                  ),
+                  textAlign: TextAlign.left,
+                ),
+              ],
+            ),
+          )
 
-                 Obx(() => controller.uploadCompleted.value
-                     ? Text(
-                   'backOnline4'.tr,
-                   style: kSize17W400KCharcoalBlackColorInterRegular.copyWith(
-                     color: AppColors.kCoolGreyColor,
-                     fontSize: getFont(12),
-                   ),
-                   textAlign: TextAlign.center,
-                 )
-                     : SizedBox.shrink(),
-                 ),
 
-                 SizedBox(height: getHeight(30),),
-                 Obx(() => controller.uploadCompleted.value
-                     ? RoundButton(
-                   onPress: (){
-                     Get.back();
-                   },
-                   radius: BorderRadius.circular(12),
-                   title: 'backOnline5'.tr,
-                   textStyle: kSize14W500kForestGreenColorInterMedium.copyWith(fontSize: getFont(16),color: AppColors.kWhiteColor,),
-                   buttonColor: AppColors.kSkyBlueColor,
-                   width: getWidth(263),
-                   height: getHeight(48),
 
-                 )
-                     : SizedBox.shrink(),
-                 ),
+
+        ],
+
+
+      ),
 
 
 
 
 
 
+    );
 
-               ],
-             ),
-           ),
-         ),
-       ),
-     );
-   }
+  }
 }
 
-// void attendanceAutoSyncDialog() {
+//
+// void _attendanceAutoSyncDialog() {
 //   Get.dialog(
 //     Dialog(
 //       backgroundColor: AppColors.kWhiteColor,
+//       shadowColor: AppColors.kBlackColor.withOpacity(0.10),
 //       shape: RoundedRectangleBorder(
 //         borderRadius: BorderRadius.circular(16),
 //       ),
-//       child: Obx(() {
-//         // 🔥 Dialog open hote hi API call
-//         if (!controller.syncing.value) {
-//           Future.microtask(() {
-//             controller.syncOfflineAttendance();
-//           });
-//         }
-//
-//         return SizedBox(
-//           width: getWidth(327),
-//           child: Padding(
-//             padding: EdgeInsets.symmetric(
-//               horizontal: getWidth(32),
-//               vertical: getHeight(34),
-//             ),
-//             child: Column(
-//               mainAxisSize: MainAxisSize.min,
-//               children: [
-//                 CircularProgressIndicator(),
-//                 SizedBox(height: getHeight(20)),
-//                 Text(
-//                   'backOnline1'.tr,
-//                   style: kSize16W600KBlackColorOutfitSemiBold.copyWith(
-//                     fontSize: getFont(18),
+//       child: SizedBox(
+//         width: getWidth(327),
+//         child: Padding(
+//           padding: EdgeInsets.symmetric(
+//               horizontal: getWidth(32), vertical: getHeight(34)),
+//           child: Column(
+//             mainAxisSize: MainAxisSize.min,
+//             children: [
+//               Container(
+//                 width: getWidth(64),
+//                 height: getHeight(64),
+//                 decoration: BoxDecoration(
+//                   shape: BoxShape.circle,
+//                   color: AppColors.kSkyBlueColor.withOpacity(0.08),
+//                 ),
+//                 child: Image.asset(AppImages.offlineScreenIcon4),
+//               ),
+//               SizedBox(height: getHeight(10)),
+//               Row(
+//                 mainAxisAlignment: MainAxisAlignment.center,
+//                 children: [
+//                   _dotContainer(dotContainerColor: AppColors.kSkyBlueColor),
+//                   SizedBox(width: getWidth(5)),
+//                   _dotContainer(dotContainerColor: AppColors.kSkyBlueColor),
+//                   SizedBox(width: getWidth(5)),
+//                   _dotContainer(dotContainerColor: AppColors.kSkyBlueColor),
+//                 ],
+//               ),
+//               SizedBox(height: getHeight(20)),
+//               Text(
+//                 'backOnline1'.tr,
+//                 style: kSize16W600kMidnightBlueColorInterSemiBold.copyWith(
+//                   color: AppColors.kMidnightBlueColor,
+//                   fontSize: getFont(20),
+//                 ),
+//               ),
+//               SizedBox(height: getHeight(10)),
+//               Text(
+//                 'backOnline2'.tr,
+//                 style: kSize17W400KCharcoalBlackColorInterRegular.copyWith(
+//                   fontSize: getFont(16),
+//                   color: AppColors.kDarkSlateGray,
+//                 ),
+//                 textAlign: TextAlign.center,
+//               ),
+//               SizedBox(height: getHeight(20)),
+//               Text(
+//                 'backOnline3'.tr,
+//                 style: kSize17W400KCharcoalBlackColorInterRegular.copyWith(
+//                   fontSize: getFont(14),
+//                   color: AppColors.kCoolGreyColor,
+//                 ),
+//                 textAlign: TextAlign.center,
+//               ),
+//               SizedBox(height: getHeight(30)),
+//               Obx(() => ClipRRect(
+//                 borderRadius: BorderRadius.circular(999),
+//                 child: LinearProgressIndicator(
+//                   value: controller.uploadProgress.value,
+//                   minHeight: getHeight(6),
+//                   backgroundColor:
+//                   AppColors.kLightCoolGreyColor.withOpacity(0.3),
+//                   valueColor: AlwaysStoppedAnimation<Color>(
+//                     AppColors.kSkyBlueColor,
 //                   ),
 //                 ),
-//                 SizedBox(height: getHeight(10)),
-//                 Text(
-//                   'Uploading attendance, please wait...',
-//                   textAlign: TextAlign.center,
-//                   style: kSize16W400KWhiteColorOutfitRegular,
+//               )),
+//               SizedBox(height: getHeight(5)),
+//               Obx(() => controller.uploadCompleted.value
+//                   ? Text(
+//                 'backOnline4'.tr,
+//                 style: kSize17W400KCharcoalBlackColorInterRegular
+//                     .copyWith(
+//                   color: AppColors.kCoolGreyColor,
+//                   fontSize: getFont(12),
 //                 ),
-//               ],
-//             ),
+//                 textAlign: TextAlign.center,
+//               )
+//                   : SizedBox.shrink()),
+//               SizedBox(height: getHeight(30)),
+//               Obx(() => controller.uploadCompleted.value
+//                   ? RoundButton(
+//                 onPress: () {
+//                   Get.back();
+//                 },
+//                 radius: BorderRadius.circular(12),
+//                 title: 'backOnline5'.tr,
+//                 textStyle: kSize14W500kForestGreenColorInterMedium
+//                     .copyWith(
+//                   fontSize: getFont(16),
+//                   color: AppColors.kWhiteColor,
+//                 ),
+//                 buttonColor: AppColors.kSkyBlueColor,
+//                 width: getWidth(263),
+//                 height: getHeight(48),
+//               )
+//                   : SizedBox.shrink()),
+//             ],
 //           ),
-//         );
-//       }),
+//         ),
+//       ),
 //     ),
-//     barrierDismissible: false, // ❌ user dialog close na kare
+//     barrierDismissible: false,
 //   );
 // }
-
+//
+// Widget _dotContainer({required Color dotContainerColor}) {
+//   return Container(
+//     width: getWidth(8),
+//     height: getHeight(8),
+//     decoration: BoxDecoration(
+//       color: dotContainerColor,
+//       shape: BoxShape.circle,
+//     ),
+//   );
+// }

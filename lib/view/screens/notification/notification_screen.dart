@@ -10,7 +10,7 @@ import '../../../util/app_images.dart';
 import '../../../util/text_style.dart';
 import '../../../view_model/controller/notification/get_unread_count_controller.dart';
 import '../../../view_model/controller/notification/mark_notification_read_controller.dart';
-import '../../../view_model/controller/notification/notification_controller.dart';
+import '../../../view_model/controller/notification/get_notification_controller.dart';
 
 
 
@@ -41,7 +41,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
     Get.find<UnreadCountController>().fetchUnreadCount();
 
   }
-   NotificationController controller = Get.find<NotificationController>();
+   GetNotificationController controller = Get.find<GetNotificationController>();
 
   MarkNotificationReadController markReadController = Get.find<MarkNotificationReadController>();
   MarkAllNotificationReadController markAllReadController = Get.find<MarkAllNotificationReadController>();

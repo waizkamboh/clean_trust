@@ -1,10 +1,11 @@
-import 'package:connectivity_plus/connectivity_plus.dart';
-import 'package:flutter/material.dart';
+import 'dart:io';
 
 Future<bool> isOnline() async {
-  final result = await Connectivity().checkConnectivity();
-
-  return result != ConnectivityResult.none;
-  debugPrint('Connectivity: $result');
-
+  try {
+    final result = await InternetAddress.lookup('google.com');
+    return result.isNotEmpty && result[0].rawAddress.isNotEmpty;
+  } catch (e) {
+    return false;
+  }
 }
+

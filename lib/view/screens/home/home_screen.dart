@@ -14,7 +14,7 @@ import '../../../util/size_config.dart';
 import '../../../util/text_style.dart';
 import '../../../view_model/controller/employee/editProfileController.dart';
 import '../../../view_model/controller/notification/get_unread_count_controller.dart';
-import '../../../view_model/controller/notification/notification_controller.dart';
+import '../../../view_model/controller/notification/get_notification_controller.dart';
 import '../../base/round_button.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -54,7 +54,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
 
 
- NotificationController notificationController = Get.find();
+ GetNotificationController notificationController = Get.find();
 
  GetTodayAndMonthlyAttendanceController getAttendanceHistoryController = Get.find<GetTodayAndMonthlyAttendanceController>();
 
@@ -731,7 +731,7 @@ class _HomeScreenState extends State<HomeScreen> {
 // import '../../../util/size_config.dart';
 // import '../../../util/text_style.dart';
 // import '../../../view_model/controller/notification/get_unread_count_controller.dart';
-// import '../../../view_model/controller/notification/notification_controller.dart';
+// import '../../../view_model/controller/notification/get_notification_controller.dart';
 // import '../../base/round_button.dart';
 // import 'package:flutter_spinkit/flutter_spinkit.dart';
 //
