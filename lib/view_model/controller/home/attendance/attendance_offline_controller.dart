@@ -24,6 +24,7 @@ class AttendanceOfflineController extends GetxController {
   RxList<OfflineAttendance> offlineList = <OfflineAttendance>[].obs;
 
   late int currentUserId;
+  RxBool isOnlineStatus = false.obs;
 
   RxBool syncing = false.obs;
   RxDouble uploadProgress = 0.0.obs;
@@ -43,6 +44,7 @@ class AttendanceOfflineController extends GetxController {
       const Duration(seconds: 5),
           (timer) async {
         final online = await isOnline();
+        isOnlineStatus.value = online;
         if (online && offlineList.isNotEmpty && !syncing.value) {
           syncOfflineAttendance();
         }

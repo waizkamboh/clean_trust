@@ -14,7 +14,7 @@ import '../../../base/round_button.dart';
 
 
 class AttendanceOfflineScreen extends StatelessWidget {
-   AttendanceOfflineScreen({super.key});
+  AttendanceOfflineScreen({super.key});
 
   AttendanceOfflineController controller = Get.find();
 
@@ -23,52 +23,62 @@ class AttendanceOfflineScreen extends StatelessWidget {
     SizeConfig().init(context);
     return Scaffold(
       backgroundColor: AppColors.kWhiteColor,
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            TopHeader(title: 'attendanceOffline1'.tr),
-            SizedBox(height: getHeight(30)),
-            _checkOfflineOrOnlineCard(),
-
-            SizedBox(height: getHeight(30)),
-
-            Padding(
-              padding:  EdgeInsets.symmetric(horizontal: getWidth(20)),
+      body: Column(
+        children: [
+          TopHeader(title: 'attendanceOffline1'.tr),
+          SizedBox(height: getHeight(30)),
+          Expanded(
+            child: SingleChildScrollView(
+              physics: BouncingScrollPhysics(),
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  _pendingSyncCard(),
-                  SizedBox(height: getHeight(40)),
-                  Text(
-                    'attendanceOffline6'.tr,
-                    style: kSize16W600kMidnightBlueColorInterSemiBold.copyWith(
-                      fontSize: getFont(18),
-                      color: AppColors.kMidnightBlueColor,
+                  Obx(() {
+                    return controller.isOnlineStatus.value
+                        ? SizedBox.shrink()
+                        : _checkOfflineOrOnlineCard();
+                  }),
+                  Padding(
+                    padding:  EdgeInsets.symmetric(horizontal: getWidth(20)),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        _pendingSyncCard(),
+                        SizedBox(height: getHeight(40)),
+                        Text(
+                          'attendanceOffline6'.tr,
+                          style: kSize16W600kMidnightBlueColorInterSemiBold.copyWith(
+                            fontSize: getFont(18),
+                            color: AppColors.kMidnightBlueColor,
+                          ),
+                        ),
+                        SizedBox(height: getHeight(20)),
+                        Obx(() => Column(
+                          children: controller.offlineList
+                              .map((item) => offlineAttendanceContainer(item))
+                              .toList(),
+                        )),
+
+                        SizedBox(height: getHeight(10)),
+
+
+                        _autoSyncInformationCard(),
+
+
+
+
+                      ],
                     ),
                   ),
-                  SizedBox(height: getHeight(20)),
-                  Obx(() => Column(
-                    children: controller.offlineList
-                        .map((item) => offlineAttendanceContainer(item))
-                        .toList(),
-                  )),
-
-                  SizedBox(height: getHeight(10)),
-
-
-                 _autoSyncInformationCard(),
-
-
-
+                  SizedBox(height: getHeight(50)),
 
                 ],
               ),
             ),
-            SizedBox(height: getHeight(50)),
+          )
 
 
-          ],
-        ),
+
+        ],
       ),
     );
   }
@@ -76,6 +86,7 @@ class AttendanceOfflineScreen extends StatelessWidget {
   Widget _checkOfflineOrOnlineCard(){
     return Container(
       padding: EdgeInsetsGeometry.symmetric(horizontal: getWidth(20), vertical: getHeight(12)),
+      margin: EdgeInsetsGeometry.only(bottom: getHeight(30)),
       width: double.infinity,
       decoration: BoxDecoration(
         color: AppColors.kSkyBlueColor.withOpacity(0.05),
@@ -175,7 +186,15 @@ class AttendanceOfflineScreen extends StatelessWidget {
             ],
           ),
           Spacer(),
-          _dotContainer(dotContainerColor: AppColors.kOrangeColor,)
+          Container(
+            width: getWidth(8),
+            height: getHeight(8),
+            decoration: BoxDecoration(
+                color:  AppColors.kOrangeColor,
+                shape: BoxShape.circle
+            ),
+
+          )
 
 
 
@@ -189,17 +208,7 @@ class AttendanceOfflineScreen extends StatelessWidget {
 
   }
 
-  Widget _dotContainer({required Color dotContainerColor}) {
-    return Container(
-      width: getWidth(8),
-      height: getHeight(8),
-      decoration: BoxDecoration(
-          color: dotContainerColor,
-          shape: BoxShape.circle
-      ),
 
-    );
-  }
 
   Widget offlineAttendanceContainer(OfflineAttendance attendance) {
     return Container(
