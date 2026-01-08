@@ -27,7 +27,14 @@ class LeaveRequestController extends GetxController {
     try {
       FilePickerResult? result = await FilePicker.platform.pickFiles(
         type: FileType.custom,
-        allowedExtensions: ['pdf', 'doc', 'docx'],
+        allowedExtensions: [
+          'pdf',
+          'doc',
+          'docx',
+          'jpg',
+          'jpeg',
+          'png',
+        ],
         allowMultiple: true,
       );
 

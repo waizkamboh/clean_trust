@@ -1,13 +1,15 @@
+import 'dart:io';
+
 import 'package:clean_trust/util/app_colors.dart';
 import 'package:clean_trust/util/app_images.dart';
 import 'package:clean_trust/util/size_config.dart';
 import 'package:clean_trust/view/base/top_header.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:open_filex/open_filex.dart';
 
 import '../../../../util/app_util.dart';
 import '../../../../util/text_style.dart';
-import '../../../../view_model/controller/home/attendance/manual_attendance_entry_controller.dart';
 import '../../../../view_model/controller/leave_request/leave_request_controller.dart';
 import '../../../base/input_text_field.dart';
 import '../../../base/round_button.dart';
@@ -34,7 +36,7 @@ class LeaveRequestScreen extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     SizedBox(height: getHeight(30)),
-                    _requestTimeCard(),
+                    _requestTimeOffCard(),
                     SizedBox(height: getHeight(20)),
                     Text(
                       'leaveRequest6'.tr,
@@ -181,37 +183,40 @@ class LeaveRequestScreen extends StatelessWidget {
                     ),
 
                     SizedBox(height: getHeight(10)),
-                    Obx(()=>
-                        GestureDetector(
-                          onTap: controller.pickDocuments,
-                          child: Container(
-                            padding: EdgeInsets.symmetric(
-                                horizontal: getWidth(16), vertical: getHeight(34)),
-                            width: getWidth(343),
-                            decoration: BoxDecoration(
-                              color: AppColors.kBlackColor.withOpacity(0),
-                              borderRadius: BorderRadius.all(Radius.circular(8)),
-                              border: Border.all(color: AppColors.kLightCoolGray, width: 2),
+                    Obx(() => GestureDetector(
+                      onTap: controller.pickDocuments,
+                      child: Container(
+                        padding: EdgeInsets.symmetric(
+                            horizontal: getWidth(16), vertical: getHeight(16)),
+                        width: getWidth(343),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(8),
+                          border: Border.all(color: AppColors.kLightCoolGray, width: 2),
+                        ),
+                        child: controller.documents.isEmpty
+                            ? Column(
+                          children: [
+                            Image.asset(AppImages.leaveRequestIcon5),
+                            SizedBox(height: getHeight(8)),
+                            Text(
+                              'leaveRequest17'.tr,
+                              style: kSize17W400KCharcoalBlackColorInterRegular
+                                  .copyWith(fontSize: getFont(14)),
                             ),
-                            child: Column(
-                              children: [
-                                Image.asset(AppImages.leaveRequestIcon5),
-                                Text(
-                                  controller.documents.isEmpty
-                                      ? 'leaveRequest17'.tr
-                                      : '${controller.documents.length} file(s) selected',
-                                  style: kSize17W400KCharcoalBlackColorInterRegular.copyWith(
-                                      fontSize: getFont(14), color: AppColors.kSlateGray),
-                                ),
-                                Text(
-                                  'leaveRequest18'.tr,
-                                  style: kSize17W400KCharcoalBlackColorInterRegular.copyWith(
-                                      fontSize: getFont(12), color: AppColors.kMediumGrey),
-                                ),
-                              ],
+                            Text(
+                              'leaveRequest18'.tr,
+                              style: kSize17W400KCharcoalBlackColorInterRegular
+                                  .copyWith(fontSize: getFont(12), color: AppColors.kMediumGrey),
                             ),
-                          ),
-                        ),),
+                          ],
+                        )
+                            : Column(
+                          children: controller.documents.map((file) {
+                            return _selectedFileTile(file, controller);
+                          }).toList(),
+                        ),
+                      ),
+                    )),
 
 
                     // Container(
@@ -294,7 +299,7 @@ class LeaveRequestScreen extends StatelessWidget {
       child: Container(
         padding: EdgeInsets.symmetric(vertical: getHeight(14)),
         margin: EdgeInsets.only(right: getWidth(5)),
-        width: getWidth(109),
+        width: getWidth(110),
         height: getHeight(86),
         decoration: BoxDecoration(
           color: controller.selectedLeaveType.value == type
@@ -325,63 +330,121 @@ class LeaveRequestScreen extends StatelessWidget {
       ),
     );
   }
+   Widget _requestTimeOffCard(){
+     return Container(
+       padding: EdgeInsetsGeometry.symmetric(horizontal: getWidth(16), vertical: getHeight(34)),
+       width: getWidth(343),
+       decoration: BoxDecoration(
+         color: AppColors.kAliceBlue,
+         borderRadius: BorderRadius.all(Radius.circular(8)),
+         border: Border.all(color: AppColors.kLightCoolGreyColor, width: 1),
+       ),
+       child: Row(
+         children: [
+           Container(
+             width: getWidth(36),
+             height: getHeight(34),
+             decoration: BoxDecoration(
+               color: AppColors.kSkyBlueColor,
+               borderRadius: BorderRadius.all(Radius.circular(8)),
+               border: Border.all(color: AppColors.kLightCoolGreyColor, width: 1),
+             ),
+             child: Icon(Icons.calendar_month_outlined, color: AppColors.kWhiteColor,weight: 12.54,),
+
+           ),
+           SizedBox(width: getWidth(20)),
+           Flexible(
+             child: Column(
+               crossAxisAlignment: CrossAxisAlignment.start,
+               mainAxisAlignment: MainAxisAlignment.center,
+               children: [
+                 Text(
+                   'leaveRequest4'.tr,
+                   style: kSize16W600kMidnightBlueColorInterSemiBold.copyWith(
+                     color: AppColors.darkSlateBlue,
+                   ),
+                 ),
+
+                 Text(
+                   'leaveRequest5'.tr,
+                   style: kSize17W400KCharcoalBlackColorInterRegular.copyWith(
+                       color: AppColors.kSlateGray,
+                       fontSize: getFont(14)
+                   ),
+                 ),
+               ],
+             ),
+           ),
+
+
+
+
+
+         ],
+       ),
+     );
+
+   }
+
+   Widget _selectedFileTile(File file, LeaveRequestController controller) {
+     String fileName = file.path.split('/').last;
+     String extension = fileName.split('.').last.toLowerCase();
+
+     IconData icon;
+     if (extension == 'pdf') {
+       icon = Icons.picture_as_pdf;
+     } else if (extension == 'jpg' || extension == 'png') {
+       icon = Icons.image;
+     } else {
+       icon = Icons.description;
+     }
+
+     return GestureDetector(
+       onTap: () async {
+         final result = await OpenFilex.open(file.path);
+
+         if (result.type != ResultType.done) {
+           Get.snackbar(
+             'Error',
+             'File open nahi ho saki',
+             snackPosition: SnackPosition.BOTTOM,
+           );
+         }
+       },
+       child: Container(
+         margin: EdgeInsets.only(bottom: getHeight(10)),
+         padding: EdgeInsets.symmetric(
+             horizontal: getWidth(12), vertical: getHeight(10)),
+         decoration: BoxDecoration(
+           color: AppColors.kAliceBlue,
+           borderRadius: BorderRadius.circular(8),
+         ),
+         child: Row(
+           children: [
+             Icon(icon, color: AppColors.kSkyBlueColor),
+             SizedBox(width: getWidth(10)),
+             Expanded(
+               child: Text(
+                 fileName,
+                 overflow: TextOverflow.ellipsis,
+                 style: kSize14W500kForestGreenColorInterMedium.copyWith(
+                   color: AppColors.kDarkSlateGray,
+                 ),
+               ),
+             ),
+             GestureDetector(
+               onTap: () => controller.documents.remove(file),
+               child: Icon(Icons.close, color: AppColors.kPrimaryRed, size: 18),
+             )
+           ],
+         ),
+       ),
+     );
+   }
+
+
 }
 
-Widget _requestTimeCard(){
-  return Container(
-    padding: EdgeInsetsGeometry.symmetric(horizontal: getWidth(16), vertical: getHeight(34)),
-    width: getWidth(343),
-    decoration: BoxDecoration(
-      color: AppColors.kAliceBlue,
-      borderRadius: BorderRadius.all(Radius.circular(8)),
-      border: Border.all(color: AppColors.kLightCoolGreyColor, width: 1),
-    ),
-    child: Row(
-      children: [
-        Container(
-          width: getWidth(36),
-          height: getHeight(34),
-          decoration: BoxDecoration(
-            color: AppColors.kSkyBlueColor,
-            borderRadius: BorderRadius.all(Radius.circular(8)),
-            border: Border.all(color: AppColors.kLightCoolGreyColor, width: 1),
-          ),
-          child: Icon(Icons.calendar_month_outlined, color: AppColors.kWhiteColor,weight: 12.54,),
-
-        ),
-        SizedBox(width: getWidth(20)),
-        Flexible(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                'leaveRequest4'.tr,
-                style: kSize16W600kMidnightBlueColorInterSemiBold.copyWith(
-                  color: AppColors.darkSlateBlue,
-                ),
-              ),
-
-              Text(
-                'leaveRequest5'.tr,
-                style: kSize17W400KCharcoalBlackColorInterRegular.copyWith(
-                    color: AppColors.kSlateGray,
-                    fontSize: getFont(14)
-                ),
-              ),
-            ],
-          ),
-        ),
-
-
-
-
-
-      ],
-    ),
-  );
-
-}
 
 
 // }
