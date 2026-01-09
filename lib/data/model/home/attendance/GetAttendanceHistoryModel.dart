@@ -1,7 +1,10 @@
+import 'dart:convert';
 /// success : true
 /// message : "Attendance history retrieved successfully"
-/// data : {"records":[{"id":544,"user_id":11,"workplace_id":6,"qr_code_id":6,"type":"clock_in","scan_time":"2025-03-15T09:00:00.000Z","date":"2025-03-15","check_in_time":"14:00:00","check_out_time":null,"latitude":"40.71280000","longitude":"-74.00600000","is_valid":false,"validation_message":"Location invalid: 1757961m from workplace (max 50m allowed)","is_manual":false,"manual_reason":null,"status":"pending","approved_by":null,"approved_at":null,"notes":null,"is_offline":false,"synced_at":"2026-01-03T22:37:12.575Z","created_at":"2026-01-03T22:37:12.576Z","updated_at":"2026-01-03T22:37:12.576Z","workplace":{"id":6,"name":"Sales Office - Miami","address":"654 Commerce Way, Miami, FL 33101"},"qrCode":{"id":6,"company_name":"TechCorp Solutions","department":"Operations"}}],"pagination":{"total":1,"page":1,"limit":20,"pages":1}}
+/// data : {"records":[{"id":551,"user_id":16,"workplace_id":6,"qr_code_id":null,"type":"clock_in","scan_time":null,"date":"2026-01-16","check_in_time":"13:09:00","check_out_time":"14:11:00","latitude":"30.75675676","longitude":"73.34300615","is_valid":false,"validation_message":"Manual entry - pending approval","is_manual":true,"manual_reason":"very very ill. please approve","status":"approved","approved_by":12,"approved_at":"2026-01-07T15:51:37.998Z","notes":null,"is_offline":false,"synced_at":"2026-01-07T15:50:00.029Z","created_at":"2026-01-07T15:50:00.052Z","updated_at":"2026-01-07T15:51:37.999Z","workplace":{"id":6,"name":"Sales Office - Miami","address":"654 Commerce Way, Miami, FL 33101"},"qrCode":null,"approver":{"id":12,"full_name":"Sarah Administrator","email":"sarah.admin@techcorp.com"}},{"id":553,"user_id":16,"workplace_id":8,"qr_code_id":8,"type":"clock_in","scan_time":"2026-01-09T00:31:11.149Z","date":"2026-01-09","check_in_time":"00:05:22","check_out_time":"00:31:11","latitude":"30.79253260","longitude":"73.44323320","is_valid":false,"validation_message":"Location invalid: 11387652m from workplace (max 50m allowed)","is_manual":false,"manual_reason":null,"status":"pending","approved_by":13,"approved_at":"2026-01-08T20:39:42.436Z","notes":"He is a very smart and interesting person","is_offline":false,"synced_at":"2026-01-08T19:35:24.559Z","created_at":"2026-01-08T19:08:56.524Z","updated_at":"2026-01-08T20:39:42.436Z","workplace":{"id":8,"name":"Noor Office 2","address":"12s3 Business St, City"},"qrCode":{"id":8,"company_name":"Tech Solutions Inc","department":"Engineering"},"approver":{"id":13,"full_name":"Mike Manager","email":"mike.manager@techcorp.com"}},{"id":552,"user_id":16,"workplace_id":8,"qr_code_id":8,"type":"clock_in","scan_time":"2026-01-08T23:56:10.006Z","date":"2026-01-08","check_in_time":"09:45:54","check_out_time":"23:56:10","latitude":"30.79253270","longitude":"73.44323320","is_valid":false,"validation_message":"Location invalid: 11387652m from workplace (max 50m allowed)","is_manual":false,"manual_reason":null,"status":"pending","approved_by":null,"approved_at":null,"notes":null,"is_offline":false,"synced_at":"2026-01-08T18:59:37.416Z","created_at":"2026-01-08T09:45:55.005Z","updated_at":"2026-01-08T18:59:37.416Z","workplace":{"id":8,"name":"Noor Office 2","address":"12s3 Business St, City"},"qrCode":{"id":8,"company_name":"Tech Solutions Inc","department":"Engineering"},"approver":null},{"id":550,"user_id":16,"workplace_id":8,"qr_code_id":8,"type":"clock_in","scan_time":"2026-01-07T21:07:28.994Z","date":"2026-01-07","check_in_time":"12:19:49","check_out_time":"21:07:28","latitude":"40.71280000","longitude":"-74.00600000","is_valid":true,"validation_message":"Location verified (0m from workplace)","is_manual":false,"manual_reason":null,"status":"approved","approved_by":null,"approved_at":null,"notes":"Person work very well and good","is_offline":false,"synced_at":"2026-01-07T21:07:29.139Z","created_at":"2026-01-07T12:19:49.410Z","updated_at":"2026-01-08T19:21:11.648Z","workplace":{"id":8,"name":"Noor Office 2","address":"12s3 Business St, City"},"qrCode":{"id":8,"company_name":"Tech Solutions Inc","department":"Engineering"},"approver":null},{"id":519,"user_id":16,"workplace_id":6,"qr_code_id":6,"type":"clock_out","scan_time":"2026-01-02T18:22:00.000Z","date":"2026-01-02","check_in_time":null,"check_out_time":"18:22:00","latitude":"25.76182094","longitude":"-80.19152931","is_valid":true,"validation_message":null,"is_manual":false,"manual_reason":null,"status":"pending","approved_by":11,"approved_at":null,"notes":null,"is_offline":false,"synced_at":null,"created_at":"2026-01-03T15:21:42.389Z","updated_at":"2026-01-03T15:21:42.389Z","workplace":{"id":6,"name":"Sales Office - Miami","address":"654 Commerce Way, Miami, FL 33101"},"qrCode":{"id":6,"company_name":"TechCorp Solutions","department":"Operations"},"approver":{"id":11,"full_name":"John Admin","email":"admin@techcorp.com"}},{"id":518,"user_id":16,"workplace_id":6,"qr_code_id":6,"type":"clock_in","scan_time":"2026-01-02T08:04:00.000Z","date":"2026-01-02","check_in_time":"08:04:00","check_out_time":null,"latitude":"25.76129974","longitude":"-80.19226051","is_valid":true,"validation_message":null,"is_manual":false,"manual_reason":null,"status":"pending","approved_by":11,"approved_at":"2026-01-02T08:04:00.000Z","notes":null,"is_offline":false,"synced_at":null,"created_at":"2026-01-03T15:21:42.289Z","updated_at":"2026-01-03T15:21:42.289Z","workplace":{"id":6,"name":"Sales Office - Miami","address":"654 Commerce Way, Miami, FL 33101"},"qrCode":{"id":6,"company_name":"TechCorp Solutions","department":"Operations"},"approver":{"id":11,"full_name":"John Admin","email":"admin@techcorp.com"}},{"id":493,"user_id":16,"workplace_id":6,"qr_code_id":6,"type":"clock_out","scan_time":"2026-01-01T17:52:00.000Z","date":"2026-01-01","check_in_time":null,"check_out_time":"17:52:00","latitude":"25.76132986","longitude":"-80.19212614","is_valid":true,"validation_message":null,"is_manual":false,"manual_reason":null,"status":"pending","approved_by":13,"approved_at":"2026-01-01T17:52:00.000Z","notes":null,"is_offline":false,"synced_at":null,"created_at":"2026-01-03T15:21:40.476Z","updated_at":"2026-01-03T15:21:40.476Z","workplace":{"id":6,"name":"Sales Office - Miami","address":"654 Commerce Way, Miami, FL 33101"},"qrCode":{"id":6,"company_name":"TechCorp Solutions","department":"Operations"},"approver":{"id":13,"full_name":"Mike Manager","email":"mike.manager@techcorp.com"}},{"id":495,"user_id":16,"workplace_id":6,"qr_code_id":6,"type":"break_end","scan_time":"2026-01-01T13:18:00.000Z","date":"2026-01-01","check_in_time":null,"check_out_time":null,"latitude":"25.76131633","longitude":"-80.19197421","is_valid":true,"validation_message":null,"is_manual":false,"manual_reason":null,"status":"approved","approved_by":null,"approved_at":null,"notes":null,"is_offline":false,"synced_at":null,"created_at":"2026-01-03T15:21:40.577Z","updated_at":"2026-01-03T15:21:40.577Z","workplace":{"id":6,"name":"Sales Office - Miami","address":"654 Commerce Way, Miami, FL 33101"},"qrCode":{"id":6,"company_name":"TechCorp Solutions","department":"Operations"},"approver":null},{"id":494,"user_id":16,"workplace_id":6,"qr_code_id":6,"type":"break_start","scan_time":"2026-01-01T12:52:00.000Z","date":"2026-01-01","check_in_time":null,"check_out_time":null,"latitude":"25.76134056","longitude":"-80.19157801","is_valid":true,"validation_message":null,"is_manual":false,"manual_reason":null,"status":"approved","approved_by":null,"approved_at":null,"notes":null,"is_offline":false,"synced_at":null,"created_at":"2026-01-03T15:21:40.488Z","updated_at":"2026-01-03T15:21:40.488Z","workplace":{"id":6,"name":"Sales Office - Miami","address":"654 Commerce Way, Miami, FL 33101"},"qrCode":{"id":6,"company_name":"TechCorp Solutions","department":"Operations"},"approver":null},{"id":492,"user_id":16,"workplace_id":6,"qr_code_id":6,"type":"clock_in","scan_time":"2026-01-01T09:47:00.000Z","date":"2026-01-01","check_in_time":"09:47:00","check_out_time":null,"latitude":"25.76146441","longitude":"-80.19147189","is_valid":true,"validation_message":null,"is_manual":false,"manual_reason":null,"status":"approved","approved_by":13,"approved_at":"2026-01-01T09:47:00.000Z","notes":null,"is_offline":false,"synced_at":null,"created_at":"2026-01-03T15:21:40.192Z","updated_at":"2026-01-03T15:21:40.192Z","workplace":{"id":6,"name":"Sales Office - Miami","address":"654 Commerce Way, Miami, FL 33101"},"qrCode":{"id":6,"company_name":"TechCorp Solutions","department":"Operations"},"approver":{"id":13,"full_name":"Mike Manager","email":"mike.manager@techcorp.com"}},{"id":469,"user_id":16,"workplace_id":2,"qr_code_id":2,"type":"clock_out","scan_time":"2025-12-31T18:57:00.000Z","date":"2025-12-31","check_in_time":null,"check_out_time":"18:57:00","latitude":"40.71262558","longitude":"-74.00649849","is_valid":true,"validation_message":null,"is_manual":false,"manual_reason":null,"status":"approved","approved_by":15,"approved_at":"2025-12-31T18:57:00.000Z","notes":null,"is_offline":false,"synced_at":null,"created_at":"2026-01-03T15:21:38.388Z","updated_at":"2026-01-03T15:21:38.388Z","workplace":{"id":2,"name":"Main Office - New York","address":"123 Tech Street, New York, NY 10001"},"qrCode":{"id":2,"company_name":"TechCorp Solutions","department":"Operations"},"approver":{"id":15,"full_name":"David Director","email":"david.director@techcorp.com"}},{"id":471,"user_id":16,"workplace_id":2,"qr_code_id":2,"type":"break_end","scan_time":"2025-12-31T14:19:00.000Z","date":"2025-12-31","check_in_time":null,"check_out_time":null,"latitude":"40.71301299","longitude":"-74.00633880","is_valid":true,"validation_message":null,"is_manual":false,"manual_reason":null,"status":"approved","approved_by":null,"approved_at":null,"notes":null,"is_offline":false,"synced_at":null,"created_at":"2026-01-03T15:21:38.489Z","updated_at":"2026-01-03T15:21:38.489Z","workplace":{"id":2,"name":"Main Office - New York","address":"123 Tech Street, New York, NY 10001"},"qrCode":{"id":2,"company_name":"TechCorp Solutions","department":"Operations"},"approver":null},{"id":470,"user_id":16,"workplace_id":2,"qr_code_id":2,"type":"break_start","scan_time":"2025-12-31T13:59:00.000Z","date":"2025-12-31","check_in_time":null,"check_out_time":null,"latitude":"40.71319645","longitude":"-74.00604536","is_valid":true,"validation_message":null,"is_manual":false,"manual_reason":null,"status":"approved","approved_by":null,"approved_at":null,"notes":null,"is_offline":false,"synced_at":null,"created_at":"2026-01-03T15:21:38.477Z","updated_at":"2026-01-03T15:21:38.477Z","workplace":{"id":2,"name":"Main Office - New York","address":"123 Tech Street, New York, NY 10001"},"qrCode":{"id":2,"company_name":"TechCorp Solutions","department":"Operations"},"approver":null},{"id":468,"user_id":16,"workplace_id":2,"qr_code_id":2,"type":"clock_in","scan_time":"2025-12-31T09:36:00.000Z","date":"2025-12-31","check_in_time":"09:36:00","check_out_time":null,"latitude":"40.71232927","longitude":"-74.00637029","is_valid":true,"validation_message":null,"is_manual":false,"manual_reason":null,"status":"approved","approved_by":15,"approved_at":"2025-12-31T09:36:00.000Z","notes":null,"is_offline":false,"synced_at":null,"created_at":"2026-01-03T15:21:38.289Z","updated_at":"2026-01-03T15:21:38.289Z","workplace":{"id":2,"name":"Main Office - New York","address":"123 Tech Street, New York, NY 10001"},"qrCode":{"id":2,"company_name":"TechCorp Solutions","department":"Operations"},"approver":{"id":15,"full_name":"David Director","email":"david.director@techcorp.com"}},{"id":441,"user_id":16,"workplace_id":4,"qr_code_id":4,"type":"clock_out","scan_time":"2025-12-30T17:01:00.000Z","date":"2025-12-30","check_in_time":null,"check_out_time":"17:01:00","latitude":"41.87770314","longitude":"-87.62970319","is_valid":true,"validation_message":null,"is_manual":false,"manual_reason":null,"status":"approved","approved_by":11,"approved_at":"2025-12-30T17:01:00.000Z","notes":null,"is_offline":false,"synced_at":null,"created_at":"2026-01-03T15:21:36.278Z","updated_at":"2026-01-03T15:21:36.278Z","workplace":{"id":4,"name":"Remote Workspace - Chicago","address":"789 Business Blvd, Chicago, IL 60601"},"qrCode":{"id":4,"company_name":"TechCorp Solutions","department":"General"},"approver":{"id":11,"full_name":"John Admin","email":"admin@techcorp.com"}},{"id":440,"user_id":16,"workplace_id":4,"qr_code_id":4,"type":"clock_in","scan_time":"2025-12-30T09:33:00.000Z","date":"2025-12-30","check_in_time":"09:33:00","check_out_time":null,"latitude":"41.87790616","longitude":"-87.62951924","is_valid":true,"validation_message":null,"is_manual":false,"manual_reason":null,"status":"approved","approved_by":11,"approved_at":"2025-12-30T09:33:00.000Z","notes":null,"is_offline":false,"synced_at":null,"created_at":"2026-01-03T15:21:36.177Z","updated_at":"2026-01-03T15:21:36.177Z","workplace":{"id":4,"name":"Remote Workspace - Chicago","address":"789 Business Blvd, Chicago, IL 60601"},"qrCode":{"id":4,"company_name":"TechCorp Solutions","department":"General"},"approver":{"id":11,"full_name":"John Admin","email":"admin@techcorp.com"}},{"id":417,"user_id":16,"workplace_id":4,"qr_code_id":4,"type":"clock_out","scan_time":"2025-12-29T18:52:00.000Z","date":"2025-12-29","check_in_time":null,"check_out_time":"18:52:00","latitude":"41.87838217","longitude":"-87.62976916","is_valid":true,"validation_message":null,"is_manual":false,"manual_reason":null,"status":"approved","approved_by":12,"approved_at":"2025-12-29T18:52:00.000Z","notes":null,"is_offline":false,"synced_at":null,"created_at":"2026-01-03T15:21:34.576Z","updated_at":"2026-01-03T15:21:34.576Z","workplace":{"id":4,"name":"Remote Workspace - Chicago","address":"789 Business Blvd, Chicago, IL 60601"},"qrCode":{"id":4,"company_name":"TechCorp Solutions","department":"General"},"approver":{"id":12,"full_name":"Sarah Administrator","email":"sarah.admin@techcorp.com"}},{"id":416,"user_id":16,"workplace_id":4,"qr_code_id":4,"type":"clock_in","scan_time":"2025-12-29T09:25:00.000Z","date":"2025-12-29","check_in_time":"09:25:00","check_out_time":null,"latitude":"41.87843070","longitude":"-87.63022093","is_valid":true,"validation_message":null,"is_manual":false,"manual_reason":null,"status":"approved","approved_by":12,"approved_at":"2025-12-29T09:25:00.000Z","notes":null,"is_offline":false,"synced_at":null,"created_at":"2026-01-03T15:21:34.477Z","updated_at":"2026-01-03T15:21:34.477Z","workplace":{"id":4,"name":"Remote Workspace - Chicago","address":"789 Business Blvd, Chicago, IL 60601"},"qrCode":{"id":4,"company_name":"TechCorp Solutions","department":"General"},"approver":{"id":12,"full_name":"Sarah Administrator","email":"sarah.admin@techcorp.com"}},{"id":391,"user_id":16,"workplace_id":4,"qr_code_id":4,"type":"clock_out","scan_time":"2025-12-26T18:06:00.000Z","date":"2025-12-26","check_in_time":null,"check_out_time":"18:06:00","latitude":"41.87796850","longitude":"-87.62998167","is_valid":true,"validation_message":null,"is_manual":false,"manual_reason":null,"status":"approved","approved_by":14,"approved_at":null,"notes":null,"is_offline":false,"synced_at":null,"created_at":"2026-01-03T15:21:32.776Z","updated_at":"2026-01-03T15:21:32.776Z","workplace":{"id":4,"name":"Remote Workspace - Chicago","address":"789 Business Blvd, Chicago, IL 60601"},"qrCode":{"id":4,"company_name":"TechCorp Solutions","department":"General"},"approver":{"id":14,"full_name":"Lisa Lead","email":"lisa.lead@techcorp.com"}},{"id":390,"user_id":16,"workplace_id":4,"qr_code_id":4,"type":"clock_in","scan_time":"2025-12-26T09:04:00.000Z","date":"2025-12-26","check_in_time":"09:04:00","check_out_time":null,"latitude":"41.87828408","longitude":"-87.62978999","is_valid":true,"validation_message":null,"is_manual":false,"manual_reason":null,"status":"approved","approved_by":14,"approved_at":"2025-12-26T09:04:00.000Z","notes":null,"is_offline":false,"synced_at":null,"created_at":"2026-01-03T15:21:32.676Z","updated_at":"2026-01-03T15:21:32.676Z","workplace":{"id":4,"name":"Remote Workspace - Chicago","address":"789 Business Blvd, Chicago, IL 60601"},"qrCode":{"id":4,"company_name":"TechCorp Solutions","department":"General"},"approver":{"id":14,"full_name":"Lisa Lead","email":"lisa.lead@techcorp.com"}}],"pagination":{"total":54,"page":1,"limit":20,"pages":3}}
 
+GetAttendanceHistoryModel getAttendanceHistoryModelFromJson(String str) => GetAttendanceHistoryModel.fromJson(json.decode(str));
+String getAttendanceHistoryModelToJson(GetAttendanceHistoryModel data) => json.encode(data.toJson());
 class GetAttendanceHistoryModel {
   GetAttendanceHistoryModel({
       bool? success, 
@@ -43,9 +46,11 @@ GetAttendanceHistoryModel copyWith({  bool? success,
 
 }
 
-/// records : [{"id":544,"user_id":11,"workplace_id":6,"qr_code_id":6,"type":"clock_in","scan_time":"2025-03-15T09:00:00.000Z","date":"2025-03-15","check_in_time":"14:00:00","check_out_time":null,"latitude":"40.71280000","longitude":"-74.00600000","is_valid":false,"validation_message":"Location invalid: 1757961m from workplace (max 50m allowed)","is_manual":false,"manual_reason":null,"status":"pending","approved_by":null,"approved_at":null,"notes":null,"is_offline":false,"synced_at":"2026-01-03T22:37:12.575Z","created_at":"2026-01-03T22:37:12.576Z","updated_at":"2026-01-03T22:37:12.576Z","workplace":{"id":6,"name":"Sales Office - Miami","address":"654 Commerce Way, Miami, FL 33101"},"qrCode":{"id":6,"company_name":"TechCorp Solutions","department":"Operations"}}]
-/// pagination : {"total":1,"page":1,"limit":20,"pages":1}
+/// records : [{"id":551,"user_id":16,"workplace_id":6,"qr_code_id":null,"type":"clock_in","scan_time":null,"date":"2026-01-16","check_in_time":"13:09:00","check_out_time":"14:11:00","latitude":"30.75675676","longitude":"73.34300615","is_valid":false,"validation_message":"Manual entry - pending approval","is_manual":true,"manual_reason":"very very ill. please approve","status":"approved","approved_by":12,"approved_at":"2026-01-07T15:51:37.998Z","notes":null,"is_offline":false,"synced_at":"2026-01-07T15:50:00.029Z","created_at":"2026-01-07T15:50:00.052Z","updated_at":"2026-01-07T15:51:37.999Z","workplace":{"id":6,"name":"Sales Office - Miami","address":"654 Commerce Way, Miami, FL 33101"},"qrCode":null,"approver":{"id":12,"full_name":"Sarah Administrator","email":"sarah.admin@techcorp.com"}},{"id":553,"user_id":16,"workplace_id":8,"qr_code_id":8,"type":"clock_in","scan_time":"2026-01-09T00:31:11.149Z","date":"2026-01-09","check_in_time":"00:05:22","check_out_time":"00:31:11","latitude":"30.79253260","longitude":"73.44323320","is_valid":false,"validation_message":"Location invalid: 11387652m from workplace (max 50m allowed)","is_manual":false,"manual_reason":null,"status":"pending","approved_by":13,"approved_at":"2026-01-08T20:39:42.436Z","notes":"He is a very smart and interesting person","is_offline":false,"synced_at":"2026-01-08T19:35:24.559Z","created_at":"2026-01-08T19:08:56.524Z","updated_at":"2026-01-08T20:39:42.436Z","workplace":{"id":8,"name":"Noor Office 2","address":"12s3 Business St, City"},"qrCode":{"id":8,"company_name":"Tech Solutions Inc","department":"Engineering"},"approver":{"id":13,"full_name":"Mike Manager","email":"mike.manager@techcorp.com"}},{"id":552,"user_id":16,"workplace_id":8,"qr_code_id":8,"type":"clock_in","scan_time":"2026-01-08T23:56:10.006Z","date":"2026-01-08","check_in_time":"09:45:54","check_out_time":"23:56:10","latitude":"30.79253270","longitude":"73.44323320","is_valid":false,"validation_message":"Location invalid: 11387652m from workplace (max 50m allowed)","is_manual":false,"manual_reason":null,"status":"pending","approved_by":null,"approved_at":null,"notes":null,"is_offline":false,"synced_at":"2026-01-08T18:59:37.416Z","created_at":"2026-01-08T09:45:55.005Z","updated_at":"2026-01-08T18:59:37.416Z","workplace":{"id":8,"name":"Noor Office 2","address":"12s3 Business St, City"},"qrCode":{"id":8,"company_name":"Tech Solutions Inc","department":"Engineering"},"approver":null},{"id":550,"user_id":16,"workplace_id":8,"qr_code_id":8,"type":"clock_in","scan_time":"2026-01-07T21:07:28.994Z","date":"2026-01-07","check_in_time":"12:19:49","check_out_time":"21:07:28","latitude":"40.71280000","longitude":"-74.00600000","is_valid":true,"validation_message":"Location verified (0m from workplace)","is_manual":false,"manual_reason":null,"status":"approved","approved_by":null,"approved_at":null,"notes":"Person work very well and good","is_offline":false,"synced_at":"2026-01-07T21:07:29.139Z","created_at":"2026-01-07T12:19:49.410Z","updated_at":"2026-01-08T19:21:11.648Z","workplace":{"id":8,"name":"Noor Office 2","address":"12s3 Business St, City"},"qrCode":{"id":8,"company_name":"Tech Solutions Inc","department":"Engineering"},"approver":null},{"id":519,"user_id":16,"workplace_id":6,"qr_code_id":6,"type":"clock_out","scan_time":"2026-01-02T18:22:00.000Z","date":"2026-01-02","check_in_time":null,"check_out_time":"18:22:00","latitude":"25.76182094","longitude":"-80.19152931","is_valid":true,"validation_message":null,"is_manual":false,"manual_reason":null,"status":"pending","approved_by":11,"approved_at":null,"notes":null,"is_offline":false,"synced_at":null,"created_at":"2026-01-03T15:21:42.389Z","updated_at":"2026-01-03T15:21:42.389Z","workplace":{"id":6,"name":"Sales Office - Miami","address":"654 Commerce Way, Miami, FL 33101"},"qrCode":{"id":6,"company_name":"TechCorp Solutions","department":"Operations"},"approver":{"id":11,"full_name":"John Admin","email":"admin@techcorp.com"}},{"id":518,"user_id":16,"workplace_id":6,"qr_code_id":6,"type":"clock_in","scan_time":"2026-01-02T08:04:00.000Z","date":"2026-01-02","check_in_time":"08:04:00","check_out_time":null,"latitude":"25.76129974","longitude":"-80.19226051","is_valid":true,"validation_message":null,"is_manual":false,"manual_reason":null,"status":"pending","approved_by":11,"approved_at":"2026-01-02T08:04:00.000Z","notes":null,"is_offline":false,"synced_at":null,"created_at":"2026-01-03T15:21:42.289Z","updated_at":"2026-01-03T15:21:42.289Z","workplace":{"id":6,"name":"Sales Office - Miami","address":"654 Commerce Way, Miami, FL 33101"},"qrCode":{"id":6,"company_name":"TechCorp Solutions","department":"Operations"},"approver":{"id":11,"full_name":"John Admin","email":"admin@techcorp.com"}},{"id":493,"user_id":16,"workplace_id":6,"qr_code_id":6,"type":"clock_out","scan_time":"2026-01-01T17:52:00.000Z","date":"2026-01-01","check_in_time":null,"check_out_time":"17:52:00","latitude":"25.76132986","longitude":"-80.19212614","is_valid":true,"validation_message":null,"is_manual":false,"manual_reason":null,"status":"pending","approved_by":13,"approved_at":"2026-01-01T17:52:00.000Z","notes":null,"is_offline":false,"synced_at":null,"created_at":"2026-01-03T15:21:40.476Z","updated_at":"2026-01-03T15:21:40.476Z","workplace":{"id":6,"name":"Sales Office - Miami","address":"654 Commerce Way, Miami, FL 33101"},"qrCode":{"id":6,"company_name":"TechCorp Solutions","department":"Operations"},"approver":{"id":13,"full_name":"Mike Manager","email":"mike.manager@techcorp.com"}},{"id":495,"user_id":16,"workplace_id":6,"qr_code_id":6,"type":"break_end","scan_time":"2026-01-01T13:18:00.000Z","date":"2026-01-01","check_in_time":null,"check_out_time":null,"latitude":"25.76131633","longitude":"-80.19197421","is_valid":true,"validation_message":null,"is_manual":false,"manual_reason":null,"status":"approved","approved_by":null,"approved_at":null,"notes":null,"is_offline":false,"synced_at":null,"created_at":"2026-01-03T15:21:40.577Z","updated_at":"2026-01-03T15:21:40.577Z","workplace":{"id":6,"name":"Sales Office - Miami","address":"654 Commerce Way, Miami, FL 33101"},"qrCode":{"id":6,"company_name":"TechCorp Solutions","department":"Operations"},"approver":null},{"id":494,"user_id":16,"workplace_id":6,"qr_code_id":6,"type":"break_start","scan_time":"2026-01-01T12:52:00.000Z","date":"2026-01-01","check_in_time":null,"check_out_time":null,"latitude":"25.76134056","longitude":"-80.19157801","is_valid":true,"validation_message":null,"is_manual":false,"manual_reason":null,"status":"approved","approved_by":null,"approved_at":null,"notes":null,"is_offline":false,"synced_at":null,"created_at":"2026-01-03T15:21:40.488Z","updated_at":"2026-01-03T15:21:40.488Z","workplace":{"id":6,"name":"Sales Office - Miami","address":"654 Commerce Way, Miami, FL 33101"},"qrCode":{"id":6,"company_name":"TechCorp Solutions","department":"Operations"},"approver":null},{"id":492,"user_id":16,"workplace_id":6,"qr_code_id":6,"type":"clock_in","scan_time":"2026-01-01T09:47:00.000Z","date":"2026-01-01","check_in_time":"09:47:00","check_out_time":null,"latitude":"25.76146441","longitude":"-80.19147189","is_valid":true,"validation_message":null,"is_manual":false,"manual_reason":null,"status":"approved","approved_by":13,"approved_at":"2026-01-01T09:47:00.000Z","notes":null,"is_offline":false,"synced_at":null,"created_at":"2026-01-03T15:21:40.192Z","updated_at":"2026-01-03T15:21:40.192Z","workplace":{"id":6,"name":"Sales Office - Miami","address":"654 Commerce Way, Miami, FL 33101"},"qrCode":{"id":6,"company_name":"TechCorp Solutions","department":"Operations"},"approver":{"id":13,"full_name":"Mike Manager","email":"mike.manager@techcorp.com"}},{"id":469,"user_id":16,"workplace_id":2,"qr_code_id":2,"type":"clock_out","scan_time":"2025-12-31T18:57:00.000Z","date":"2025-12-31","check_in_time":null,"check_out_time":"18:57:00","latitude":"40.71262558","longitude":"-74.00649849","is_valid":true,"validation_message":null,"is_manual":false,"manual_reason":null,"status":"approved","approved_by":15,"approved_at":"2025-12-31T18:57:00.000Z","notes":null,"is_offline":false,"synced_at":null,"created_at":"2026-01-03T15:21:38.388Z","updated_at":"2026-01-03T15:21:38.388Z","workplace":{"id":2,"name":"Main Office - New York","address":"123 Tech Street, New York, NY 10001"},"qrCode":{"id":2,"company_name":"TechCorp Solutions","department":"Operations"},"approver":{"id":15,"full_name":"David Director","email":"david.director@techcorp.com"}},{"id":471,"user_id":16,"workplace_id":2,"qr_code_id":2,"type":"break_end","scan_time":"2025-12-31T14:19:00.000Z","date":"2025-12-31","check_in_time":null,"check_out_time":null,"latitude":"40.71301299","longitude":"-74.00633880","is_valid":true,"validation_message":null,"is_manual":false,"manual_reason":null,"status":"approved","approved_by":null,"approved_at":null,"notes":null,"is_offline":false,"synced_at":null,"created_at":"2026-01-03T15:21:38.489Z","updated_at":"2026-01-03T15:21:38.489Z","workplace":{"id":2,"name":"Main Office - New York","address":"123 Tech Street, New York, NY 10001"},"qrCode":{"id":2,"company_name":"TechCorp Solutions","department":"Operations"},"approver":null},{"id":470,"user_id":16,"workplace_id":2,"qr_code_id":2,"type":"break_start","scan_time":"2025-12-31T13:59:00.000Z","date":"2025-12-31","check_in_time":null,"check_out_time":null,"latitude":"40.71319645","longitude":"-74.00604536","is_valid":true,"validation_message":null,"is_manual":false,"manual_reason":null,"status":"approved","approved_by":null,"approved_at":null,"notes":null,"is_offline":false,"synced_at":null,"created_at":"2026-01-03T15:21:38.477Z","updated_at":"2026-01-03T15:21:38.477Z","workplace":{"id":2,"name":"Main Office - New York","address":"123 Tech Street, New York, NY 10001"},"qrCode":{"id":2,"company_name":"TechCorp Solutions","department":"Operations"},"approver":null},{"id":468,"user_id":16,"workplace_id":2,"qr_code_id":2,"type":"clock_in","scan_time":"2025-12-31T09:36:00.000Z","date":"2025-12-31","check_in_time":"09:36:00","check_out_time":null,"latitude":"40.71232927","longitude":"-74.00637029","is_valid":true,"validation_message":null,"is_manual":false,"manual_reason":null,"status":"approved","approved_by":15,"approved_at":"2025-12-31T09:36:00.000Z","notes":null,"is_offline":false,"synced_at":null,"created_at":"2026-01-03T15:21:38.289Z","updated_at":"2026-01-03T15:21:38.289Z","workplace":{"id":2,"name":"Main Office - New York","address":"123 Tech Street, New York, NY 10001"},"qrCode":{"id":2,"company_name":"TechCorp Solutions","department":"Operations"},"approver":{"id":15,"full_name":"David Director","email":"david.director@techcorp.com"}},{"id":441,"user_id":16,"workplace_id":4,"qr_code_id":4,"type":"clock_out","scan_time":"2025-12-30T17:01:00.000Z","date":"2025-12-30","check_in_time":null,"check_out_time":"17:01:00","latitude":"41.87770314","longitude":"-87.62970319","is_valid":true,"validation_message":null,"is_manual":false,"manual_reason":null,"status":"approved","approved_by":11,"approved_at":"2025-12-30T17:01:00.000Z","notes":null,"is_offline":false,"synced_at":null,"created_at":"2026-01-03T15:21:36.278Z","updated_at":"2026-01-03T15:21:36.278Z","workplace":{"id":4,"name":"Remote Workspace - Chicago","address":"789 Business Blvd, Chicago, IL 60601"},"qrCode":{"id":4,"company_name":"TechCorp Solutions","department":"General"},"approver":{"id":11,"full_name":"John Admin","email":"admin@techcorp.com"}},{"id":440,"user_id":16,"workplace_id":4,"qr_code_id":4,"type":"clock_in","scan_time":"2025-12-30T09:33:00.000Z","date":"2025-12-30","check_in_time":"09:33:00","check_out_time":null,"latitude":"41.87790616","longitude":"-87.62951924","is_valid":true,"validation_message":null,"is_manual":false,"manual_reason":null,"status":"approved","approved_by":11,"approved_at":"2025-12-30T09:33:00.000Z","notes":null,"is_offline":false,"synced_at":null,"created_at":"2026-01-03T15:21:36.177Z","updated_at":"2026-01-03T15:21:36.177Z","workplace":{"id":4,"name":"Remote Workspace - Chicago","address":"789 Business Blvd, Chicago, IL 60601"},"qrCode":{"id":4,"company_name":"TechCorp Solutions","department":"General"},"approver":{"id":11,"full_name":"John Admin","email":"admin@techcorp.com"}},{"id":417,"user_id":16,"workplace_id":4,"qr_code_id":4,"type":"clock_out","scan_time":"2025-12-29T18:52:00.000Z","date":"2025-12-29","check_in_time":null,"check_out_time":"18:52:00","latitude":"41.87838217","longitude":"-87.62976916","is_valid":true,"validation_message":null,"is_manual":false,"manual_reason":null,"status":"approved","approved_by":12,"approved_at":"2025-12-29T18:52:00.000Z","notes":null,"is_offline":false,"synced_at":null,"created_at":"2026-01-03T15:21:34.576Z","updated_at":"2026-01-03T15:21:34.576Z","workplace":{"id":4,"name":"Remote Workspace - Chicago","address":"789 Business Blvd, Chicago, IL 60601"},"qrCode":{"id":4,"company_name":"TechCorp Solutions","department":"General"},"approver":{"id":12,"full_name":"Sarah Administrator","email":"sarah.admin@techcorp.com"}},{"id":416,"user_id":16,"workplace_id":4,"qr_code_id":4,"type":"clock_in","scan_time":"2025-12-29T09:25:00.000Z","date":"2025-12-29","check_in_time":"09:25:00","check_out_time":null,"latitude":"41.87843070","longitude":"-87.63022093","is_valid":true,"validation_message":null,"is_manual":false,"manual_reason":null,"status":"approved","approved_by":12,"approved_at":"2025-12-29T09:25:00.000Z","notes":null,"is_offline":false,"synced_at":null,"created_at":"2026-01-03T15:21:34.477Z","updated_at":"2026-01-03T15:21:34.477Z","workplace":{"id":4,"name":"Remote Workspace - Chicago","address":"789 Business Blvd, Chicago, IL 60601"},"qrCode":{"id":4,"company_name":"TechCorp Solutions","department":"General"},"approver":{"id":12,"full_name":"Sarah Administrator","email":"sarah.admin@techcorp.com"}},{"id":391,"user_id":16,"workplace_id":4,"qr_code_id":4,"type":"clock_out","scan_time":"2025-12-26T18:06:00.000Z","date":"2025-12-26","check_in_time":null,"check_out_time":"18:06:00","latitude":"41.87796850","longitude":"-87.62998167","is_valid":true,"validation_message":null,"is_manual":false,"manual_reason":null,"status":"approved","approved_by":14,"approved_at":null,"notes":null,"is_offline":false,"synced_at":null,"created_at":"2026-01-03T15:21:32.776Z","updated_at":"2026-01-03T15:21:32.776Z","workplace":{"id":4,"name":"Remote Workspace - Chicago","address":"789 Business Blvd, Chicago, IL 60601"},"qrCode":{"id":4,"company_name":"TechCorp Solutions","department":"General"},"approver":{"id":14,"full_name":"Lisa Lead","email":"lisa.lead@techcorp.com"}},{"id":390,"user_id":16,"workplace_id":4,"qr_code_id":4,"type":"clock_in","scan_time":"2025-12-26T09:04:00.000Z","date":"2025-12-26","check_in_time":"09:04:00","check_out_time":null,"latitude":"41.87828408","longitude":"-87.62978999","is_valid":true,"validation_message":null,"is_manual":false,"manual_reason":null,"status":"approved","approved_by":14,"approved_at":"2025-12-26T09:04:00.000Z","notes":null,"is_offline":false,"synced_at":null,"created_at":"2026-01-03T15:21:32.676Z","updated_at":"2026-01-03T15:21:32.676Z","workplace":{"id":4,"name":"Remote Workspace - Chicago","address":"789 Business Blvd, Chicago, IL 60601"},"qrCode":{"id":4,"company_name":"TechCorp Solutions","department":"General"},"approver":{"id":14,"full_name":"Lisa Lead","email":"lisa.lead@techcorp.com"}}]
+/// pagination : {"total":54,"page":1,"limit":20,"pages":3}
 
+Data dataFromJson(String str) => Data.fromJson(json.decode(str));
+String dataToJson(Data data) => json.encode(data.toJson());
 class Data {
   Data({
       List<AttendanceRecords>? records,
@@ -86,11 +91,13 @@ Data copyWith({  List<AttendanceRecords>? records,
 
 }
 
-/// total : 1
+/// total : 54
 /// page : 1
 /// limit : 20
-/// pages : 1
+/// pages : 3
 
+Pagination paginationFromJson(String str) => Pagination.fromJson(json.decode(str));
+String paginationToJson(Pagination data) => json.encode(data.toJson());
 class Pagination {
   Pagination({
       num? total, 
@@ -138,59 +145,63 @@ Pagination copyWith({  num? total,
 
 }
 
-/// id : 544
-/// user_id : 11
+/// id : 551
+/// user_id : 16
 /// workplace_id : 6
-/// qr_code_id : 6
+/// qr_code_id : null
 /// type : "clock_in"
-/// scan_time : "2025-03-15T09:00:00.000Z"
-/// date : "2025-03-15"
-/// check_in_time : "14:00:00"
-/// check_out_time : null
-/// latitude : "40.71280000"
-/// longitude : "-74.00600000"
+/// scan_time : null
+/// date : "2026-01-16"
+/// check_in_time : "13:09:00"
+/// check_out_time : "14:11:00"
+/// latitude : "30.75675676"
+/// longitude : "73.34300615"
 /// is_valid : false
-/// validation_message : "Location invalid: 1757961m from workplace (max 50m allowed)"
-/// is_manual : false
-/// manual_reason : null
-/// status : "pending"
-/// approved_by : null
-/// approved_at : null
+/// validation_message : "Manual entry - pending approval"
+/// is_manual : true
+/// manual_reason : "very very ill. please approve"
+/// status : "approved"
+/// approved_by : 12
+/// approved_at : "2026-01-07T15:51:37.998Z"
 /// notes : null
 /// is_offline : false
-/// synced_at : "2026-01-03T22:37:12.575Z"
-/// created_at : "2026-01-03T22:37:12.576Z"
-/// updated_at : "2026-01-03T22:37:12.576Z"
+/// synced_at : "2026-01-07T15:50:00.029Z"
+/// created_at : "2026-01-07T15:50:00.052Z"
+/// updated_at : "2026-01-07T15:51:37.999Z"
 /// workplace : {"id":6,"name":"Sales Office - Miami","address":"654 Commerce Way, Miami, FL 33101"}
-/// qrCode : {"id":6,"company_name":"TechCorp Solutions","department":"Operations"}
+/// qrCode : null
+/// approver : {"id":12,"full_name":"Sarah Administrator","email":"sarah.admin@techcorp.com"}
 
+AttendanceRecords recordsFromJson(String str) => AttendanceRecords.fromJson(json.decode(str));
+String recordsToJson(AttendanceRecords data) => json.encode(data.toJson());
 class AttendanceRecords {
   AttendanceRecords({
       num? id, 
       num? userId, 
       num? workplaceId, 
-      num? qrCodeId, 
+      dynamic qrCodeId, 
       String? type, 
-      String? scanTime, 
+      dynamic scanTime, 
       String? date, 
       String? checkInTime, 
-      dynamic checkOutTime, 
+      String? checkOutTime, 
       String? latitude, 
       String? longitude, 
       bool? isValid, 
       String? validationMessage, 
       bool? isManual, 
-      dynamic manualReason, 
+      String? manualReason, 
       String? status, 
-      dynamic approvedBy, 
-      dynamic approvedAt, 
+      num? approvedBy, 
+      String? approvedAt, 
       dynamic notes, 
       bool? isOffline, 
       String? syncedAt, 
       String? createdAt, 
       String? updatedAt, 
       Workplace? workplace, 
-      QrCode? qrCode,}){
+      dynamic qrCode, 
+      Approver? approver,}){
     _id = id;
     _userId = userId;
     _workplaceId = workplaceId;
@@ -216,6 +227,7 @@ class AttendanceRecords {
     _updatedAt = updatedAt;
     _workplace = workplace;
     _qrCode = qrCode;
+    _approver = approver;
 }
 
   AttendanceRecords.fromJson(dynamic json) {
@@ -243,58 +255,61 @@ class AttendanceRecords {
     _createdAt = json['created_at'];
     _updatedAt = json['updated_at'];
     _workplace = json['workplace'] != null ? Workplace.fromJson(json['workplace']) : null;
-    _qrCode = json['qrCode'] != null ? QrCode.fromJson(json['qrCode']) : null;
+    _qrCode = json['qrCode'];
+    _approver = json['approver'] != null ? Approver.fromJson(json['approver']) : null;
   }
   num? _id;
   num? _userId;
   num? _workplaceId;
-  num? _qrCodeId;
+  dynamic _qrCodeId;
   String? _type;
-  String? _scanTime;
+  dynamic _scanTime;
   String? _date;
   String? _checkInTime;
-  dynamic _checkOutTime;
+  String? _checkOutTime;
   String? _latitude;
   String? _longitude;
   bool? _isValid;
   String? _validationMessage;
   bool? _isManual;
-  dynamic _manualReason;
+  String? _manualReason;
   String? _status;
-  dynamic _approvedBy;
-  dynamic _approvedAt;
+  num? _approvedBy;
+  String? _approvedAt;
   dynamic _notes;
   bool? _isOffline;
   String? _syncedAt;
   String? _createdAt;
   String? _updatedAt;
   Workplace? _workplace;
-  QrCode? _qrCode;
+  dynamic _qrCode;
+  Approver? _approver;
 AttendanceRecords copyWith({  num? id,
   num? userId,
   num? workplaceId,
-  num? qrCodeId,
+  dynamic qrCodeId,
   String? type,
-  String? scanTime,
+  dynamic scanTime,
   String? date,
   String? checkInTime,
-  dynamic checkOutTime,
+  String? checkOutTime,
   String? latitude,
   String? longitude,
   bool? isValid,
   String? validationMessage,
   bool? isManual,
-  dynamic manualReason,
+  String? manualReason,
   String? status,
-  dynamic approvedBy,
-  dynamic approvedAt,
+  num? approvedBy,
+  String? approvedAt,
   dynamic notes,
   bool? isOffline,
   String? syncedAt,
   String? createdAt,
   String? updatedAt,
   Workplace? workplace,
-  QrCode? qrCode,
+  dynamic qrCode,
+  Approver? approver,
 }) => AttendanceRecords(  id: id ?? _id,
   userId: userId ?? _userId,
   workplaceId: workplaceId ?? _workplaceId,
@@ -320,32 +335,34 @@ AttendanceRecords copyWith({  num? id,
   updatedAt: updatedAt ?? _updatedAt,
   workplace: workplace ?? _workplace,
   qrCode: qrCode ?? _qrCode,
+  approver: approver ?? _approver,
 );
   num? get id => _id;
   num? get userId => _userId;
   num? get workplaceId => _workplaceId;
-  num? get qrCodeId => _qrCodeId;
+  dynamic get qrCodeId => _qrCodeId;
   String? get type => _type;
-  String? get scanTime => _scanTime;
+  dynamic get scanTime => _scanTime;
   String? get date => _date;
   String? get checkInTime => _checkInTime;
-  dynamic get checkOutTime => _checkOutTime;
+  String? get checkOutTime => _checkOutTime;
   String? get latitude => _latitude;
   String? get longitude => _longitude;
   bool? get isValid => _isValid;
   String? get validationMessage => _validationMessage;
   bool? get isManual => _isManual;
-  dynamic get manualReason => _manualReason;
+  String? get manualReason => _manualReason;
   String? get status => _status;
-  dynamic get approvedBy => _approvedBy;
-  dynamic get approvedAt => _approvedAt;
+  num? get approvedBy => _approvedBy;
+  String? get approvedAt => _approvedAt;
   dynamic get notes => _notes;
   bool? get isOffline => _isOffline;
   String? get syncedAt => _syncedAt;
   String? get createdAt => _createdAt;
   String? get updatedAt => _updatedAt;
   Workplace? get workplace => _workplace;
-  QrCode? get qrCode => _qrCode;
+  dynamic get qrCode => _qrCode;
+  Approver? get approver => _approver;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
@@ -375,52 +392,55 @@ AttendanceRecords copyWith({  num? id,
     if (_workplace != null) {
       map['workplace'] = _workplace?.toJson();
     }
-    if (_qrCode != null) {
-      map['qrCode'] = _qrCode?.toJson();
+    map['qrCode'] = _qrCode;
+    if (_approver != null) {
+      map['approver'] = _approver?.toJson();
     }
     return map;
   }
 
 }
 
-/// id : 6
-/// company_name : "TechCorp Solutions"
-/// department : "Operations"
+/// id : 12
+/// full_name : "Sarah Administrator"
+/// email : "sarah.admin@techcorp.com"
 
-class QrCode {
-  QrCode({
+Approver approverFromJson(String str) => Approver.fromJson(json.decode(str));
+String approverToJson(Approver data) => json.encode(data.toJson());
+class Approver {
+  Approver({
       num? id, 
-      String? companyName, 
-      String? department,}){
+      String? fullName, 
+      String? email,}){
     _id = id;
-    _companyName = companyName;
-    _department = department;
+    _fullName = fullName;
+    _email = email;
 }
 
-  QrCode.fromJson(dynamic json) {
+  Approver.fromJson(dynamic json) {
     _id = json['id'];
-    _companyName = json['company_name'];
-    _department = json['department'];
+    _fullName = json['full_name'];
+    _email = json['email'];
   }
   num? _id;
-  String? _companyName;
-  String? _department;
-QrCode copyWith({  num? id,
-  String? companyName,
-  String? department,
-}) => QrCode(  id: id ?? _id,
-  companyName: companyName ?? _companyName,
-  department: department ?? _department,
+  String? _fullName;
+  String? _email;
+Approver copyWith({  num? id,
+  String? fullName,
+  String? email,
+}) => Approver(  id: id ?? _id,
+  fullName: fullName ?? _fullName,
+  email: email ?? _email,
 );
   num? get id => _id;
-  String? get companyName => _companyName;
-  String? get department => _department;
+  String? get fullName => _fullName;
+  String? get email => _email;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
     map['id'] = _id;
-    map['company_name'] = _companyName;
-    map['department'] = _department;
+    map['full_name'] = _fullName;
+    map['email'] = _email;
     return map;
   }
 
@@ -430,6 +450,8 @@ QrCode copyWith({  num? id,
 /// name : "Sales Office - Miami"
 /// address : "654 Commerce Way, Miami, FL 33101"
 
+Workplace workplaceFromJson(String str) => Workplace.fromJson(json.decode(str));
+String workplaceToJson(Workplace data) => json.encode(data.toJson());
 class Workplace {
   Workplace({
       num? id, 

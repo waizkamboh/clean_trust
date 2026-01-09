@@ -87,21 +87,18 @@ class GetAttendanceHistoryController extends GetxController {
         endDate: endDate,
       );
 
-      // ✅ LIST UPDATE
       attendanceList.value =
           response.data?.records
               ?.map((e) => AttendanceRecords.fromJson(e.toJson()))
               .toList() ?? [];
 
 
-      // ✅ TOTAL HOURS FROM BACKEND
       final breakdown = response.data?.totalHoursBreakdown;
       if (breakdown != null) {
         apiTotalHours.value =
         '${breakdown.hours}h ${breakdown.minutes}m';
       }
 
-      // ✅ DATE RANGE TEXT
       filteredDateRangeText.value =
       'Hours worked between ${DateFormat('dd MMM').format(fromDate.value!)} - '
           '${DateFormat('dd MMM yyyy').format(toDate.value!)}';

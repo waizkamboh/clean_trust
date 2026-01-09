@@ -118,6 +118,7 @@ class _AttendanceHistoryScreenState extends State<AttendanceHistoryScreen> {
                                 style:
                                 kSize14W500kForestGreenColorInterMedium.copyWith(
                                   fontSize: getFont(14),
+                                  fontWeight: FontWeight.bold,
                                   color: AppColors.kMidnightBlueColor,
                                 ),
                               ),
@@ -133,24 +134,25 @@ class _AttendanceHistoryScreenState extends State<AttendanceHistoryScreen> {
                   }),
                   SizedBox(height: getHeight(50),),
 
+                  RoundButton(
+                    onPress: (){},
+                    radius: BorderRadius.circular(12),
+                    title: 'attendanceHistory23'.tr,
+                    textStyle: kSize14W500kForestGreenColorInterMedium.copyWith(color: AppColors.kWhiteColor,),
+                    buttonColor: AppColors.kSkyBlueColor,
+                    width: getWidth(343),
+                    height: getHeight(46),
+
+                  ),
+                  SizedBox(height: getHeight(50),),
 
                 ],
               ),
             ),
           ),
 
-          SizedBox(height: getHeight(50),),
 
-          RoundButton(
-            onPress: (){},
-            radius: BorderRadius.circular(12),
-            title: 'attendanceHistory23'.tr,
-            textStyle: kSize16W600KBlackColorOutfitSemiBold.copyWith(color: AppColors.kWhiteColor,),
-            buttonColor: AppColors.kSkyBlueColor,
-            width: getWidth(343),
-            height: getHeight(64),
 
-          ),
 
 
         ],

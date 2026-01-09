@@ -32,7 +32,6 @@ class AttendanceOfflineController extends GetxController {
 
   Timer? _internetTimer;
 
-  // ---------------- INIT ----------------
   @override
   void onInit() {
     super.onInit();
@@ -71,7 +70,6 @@ class AttendanceOfflineController extends GetxController {
 
   int get count => offlineList.length;
 
-  // ---------------- SYNC ----------------
   Future<void> syncOfflineAttendance() async {
     if (offlineList.isEmpty || syncing.value) return;
 

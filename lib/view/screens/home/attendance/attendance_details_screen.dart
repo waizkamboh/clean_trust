@@ -9,6 +9,7 @@ import '../../../../data/model/home/attendance/GetAttendanceHistoryModel.dart';
 import '../../../../util/app_images.dart';
 import '../../../../util/text_style.dart';
 import '../../../../view_model/controller/home/attendance/get_attendance_history_controller.dart';
+import 'package:clean_trust/util/app_util.dart';
 
 class AttendanceDetailsScreen extends StatelessWidget {
   final AttendanceRecords record;
@@ -306,70 +307,86 @@ class AttendanceDetailsScreen extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
 
         children: [
-          Text(
-            record.workplace?.address ?? '--',
-            style: kSize16W600kMidnightBlueColorInterSemiBold.copyWith(
-              fontSize: getFont(18),
-              color: AppColors.kMidnightBlueColor,
-
-            ),
-          ),
-          SizedBox(height: getHeight(5),),
           Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    'attendanceDetail7'.tr,
-                    style: kSize17W400KCharcoalBlackColorInterRegular.copyWith(
-                      fontSize: getFont(14),
-                      color: AppColors.kCoolGreyColor,
-
-                    ),
-                  ),
-                  Text(
-                    controller.formatTime24To12(record.checkInTime),
-                    style: kSize16W600kMidnightBlueColorInterSemiBold.copyWith(
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      record.workplace?.name ?? '--',
+                      style: kSize16W600kMidnightBlueColorInterSemiBold.copyWith(
                         fontSize: getFont(18),
-                        color: AppColors.kBlackColor
-
+                        color: AppColors.kMidnightBlueColor,
+                      ),
                     ),
-                  ),
 
+                    SizedBox(height: getHeight(20)),
 
-                ],
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              'attendanceDetail7'.tr,
+                              style: kSize17W400KCharcoalBlackColorInterRegular.copyWith(
+                                fontSize: getFont(14),
+                                color: AppColors.kCoolGreyColor,
+                              ),
+                            ),
+                            Text(
+                              controller.formatTime24To12(record.checkInTime),
+                              style: kSize16W600kMidnightBlueColorInterSemiBold.copyWith(
+                                fontSize: getFont(18),
+                                color: AppColors.kBlackColor,
+                              ),
+                            ),
+                          ],
+                        ),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              'attendanceDetail8'.tr,
+                              style: kSize17W400KCharcoalBlackColorInterRegular.copyWith(
+                                fontSize: getFont(14),
+                                color: AppColors.kCoolGreyColor,
+                              ),
+                            ),
+                            Text(
+                              controller.formatTime24To12(record.checkOutTime),
+                              style: kSize16W600kMidnightBlueColorInterSemiBold.copyWith(
+                                fontSize: getFont(18),
+                                color: AppColors.kBlackColor,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
               ),
-              Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    'attendanceDetail8'.tr,
-                    style: kSize17W400KCharcoalBlackColorInterRegular.copyWith(
-                      fontSize: getFont(14),
-                      color: AppColors.kCoolGreyColor,
 
-                    ),
-                  ),
-                  Text(
-                    controller.formatTime24To12(record.checkOutTime),
-                    style: kSize16W600kMidnightBlueColorInterSemiBold.copyWith(
-                        fontSize: getFont(18),
-                        color: AppColors.kBlackColor
+              SizedBox(width: getWidth(20)),
 
-                    ),
-                  ),
-
-
-                ],
-              )
+              Container(
+                width: getWidth(50),
+                height: getHeight(52),
+                decoration: BoxDecoration(
+                  color: AppColors.kLightBlueColor,
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                child: Center(
+                  child: Image.asset(AppImages.offlineScreenIcon1),
+                ),
+              ),
             ],
           ),
-
-          SizedBox(height: getHeight(10),),
+          SizedBox(height: getHeight(20),),
           Text(
             'attendanceDetail11'.tr,
             style: kSize17W400KCharcoalBlackColorInterRegular.copyWith(
@@ -386,58 +403,54 @@ class AttendanceDetailsScreen extends StatelessWidget {
 
             ),
           ),
-          SizedBox(height: getHeight(10),),
+          SizedBox(height: getHeight(20),),
           Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    'attendanceDetail13'.tr,
-                    style: kSize17W400KCharcoalBlackColorInterRegular.copyWith(
-                      fontSize: getFont(14),
-                      color: AppColors.kCoolGreyColor,
-
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'attendanceDetail13'.tr,
+                      style: kSize17W400KCharcoalBlackColorInterRegular.copyWith(
+                        fontSize: getFont(14),
+                        color: AppColors.kCoolGreyColor,
+                      ),
                     ),
-                  ),
-                  Text(
-                    record.type ?? '--',
-                    style: kSize16W600kMidnightBlueColorInterSemiBold.copyWith(
+                    Text(
+                      record.isManual == true ? 'Manual' : 'QR Code',
+                      style: kSize16W600kMidnightBlueColorInterSemiBold.copyWith(
                         fontSize: getFont(18),
-                        color: AppColors.kBlackColor
-
+                        color: AppColors.kBlackColor,
+                      ),
                     ),
-                  ),
-
-
-                ],
+                  ],
+                ),
               ),
-              Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    'attendanceDetail14'.tr,
-                    style: kSize17W400KCharcoalBlackColorInterRegular.copyWith(
-                      fontSize: getFont(14),
-                      color: AppColors.kCoolGreyColor,
-
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'attendanceDetail14'.tr,
+                      style: kSize17W400KCharcoalBlackColorInterRegular.copyWith(
+                        fontSize: getFont(14),
+                        color: AppColors.kCoolGreyColor,
+                      ),
                     ),
-                  ),
-                  Text(
-                    record.status ?? '--',
-                    style:kSize16W600kMidnightBlueColorInterSemiBold.copyWith(
+                    Text(
+                      record.status?.isNotEmpty == true
+                          ? '${record.status![0].toUpperCase()}${record.status!.substring(1)}'
+                          : '--',
+                      style: kSize16W600kMidnightBlueColorInterSemiBold.copyWith(
                         fontSize: getFont(18),
-                        color: AppColors.kBlackColor
-
+                        color: AppColors.kBlackColor,
+                      ),
                     ),
-                  ),
 
-
-                ],
-              )
+                  ],
+                ),
+              ),
             ],
           ),
 
