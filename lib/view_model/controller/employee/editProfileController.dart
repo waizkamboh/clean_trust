@@ -2,14 +2,14 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../../../data/repository/employee/get_employee_by_id_repository.dart';
+import '../../../../data/repository/employee/get_employee_repository.dart';
 import '../../../../data/repository/employee/update_employee_repository.dart';
 import '../../../../util/custom_snackbar.dart';
 import '../../../helper/internet_check.dart';
 import '../../user_preference/user_preference.dart';
 
 class EditProfileController extends GetxController {
-  final GetEmployeeByIdRepository _getRepo = GetEmployeeByIdRepository();
+  final GetEmployeeRepository _getRepo = GetEmployeeRepository();
   final UpdateEmployeeRepository _updateRepo = UpdateEmployeeRepository();
   final UserPreference _userPreference = UserPreference();
 
@@ -75,9 +75,8 @@ class EditProfileController extends GetxController {
       isLoading.value = true;
 
       final token = await _userPreference.getToken();
-      final employeeId = await _userPreference.getUserId();
 
-      if (token == null || employeeId == null) return;
+      if (token == null ) return;
 
       final headers = {
         'Content-Type': 'application/json',
@@ -85,9 +84,9 @@ class EditProfileController extends GetxController {
       };
 
       final response =
-      await _getRepo.getEmployeeByIdApi(headers, employeeId);
+      await _getRepo.getEmployeeByIdApi(headers, );
 
-      final emp = response.data?.employee;
+      final emp = response.data?.user;
       if (emp == null) return;
 
       // Update State

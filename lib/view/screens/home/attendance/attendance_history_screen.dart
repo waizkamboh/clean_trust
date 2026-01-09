@@ -59,6 +59,20 @@ class _AttendanceHistoryScreenState extends State<AttendanceHistoryScreen> {
 
                   SizedBox(height: getHeight(20),),
 
+                  Padding(
+                    padding:  EdgeInsets.symmetric(horizontal: getWidth(20)),
+                    child: Align(
+                      alignment: Alignment.centerLeft,
+                      child: Text(
+                        'attendanceHistory13'.tr,
+                        style: kSize14W500kForestGreenColorInterMedium.copyWith(
+                          fontSize: getFont(19),
+                          color: AppColors.kMidnightBlueColor,
+                        ),
+                      ),
+                    ),
+                  ),
+
                   Obx(() {
                     if (controller.isLoading.value) {
                       return Padding(
@@ -87,6 +101,7 @@ class _AttendanceHistoryScreenState extends State<AttendanceHistoryScreen> {
                     }
 
 
+
                     return Column(
                       children: controller.groupedByDate.entries.map((entry) {
                         final date = entry.key;
@@ -95,19 +110,7 @@ class _AttendanceHistoryScreenState extends State<AttendanceHistoryScreen> {
                         return Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Padding(
-                              padding:  EdgeInsets.symmetric(horizontal: getWidth(20)),
-                              child: Align(
-                                alignment: Alignment.centerLeft,
-                                child: Text(
-                                  'attendanceHistory13'.tr,
-                                  style: kSize14W500kForestGreenColorInterMedium.copyWith(
-                                    fontSize: getFont(19),
-                                    color: AppColors.kMidnightBlueColor,
-                                  ),
-                                ),
-                              ),
-                            ),
+
                             Padding(
                               padding:  EdgeInsets.symmetric(horizontal: getWidth(20), vertical: getHeight(5)),
                               child: Text(
@@ -136,18 +139,18 @@ class _AttendanceHistoryScreenState extends State<AttendanceHistoryScreen> {
             ),
           ),
 
-          // SizedBox(height: getHeight(50),),
-          //
-          // RoundButton(
-          //   onPress: (){},
-          //   radius: BorderRadius.circular(12),
-          //   title: 'attendanceHistory23'.tr,
-          //   textStyle: kSize16W600KBlackColorOutfitSemiBold.copyWith(color: AppColors.kWhiteColor,),
-          //   buttonColor: AppColors.kSkyBlueColor,
-          //   width: getWidth(343),
-          //   height: getHeight(64),
-          //
-          // ),
+          SizedBox(height: getHeight(50),),
+
+          RoundButton(
+            onPress: (){},
+            radius: BorderRadius.circular(12),
+            title: 'attendanceHistory23'.tr,
+            textStyle: kSize16W600KBlackColorOutfitSemiBold.copyWith(color: AppColors.kWhiteColor,),
+            buttonColor: AppColors.kSkyBlueColor,
+            width: getWidth(343),
+            height: getHeight(64),
+
+          ),
 
 
         ],
@@ -363,6 +366,7 @@ class _AttendanceHistoryScreenState extends State<AttendanceHistoryScreen> {
                           contentPadding: EdgeInsets.symmetric(horizontal: getWidth(12)),
                           borderRadius: 8,
                           readOnly: true,
+                          onTap: controller.pickDateRange,
                           hintText: controller.fromDate.value == null
                               ? 'attendanceHistory4'.tr
                               : DateFormat('yyyy-MM-dd')
@@ -377,6 +381,7 @@ class _AttendanceHistoryScreenState extends State<AttendanceHistoryScreen> {
                           contentPadding: EdgeInsets.symmetric(horizontal: getWidth(12)),
                           borderRadius: 8,
                           readOnly: true,
+                          onTap: controller.pickDateRange,
                           hintText: controller.toDate.value == null
                               ? 'attendanceHistory5'.tr
                               : DateFormat('yyyy-MM-dd')
@@ -405,6 +410,7 @@ class _AttendanceHistoryScreenState extends State<AttendanceHistoryScreen> {
                   ),
                 ),
                 SizedBox(height: getHeight(5),),
+                Obx(()=>
                 CustomDropdownField(
                   width: getWidth(309),
                   contentPadding: EdgeInsets.symmetric(horizontal: getWidth(12)),
@@ -412,14 +418,17 @@ class _AttendanceHistoryScreenState extends State<AttendanceHistoryScreen> {
                   hintText: 'attendanceHistory7'.tr,
                   onChanged: (value) {
                     controller.selectedStatus.value =
-                        value.toString().toLowerCase();
+                        value.toString();
                   },
+                  value: controller.selectedStatus.value.isEmpty
+                      ? null
+                      : controller.selectedStatus.value,
                   hintTextStyle: kSize17W400KCharcoalBlackColorInterRegular.copyWith(fontSize: getFont(14),color: AppColors.kBlackColor),
                   borderSideColor: AppColors.kLightCoolGreyColor,
                   borderRadius: 8,
                   dropdownFieldColor: AppColors.kWhiteColor,
                   suffixIcon: Image.asset(AppImages.dropDownIcon),
-                ),
+                ),),
                 SizedBox(height: getHeight(20),),
                 Row(
                   //mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -443,7 +452,7 @@ class _AttendanceHistoryScreenState extends State<AttendanceHistoryScreen> {
           
                     RoundButton(
                       onPress: (){
-                        controller.resetFilter();
+                        controller.clearFields();
                       },
                       radius: BorderRadius.circular(8),
                       title: 'attendanceHistory9'.tr,
@@ -493,7 +502,7 @@ class _AttendanceHistoryScreenState extends State<AttendanceHistoryScreen> {
                 ),
                 Obx(()=>
                     Text(
-                      controller.filteredTotalHours.value,
+                      controller.apiTotalHours.value,
                       style: kSize24W700kMidnightBlueColorInterBold.copyWith(
                         fontSize: getFont(31.66),
                         color: AppColors.kRoyalBlue,

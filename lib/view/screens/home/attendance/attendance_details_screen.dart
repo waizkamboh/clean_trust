@@ -11,7 +11,7 @@ import '../../../../util/text_style.dart';
 import '../../../../view_model/controller/home/attendance/get_attendance_history_controller.dart';
 
 class AttendanceDetailsScreen extends StatelessWidget {
-  final Records record;
+  final AttendanceRecords record;
   final GetAttendanceHistoryController controller = Get.find();
 
   AttendanceDetailsScreen({super.key, required this.record});

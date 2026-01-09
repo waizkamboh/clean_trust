@@ -46,114 +46,139 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 physics: const BouncingScrollPhysics(),
                 child: Column(
                   children: [
-                    AuthCard(
-                      child: Padding(
-                        padding: EdgeInsets.symmetric(
-                          horizontal: getWidth(24),
-                          vertical: getHeight(24),
+                    Container(
+                      padding: EdgeInsetsGeometry.symmetric( horizontal: getWidth(24),
+                        vertical: getHeight(24),),
+                      width: getWidth(327),
+                      decoration: BoxDecoration(
+                        color: AppColors.kWhiteColor,
+                        borderRadius: BorderRadius.all(Radius.circular(16)),
+                        border: Border.all(
+                          color: AppColors.kLightCoolGreyColor,
+                          width: 1,
                         ),
-                        child: Obx(() {
-                          if (controller.isLoading.value) {
-                            return SizedBox(
-                              height: getHeight(200), // Adjust as needed
-                              child:  Center(
-                                child: SpinKitSpinningLines(color: AppColors.kSkyBlueColor),
-                              ),
-                            );
-                          }
+                        boxShadow: [
+                          BoxShadow(
+                            color: AppColors.kBlackColor.withOpacity(0.10),
+                            offset: const Offset(0, 10),
+                            blurRadius: 15,
+                            spreadRadius: 0,
+                          ),
 
-                          return Column(
-                            children: [
-                              Stack(
-                                clipBehavior: Clip.none,
-                                children: [
-                                  SizedBox(height: getHeight(10),),
-                                  Container(
-                                    width: getWidth(120),
-                                    height: getHeight(120),
+                          BoxShadow(
+                            color: AppColors.kBlackColor.withOpacity(0.10),
+                            offset: const Offset(0, 4),
+                            blurRadius: 6,
+                            spreadRadius: 0,
+                          ),
+                        ],
+                      ),
+                      child: Obx(() {
+                        if (controller.isLoading.value) {
+                          return SizedBox(
+                            height: getHeight(200), // Adjust as needed
+                            child:  Center(
+                              child: SpinKitSpinningLines(color: AppColors.kSkyBlueColor),
+                            ),
+                          );
+                        }
+
+                        return Column(
+                          children: [
+                            Stack(
+                              clipBehavior: Clip.none,
+                              children: [
+                                SizedBox(height: getHeight(10),),
+                                Container(
+                                  width: getWidth(120),
+                                  height: getHeight(120),
+                                  decoration: BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    image: controller.profilePicture.value.isNotEmpty
+                                        ? DecorationImage(
+                                      image: NetworkImage(controller.profilePicture.value),
+                                      fit: BoxFit.cover,
+                                    )
+                                        : null,
+                                    //color: Colors.white,
+                                    border: Border.all(
+                                      color: AppColors.kWhiteColor,
+                                      width: 6,
+                                    ),
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color: AppColors.kLightCoolGreyColor.withOpacity(0.20),
+                                        offset: const Offset(0, 10),
+                                        blurRadius: 15,
+                                        spreadRadius: 0,
+                                      ),
+                                      BoxShadow(
+                                        color: AppColors.kLightCoolGreyColor.withOpacity(0.20),
+                                        offset: const Offset(0, 4),
+                                        blurRadius: 6,
+                                        spreadRadius: 0,
+
+                                      ),
+                                    ],
+                                  ),
+
+
+                                ),
+
+                                // Camera Button
+                                Positioned(
+                                  bottom: 2,
+                                  right: 10,
+                                  child: Container(
+                                    width: getWidth(32),
+                                    height: getHeight(32),
                                     decoration: BoxDecoration(
                                       shape: BoxShape.circle,
+                                      color: AppColors.kSkyBlueColor,
+                                    ),
+                                    child: const Icon(
+                                      Icons.camera_alt,
+                                      size: 14,
                                       color: AppColors.kWhiteColor,
-                                      border: Border.all(
-                                        color: AppColors.kLightCoolGreyColor,
-                                        width: 4,
-                                      ),
-                                      image: controller.profilePicture.value.isNotEmpty
-                                          ? DecorationImage(
-                                        image: NetworkImage(
-                                          controller.profilePicture.value,
-                                        ),
-                                        fit: BoxFit.cover,
-                                      )
-                                          : null,
-                                      boxShadow: [
-                                        BoxShadow(
-                                          color: AppColors.kBlackColor.withOpacity(0.10),
-                                          offset: const Offset(0, 10),
-                                          blurRadius: 15,
-                                        ),
-                                        BoxShadow(
-                                          color: AppColors.kBlackColor.withOpacity(0.10),
-                                          offset: const Offset(0, 4),
-                                          blurRadius: 6,
-                                        ),
-                                      ],
                                     ),
                                   ),
-                                  // Camera Button
-                                  Positioned(
-                                    bottom: 2,
-                                    right: 10,
-                                    child: Container(
-                                      width: getWidth(32),
-                                      height: getHeight(32),
-                                      decoration: BoxDecoration(
-                                        shape: BoxShape.circle,
-                                        color: AppColors.kSkyBlueColor,
-                                      ),
-                                      child: const Icon(
-                                        Icons.camera_alt,
-                                        size: 14,
-                                        color: AppColors.kWhiteColor,
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              SizedBox(height: getHeight(20)),
-
-                              // Name & Email
-                              Text(
-                                controller.fullName.value,
-                                style: kSize24W700kMidnightBlueColorInterBold
-                                    .copyWith(color: AppColors.kMidnightBlueColor, fontSize: getFont(20)),
-                              ),
-                              Text(
-                                controller.position.value,
-                                style: kSize17W400KCharcoalBlackColorInterRegular.copyWith(
-                                  fontSize: getFont(14),
-                                  color: AppColors.kCoolGreyColor,
                                 ),
-                              ),
-                              SizedBox(height: getHeight(20)),
+                              ],
+                            ),
+                            SizedBox(height: getHeight(20)),
 
-                              // Profile Info Tiles
-                              profileInfoTile(
-                                iconPath: AppImages.profileScreenIcon1,
-                                title: 'profileScreen4'.tr,
-                                subtitle: controller.email.value,
+                            // Name & Email
+                            Text(
+                              controller.fullName.value,
+                              style: kSize24W700kMidnightBlueColorInterBold
+                                  .copyWith(color: AppColors.kMidnightBlueColor, fontSize: getFont(20)),
+                            ),
+                            Text(
+                              controller.position.value,
+                              style: kSize17W400KCharcoalBlackColorInterRegular.copyWith(
+                                fontSize: getFont(14),
+                                color: AppColors.kCoolGreyColor,
                               ),
-                              SizedBox(height: getHeight(10)),
-                              profileInfoTile(
-                                iconPath: AppImages.profileScreenIcon2,
-                                title: 'profileScreen6'.tr,
-                                subtitle: controller.phoneNumber.value,
-                              ),
-                            ],
-                          );
-                        }),
-                      ),
+                            ),
+                            SizedBox(height: getHeight(20)),
+
+                            // Profile Info Tiles
+                            profileInfoTile(
+                              iconPath: AppImages.profileScreenIcon1,
+                              title: 'profileScreen4'.tr,
+                              subtitle: controller.email.value,
+                            ),
+                            SizedBox(height: getHeight(10)),
+                            profileInfoTile(
+                              iconPath: AppImages.profileScreenIcon2,
+                              title: 'profileScreen6'.tr,
+                              subtitle: controller.phoneNumber.value,
+                            ),
+                          ],
+                        );
+                      }),
                     ),
+
 
                     SizedBox(height: getHeight(40)),
 

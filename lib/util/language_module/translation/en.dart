@@ -94,7 +94,7 @@ Map<String, String> en = {
   'attendanceHistory16': 'Check In: ',
   'attendanceHistory17': 'Approved',
   'attendanceHistory18': 'Check Out: ',
-  'attendanceHistory19': 'No attendance found, Please check your internet connection',
+  'attendanceHistory19': 'No attendance found.',
   'attendanceHistory20': 'Total Hours: ',
   'attendanceHistory21': '8h 30m',
   'attendanceHistory22': 'Tuesday, Jan 16',

@@ -43,28 +43,34 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                   Stack(
                     clipBehavior: Clip.none,
                     children: [
-                      Obx(()=>
-                          Container(
-                            width: getWidth(140),
-                            height: getHeight(140),
+                      Container(
+                        width: getWidth(140),
+                        height: getHeight(140),
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: Colors.transparent,
+                          border: Border.all(
+                            color: AppColors.kLightCoolGreyColor,
+                            width: 4.86,
+                          ),
+                        ),
+                        child: Padding(
+                          // Padding to simulate "Inside stroke"
+                          padding: const EdgeInsets.all(3),
+                          child: Obx(() => Container(
                             decoration: BoxDecoration(
                               shape: BoxShape.circle,
-                              color: Colors.transparent,
-                              border: Border.all(
-                                color: AppColors.kLightCoolGreyColor,
-                                width: 4,
-                              ),
                               image: controller.profilePicture.value.isNotEmpty
                                   ? DecorationImage(
-                                image: NetworkImage(
-                                  controller.profilePicture.value,
-                                ),
+                                image: NetworkImage(controller.profilePicture.value),
                                 fit: BoxFit.cover,
                               )
-                                  : null,
-
+                                  : null
                             ),
-                          ),),
+                          )),
+                        ),
+                      ),
+
                       Positioned(
                         bottom: 2,
                         right: 10,

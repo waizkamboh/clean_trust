@@ -23,8 +23,10 @@ class GetAttendanceHistoryController extends GetxController {
   RxBool hasMoreData = true.obs;
 
 
-  RxList<Records> attendanceList = <Records>[].obs;
+  RxList<AttendanceRecords> attendanceList = <AttendanceRecords>[].obs;
 
+  RxString apiTotalHours = '0h 0m'.obs;
+  RxBool isFilterLoading = false.obs;
 
 
 
@@ -57,6 +59,59 @@ class GetAttendanceHistoryController extends GetxController {
     }
   }
 
+  Future<void> applyFilter() async {
+    if (fromDate.value == null || toDate.value == null) {
+      showCustomSnackBar("Please select date range");
+      return;
+    }
+
+    try {
+      isFilterLoading.value = true;
+
+      final token = await _userPreference.getToken();
+      if (token == null || token.isEmpty) return;
+
+      final headers = {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $token',
+      };
+
+      final startDate =
+      DateFormat('yyyy-MM-dd').format(fromDate.value!);
+      final endDate =
+      DateFormat('yyyy-MM-dd').format(toDate.value!);
+
+      final response = await _repo.getFilteredAttendanceApi(
+        headers: headers,
+        startDate: startDate,
+        endDate: endDate,
+      );
+
+      // ✅ LIST UPDATE
+      attendanceList.value =
+          response.data?.records
+              ?.map((e) => AttendanceRecords.fromJson(e.toJson()))
+              .toList() ?? [];
+
+
+      // ✅ TOTAL HOURS FROM BACKEND
+      final breakdown = response.data?.totalHoursBreakdown;
+      if (breakdown != null) {
+        apiTotalHours.value =
+        '${breakdown.hours}h ${breakdown.minutes}m';
+      }
+
+      // ✅ DATE RANGE TEXT
+      filteredDateRangeText.value =
+      'Hours worked between ${DateFormat('dd MMM').format(fromDate.value!)} - '
+          '${DateFormat('dd MMM yyyy').format(toDate.value!)}';
+
+    } catch (e) {
+      showCustomSnackBar("Failed to apply filter");
+    } finally {
+      isFilterLoading.value = false;
+    }
+  }
 
 
   String formatShortDate(String? date) {
@@ -112,8 +167,8 @@ class GetAttendanceHistoryController extends GetxController {
 
     return '${h}h ${m}m';
   }
-  Map<String, List<Records>> get groupedByDate {
-    final Map<String, List<Records>> map = {};
+  Map<String, List<AttendanceRecords>> get groupedByDate {
+    final Map<String, List<AttendanceRecords>> map = {};
 
     for (final record in attendanceList) {
       final dateKey = record.date ?? '';
@@ -161,7 +216,7 @@ class GetAttendanceHistoryController extends GetxController {
   Rx<DateTime?> fromDate = Rx<DateTime?>(null);
   Rx<DateTime?> toDate = Rx<DateTime?>(null);
 
-  RxString selectedStatus = 'all'.obs; // all | pending | approved
+  RxString selectedStatus = ''.obs; // all | pending | approved
 
   RxString filteredTotalHours = '0h 0m'.obs;
   RxString filteredDateRangeText = ''.obs;
@@ -195,25 +250,7 @@ class GetAttendanceHistoryController extends GetxController {
   }
 
 
-  void applyFilter() {
-    if (fromDate.value == null || toDate.value == null) return;
 
-    final filtered = attendanceList.where((record) {
-      final recordDate = DateTime.parse(record.date!);
-
-      final isInRange =
-          recordDate.isAfter(fromDate.value!.subtract(Duration(days: 1))) &&
-              recordDate.isBefore(toDate.value!.add(Duration(days: 1)));
-
-      final statusMatch = selectedStatus.value == 'all'
-          ? true
-          : record.status == selectedStatus.value;
-
-      return isInRange && statusMatch;
-    }).toList();
-
-    _calculateFilteredHours(filtered);
-  }
 
   void _calculateFilteredHours(List records) {
     int totalMinutes = 0;
@@ -270,16 +307,15 @@ class GetAttendanceHistoryController extends GetxController {
     return '${h}h ${m}m';
   }
 
-  void resetFilter() {
+  void clearFields() {
     fromDate.value = null;
     toDate.value = null;
-    selectedStatus.value = 'all';
-
-    filteredTotalHours.value = '0h 0m';
+    apiTotalHours.value = '0h 0m';
+    selectedStatus.value = '';
     filteredDateRangeText.value = '';
-
-    attendanceList.refresh();
+    fetchAttendanceHistory();
   }
+
 
 
 }

@@ -48,7 +48,7 @@ GetAttendanceHistoryModel copyWith({  bool? success,
 
 class Data {
   Data({
-      List<Records>? records, 
+      List<AttendanceRecords>? records,
       Pagination? pagination,}){
     _records = records;
     _pagination = pagination;
@@ -58,19 +58,19 @@ class Data {
     if (json['records'] != null) {
       _records = [];
       json['records'].forEach((v) {
-        _records?.add(Records.fromJson(v));
+        _records?.add(AttendanceRecords.fromJson(v));
       });
     }
     _pagination = json['pagination'] != null ? Pagination.fromJson(json['pagination']) : null;
   }
-  List<Records>? _records;
+  List<AttendanceRecords>? _records;
   Pagination? _pagination;
-Data copyWith({  List<Records>? records,
+Data copyWith({  List<AttendanceRecords>? records,
   Pagination? pagination,
 }) => Data(  records: records ?? _records,
   pagination: pagination ?? _pagination,
 );
-  List<Records>? get records => _records;
+  List<AttendanceRecords>? get records => _records;
   Pagination? get pagination => _pagination;
 
   Map<String, dynamic> toJson() {
@@ -164,8 +164,8 @@ Pagination copyWith({  num? total,
 /// workplace : {"id":6,"name":"Sales Office - Miami","address":"654 Commerce Way, Miami, FL 33101"}
 /// qrCode : {"id":6,"company_name":"TechCorp Solutions","department":"Operations"}
 
-class Records {
-  Records({
+class AttendanceRecords {
+  AttendanceRecords({
       num? id, 
       num? userId, 
       num? workplaceId, 
@@ -218,7 +218,7 @@ class Records {
     _qrCode = qrCode;
 }
 
-  Records.fromJson(dynamic json) {
+  AttendanceRecords.fromJson(dynamic json) {
     _id = json['id'];
     _userId = json['user_id'];
     _workplaceId = json['workplace_id'];
@@ -270,7 +270,7 @@ class Records {
   String? _updatedAt;
   Workplace? _workplace;
   QrCode? _qrCode;
-Records copyWith({  num? id,
+AttendanceRecords copyWith({  num? id,
   num? userId,
   num? workplaceId,
   num? qrCodeId,
@@ -295,7 +295,7 @@ Records copyWith({  num? id,
   String? updatedAt,
   Workplace? workplace,
   QrCode? qrCode,
-}) => Records(  id: id ?? _id,
+}) => AttendanceRecords(  id: id ?? _id,
   userId: userId ?? _userId,
   workplaceId: workplaceId ?? _workplaceId,
   qrCodeId: qrCodeId ?? _qrCodeId,

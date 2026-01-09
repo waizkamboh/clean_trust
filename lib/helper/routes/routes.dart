@@ -131,31 +131,31 @@ class AppRoutes{
     GetPage(
       name: RouteName.editProfileScreen,
       page: () =>  EditProfileScreen(),
-      // transition: Transition.rightToLeftWithFade,
+       transition: Transition.rightToLeftWithFade,
       //transitionDuration: const Duration(milliseconds: 250)
     ),
 GetPage(
       name: RouteName.appSettingScreen,
       page: () =>  AppSettingScreen(),
-      // transition: Transition.rightToLeftWithFade,
+      transition: Transition.rightToLeftWithFade,
       //transitionDuration: const Duration(milliseconds: 250)
     ),
 
 GetPage(
       name: RouteName.changePasswordScreen,
       page: () =>  ChangePasswordScreen(),
-      // transition: Transition.rightToLeftWithFade,
+      transition: Transition.rightToLeftWithFade,
       //transitionDuration: const Duration(milliseconds: 250)
     ),
     GetPage(
       name: RouteName.languageScreen,
       page: () => const LanguageScreen(),
-      // transition: Transition.rightToLeftWithFade,
+      transition: Transition.rightToLeftWithFade,
       //transitionDuration: const Duration(milliseconds: 250)
     ),GetPage(
       name: RouteName.helpSupportScreen,
       page: () => const HelpSupportScreen(),
-      // transition: Transition.rightToLeftWithFade,
+      transition: Transition.rightToLeftWithFade,
       //transitionDuration: const Duration(milliseconds: 250)
     ),
 

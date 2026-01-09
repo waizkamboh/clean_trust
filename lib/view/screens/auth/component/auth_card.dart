@@ -8,6 +8,7 @@ class AuthCard extends StatelessWidget {
   final Widget child;
   final double size;
 
+
   const AuthCard({super.key, required this.child, this.size = 0});
 
   @override
