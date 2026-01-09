@@ -6,6 +6,7 @@ import 'package:url_launcher/url_launcher.dart';
 
 import '../../../../data/model/home/attendance/GetAttendanceHistoryModel.dart';
 import '../../../../data/repository/home/attendance/get_attendance_history_repository.dart';
+import '../../../../helper/internet_check.dart';
 import '../../../../util/app_colors.dart';
 import '../../../../util/custom_snackbar.dart';
 import '../../../user_preference/user_preference.dart';
@@ -16,11 +17,30 @@ class GetAttendanceHistoryController extends GetxController {
   GetAttendanceHistoryRepository();
 
   final UserPreference _userPreference = UserPreference();
+  @override
+  void onInit() {
+    super.onInit();
+    _loadData();
+  }
+  Future<void> _loadData() async {
+    final online = await isOnline();
+
+    if (!online) {
+      debugPrint('OFFLINE → API not called');
+      return;
+    }
+
+    fetchAttendanceHistory(reset: true);
+
+  }
 
   RxBool isLoading = false.obs;
   int _apiCounter = 0;
   RxBool isPaginationLoading = false.obs;
   RxBool hasMoreData = true.obs;
+  int currentPage = 1;
+  int totalPages = 1;
+
 
 
   RxList<AttendanceRecords> attendanceList = <AttendanceRecords>[].obs;
@@ -28,11 +48,22 @@ class GetAttendanceHistoryController extends GetxController {
   RxString apiTotalHours = '0h 0m'.obs;
   RxBool isFilterLoading = false.obs;
 
+  void loadMore() {
+    if (!hasMoreData.value || isPaginationLoading.value) return;
+    fetchAttendanceHistory();
+  }
 
 
-  Future<void> fetchAttendanceHistory() async {
+  Future<void> fetchAttendanceHistory({bool reset = false}) async {
     try {
-      _startLoading();
+      if (reset) {
+        currentPage = 1;
+        hasMoreData.value = true;
+        attendanceList.clear();
+        _startLoading();
+      } else {
+        isPaginationLoading.value = true;
+      }
 
       final token = await _userPreference.getToken();
       if (token == null || token.isEmpty) return;
@@ -42,20 +73,30 @@ class GetAttendanceHistoryController extends GetxController {
         'Authorization': 'Bearer $token',
       };
 
-      final response =
-      await _repo.getAttendanceHistoryApi(headers);
+      final response = await _repo.getAttendanceHistoryApi(
+        headers: headers,
+        page: currentPage,
+      );
 
-      attendanceList.value =
-          response.data?.records ?? [];
+      final newRecords = response.data?.records ?? [];
 
-    } catch (e, s) {
-      if (kDebugMode) {
-        print(e);
-        print(s);
+      // 🔥 Append data
+      attendanceList.addAll(newRecords);
+
+      // 🔥 Pagination info
+      totalPages = response.data?.pagination?.pages?.toInt() ?? 1;
+
+      if (currentPage >= totalPages || newRecords.isEmpty) {
+        hasMoreData.value = false;
       }
+
+      currentPage++;
+
+    } catch (e) {
       showCustomSnackBar("Failed to load attendance history");
     } finally {
       _stopLoading();
+      isPaginationLoading.value = false;
     }
   }
 
@@ -178,22 +219,6 @@ class GetAttendanceHistoryController extends GetxController {
   }
 
 
-  Future<void> openLocation(String? lat, String? lng) async {
-    if (lat == null || lng == null) return;
-
-    final googleMapsUri = Uri.parse(
-      'geo:$lat,$lng?q=$lat,$lng',
-    );
-
-    try {
-      await launchUrl(
-        googleMapsUri,
-        mode: LaunchMode.externalApplication,
-      );
-    } catch (e) {
-      showCustomSnackBar("Google Maps not available");
-    }
-  }
 
 
 
@@ -218,7 +243,6 @@ class GetAttendanceHistoryController extends GetxController {
   RxString filteredTotalHours = '0h 0m'.obs;
   RxString filteredDateRangeText = ''.obs;
 
-  /// ---------------- PICK DATE RANGE ----------------
   Future<void> pickDateRange() async {
     DateTimeRange? range = await showDateRangePicker(
       context: Get.context!,
@@ -248,33 +272,6 @@ class GetAttendanceHistoryController extends GetxController {
 
 
 
-
-  void _calculateFilteredHours(List records) {
-    int totalMinutes = 0;
-
-    for (var r in records) {
-      if (r.checkInTime != null && r.checkOutTime != null) {
-        final inParts = r.checkInTime.split(':');
-        final outParts = r.checkOutTime.split(':');
-
-        final inMinutes =
-            int.parse(inParts[0]) * 60 + int.parse(inParts[1]);
-        final outMinutes =
-            int.parse(outParts[0]) * 60 + int.parse(outParts[1]);
-
-        totalMinutes += (outMinutes - inMinutes);
-      }
-    }
-
-    final h = totalMinutes ~/ 60;
-    final m = totalMinutes % 60;
-
-    filteredTotalHours.value = '${h}h ${m}m';
-
-    filteredDateRangeText.value =
-    'Hours worked between ${DateFormat('dd MMM').format(fromDate.value!)} – '
-        '${DateFormat('dd MMM yyyy').format(toDate.value!)}';
-  }
   int _calculateTotalMinutes(String? checkIn, String? checkOut) {
     if (checkIn == null || checkOut == null) return 0;
 

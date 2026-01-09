@@ -14,32 +14,11 @@ import '../../../base/input_text_field.dart';
 import '../../../base/round_button.dart';
 import 'attendance_details_screen.dart';
 
-class AttendanceHistoryScreen extends StatefulWidget {
-  const AttendanceHistoryScreen({super.key});
+class AttendanceHistoryScreen extends StatelessWidget {
+   AttendanceHistoryScreen({super.key});
 
-  @override
-  State<AttendanceHistoryScreen> createState() => _AttendanceHistoryScreenState();
-}
-
-class _AttendanceHistoryScreenState extends State<AttendanceHistoryScreen> {
   GetAttendanceHistoryController controller = Get.find<GetAttendanceHistoryController>();
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    _loadData();
-  }
-  Future<void> _loadData() async {
-    final online = await isOnline();
 
-    if (!online) {
-      debugPrint('OFFLINE → API not called');
-      return;
-    }
-
-    controller.fetchAttendanceHistory();
-
-  }
   @override
   Widget build(BuildContext context) {
     SizeConfig().init(context);
@@ -133,18 +112,25 @@ class _AttendanceHistoryScreenState extends State<AttendanceHistoryScreen> {
                     );
                   }),
                   SizedBox(height: getHeight(50),),
+                Obx(() {
+                  if (!controller.hasMoreData.value) {
+                    return const SizedBox(); // hide button
+                  }
 
-                  RoundButton(
-                    onPress: (){},
+                  return RoundButton(
+                    loading: controller.isPaginationLoading.value,
+                    onPress: controller.loadMore,
                     radius: BorderRadius.circular(12),
                     title: 'attendanceHistory23'.tr,
-                    textStyle: kSize14W500kForestGreenColorInterMedium.copyWith(color: AppColors.kWhiteColor,),
+                    textStyle: kSize14W500kForestGreenColorInterMedium
+                        .copyWith(color: AppColors.kWhiteColor),
                     buttonColor: AppColors.kSkyBlueColor,
                     width: getWidth(343),
                     height: getHeight(46),
+                  );
+                }),
 
-                  ),
-                  SizedBox(height: getHeight(50),),
+                SizedBox(height: getHeight(50),),
 
                 ],
               ),
@@ -188,13 +174,13 @@ class _AttendanceHistoryScreenState extends State<AttendanceHistoryScreen> {
                 blurRadius: 2.11,
                 spreadRadius: 0
               ),
-        
+
             ],
           ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-        
+
               Text(
                 record.workplace?.address ?? '--',
                 style: kSize14W500kForestGreenColorInterMedium.copyWith(
@@ -202,13 +188,13 @@ class _AttendanceHistoryScreenState extends State<AttendanceHistoryScreen> {
                   color: AppColors.kMidnightBlueColor,
                 ),
               ),
-        
+
               SizedBox(height: getHeight(5)),
-        
+
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-        
+
                   Row(
                     children: [
                       Image.asset(
@@ -242,7 +228,7 @@ class _AttendanceHistoryScreenState extends State<AttendanceHistoryScreen> {
                       ),
                     ],
                   ),
-        
+
                   Row(
                     children: [
                       Image.asset(
@@ -278,9 +264,9 @@ class _AttendanceHistoryScreenState extends State<AttendanceHistoryScreen> {
                   ),
                 ],
               ),
-        
+
               SizedBox(height: getHeight(5)),
-        
+
               RichText(
                 text: TextSpan(
                   children: [
@@ -330,7 +316,7 @@ class _AttendanceHistoryScreenState extends State<AttendanceHistoryScreen> {
                   blurRadius: 15,
                   spreadRadius: 0,
                 ),
-          
+
                 BoxShadow(
                   color: AppColors.kBlackColor.withOpacity(0.10),
                   offset: const Offset(0, 4),
@@ -341,13 +327,13 @@ class _AttendanceHistoryScreenState extends State<AttendanceHistoryScreen> {
             ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
-          
+
               children: [
                 Text(
                   'attendanceHistory2'.tr,
                   style: kSize14W500kForestGreenColorInterMedium.copyWith(
                     color: AppColors.kDarkSlateGray,
-          
+
                   ),
                 ),
                 Text(
@@ -355,7 +341,7 @@ class _AttendanceHistoryScreenState extends State<AttendanceHistoryScreen> {
                   style: kSize14W500kForestGreenColorInterMedium.copyWith(
                     fontSize: getFont(12),
                     color: AppColors.kSlateGray,
-          
+
                   ),
                 ),
                 SizedBox(height: getHeight(5),),
@@ -391,15 +377,15 @@ class _AttendanceHistoryScreenState extends State<AttendanceHistoryScreen> {
                           borderSideColor: AppColors.kLightCoolGreyColor,
                           textFormFieldColor: AppColors.kWhiteColor,
                           hintTextStyle: kSize17W400KCharcoalBlackColorInterRegular.copyWith(fontSize: getFont(14),color: AppColors.kBlackColor),
-          
+
                         ),),
                     GestureDetector(
                       onTap: controller.pickDateRange,
                       child: Icon(Icons.calendar_today_outlined,
                           color: AppColors.kBlackColor, size: 20),
                     )
-          
-          
+
+
                   ],
                 ),
                 SizedBox(height: getHeight(10),),
@@ -408,7 +394,7 @@ class _AttendanceHistoryScreenState extends State<AttendanceHistoryScreen> {
                   style: kSize14W500kForestGreenColorInterMedium.copyWith(
                     fontSize: getFont(12),
                     color: AppColors.kSlateGray,
-          
+
                   ),
                 ),
                 SizedBox(height: getHeight(5),),
@@ -443,15 +429,15 @@ class _AttendanceHistoryScreenState extends State<AttendanceHistoryScreen> {
                       title: 'attendanceHistory8'.tr,
                       textStyle: kSize14W500kForestGreenColorInterMedium.copyWith(
                         color: AppColors.kWhiteColor,
-          
+
                       ),
                       buttonColor: AppColors.kSkyBlueColor,
                       width: getWidth(230.95),
                       height: getHeight(38),
-          
+
                     ),
                     SizedBox(width: getWidth(10),),
-          
+
                     RoundButton(
                       onPress: (){
                         controller.clearFields();
@@ -460,19 +446,19 @@ class _AttendanceHistoryScreenState extends State<AttendanceHistoryScreen> {
                       title: 'attendanceHistory9'.tr,
                       textStyle: kSize14W500kForestGreenColorInterMedium.copyWith(
                         color: AppColors.kSlateGray,
-          
+
                       ),
                       buttonColor: AppColors.kBlackColor.withOpacity(0),
                       borderColor: AppColors.kLightCoolGreyColor,
                       width: getWidth(70.05),
                       height: getHeight(38),
-          
+
                     ),
-          
+
                   ],
                 )
-          
-          
+
+
               ],
             ),
           ),

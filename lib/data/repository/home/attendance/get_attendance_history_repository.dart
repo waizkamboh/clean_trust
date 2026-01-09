@@ -7,10 +7,15 @@ class GetAttendanceHistoryRepository {
   final _api = NetworkApiServices();
 
   // NORMAL HISTORY
-  Future<GetAttendanceHistoryModel> getAttendanceHistoryApi(
-      Map<String, String>? headers) async {
-    final response =
-    await _api.getApi(AppUrl.getAttendanceHistoryApi, headers: headers);
+  Future<GetAttendanceHistoryModel> getAttendanceHistoryApi({
+    required Map<String, String> headers,
+    int page = 1,
+    int limit = 20,
+  }) async {
+    final url =
+        '${AppUrl.getAttendanceHistoryApi}?page=$page&limit=$limit';
+
+    final response = await _api.getApi(url, headers: headers);
 
     return GetAttendanceHistoryModel.fromJson(response);
   }
