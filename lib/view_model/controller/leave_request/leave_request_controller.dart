@@ -35,7 +35,6 @@ class LeaveRequestController extends GetxController {
           'jpeg',
           'png',
         ],
-        allowMultiple: true,
       );
 
       if (result != null) {

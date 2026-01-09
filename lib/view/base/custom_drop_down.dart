@@ -1,8 +1,8 @@
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
 
+import '../../util/app_colors.dart';
 import '../../util/size_config.dart';
-
 
 class CustomDropdownField extends StatelessWidget {
   final double? height;
@@ -13,6 +13,7 @@ class CustomDropdownField extends StatelessWidget {
   final Color dropdownFieldColor, borderSideColor;
   final Color? menuPropsColor;
   final String? hintText;
+  final String? searchHintText;
   final EdgeInsetsGeometry? contentPadding;
   final double? borderRadius;
   final Function(String?)? onChanged;
@@ -24,8 +25,11 @@ class CustomDropdownField extends StatelessWidget {
   final Widget? helperWidget;
   final Widget? suffixIcon;
 
-  /// ✅ NEW optional selected value
+  /// Optional selected value
   final String? value;
+
+  /// ✅ NEW: Enable / Disable Search
+  final bool enableSearch;
 
   const CustomDropdownField({
     super.key,
@@ -48,12 +52,14 @@ class CustomDropdownField extends StatelessWidget {
     this.labelTextStyle,
     this.helperWidget,
     this.suffixIcon,
-    this.value, // optional selected value
+    this.value,
+    this.enableSearch = false, this.searchHintText,
   });
 
   @override
   Widget build(BuildContext context) {
     SizeConfig().init(context);
+
     return Stack(
       alignment: Alignment.centerRight,
       children: [
@@ -62,32 +68,84 @@ class CustomDropdownField extends StatelessWidget {
           height: height,
           child: DropdownSearch<String>(
             items: items,
+            selectedItem: value,
             onChanged: onChanged,
             validator: validator,
-            selectedItem: value, // ✅ BIND VALUE HERE
+            enabled: enable,
+
             dropdownButtonProps: const DropdownButtonProps(
               isVisible: false,
             ),
-            clearButtonProps: const ClearButtonProps(isVisible: false),
+            clearButtonProps: const ClearButtonProps(
+              isVisible: false,
+            ),
+
             dropdownBuilder: (context, selectedItem) {
               return Padding(
-                padding: EdgeInsets.only(right: suffixIcon != null ? 40 : 0),
+                padding: EdgeInsets.only(
+                  right: suffixIcon != null ? 40 : 0,
+                ),
                 child: Text(
                   selectedItem ?? hintText!,
                   style: hintTextStyle,
+                  overflow: TextOverflow.ellipsis,
                 ),
               );
             },
-            popupProps: PopupProps.menu(
-              showSelectedItems: false,
+
+            popupProps: enableSearch
+                ? PopupProps.menu(
+              showSearchBox: true,
+
+              searchDelay: Duration.zero,
+
               fit: FlexFit.loose,
               menuProps: MenuProps(
-                backgroundColor: menuPropsColor ?? Colors.white,
+                backgroundColor: menuPropsColor ?? AppColors.kWhiteColor,
+              ),
+
+              searchFieldProps: TextFieldProps(
+                cursorColor: AppColors.kBlackColor.withOpacity(0.50),
+                decoration: InputDecoration(
+                  hintText: searchHintText,
+                  hintStyle: hintTextStyle,
+                  filled: true,
+                  fillColor: dropdownFieldColor,
+                  contentPadding:
+                  EdgeInsets.symmetric(horizontal: getWidth(12)),
+                  enabledBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(borderRadius ?? 8),
+                    borderSide: BorderSide(
+                      color: borderSideColor,
+                      width: 1,
+                    ),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(borderRadius ?? 8),
+                    borderSide: BorderSide(
+                      color: borderSideColor,
+                      width: 1,
+                    ),
+                  ),
+                ),
+              ),
+
+              listViewProps: const ListViewProps(
+                physics: BouncingScrollPhysics(),
+              ),
+            )
+                : PopupProps.menu(
+              showSearchBox: false,
+              fit: FlexFit.loose,
+              menuProps: MenuProps(
+                backgroundColor: menuPropsColor ?? AppColors.kWhiteColor,
               ),
               listViewProps: const ListViewProps(
                 physics: BouncingScrollPhysics(),
               ),
             ),
+
+
             dropdownDecoratorProps: DropDownDecoratorProps(
               dropdownSearchDecoration: InputDecoration(
                 labelText: labelText,
@@ -123,6 +181,7 @@ class CustomDropdownField extends StatelessWidget {
             ),
           ),
         ),
+
         if (suffixIcon != null)
           Positioned(
             right: getWidth(15),

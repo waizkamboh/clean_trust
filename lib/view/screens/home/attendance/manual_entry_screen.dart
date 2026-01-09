@@ -106,11 +106,13 @@ class ManualEntryScreen extends StatelessWidget {
                     CustomDropdownField(
                       width: getWidth(343),
                       height: getHeight(56),
+                      enableSearch: true,
                       contentPadding:
                       EdgeInsets.symmetric(horizontal: getWidth(20)),
                       //value: workplaceController.selectedWorkplaceId.value,
 
                       hintText: 'manualEntry6'.tr,
+                      searchHintText: 'manualEntry18'.tr,
                       hintTextStyle: kSize17W400KCharcoalBlackColorInterRegular.copyWith(fontSize: getFont(18), color: AppColors.kBlackColor),
 
                       borderSideColor: AppColors.kLightCoolGray,

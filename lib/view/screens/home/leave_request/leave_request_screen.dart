@@ -426,7 +426,6 @@ class LeaveRequestScreen extends StatelessWidget {
              Expanded(
                child: Text(
                  fileName,
-                 overflow: TextOverflow.ellipsis,
                  style: kSize14W500kForestGreenColorInterMedium.copyWith(
                    color: AppColors.kDarkSlateGray,
                  ),

@@ -139,9 +139,9 @@ Map<String, String> en = {
   'manualEntry3': 'Fill in the details below to request a manual attendance entry',
   'manualEntry4': 'Date',
   'manualEntry5': 'mm/dd/yyyy',
-  'manualEntry6': 'Select Workplace',
-  'manualEntry7': 'Choose Workplace',
-  'manualEntry8': 'Employee MUST select an workplace (cannot submit without it)',
+  'manualEntry6': 'Select Object',
+  'manualEntry7': 'Choose Object',
+  'manualEntry8': 'Employee MUST select an Object (cannot submit without it)',
   'manualEntry9': 'Clock In Time',
   'manualEntry10': '--:-- --',
   'manualEntry11': 'Clock Out Time',
@@ -151,6 +151,8 @@ Map<String, String> en = {
   'manualEntry15': 'Minimum 20 characters',
   'manualEntry16': 'Submit Entry',
   'manualEntry17': 'Submit Other Entry',
+  'manualEntry18': 'Search object',
+
 
   'leaveRequest1': 'Leave Request',
   'leaveRequest2': 'Request Time Off',
