@@ -10,7 +10,8 @@ import '../../../../util/app_images.dart';
 import '../../../../util/text_style.dart';
 import '../../../../view_model/controller/home/attendance/get_attendance_history_controller.dart';
 import 'package:clean_trust/util/app_util.dart';
-
+import 'package:flutter_map/flutter_map.dart';
+import 'package:latlong2/latlong.dart';
 class AttendanceDetailsScreen extends StatelessWidget {
   final AttendanceRecords record;
   final GetAttendanceHistoryController controller = Get.find();
@@ -24,150 +25,42 @@ class AttendanceDetailsScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: AppColors.kWhiteColor,
       body: Column(
-          children: [
-            TopHeader(title: 'attendanceDetail1'.tr),
-            Expanded(
-              child: SingleChildScrollView(
-                physics: BouncingScrollPhysics(),
-                child: Padding(
-                  padding:  EdgeInsets.symmetric(horizontal: getWidth(30)),
-                  child: Column(
-                    children: [
-                      SizedBox(height: getHeight(30),),
-                      _attendanceDateCard(),
-                      SizedBox(height: getHeight(15),),
-                      _attendanceDetailCard(),
-                      // SizedBox(height: getHeight(10),),
-                      // Container(
-                      //   padding: EdgeInsetsGeometry.symmetric(horizontal: getWidth(17), vertical: getHeight(17)),
-                      //   width: getWidth(343),
-                      //   decoration: BoxDecoration(
-                      //     color: AppColors.kWhiteColor,
-                      //     borderRadius: BorderRadius.all(Radius.circular(12)),
-                      //     boxShadow: [
-                      //       BoxShadow(
-                      //         color: AppColors.kBlackColor.withOpacity(0.11),
-                      //         offset: const Offset(0, 1),
-                      //         blurRadius: 4,
-                      //         spreadRadius: 0,
-                      //       ),
-                      //
-                      //
-                      //     ],
-                      //   ),
-                      //   child: Column(
-                      //     crossAxisAlignment: CrossAxisAlignment.start,
-                      //
-                      //     children: [
-                      //       Text(
-                      //         'attendanceDetail21'.tr,
-                      //         style: kSize16W400KWhiteColorOutfitRegular.copyWith(
-                      //           fontSize: getFont(14),
-                      //           color: AppColors.kCoolGreyColor,
-                      //
-                      //         ),
-                      //       ),
-                      //       SizedBox(height: getHeight(5),),
-                      //       Container(
-                      //         padding: EdgeInsetsGeometry.symmetric(horizontal: getWidth(13), vertical: getHeight(13)),
-                      //         width: getWidth(309),
-                      //         decoration: BoxDecoration(
-                      //           color: AppColors.kTealGreenLight.withOpacity(0.1),
-                      //           borderRadius: BorderRadius.all(Radius.circular(8)),
-                      //           border: Border.all(color: AppColors.kLightCoolGreyColor, width: 1),
-                      //         ),
-                      //         child: Column(
-                      //           children: [
-                      //             Row(
-                      //               children: [
-                      //                 Image.asset(AppImages.attendanceDetailIcon2),
-                      //                 SizedBox(width: getWidth(5),),
-                      //                 Text(
-                      //                   'attendanceDetail22'.tr,
-                      //                   style: kSize16W600KBlackColorOutfitSemiBold.copyWith(
-                      //                     fontSize: getFont(14),
-                      //
-                      //                   ),
-                      //                 ),
-                      //
-                      //
-                      //
-                      //               ],
-                      //
-                      //
-                      //             ),
-                      //             Text(
-                      //               'attendanceDetail23'.tr,
-                      //               style: kSize16W400KWhiteColorOutfitRegular.copyWith(
-                      //                 fontSize: getFont(14),
-                      //                 color: AppColors.kBlackColor,
-                      //
-                      //
-                      //               ),
-                      //               textAlign: TextAlign.center,
-                      //             ),
-                      //
-                      //
-                      //
-                      //
-                      //
-                      //
-                      //           ],
-                      //         ),
-                      //       ),
-                      //       SizedBox(height: getHeight(10),),
-                      //       Row(
-                      //         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      //         children: [
-                      //           Row(
-                      //             children: [
-                      //               Image.asset(AppImages.attendanceDetailIcon3),
-                      //               SizedBox(width: getWidth(5),),
-                      //               Text(
-                      //                 'attendanceDetail24'.tr,
-                      //                 style: kSize16W400KWhiteColorOutfitRegular.copyWith(
-                      //                   fontSize: getFont(12),
-                      //                   color: AppColors.kSlateGray,
-                      //
-                      //                 ),
-                      //               ),
-                      //
-                      //             ],
-                      //           ),
-                      //           Text(
-                      //             'attendanceDetail24'.tr,
-                      //             style: kSize16W400KWhiteColorOutfitRegular.copyWith(
-                      //               fontSize: getFont(12),
-                      //               color: AppColors.kSlateGray,
-                      //
-                      //             ),
-                      //           ),
-                      //         ],
-                      //       )
-                      //
-                      //
-                      //
-                      //     ],
-                      //   ),
-                      // ),
-                      SizedBox(height: getHeight(20),),
-                      _workSummaryCard(),
-                      SizedBox(height: getHeight(50),),
-                  
+        children: [
+          TopHeader(title: 'attendanceDetail1'.tr),
+          Expanded(
+            child: SingleChildScrollView(
+              physics: BouncingScrollPhysics(),
+              child: Padding(
+                padding:  EdgeInsets.symmetric(horizontal: getWidth(30)),
+                child: Column(
+                  children: [
+                    SizedBox(height: getHeight(30),),
+                    _attendanceDateCard(),
+                    SizedBox(height: getHeight(20),),
+                    _attendanceDetailCard(),
+                    SizedBox(height: getHeight(20),),
+                    if (record.notes != null && record.notes!.trim().isNotEmpty) ...[
+                      _mangerNotesCard(),
+                      SizedBox(height: getHeight(20)),
                     ],
-                  
-                  
-                  ),
+
+                    _workSummaryCard(),
+                    SizedBox(height: getHeight(50),),
+
+                  ],
+
+
                 ),
               ),
             ),
+          ),
 
 
 
 
-          ],
-        ),
-      
+        ],
+      ),
+
     );
   }
   Widget _attendanceDateCard(){
@@ -455,15 +348,12 @@ class AttendanceDetailsScreen extends StatelessWidget {
           ),
 
 
-          SizedBox(height: getHeight(10),),
-          GestureDetector(
-              onTap: () => controller.openLocation(record.latitude, record.longitude),
-              child: Image.asset(AppImages.attendanceDetailImg1)),
+          SizedBox(height: getHeight(20),),
+          _locationMap(title: 'attendanceDetail22'),
+
           SizedBox(height: getHeight(10),),
 
-          GestureDetector(
-              onTap: () => controller.openLocation(record.latitude, record.longitude),
-              child: Image.asset(AppImages.attendanceDetailImg1)),
+          _locationMap(title: 'attendanceDetail23'),
 
 
 
@@ -475,7 +365,149 @@ class AttendanceDetailsScreen extends StatelessWidget {
     );
 
   }
+  Widget _mangerNotesCard(){
+    return  Container(
+      padding: EdgeInsetsGeometry.symmetric(horizontal: getWidth(17), vertical: getHeight(17)),
+      width: getWidth(343),
+      decoration: BoxDecoration(
+        color: AppColors.kWhiteColor,
+        borderRadius: BorderRadius.all(Radius.circular(12)),
+        boxShadow: [
+          BoxShadow(
+            color: AppColors.kBlackColor.withOpacity(0.11),
+            offset: const Offset(0, 1),
+            blurRadius: 4,
+            spreadRadius: 0,
+          ),
 
+
+        ],
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+
+        children: [
+          Text(
+            'attendanceDetail21'.tr,
+            style: kSize17W400KCharcoalBlackColorInterRegular.copyWith(
+              fontSize: getFont(14),
+              color: AppColors.kCoolGreyColor,
+
+            ),
+          ),
+          SizedBox(height: getHeight(5),),
+
+          Container(
+            padding: EdgeInsetsGeometry.symmetric(horizontal: getWidth(13), vertical: getHeight(13)),
+            width: getWidth(309),
+            decoration: BoxDecoration(
+              color: AppColors.kTealGreenLight.withOpacity(0.05),
+              borderRadius: BorderRadius.all(Radius.circular(8)),
+              border: Border.all(color: AppColors.kLightCoolGreyColor, width: 1),
+            ),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Baseline(
+                  baseline: getHeight(18),
+                  baselineType: TextBaseline.alphabetic,
+                  child: Image.asset(
+                    AppImages.attendanceDetailIcon2,
+                    height: getHeight(14),
+                    width: getWidth(14),
+                  ),
+                ),
+                SizedBox(width: getWidth(5),),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        'attendanceDetail24'.tr,
+                        style: kSize14W500kForestGreenColorInterMedium.copyWith(
+                          color: AppColors.kBlackColor,
+
+                        ),
+                      ),
+
+                      Text(
+                        record.notes?? '--',
+                        style: kSize17W400KCharcoalBlackColorInterRegular.copyWith(
+                          fontSize: getFont(14),
+                          color: AppColors.kBlackColor,
+
+
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+
+
+
+
+              ],
+
+
+            ),
+          ),
+          SizedBox(height: getHeight(5),),
+          Divider(
+            color: AppColors.kLightGrayBackground,
+            thickness: 1,
+          ),
+          SizedBox(height: getHeight(5),),
+
+          Row(
+            children: [
+              Text(
+                'attendanceDetail18'.tr,
+                style: kSize17W400KCharcoalBlackColorInterRegular.copyWith(
+                  fontSize: getFont(12),
+                  color: AppColors.kSlateGray,
+
+                ),
+              ),
+              Text(
+                record.approver?.fullName?? '--',
+                style: kSize17W400KCharcoalBlackColorInterRegular.copyWith(
+                  fontSize: getFont(12),
+                  color: AppColors.kCoolGreyColor,
+
+                ),
+              ),
+            ],
+          ),
+          SizedBox(height: getHeight(2),),
+
+          Row(
+            children: [
+              Text(
+                'attendanceDetail20'.tr,
+                style: kSize17W400KCharcoalBlackColorInterRegular.copyWith(
+                  fontSize: getFont(12),
+                  color: AppColors.kSlateGray,
+
+                ),
+              ),
+              Text(
+                record.approver?.email?? '--',
+                style: kSize17W400KCharcoalBlackColorInterRegular.copyWith(
+                  fontSize: getFont(12),
+                  color: AppColors.kCoolGreyColor,
+
+                ),
+              ),
+            ],
+          )
+
+
+
+        ],
+      ),
+    );
+
+  }
   Widget _workSummaryCard(){
     return Container(
       padding: EdgeInsetsGeometry.symmetric(horizontal: getWidth(17), vertical: getHeight(17)),
@@ -595,4 +627,99 @@ class AttendanceDetailsScreen extends StatelessWidget {
     );
 
   }
+
+Widget _locationMap({required String title}){
+    return Container(
+      padding: EdgeInsetsGeometry.symmetric(horizontal: getWidth(12), vertical: getHeight(12)),
+      width: getWidth(309),
+      decoration: BoxDecoration(
+        color: AppColors.kColor1,
+        borderRadius: BorderRadius.all(Radius.circular(8)),
+        border: Border.all(
+            color: AppColors.kLightCoolGreyColor,
+            width: 1
+        ),
+
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              Text(
+                title.tr,
+                style: kSize14W500kForestGreenColorInterMedium.copyWith(
+                  color: AppColors.kDarkSlateGray,
+                ),
+              ),
+              SizedBox(width: getWidth(5),),
+              Image.asset(AppImages.checkLocationIcon),
+
+
+            ],
+          ),
+          SizedBox(height: getHeight(5),),
+
+          attendanceMap(
+            lat: double.parse(record.latitude ?? '0.0'),
+            lng: double.parse(record.longitude ?? '0.0'),
+          ),
+          SizedBox(height: getHeight(5),),
+
+          Text(
+            record.workplace?.address ?? '--',
+            style: kSize17W400KCharcoalBlackColorInterRegular.copyWith(
+              fontSize: getFont(12),
+              color: AppColors.kSlateGray,
+            ),
+          ),
+
+        ],
+      ),
+    );
+
+}
+  Widget attendanceMap({
+    required double lat,
+    required double lng,
+  }) {
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(12),
+      child: SizedBox(
+        height: getHeight(96),
+        width: getWidth(285),
+        child: FlutterMap(
+          options: MapOptions(
+            initialCenter: LatLng(lat, lng),
+            initialZoom: 16,
+            interactionOptions: const InteractionOptions(
+              flags: InteractiveFlag.none,
+            ),
+          ),
+          children: [
+            TileLayer(
+              urlTemplate:
+              'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
+              userAgentPackageName: 'com.your.app',
+            ),
+            MarkerLayer(
+              markers: [
+                Marker(
+                  point: LatLng(lat, lng),
+                  width: 40,
+                  height: 40,
+                  child: const Icon(
+                    Icons.location_pin,
+                    color: Colors.red,
+                    size: 40,
+                  ),
+                ),
+              ],
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
 }
