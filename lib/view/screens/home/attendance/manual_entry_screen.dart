@@ -103,29 +103,38 @@ class ManualEntryScreen extends StatelessWidget {
                     ),
                     SizedBox(height: getHeight(5),),
 
-                    CustomDropdownField(
-                      width: getWidth(343),
-                      height: getHeight(56),
-                      enableSearch: true,
-                      contentPadding:
-                      EdgeInsets.symmetric(horizontal: getWidth(20)),
-                      //value: workplaceController.selectedWorkplaceId.value,
+              Obx(() {
+                return CustomDropdownField(
+                  width: getWidth(343),
+                  height: getHeight(56),
+                  enableSearch: true,
+                  contentPadding: EdgeInsets.symmetric(horizontal: getWidth(20)),
+                  hintText: 'manualEntry6'.tr,
+                  searchHintText: 'manualEntry18'.tr,
+                  hintTextStyle: kSize17W400KCharcoalBlackColorInterRegular.copyWith(
+                    fontSize: getFont(18),
+                    color: AppColors.kBlackColor,
+                  ),
+                  borderSideColor: AppColors.kLightCoolGray,
+                  borderRadius: 12,
+                  items: workplaceController.workplaceNames,
+                  dropdownFieldColor: AppColors.kColor1,
+                  suffixIcon: Image.asset(
+                    AppImages.dropDownIcon,
+                    color: AppColors.kBlackColor.withOpacity(0.66),
+                  ),
+                  value: workplaceController.selectedWorkplaceName.value.isEmpty
+                      ? null
+                      : workplaceController.selectedWorkplaceName.value,
 
-                      hintText: 'manualEntry6'.tr,
-                      searchHintText: 'manualEntry18'.tr,
-                      hintTextStyle: kSize17W400KCharcoalBlackColorInterRegular.copyWith(fontSize: getFont(18), color: AppColors.kBlackColor),
+                  onChanged: (value) {
+                    workplaceController.onWorkplaceSelected(value);
+                  },
+                );
+              }),
 
-                      borderSideColor: AppColors.kLightCoolGray,
-                      borderRadius: 12,
-                      items: workplaceController.workplaceNames,
-                      dropdownFieldColor: AppColors.kColor1,
-                      suffixIcon: Image.asset(AppImages.dropDownIcon,  color: AppColors.kBlackColor.withOpacity(0.66)),
-                      onChanged: (value) {
-                        workplaceController.onWorkplaceSelected(value);
-                      },
-                    ),
 
-                    Text(
+              Text(
                       'manualEntry8'.tr,
                       style: kSize17W400KCharcoalBlackColorInterRegular.copyWith(fontSize: getFont(10), color: AppColors.kBlackColor),
                     ),
@@ -251,7 +260,9 @@ class ManualEntryScreen extends StatelessWidget {
 
                         },
                         radius: BorderRadius.circular(12),
-                        title: 'manualEntry16'.tr,
+                        title: controller.isSubmitted.value
+                            ? 'manualEntry17'.tr
+                            : 'manualEntry16'.tr,
                         textStyle: kSize16W600kMidnightBlueColorInterSemiBold.copyWith(color: AppColors.kWhiteColor,),
                         buttonColor: AppColors.kSkyBlueColor,
                         width: getWidth(343),
@@ -261,20 +272,6 @@ class ManualEntryScreen extends StatelessWidget {
 
 
                     }),
-                    SizedBox(height: getHeight(15),),
-                    RoundButton(
-                      onPress: (){
-                        Get.toNamed(RouteName.manualEntryScreen);
-                      },
-                      radius: BorderRadius.circular(12),
-                      title: 'manualEntry17'.tr,
-                      textStyle: kSize16W600kMidnightBlueColorInterSemiBold.copyWith(color: AppColors.kDarkSlateGray,),
-                      borderColor: AppColors.kLightCoolGreyColor,
-                      buttonColor: AppColors.kLightGrayBackground,
-                      width: getWidth(343),
-                      height: getHeight(56),
-
-                    ),
 
                   ],
                 ),

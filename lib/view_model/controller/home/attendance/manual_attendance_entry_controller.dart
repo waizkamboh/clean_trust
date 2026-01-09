@@ -17,7 +17,7 @@ class ManualAttendanceEntryController extends GetxController {
   final GetWorkplacesController workplacesController = Get.find();
 
   RxBool loading = false.obs;
-
+  RxBool isSubmitted = false.obs;
   /// Controllers
   final dateController = TextEditingController().obs;
   final checkInController = TextEditingController().obs;
@@ -152,7 +152,7 @@ class ManualAttendanceEntryController extends GetxController {
       showCustomSnackBar(
         model.message ?? 'Manual entry submitted successfully',
       );
-
+      isSubmitted.value = true;
       clearFields();
 
     } catch (e) {
@@ -174,6 +174,13 @@ class ManualAttendanceEntryController extends GetxController {
     checkInController.value.clear();
     checkOutController.value.clear();
     reasonController.value.clear();
+    workplacesController.selectedWorkplaceName.value = '';
     workplacesController.selectedWorkplaceId.value = 0;
+  }
+
+  @override
+  void onClose() {
+    isSubmitted.value = false;
+    super.onClose();
   }
 }
