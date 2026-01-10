@@ -8,6 +8,7 @@ import 'package:get/get.dart';
 
 import '../../../util/text_style.dart';
 import '../../../view_model/controller/app_setting/get_app_setting_controller.dart';
+import '../../../view_model/controller/notification/get_notification_controller.dart';
 
 class AppSettingScreen extends StatelessWidget {
   AppSettingScreen({super.key});
@@ -49,12 +50,24 @@ class AppSettingScreen extends StatelessWidget {
                           Obx(() => GestureDetector(
                             onTap: controller.isUpdating.value
                                 ? null
-                                : () {
-                              controller.updateAppSetting(
-                                notifications:
-                                !controller
-                                    .allowNotifications.value,
+                                : () async {
+                              final newValue =
+                              !controller.allowNotifications.value;
+
+                              await controller.updateAppSetting(
+                                notifications: newValue,
                               );
+
+                              final notificationController =
+                              Get.find<GetNotificationController>();
+
+                              if (!newValue) {
+                                notificationController.clearNotifications();
+                              } else {
+                                notificationController.fetchNotifications(
+                                  isInitial: true,
+                                );
+                              }
                             },
                             child: appSettingContainer(
                               leadingIcon: AppImages.appSettingIcon,

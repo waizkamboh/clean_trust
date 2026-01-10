@@ -4,11 +4,15 @@ import '../../../../data/model/notification/GetAllNotificationModel.dart';
 import '../../../../data/repository/notification/get_all_notification_repository.dart';
 import '../../../../util/custom_snackbar.dart';
 import '../../user_preference/user_preference.dart';
+import '../app_setting/get_app_setting_controller.dart';
 
 class GetNotificationController extends GetxController {
   final GetAllNotificationRepository _repo =
   GetAllNotificationRepository();
   final UserPreference _userPreference = UserPreference();
+
+  final AppSettingController appSettingController =
+  Get.find<AppSettingController>();
 
   RxBool isLoading = false.obs;
   RxBool isPaginationLoading = false.obs;
@@ -19,13 +23,15 @@ class GetNotificationController extends GetxController {
   int totalPages = 1;
   final int limit = 20;
 
-  // @override
-  // void onInit() {
-  //   super.onInit();
-  //   fetchNotifications(isInitial: true);
-  // }
-
   Future<void> fetchNotifications({bool isInitial = false}) async {
+    if (!appSettingController.allowNotifications.value) {
+      if (isInitial) {
+        notifications.clear();
+        unreadCount.value = 0;
+      }
+      return;
+    }
+
     try {
       if (isInitial) {
         isLoading.value = true;
@@ -54,7 +60,6 @@ class GetNotificationController extends GetxController {
       final data = response.data;
 
       unreadCount.value = data?.unreadCount?.toInt() ?? 0;
-
       totalPages = data?.pagination?.pages?.toInt() ?? 1;
 
       if (data?.notifications != null) {
@@ -75,6 +80,8 @@ class GetNotificationController extends GetxController {
   }
 
   Future<void> refreshNotifications() async {
+    if (!appSettingController.allowNotifications.value) return;
+
     page = 1;
     notifications.clear();
     await fetchNotifications(isInitial: true);
@@ -90,5 +97,9 @@ class GetNotificationController extends GetxController {
     }
   }
 
-
+  void clearNotifications() {
+    notifications.clear();
+    unreadCount.value = 0;
+    page = 1;
+  }
 }

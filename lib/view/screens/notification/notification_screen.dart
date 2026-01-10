@@ -8,6 +8,7 @@ import 'package:get/get.dart';
 import '../../../helper/internet_check.dart';
 import '../../../util/app_images.dart';
 import '../../../util/text_style.dart';
+import '../../../view_model/controller/app_setting/get_app_setting_controller.dart';
 import '../../../view_model/controller/notification/get_unread_count_controller.dart';
 import '../../../view_model/controller/notification/mark_notification_read_controller.dart';
 import '../../../view_model/controller/notification/get_notification_controller.dart';
@@ -56,26 +57,33 @@ class _NotificationScreenState extends State<NotificationScreen> {
           /// 🔹 MAIN UI
           Column(
             children: [
-              TopHeader(
-                title: 'notificationsScreen1'.tr,
-                actions: [
-                  PopupMenuButton<int>(
-                    icon: const Icon(Icons.more_vert, color: Colors.white),
-                    onSelected: (value) {
-                      if (value == 1 &&
-                          !markAllReadController.isLoading.value) {
-                        markAllReadController.markAllAsRead();
-                      }
-                    },
-                    itemBuilder: (context) => const [
-                      PopupMenuItem(
-                        value: 1,
-                        child: Text('Mark all as read'),
-                      ),
-                    ],
-                  ),
-                ],
-              ),
+              Obx(() {
+                final allowNotifications =
+                    Get.find<AppSettingController>().allowNotifications.value;
+
+                return TopHeader(
+                  title: 'notificationsScreen1'.tr,
+                  actions: allowNotifications
+                      ? [
+                    PopupMenuButton<int>(
+                      icon: const Icon(Icons.more_vert, color: Colors.white),
+                      onSelected: (value) {
+                        if (value == 1 &&
+                            !markAllReadController.isLoading.value) {
+                          markAllReadController.markAllAsRead();
+                        }
+                      },
+                      itemBuilder: (context) => const [
+                        PopupMenuItem(
+                          value: 1,
+                          child: Text('Mark all as read'),
+                        ),
+                      ],
+                    ),
+                  ]
+                      : [], // 🔹 notifications OFF → actions hide
+                );
+              }),
 
               SizedBox(height: getHeight(20)),
 
@@ -90,9 +98,25 @@ class _NotificationScreenState extends State<NotificationScreen> {
                     );
                   }
 
+                  if (!Get.find<AppSettingController>().allowNotifications.value) {
+                    return Center(
+                      child: Text(
+                        'Notifications are disabled. You can enable it anytime from settings.',
+                        textAlign: TextAlign.center,
+                        style:
+                        kSize16W400KWhiteColorOutfitRegular
+                            .copyWith(
+                          color: AppColors.kCoolGreyColor,
+                        ),
+                      ),
+                    );
+                  }
+
                   if (controller.notifications.isEmpty) {
                     return RefreshIndicator(
                       onRefresh: controller.refreshNotifications,
+                      color: AppColors.kSkyBlueColor,
+                      backgroundColor: AppColors.kWhiteColor,
                       child: ListView(
                         physics: const AlwaysScrollableScrollPhysics(),
                         children: [
@@ -121,6 +145,8 @@ class _NotificationScreenState extends State<NotificationScreen> {
 
                   return RefreshIndicator(
                     onRefresh: controller.refreshNotifications,
+                    color: AppColors.kSkyBlueColor,
+                    backgroundColor: AppColors.kWhiteColor,
                     child: NotificationListener<ScrollNotification>(
                       onNotification: (scrollInfo) {
                         if (scrollInfo.metrics.pixels ==
