@@ -65,6 +65,7 @@ class AppImages{
   static const String offlineScreenIcon4 = 'assets/icons/offline_screen_icon4.png';
   static const String checkLocationIcon = 'assets/icons/check_location_icon.png';
   static const String locationEnableIcon = 'assets/icons/location_enable_icon.png';
+  static const String appSettingIcon = 'assets/icons/app_setting_icon.png';
 
 
 

@@ -86,6 +86,8 @@ class AppSettingController extends GetxController {
 
   Future<void> fetchAppVersion() async {
     try {
+      isFetching.value = true;
+
       final token = await _userPreference.getToken();
       if (token == null || token.isEmpty) return;
 
@@ -94,7 +96,9 @@ class AppSettingController extends GetxController {
         'Authorization': 'Bearer $token',
       };
 
-      final GetAppVersionModel response = await _repo1.getAppVersionApi(headers);
+      final GetAppVersionModel response =
+      await _repo1.getAppVersionApi(headers);
+
       final versionData = response.data?.appVersion;
       if (versionData == null) return;
 
@@ -102,15 +106,16 @@ class AppSettingController extends GetxController {
       buildNumber.value = versionData.buildNumber ?? '';
       lastUpdated.value = versionData.lastUpdated ?? '';
 
-      // Save in cache
       await _userPreference.saveAppVersion(appVersion.value);
       await _userPreference.saveBuildNumber(buildNumber.value);
       await _userPreference.saveLastUpdated(lastUpdated.value);
-
     } catch (e, s) {
       if (kDebugMode) print(s);
+    } finally {
+      isFetching.value = false;
     }
   }
+
 
   Future<void> updateAppSetting({
     bool? notifications,

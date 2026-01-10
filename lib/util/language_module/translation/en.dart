@@ -239,7 +239,7 @@ Map<String, String> en = {
 
   'EditProfileScreen1': 'Edit Profile',
   'EditProfileScreen2': 'Name',
-  'EditProfileScreen3': 'User name',
+  'EditProfileScreen3': 'User Name',
   'EditProfileScreen4': 'Enter Email',
   'EditProfileScreen5': 'email@gmail,com',
   'EditProfileScreen6': 'Joining Date',
@@ -247,10 +247,11 @@ Map<String, String> en = {
   'EditProfileScreen8': 'Designation',
   'EditProfileScreen9': 'Phone Number',
   'EditProfileScreen10': '+92 3455555555',
-  'EditProfileScreen11': 'Password',
+  'EditProfileScreen11': 'Current Password',
   'EditProfileScreen12': '..........',
   'EditProfileScreen13': 'Save Changes',
   'EditProfileScreen14': 'Read Only',
+  'EditProfileScreen15': 'New Password',
 
 
   'bottomNav1': 'Home',

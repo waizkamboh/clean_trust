@@ -200,6 +200,8 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                               width: getWidth(333),
                               contentPadding: EdgeInsets.symmetric(horizontal: getWidth(20)),
                               keyBoardType: TextInputType.phone,
+                              textInputAction: TextInputAction.next,
+
                               labelTextStyle: kSize17W400KCharcoalBlackColorInterRegular.copyWith(fontSize: getFont(14), color: AppColors.kCharcoalBlackColor),
                               hintTextStyle: kSize17W400KCharcoalBlackColorInterRegular.copyWith(fontSize: getFont(14), color: AppColors.kBlackColor.withOpacity(0.66)),
                               obscureText: false,
@@ -212,13 +214,14 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                         SizedBox(height: getHeight(25),),
                         Obx(()=>
                             InputTextField(
-                              myController: controller.passwordController.value,
+                              myController: controller.currentPasswordController.value,
                               width: getWidth(333),
                               contentPadding: EdgeInsets.symmetric(horizontal: getWidth(20)),
                               keyBoardType: TextInputType.visiblePassword,
                               labelTextStyle: kSize17W400KCharcoalBlackColorInterRegular.copyWith(fontSize: getFont(14), color: AppColors.kCharcoalBlackColor),
                               hintTextStyle: kSize17W400KCharcoalBlackColorInterRegular.copyWith(fontSize: getFont(14), color: AppColors.kBlackColor.withOpacity(0.66)),
                               obscureText: controller.isPasswordHidden.value,
+                              textInputAction: TextInputAction.next,
                               suffixIcon: InkWell(
                                 onTap: () {
                                   controller.isPasswordHidden.toggle();
@@ -235,7 +238,33 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                               borderSideColor: AppColors.kBlackColor.withOpacity(0.37),
                               textFormFieldColor: AppColors.kWhiteColor,
                             ),),
-
+                        SizedBox(height: getHeight(25),),
+                        Obx(()=>
+                            InputTextField(
+                              myController: controller.newPasswordController.value,
+                              width: getWidth(333),
+                              contentPadding: EdgeInsets.symmetric(horizontal: getWidth(20)),
+                              keyBoardType: TextInputType.visiblePassword,
+                              labelTextStyle: kSize17W400KCharcoalBlackColorInterRegular.copyWith(fontSize: getFont(14), color: AppColors.kCharcoalBlackColor),
+                              hintTextStyle: kSize17W400KCharcoalBlackColorInterRegular.copyWith(fontSize: getFont(14), color: AppColors.kBlackColor.withOpacity(0.66)),
+                              obscureText: controller.isPasswordHidden1.value,
+                              textInputAction: TextInputAction.done,
+                              suffixIcon: InkWell(
+                                onTap: () {
+                                  controller.isPasswordHidden1.toggle();
+                                },
+                                child: Icon(
+                                  controller.isPasswordHidden1.value
+                                      ? Icons.remove_red_eye_outlined
+                                      : Icons.remove_red_eye,
+                                ),
+                              ),
+                              hintText: 'EditProfileScreen12'.tr,
+                              labelText: 'EditProfileScreen15'.tr,
+                              borderRadius: 5,
+                              borderSideColor: AppColors.kBlackColor.withOpacity(0.37),
+                              textFormFieldColor: AppColors.kWhiteColor,
+                            ),),
 
 
                       ],

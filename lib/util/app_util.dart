@@ -42,6 +42,9 @@ Future<Position> getCurrentLocation() async {
   Get.toNamed(RouteName.scanQRCodeScreen);
   return position;
 }
+
+
+
 Future<void> datePicker(    {
   required TextEditingController controller,
 }

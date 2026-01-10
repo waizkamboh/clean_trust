@@ -1,3 +1,4 @@
+import 'package:clean_trust/helper/routes/routes_name.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -16,9 +17,12 @@ class EditProfileController extends GetxController {
   // Text Controllers
   final emailController = TextEditingController().obs;
   final phoneController = TextEditingController().obs;
-  final passwordController = TextEditingController().obs;
+  final newPasswordController = TextEditingController().obs;
+  final currentPasswordController = TextEditingController().obs;
+
 
   var isPasswordHidden = true.obs;
+  var isPasswordHidden1 = true.obs;
 
   // Profile Data
   RxString fullName = ''.obs;
@@ -126,34 +130,50 @@ class EditProfileController extends GetxController {
   Future<void> updateProfile() async {
     final emailText = emailController.value.text.trim();
     final phoneText = phoneController.value.text.trim();
-    final passwordText = passwordController.value.text.trim();
+    final newPassword = newPasswordController.value.text.trim();
+    final currentPassword = currentPasswordController.value.text.trim();
 
     final passwordRegex = RegExp(
       r'^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[!@#$%^&*(),.?":{}|<>]).{8,}$',
     );
 
-    // Validation
-    if (!GetUtils.isEmail(emailText)) {
+    // ✅ EMAIL (optional)
+    if (emailText.isNotEmpty && !GetUtils.isEmail(emailText)) {
       showCustomSnackBar('Enter a valid email address');
       return;
     }
 
+    // ✅ PHONE (optional)
     if (phoneText.isNotEmpty && !GetUtils.isPhoneNumber(phoneText)) {
       showCustomSnackBar('Enter a valid phone number');
       return;
     }
 
-    if (passwordText.isNotEmpty &&
-        !passwordRegex.hasMatch(passwordText)) {
-      showCustomSnackBar(
-        'Password must be strong (8+ chars, upper, lower, number & symbol)',
-      );
+    // ✅ PASSWORD CHANGE RULE
+    if (newPassword.isNotEmpty) {
+      if (currentPassword.isEmpty) {
+        showCustomSnackBar('Enter current password to change password');
+        return;
+      }
+
+      if (!passwordRegex.hasMatch(newPassword)) {
+        showCustomSnackBar(
+          'Password must be strong (8+ chars, upper, lower, number & symbol)',
+        );
+        return;
+      }
+    }
+
+    // ❌ NOTHING TO UPDATE
+    if (emailText.isEmpty &&
+        phoneText.isEmpty &&
+        newPassword.isEmpty) {
+      showCustomSnackBar('Please update at least one field');
       return;
     }
-    final online = await isOnline();
 
+    final online = await isOnline();
     if (!online) {
-      debugPrint('OFFLINE → API not called');
       showCustomSnackBar('Please check internet connection');
       return;
     }
@@ -172,9 +192,10 @@ class EditProfileController extends GetxController {
       };
 
       final body = {
-        "email": emailText,
-        "phone_number": phoneText,
-        if (passwordText.isNotEmpty) "password": passwordText,
+        if (emailText.isNotEmpty) "email": emailText,
+        if (phoneText.isNotEmpty) "phone_number": phoneText,
+        if (newPassword.isNotEmpty) "password": newPassword,
+        if (newPassword.isNotEmpty) "current_password": currentPassword,
       };
 
       final response =
@@ -185,14 +206,13 @@ class EditProfileController extends GetxController {
           response.message ?? "Profile updated successfully",
           isError: false,
         );
+        Get.toNamed(RouteName.bottomNavScreen);
 
         emailController.value.clear();
         phoneController.value.clear();
-        passwordController.value.clear();
-
+        newPasswordController.value.clear();
+        currentPasswordController.value.clear();
         await fetchEmployee();
-        isLoading1.value = false;
-
       } else {
         showCustomSnackBar(response.message ?? "Update failed");
       }
@@ -207,7 +227,6 @@ class EditProfileController extends GetxController {
     }
   }
 
-  // ================= UTIL =================
 
   String formatDate(String? date) {
     if (date == null || date.isEmpty) return '';
@@ -219,7 +238,9 @@ class EditProfileController extends GetxController {
   void onClose() {
     emailController.value.dispose();
     phoneController.value.dispose();
-    passwordController.value.dispose();
+    newPasswordController.value.dispose();
+    currentPasswordController.value.dispose();
     super.onClose();
   }
+
 }

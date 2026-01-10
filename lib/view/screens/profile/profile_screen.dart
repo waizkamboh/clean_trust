@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:clean_trust/util/app_images.dart';
 import 'package:clean_trust/view/base/top_header.dart';
 import 'package:clean_trust/view/screens/auth/component/auth_card.dart';
@@ -94,12 +95,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                   height: getHeight(120),
                                   decoration: BoxDecoration(
                                     shape: BoxShape.circle,
-                                    image: controller.profilePicture.value.isNotEmpty
-                                        ? DecorationImage(
-                                      image: NetworkImage(controller.profilePicture.value),
-                                      fit: BoxFit.cover,
-                                    )
-                                        : null,
+
                                     //color: Colors.white,
                                     border: Border.all(
                                       color: AppColors.kWhiteColor,
@@ -107,13 +103,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                     ),
                                     boxShadow: [
                                       BoxShadow(
-                                        color: AppColors.kLightCoolGreyColor.withOpacity(0.20),
+                                        color: AppColors.kLightCoolGreyColor.withOpacity(0.50),
                                         offset: const Offset(0, 10),
                                         blurRadius: 15,
                                         spreadRadius: 0,
                                       ),
                                       BoxShadow(
-                                        color: AppColors.kLightCoolGreyColor.withOpacity(0.20),
+                                        color: AppColors.kLightCoolGreyColor.withOpacity(0.50),
                                         offset: const Offset(0, 4),
                                         blurRadius: 6,
                                         spreadRadius: 0,
@@ -121,7 +117,15 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                       ),
                                     ],
                                   ),
-
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(6), // ring gap
+                                    child:controller.profilePicture.value.isNotEmpty?
+                                    CachedNetworkImage(
+                                      imageUrl: controller.profilePicture.value,
+                                      placeholder: (context, url) => CircularProgressIndicator(color: AppColors.kSkyBlueColor,),
+                                      errorWidget: (context, url, error) => Icon(Icons.error),
+                                    ): null
+                                  ),
 
                                 ),
 

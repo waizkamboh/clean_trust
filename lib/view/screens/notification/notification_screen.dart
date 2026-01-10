@@ -22,29 +22,28 @@ class NotificationScreen extends StatefulWidget {
 }
 
 class _NotificationScreenState extends State<NotificationScreen> {
+  final GetNotificationController controller =
+  Get.find<GetNotificationController>();
+
+  final MarkNotificationReadController markReadController =
+  Get.find<MarkNotificationReadController>();
+
+  final MarkAllNotificationReadController markAllReadController =
+  Get.find<MarkAllNotificationReadController>();
+
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     _loadData();
-
   }
+
   Future<void> _loadData() async {
     final online = await isOnline();
-
-    if (!online) {
-      debugPrint('OFFLINE → API not called');
-      return;
-    }
+    if (!online) return;
 
     controller.fetchNotifications(isInitial: true);
     Get.find<UnreadCountController>().fetchUnreadCount();
-
   }
-   GetNotificationController controller = Get.find<GetNotificationController>();
-
-  MarkNotificationReadController markReadController = Get.find<MarkNotificationReadController>();
-  MarkAllNotificationReadController markAllReadController = Get.find<MarkAllNotificationReadController>();
 
   @override
   Widget build(BuildContext context) {
@@ -52,124 +51,149 @@ class _NotificationScreenState extends State<NotificationScreen> {
 
     return Scaffold(
       backgroundColor: AppColors.kWhiteColor,
-      body: Column(
+      body: Stack(
         children: [
-          TopHeader(
-            title: 'notificationsScreen1'.tr,
-            actions: [
-              PopupMenuButton<int>(
-                icon: const Icon(
-                  Icons.more_vert,
-                  color: Colors.white,
-                ),
-                onSelected: (value) {
-                  if (value == 1) {
-                    markAllReadController.markAllAsRead();
-                  }
-                },
-                itemBuilder: (context) => [
-                  const PopupMenuItem(
-                    value: 1,
-                    child: Text('Mark all as read'),
+          /// 🔹 MAIN UI
+          Column(
+            children: [
+              TopHeader(
+                title: 'notificationsScreen1'.tr,
+                actions: [
+                  PopupMenuButton<int>(
+                    icon: const Icon(Icons.more_vert, color: Colors.white),
+                    onSelected: (value) {
+                      if (value == 1 &&
+                          !markAllReadController.isLoading.value) {
+                        markAllReadController.markAllAsRead();
+                      }
+                    },
+                    itemBuilder: (context) => const [
+                      PopupMenuItem(
+                        value: 1,
+                        child: Text('Mark all as read'),
+                      ),
+                    ],
                   ),
                 ],
+              ),
+
+              SizedBox(height: getHeight(20)),
+
+              /// 🔹 LIST / FETCH LOADER
+              Expanded(
+                child: Obx(() {
+                  if (controller.isLoading.value) {
+                    return const Center(
+                      child: SpinKitSpinningLines(
+                        color: AppColors.kSkyBlueColor,
+                      ),
+                    );
+                  }
+
+                  if (controller.notifications.isEmpty) {
+                    return RefreshIndicator(
+                      onRefresh: controller.refreshNotifications,
+                      child: ListView(
+                        physics: const AlwaysScrollableScrollPhysics(),
+                        children: [
+                          SizedBox(
+                              height:
+                              MediaQuery.of(context).size.height * 0.3),
+                          Padding(
+                            padding: EdgeInsets.symmetric(
+                                horizontal: getWidth(20)),
+                            child: Center(
+                              child: Text(
+                                'No notifications found',
+                                textAlign: TextAlign.center,
+                                style:
+                                kSize16W400KWhiteColorOutfitRegular
+                                    .copyWith(
+                                  color: AppColors.kCoolGreyColor,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    );
+                  }
+
+                  return RefreshIndicator(
+                    onRefresh: controller.refreshNotifications,
+                    child: NotificationListener<ScrollNotification>(
+                      onNotification: (scrollInfo) {
+                        if (scrollInfo.metrics.pixels ==
+                            scrollInfo.metrics.maxScrollExtent &&
+                            !controller.isPaginationLoading.value) {
+                          controller.fetchNotifications();
+                        }
+                        return false;
+                      },
+                      child: ListView.builder(
+                        padding: EdgeInsets.symmetric(
+                            horizontal: getWidth(20)),
+                        itemCount: controller.notifications.length +
+                            (controller.isPaginationLoading.value ? 1 : 0),
+                        itemBuilder: (context, index) {
+                          if (index ==
+                              controller.notifications.length) {
+                            return const Padding(
+                              padding: EdgeInsets.all(16),
+                              child: Center(
+                                  child: CircularProgressIndicator()),
+                            );
+                          }
+
+                          final notification =
+                          controller.notifications[index];
+
+                          return InkWell(
+                            onTap: () async {
+                              if (notification.isRead == false &&
+                                  !markReadController.isLoading.value) {
+                                await markReadController.markAsRead(
+                                  notificationId:
+                                  notification.id!.toInt(),
+                                );
+                              }
+                            },
+                            child: buildNotificationCard(
+                              iconPath: AppImages.appSettingIcon,
+                              title: notification.title ?? '',
+                              message: notification.message ?? '',
+                              time:
+                              formatDate(notification.createdAt),
+                              isUnread:
+                              notification.isRead == false,
+                            ),
+                          );
+                        },
+                      ),
+                    ),
+                  );
+                }),
               ),
             ],
           ),
 
-          SizedBox(height: getHeight(20),),
-          Expanded(
-            child: Obx(() {
-              if (controller.isLoading.value) {
-                return const Center(
-                  child: SpinKitSpinningLines(color: AppColors.kSkyBlueColor),
-                );
-              }
+          /// 🔹 OVERLAY LOADER (SINGLE + MARK ALL)
+          Obx(() {
+            if (!markReadController.isLoading.value &&
+                !markAllReadController.isLoading.value) {
+              return const SizedBox();
+            }
 
-              if (controller.notifications.isEmpty) {
-                return RefreshIndicator(
-                  onRefresh: controller.refreshNotifications,
-                  color: AppColors.kSkyBlueColor,
-                  backgroundColor: AppColors.kWhiteColor,
-                  child: ListView(
-                    physics: const AlwaysScrollableScrollPhysics(),
-                    children: [
-                      SizedBox(height: MediaQuery.of(context).size.height * 0.3),
-                      Padding(
-                        padding: EdgeInsets.symmetric(horizontal: getWidth(20)),
-                        child: Center(
-                          child: Text(
-                            'No notifications found, please check your internet connection',
-                            textAlign: TextAlign.center,
-                            style: kSize16W400KWhiteColorOutfitRegular.copyWith(
-                              color: AppColors.kCoolGreyColor,
-                            ),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                );
-
-              }
-
-              return RefreshIndicator(
-                color: AppColors.kSkyBlueColor,
-                backgroundColor: AppColors.kWhiteColor,
-                onRefresh: controller.refreshNotifications,
-                child: NotificationListener<ScrollNotification>(
-                  onNotification: (scrollInfo) {
-                    if (scrollInfo.metrics.pixels ==
-                        scrollInfo.metrics.maxScrollExtent &&
-                        !controller.isPaginationLoading.value) {
-                      controller.fetchNotifications();
-                    }
-                    return false;
-                  },
-                  child: ListView.builder(
-                    padding:
-                    EdgeInsets.symmetric(horizontal: getWidth(20)),
-                    itemCount: controller.notifications.length +
-                        (controller.isPaginationLoading.value ? 1 : 0),
-                    itemBuilder: (context, index) {
-                      if (index ==
-                          controller.notifications.length) {
-                        return const Padding(
-                          padding: EdgeInsets.all(16),
-                          child: Center(
-                            child: CircularProgressIndicator(),
-                          ),
-                        );
-                      }
-
-                      final notification =
-                      controller.notifications[index];
-
-                      return  InkWell(
-                        onTap: () {
-                          if (notification.isRead == false) {
-                            markReadController.markAsRead(
-                              notificationId: notification.id!.toInt(),
-                            );
-                          }
-
-                          // navigation if needed later
-                        },
-                        child: buildNotificationCard(
-                          iconPath: AppImages.bellIcon,
-                          title: notification.title ?? '',
-                          message: notification.message ?? '',
-                          time: formatDate(notification.createdAt),
-                          isUnread: notification.isRead == false,
-                        ),
-                      );
-
-                    },
-                  ),
+            return Container(
+              color: Colors.black.withOpacity(0.35),
+              child: const Center(
+                child: SpinKitCircle(
+                  color: Colors.white,
+                  size: 55,
                 ),
-              );
-            }),
-          ),
+              ),
+            );
+          }),
         ],
       ),
     );
@@ -184,7 +208,6 @@ class _NotificationScreenState extends State<NotificationScreen> {
     required bool isUnread,
   }) {
     return Container(
-      width: getWidth(362),
       margin: EdgeInsets.only(bottom: getHeight(12)),
       padding: EdgeInsets.symmetric(
         horizontal: getWidth(16),
@@ -192,9 +215,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
       ),
       decoration: BoxDecoration(
         color: AppColors.kWhiteColor,
-        border: Border.all(
-          color: AppColors.kLightCoolGreyColor,
-        ),
+        border: Border.all(color: AppColors.kLightCoolGreyColor),
       ),
       child: Row(
         children: [
@@ -203,13 +224,10 @@ class _NotificationScreenState extends State<NotificationScreen> {
             height: getHeight(40),
             decoration: BoxDecoration(
               color: AppColors.kIceBlueColor,
-              border: Border.all(
-                color: AppColors.kLightCoolGreyColor,
-
-              ),
-              shape: BoxShape.circle
+              shape: BoxShape.circle,
+              border:
+              Border.all(color: AppColors.kLightCoolGreyColor),
             ),
-
             child: Image.asset(
               iconPath,
               color: AppColors.kSkyBlueColor,
@@ -220,31 +238,26 @@ class _NotificationScreenState extends State<NotificationScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  title,
-                  style:
-                  kSize14W500kForestGreenColorInterMedium.copyWith(
-                    fontSize: getFont(14),
-                    color: AppColors.kMidnightBlueColor
-                  ),
-                ),
-                Text(
-                  message,
-                  style:
-                  kSize17W400KCharcoalBlackColorInterRegular.copyWith(
-                    fontSize: getFont(14),
-                    color: AppColors.kCoolGreyColor,
-                  ),
-                ),
-                Text(
-                  time,
-                  style:
-                  kSize17W400KCharcoalBlackColorInterRegular.copyWith(
-                    fontSize: getFont(12),
-                    color:
-                    AppColors.kMediumGrey,
-                  ),
-                ),
+                Text(title,
+                    style:
+                    kSize14W500kForestGreenColorInterMedium
+                        .copyWith(
+                      color: AppColors.kMidnightBlueColor,
+                    )),
+                Text(message,
+                    style:
+                    kSize17W400KCharcoalBlackColorInterRegular
+                        .copyWith(
+                      fontSize: getFont(14),
+                      color: AppColors.kCoolGreyColor,
+                    )),
+                Text(time,
+                    style:
+                    kSize17W400KCharcoalBlackColorInterRegular
+                        .copyWith(
+                      fontSize: getFont(12),
+                      color: AppColors.kMediumGrey,
+                    )),
               ],
             ),
           ),
@@ -262,7 +275,6 @@ class _NotificationScreenState extends State<NotificationScreen> {
     );
   }
 
-  /// 🔹 Date Formatter
   String formatDate(String? date) {
     if (date == null) return '';
     return date.split('T').first;
