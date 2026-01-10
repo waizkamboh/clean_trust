@@ -36,10 +36,8 @@ Future<Position> getCurrentLocation() async {
     throw Exception('Permission denied');
   }
   Position position = await Geolocator.getCurrentPosition(
-    desiredAccuracy: LocationAccuracy.high,
   );
 
-  Get.toNamed(RouteName.scanQRCodeScreen);
   return position;
 }
 

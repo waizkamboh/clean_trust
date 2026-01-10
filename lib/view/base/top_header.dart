@@ -26,7 +26,9 @@ class TopHeader extends StatelessWidget {
       height: getHeight(156),
       decoration: BoxDecoration(
         gradient: LinearGradient(
+
           colors: [
+
             AppColors.kGradientColor5,
             AppColors.kGradientColor6,
           ],

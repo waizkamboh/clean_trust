@@ -15,6 +15,8 @@ import '../../../user_preference/user_preference.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:flutter/widgets.dart';
 
+import '../../app_setting/get_app_setting_controller.dart';
+
 
 class ScanQrCodeController extends GetxController with WidgetsBindingObserver{
   final ScanQrCodeRepository _repo = ScanQrCodeRepository();
@@ -42,7 +44,6 @@ class ScanQrCodeController extends GetxController with WidgetsBindingObserver{
   void onInit() {
     super.onInit();
     WidgetsBinding.instance.addObserver(this);
-    fetchCurrentLocation();
     scannerController = MobileScannerController(
       facing: CameraFacing.back,
       torchEnabled: false,
@@ -54,11 +55,10 @@ class ScanQrCodeController extends GetxController with WidgetsBindingObserver{
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
     if (state == AppLifecycleState.resumed) {
-      debugPrint('APP RESUMED → FETCH LOCATION AGAIN');
+      // 🔥 App wapas aayi hai (Settings se)
       fetchCurrentLocation();
     }
   }
-
 
 
   void openScanner() async {
@@ -92,6 +92,17 @@ class ScanQrCodeController extends GetxController with WidgetsBindingObserver{
 
   Future<void> fetchCurrentLocation() async {
     try {
+      bool serviceEnabled = await Geolocator.isLocationServiceEnabled();
+      if (!serviceEnabled) return;
+
+      LocationPermission permission =
+      await Geolocator.checkPermission();
+
+      if (permission == LocationPermission.denied ||
+          permission == LocationPermission.deniedForever) {
+        return;
+      }
+
       final position = await Geolocator.getCurrentPosition(
         desiredAccuracy: LocationAccuracy.high,
       );
@@ -99,9 +110,8 @@ class ScanQrCodeController extends GetxController with WidgetsBindingObserver{
       latitude.value = position.latitude;
       longitude.value = position.longitude;
 
-      debugPrint('latitude: ${latitude.value}');
-      debugPrint('longitude: ${longitude.value}');
-
+      debugPrint('Latitude: ${latitude.value}');
+      debugPrint('Longitude: ${longitude.value}');
     } catch (e) {
       debugPrint('LOCATION ERROR: $e');
     }
@@ -118,9 +128,24 @@ class ScanQrCodeController extends GetxController with WidgetsBindingObserver{
 
 
       if (!online) {
+        final appSettingController = Get.find<AppSettingController>();
+
+        /// 🔹 Auto Sync OFF
+        if (!appSettingController.autoSync.value) {
+          loading.value = false;
+
+          showCustomSnackBar(
+            'Auto sync is turned off. Please enable it from settings to save attendance offline.',
+          );
+
+          return;
+        }
+
+        /// 🔹 Auto Sync ON → save locally
         final int? userId = await userPreference.getUserId();
 
         if (userId == null) {
+          loading.value = false;
           showCustomSnackBar('User not found');
           return;
         }
@@ -135,12 +160,15 @@ class ScanQrCodeController extends GetxController with WidgetsBindingObserver{
           ),
         );
 
-
         localDb.debugPrintAll();
 
         loading.value = false;
         Get.back();
-        showCustomSnackBar('Attendance saved offline');
+
+        showCustomSnackBar(
+          'No internet. Attendance saved offline and will sync automatically.',
+        );
+
         return;
       }
 
@@ -199,13 +227,15 @@ class ScanQrCodeController extends GetxController with WidgetsBindingObserver{
 
 
 
-
   @override
   void onClose() {
+    WidgetsBinding.instance.removeObserver(this);
     scannerController.stop();
+
     scannerController.dispose();
     super.onClose();
   }
+
 
 }
 

@@ -1,5 +1,7 @@
 import 'package:clean_trust/data/repository/app_setting/get_app_version_repository.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 
 import '../../../data/model/app_setting/GetAppSettingModel.dart';
@@ -10,7 +12,7 @@ import '../../../util/app_images.dart';
 import '../../user_preference/user_preference.dart';
 import '../../../util/custom_snackbar.dart';
 
-class AppSettingController extends GetxController {
+class AppSettingController extends GetxController with WidgetsBindingObserver{
   final UserPreference _userPreference = UserPreference();
   final GetAppSettingRepository _repo = GetAppSettingRepository();
   final GetAppVersionRepository _repo1 = GetAppVersionRepository();
@@ -31,11 +33,73 @@ class AppSettingController extends GetxController {
   @override
   void onInit() {
     super.onInit();
+    WidgetsBinding.instance.addObserver(this);
+    syncLocationStatus();
     _loadFromCache();
     fetchFromApi();
     fetchAppVersion();
 
   }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    if (state == AppLifecycleState.resumed) {
+      syncLocationStatus(); // 🔥 VERY IMPORTANT
+    }
+  }
+
+  Future<void> syncLocationStatus() async {
+    final serviceEnabled = await Geolocator.isLocationServiceEnabled();
+    final permission = await Geolocator.checkPermission();
+
+    allowLocation.value =
+        serviceEnabled &&
+            permission != LocationPermission.denied &&
+            permission != LocationPermission.deniedForever;
+  }
+  Future<void> handleLocationToggle() async {
+    final serviceEnabled = await Geolocator.isLocationServiceEnabled();
+    final permission = await Geolocator.checkPermission();
+
+    // ===============================
+    // 🔴 CASE 1: Location already ON → turn OFF
+    // ===============================
+    if (allowLocation.value == true) {
+      allowLocation.value = false;
+
+      // Backend update
+      await updateAppSetting(location: false);
+
+      // System settings open (user manually OFF kare)
+      await Geolocator.openLocationSettings();
+      return;
+    }
+
+    // ===============================
+    // 🟢 CASE 2: Location OFF → turn ON
+    // ===============================
+    if (!serviceEnabled) {
+      await Geolocator.openLocationSettings();
+      return;
+    }
+
+    if (permission == LocationPermission.denied) {
+      final result = await Geolocator.requestPermission();
+      if (result == LocationPermission.denied) return;
+    }
+
+    if (permission == LocationPermission.deniedForever) {
+      showCustomSnackBar('locationRequiredDialog2'.tr);
+      await Geolocator.openAppSettings();
+      return;
+    }
+
+    // ✅ Permission granted → ON
+    allowLocation.value = true;
+    await updateAppSetting(location: true);
+  }
+
+
 
   Future<void> _loadFromCache() async {
     allowNotifications.value = await _userPreference.getAllowNotifications();

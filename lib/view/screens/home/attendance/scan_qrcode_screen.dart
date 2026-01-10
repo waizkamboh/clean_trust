@@ -340,31 +340,41 @@ class ScanQrcodeScreen extends StatelessWidget {
         children: [
           TopHeader(title: 'scanQrCode1'.tr,
             actions: [
-              IconButton(
-                onPressed: () {
-                  Get.dialog(
-                    Stack(
-                      children: [
-                        // background tap dismiss
-                        GestureDetector(
-                          onTap: () => Get.back(),
-                          child: Container(),
-                        ),
+              Container(
+                width: getWidth(40),
+                height: getHeight(40),
+                decoration: BoxDecoration(
+                  color: AppColors.kSkyBlue.withOpacity(0.57),
+                  shape: BoxShape.circle,
 
-                        Positioned(
-                          top: getHeight(100), // header ke neeche
-                          left: getWidth(20),
-                          right: getWidth(20),
-                          child: locationEnabledialog(),
-                        ),
-                      ],
-                    ),
-                    barrierColor: Colors.transparent,
-                  );
-                },
-                icon: const Icon(Icons.more_vert),
-                color: AppColors.kWhiteColor,
+                ),
+                child:   IconButton(
+                  onPressed: () {
+                    Get.dialog(
+                      Stack(
+                        children: [
+                          // background tap dismiss
+                          GestureDetector(
+                            onTap: () => Get.back(),
+                            child: Container(),
+                          ),
+
+                          Positioned(
+                            top: getHeight(100), // header ke neeche
+                            left: getWidth(20),
+                            right: getWidth(20),
+                            child: locationEnabledialog(),
+                          ),
+                        ],
+                      ),
+                      barrierColor: Colors.transparent,
+                    );
+                  },
+                  icon: const Icon(Icons.more_vert),
+                  color: AppColors.kWhiteColor,
+                ),
               ),
+
 
 
             ],
