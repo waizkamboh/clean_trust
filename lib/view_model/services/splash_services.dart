@@ -15,7 +15,7 @@ class SplashServices {
       print('Saved Token: $token, Onboarding Seen: $seenOnboarding');
     }
 
-    Timer(const Duration(seconds: 3), () {
+    Timer(const Duration(seconds: 5), () {
       if (!seenOnboarding) {
         Get.offAllNamed(RouteName.onboardingScreen1);
       } else if (token == null || token.isEmpty) {

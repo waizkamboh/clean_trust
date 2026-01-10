@@ -36,6 +36,7 @@ class ScanQrCodeController extends GetxController with WidgetsBindingObserver{
   RxDouble longitude = 0.0.obs;
   RxString workplaceName = ''.obs;
   RxString workplaceAddress = ''.obs;
+  RxBool scannerActive = false.obs;
 
 
 
@@ -49,26 +50,34 @@ class ScanQrCodeController extends GetxController with WidgetsBindingObserver{
       torchEnabled: false,
       detectionSpeed: DetectionSpeed.noDuplicates,
     );
+    fetchCurrentLocation();
 
   }
 
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
     if (state == AppLifecycleState.resumed) {
-      // 🔥 App wapas aayi hai (Settings se)
       fetchCurrentLocation();
     }
   }
 
 
+
+
+
   void openScanner() async {
+    if (scannerActive.value) return;
+    if (latitude.value == 0.0 || longitude.value == 0.0) {
+      showCustomSnackBar(
+        'Please enable location and wait for GPS',
+      );
+      return;
+    }
     _scanLock = false;
-    showScanner.value = true;
+    scannerActive.value = true;
 
     await scannerController.start();
   }
-
-
 
   void toggleTorch() {
     scannerController.toggleTorch();
@@ -76,15 +85,16 @@ class ScanQrCodeController extends GetxController with WidgetsBindingObserver{
   }
 
   Future<void> onQrDetected(String qrCode) async {
-    if (_scanLock) return;
+    if (!scannerActive.value || _scanLock) return;
 
     _scanLock = true;
-    await scannerController.stop();
 
-    showScanner.value = false;
+    await scannerController.stop();
+    scannerActive.value = false;
 
     await _markAttendance(qrCode);
   }
+
 
 
 

@@ -8,6 +8,7 @@ import '../../../data/model/app_setting/GetAppSettingModel.dart';
 import '../../../data/model/app_setting/GetAppVersionModel.dart';
 import '../../../data/repository/app_setting/get_app_setting.dart';
 import '../../../data/repository/app_setting/update_app_setting_repository.dart';
+import '../../../helper/internet_check.dart';
 import '../../../util/app_images.dart';
 import '../../user_preference/user_preference.dart';
 import '../../../util/custom_snackbar.dart';
@@ -187,6 +188,13 @@ class AppSettingController extends GetxController with WidgetsBindingObserver{
     bool? sync,
   }) async {
     try {
+      final online = await isOnline();
+
+      if (!online) {
+        debugPrint('OFFLINE → API not called');
+        showCustomSnackBar('Please check internet connection');
+        return;
+      }
       isUpdating.value = true;
 
       final token = await _userPreference.getToken();

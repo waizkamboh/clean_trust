@@ -3,6 +3,7 @@ import 'package:clean_trust/util/size_config.dart';
 import 'package:clean_trust/view/base/top_header.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 //
 // import '../../../helper/routes/routes_name.dart';
@@ -350,25 +351,8 @@ class ScanQrcodeScreen extends StatelessWidget {
                 ),
                 child:   IconButton(
                   onPressed: () {
-                    Get.dialog(
-                      Stack(
-                        children: [
-                          // background tap dismiss
-                          GestureDetector(
-                            onTap: () => Get.back(),
-                            child: Container(),
-                          ),
+                    showLocationDialog();
 
-                          Positioned(
-                            top: getHeight(100), // header ke neeche
-                            left: getWidth(20),
-                            right: getWidth(20),
-                            child: locationEnabledialog(),
-                          ),
-                        ],
-                      ),
-                      barrierColor: Colors.transparent,
-                    );
                   },
                   icon: const Icon(Icons.more_vert),
                   color: AppColors.kWhiteColor,
@@ -378,8 +362,8 @@ class ScanQrcodeScreen extends StatelessWidget {
 
 
             ],
-          
-          
+
+
           ),
 
 
@@ -490,15 +474,13 @@ class ScanQrcodeScreen extends StatelessWidget {
       ),
     );
   }
-Widget locationEnabledialog(){
+  Widget locationEnabledialog(){
     return Container(
       width: getWidth(335),
       padding: EdgeInsets.symmetric(horizontal: getWidth(20), vertical: getHeight(16)),
       decoration: BoxDecoration(
         color: AppColors.kWhiteColor,
-        border: Border.all(
-          color: AppColors.kLightCoolGreyColor,
-        ),
+
         borderRadius: BorderRadius.all(Radius.circular(16)),
         boxShadow: [
           BoxShadow(
@@ -560,33 +542,33 @@ Widget locationEnabledialog(){
           SizedBox(width: getWidth(20),),
 
           TextButton(
-              onPressed: () async{
-                if (Get.isDialogOpen == true) {
-                  Get.back();
+            onPressed: () async{
+              if (Get.isDialogOpen == true) {
+                Get.back();
+              }
+              try {
+                await getCurrentLocation();
+              } catch (e) {
+                if (kDebugMode) {
+                  print(e);
                 }
-                try {
-                  await getCurrentLocation();
-                } catch (e) {
-                  if (kDebugMode) {
-                    print(e);
-                  }
-                }
+              }
 
-              },
-           child: Text(
-            'enableLocation7'.tr,
-            style: kSize16W600kMidnightBlueColorInterSemiBold
-                .copyWith(
-                fontSize: getFont(12),
-                color:
-                AppColors.kBlackColor,
-                decoration: TextDecoration.underline,
-                decorationStyle: TextDecorationStyle.solid,
-                decorationColor: AppColors.kBlackColor
+            },
+            child: Text(
+              'enableLocation7'.tr,
+              style: kSize16W600kMidnightBlueColorInterSemiBold
+                  .copyWith(
+                  fontSize: getFont(12),
+                  color:
+                  AppColors.kBlackColor,
+                  decoration: TextDecoration.underline,
+                  decorationStyle: TextDecorationStyle.solid,
+                  decorationColor: AppColors.kBlackColor
+
+              ),
 
             ),
-
-          ),
 
           ),
 
@@ -594,7 +576,7 @@ Widget locationEnabledialog(){
       ),
     );
 
-}
+  }
   Widget buildInfoCard({
     required Widget leadingWidget,
     required String title,
@@ -637,7 +619,7 @@ Widget locationEnabledialog(){
                 style:
                 kSize14W500kForestGreenColorInterMedium
                     .copyWith(
-                  color: AppColors.kMidnightBlueColor
+                    color: AppColors.kMidnightBlueColor
 
                 ),
               ),
@@ -677,71 +659,47 @@ Widget locationEnabledialog(){
             ),
 
             Obx(() {
-              return Visibility(
-                visible: controller.showScanner.value,
-                maintainState: true,
-                maintainAnimation: true,
-                maintainSize: true,
-                child: Container(
-                  width: getWidth(240),
-                  height: getWidth(240),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(16),
-                    border: Border.all(
-                      color: AppColors.kSkyBlueColor,
-                      width: 2,
+              return IgnorePointer(
+                ignoring: !controller.scannerActive.value,
+                child: Opacity(
+                  opacity: controller.scannerActive.value ? 1 : 0,
+                  child: Container(
+                    width: getWidth(240),
+                    height: getWidth(240),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(16),
+                      border: Border.all(
+                        color: AppColors.kSkyBlueColor,
+                        width: 2,
+                      ),
                     ),
-                  ),
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(16),
-                    child: MobileScanner(
-                      key: const ValueKey('qr_scanner'), // 🔥 IMPORTANT
-                      controller: controller.scannerController,
-                      onDetect: (barcodeCapture) {
-                        final qrCode =
-                            barcodeCapture.barcodes.first.rawValue;
-                        if (qrCode != null) {
-                          controller.onQrDetected(qrCode);
-                        }
-                      },
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(16),
+                      child: MobileScanner(
+                        controller: controller.scannerController,
+                        onDetect: (barcodeCapture) {
+                          if (!controller.scannerActive.value) return; // 🔒 manual control
+
+                          final qrCode =
+                              barcodeCapture.barcodes.first.rawValue;
+
+                          if (qrCode != null) {
+                            controller.onQrDetected(qrCode);
+                          }
+                        },
+                      ),
                     ),
                   ),
                 ),
               );
-            }),
-          ],
+            })          ],
         ),
 
         SizedBox(height: getHeight(10)),
 
         GestureDetector(
-          onTap: () async {
-            bool shouldShowDialog =
-            await shouldAskForLocationPermission();
-
-            if (shouldShowDialog) {
-              Get.dialog(
-                Stack(
-                  children: [
-                    // background tap dismiss
-                    GestureDetector(
-                      onTap: () => Get.back(),
-                      child: Container(),
-                    ),
-
-                    Positioned(
-                      top: getHeight(100),
-                      left: getWidth(20),
-                      right: getWidth(20),
-                      child: locationEnabledialog(),
-                    ),
-                  ],
-                ),
-                barrierColor: Colors.transparent,
-              );
-            } else {
-              controller.openScanner();
-            }
+          onTap: () {
+            onScanButtonPressed();
           },
           child: Container(
             width: getWidth(64),
@@ -793,6 +751,59 @@ Widget locationEnabledialog(){
           );
         }),
       ],
+    );
+  }
+  Future<void> onScanButtonPressed() async {
+    bool serviceEnabled = await Geolocator.isLocationServiceEnabled();
+
+    if (!serviceEnabled) {
+      // 🔴 Location OFF → dialog open
+      showLocationDialog();
+      return;
+    }
+
+    LocationPermission permission = await Geolocator.checkPermission();
+
+    if (permission == LocationPermission.denied ||
+        permission == LocationPermission.deniedForever) {
+      // 🔴 Permission issue → dialog
+      showLocationDialog();
+
+      return;
+    }
+
+    // 🟢 Location OK → open scanner
+    controller.openScanner();
+  }
+  void showLocationDialog() {
+    // Ye method call karo instead of your old Get.dialog(...)
+    Get.dialog(
+      Material(
+        color: Colors.transparent, // background transparent
+        child: Stack(
+          children: [
+            // background tap to dismiss
+            GestureDetector(
+              onTap: () => Get.back(),
+              child: Container(
+                color: Colors.transparent,
+              ),
+            ),
+
+            // Floating container, header ke neeche
+            Positioned(
+              top: getHeight(100), // header ke neeche
+              left: getWidth(20),
+              right: getWidth(20),
+              child: Material(
+                color: Colors.transparent,
+                child: locationEnabledialog(), // tumhara existing container
+              ),
+            ),
+          ],
+        ),
+      ),
+      barrierColor: Colors.transparent,
     );
   }
 
