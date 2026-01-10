@@ -1,6 +1,7 @@
 import 'package:clean_trust/util/app_colors.dart';
 import 'package:clean_trust/util/size_config.dart';
 import 'package:clean_trust/view/base/top_header.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 //
@@ -313,7 +314,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
 
+import '../../../../helper/routes/routes_name.dart';
 import '../../../../util/app_images.dart';
+import '../../../../util/app_util.dart';
 import '../../../../util/text_style.dart';
 import '../../../../view_model/controller/home/attendance/get_today_and_monthly_attendance_controller.dart';
 import '../../../../view_model/controller/home/attendance/scanqrcode_controller.dart';
@@ -335,13 +338,46 @@ class ScanQrcodeScreen extends StatelessWidget {
       backgroundColor: AppColors.kWhiteColor,
       body: Column(
         children: [
-          TopHeader(title: 'scanQrCode1'.tr),
+          TopHeader(title: 'scanQrCode1'.tr,
+            actions: [
+              IconButton(
+                onPressed: () {
+                  Get.dialog(
+                    Stack(
+                      children: [
+                        // background tap dismiss
+                        GestureDetector(
+                          onTap: () => Get.back(),
+                          child: Container(),
+                        ),
+
+                        Positioned(
+                          top: getHeight(100), // header ke neeche
+                          left: getWidth(20),
+                          right: getWidth(20),
+                          child: locationEnabledialog(),
+                        ),
+                      ],
+                    ),
+                    barrierColor: Colors.transparent,
+                  );
+                },
+                icon: const Icon(Icons.more_vert),
+                color: AppColors.kWhiteColor,
+              ),
+
+
+            ],
+          
+          
+          ),
+
 
           Expanded(
             child: SingleChildScrollView(
               child: Column(
                 children: [
-                  SizedBox(height: getHeight(30)),
+                  SizedBox(height: getHeight(60)),
 
                   _qrScanner(),
 
@@ -444,7 +480,111 @@ class ScanQrcodeScreen extends StatelessWidget {
       ),
     );
   }
+Widget locationEnabledialog(){
+    return Container(
+      width: getWidth(335),
+      padding: EdgeInsets.symmetric(horizontal: getWidth(20), vertical: getHeight(16)),
+      decoration: BoxDecoration(
+        color: AppColors.kWhiteColor,
+        border: Border.all(
+          color: AppColors.kLightCoolGreyColor,
+        ),
+        borderRadius: BorderRadius.all(Radius.circular(16)),
+        boxShadow: [
+          BoxShadow(
+            color: AppColors.kBlackColor.withOpacity(0.10),
+            offset: const Offset(0, 10),
+            blurRadius: 15,
+            spreadRadius: 0,
+          ),
 
+          BoxShadow(
+            color: AppColors.kBlackColor.withOpacity(0.10),
+            offset: const Offset(0, 4),
+            blurRadius: 6,
+            spreadRadius: 0,
+          ),
+        ],
+      ),
+      child: Row(
+        children: [
+          Container(
+            width: getWidth(40),
+            height: getHeight(40),
+            decoration: BoxDecoration(
+                color: AppColors.kSkyBlueColor,
+                shape: BoxShape.circle
+            ),
+            child:Image.asset(AppImages.locationEnableIcon, color: AppColors.kWhiteColor),
+          ),
+          SizedBox(width: getWidth(10),),
+          Expanded(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  'enableLocation5'.tr,
+                  style: kSize16W600kMidnightBlueColorInterSemiBold
+                      .copyWith(
+                    fontSize: getFont(14),
+                    height: 1.2,
+                    color:
+                    AppColors.kBlackColor,
+                  ),
+                ),
+                SizedBox(height: 2),
+                Text(
+                  'enableLocation6'.tr,
+                  style: kSize17W400KCharcoalBlackColorInterRegular
+                      .copyWith(
+                    fontSize: getFont(12),
+                    height: 1.2,
+                    color:
+                    AppColors.kBlackColor,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          SizedBox(width: getWidth(20),),
+
+          TextButton(
+              onPressed: () async{
+                if (Get.isDialogOpen == true) {
+                  Get.back();
+                }
+                try {
+                  await getCurrentLocation();
+                } catch (e) {
+                  if (kDebugMode) {
+                    print(e);
+                  }
+                }
+
+              },
+           child: Text(
+            'enableLocation7'.tr,
+            style: kSize16W600kMidnightBlueColorInterSemiBold
+                .copyWith(
+                fontSize: getFont(12),
+                color:
+                AppColors.kBlackColor,
+                decoration: TextDecoration.underline,
+                decorationStyle: TextDecorationStyle.solid,
+                decorationColor: AppColors.kBlackColor
+
+            ),
+
+          ),
+
+          ),
+
+        ],
+      ),
+    );
+
+}
   Widget buildInfoCard({
     required Widget leadingWidget,
     required String title,
@@ -514,6 +654,7 @@ class ScanQrcodeScreen extends StatelessWidget {
       ),
     );
   }
+
   Widget _qrScanner() {
     return Column(
       children: [
@@ -564,7 +705,34 @@ class ScanQrcodeScreen extends StatelessWidget {
         SizedBox(height: getHeight(10)),
 
         GestureDetector(
-          onTap: controller.openScanner,
+          onTap: () async {
+            bool shouldShowDialog =
+            await shouldAskForLocationPermission();
+
+            if (shouldShowDialog) {
+              Get.dialog(
+                Stack(
+                  children: [
+                    // background tap dismiss
+                    GestureDetector(
+                      onTap: () => Get.back(),
+                      child: Container(),
+                    ),
+
+                    Positioned(
+                      top: getHeight(100),
+                      left: getWidth(20),
+                      right: getWidth(20),
+                      child: locationEnabledialog(),
+                    ),
+                  ],
+                ),
+                barrierColor: Colors.transparent,
+              );
+            } else {
+              controller.openScanner();
+            }
+          },
           child: Container(
             width: getWidth(64),
             height: getHeight(64),

@@ -18,7 +18,6 @@ Future<bool> shouldAskForLocationPermission() async {
 Future<Position> getCurrentLocation() async {
   bool serviceEnabled = await Geolocator.isLocationServiceEnabled();
   if (!serviceEnabled) {
-    showCustomSnackBar('locationRequiredDialog1'.tr);
     await Geolocator.openLocationSettings();
     throw Exception('Location service disabled');
   }
@@ -39,10 +38,7 @@ Future<Position> getCurrentLocation() async {
   Position position = await Geolocator.getCurrentPosition(
     desiredAccuracy: LocationAccuracy.high,
   );
-  // Close dialog before navigation
-  if (Get.isDialogOpen == true) {
-    Get.back();
-  }
+
   Get.toNamed(RouteName.scanQRCodeScreen);
   return position;
 }

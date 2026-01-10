@@ -218,6 +218,9 @@ Map<String, String> en = {
   'enableLocation2': 'Please enable location services to continue scanning QR codes. This helps us provide accurate location- based features.',
   'enableLocation3': 'Enable Location',
   'enableLocation4': 'Cancel',
+  'enableLocation5': 'GPS Required',
+  'enableLocation6': 'Location access needed for scanning',
+  'enableLocation7': 'Enable',
 
 
   'profileScreen1': 'Profile',

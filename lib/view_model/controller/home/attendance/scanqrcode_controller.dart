@@ -1,4 +1,5 @@
 import 'package:clean_trust/helper/routes/routes_name.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
@@ -12,9 +13,10 @@ import '../../../../helper/internet_check.dart';
 import '../../../../util/custom_snackbar.dart';
 import '../../../user_preference/user_preference.dart';
 import 'package:geocoding/geocoding.dart';
+import 'package:flutter/widgets.dart';
 
 
-class ScanQrCodeController extends GetxController {
+class ScanQrCodeController extends GetxController with WidgetsBindingObserver{
   final ScanQrCodeRepository _repo = ScanQrCodeRepository();
   final OfflineAttendanceService localDb = OfflineAttendanceService();
   final ScanQrCodeRepository repo = ScanQrCodeRepository();
@@ -39,6 +41,7 @@ class ScanQrCodeController extends GetxController {
   @override
   void onInit() {
     super.onInit();
+    WidgetsBinding.instance.addObserver(this);
     fetchCurrentLocation();
     scannerController = MobileScannerController(
       facing: CameraFacing.back,
@@ -48,6 +51,13 @@ class ScanQrCodeController extends GetxController {
 
   }
 
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    if (state == AppLifecycleState.resumed) {
+      debugPrint('APP RESUMED → FETCH LOCATION AGAIN');
+      fetchCurrentLocation();
+    }
+  }
 
 
 

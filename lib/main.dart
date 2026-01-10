@@ -30,7 +30,6 @@ import 'helper/routes/routes.dart';
 
 void main() async{
  await init();
-
   runApp(const MyApp());
 }
 

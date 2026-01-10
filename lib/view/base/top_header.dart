@@ -49,7 +49,7 @@ class TopHeader extends StatelessWidget {
                   width: getWidth(40),
                   height: getHeight(40),
                   decoration: BoxDecoration(
-                    color: AppColors.kDeepSkyBlueColor,
+                    color: AppColors.kSkyBlue.withOpacity(0.57),
                     shape: BoxShape.circle,
 
                   ),

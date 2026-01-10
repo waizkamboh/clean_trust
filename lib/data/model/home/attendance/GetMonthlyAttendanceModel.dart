@@ -28,7 +28,7 @@ class Data {
   TotalHoursBreakdown? totalOvertimeBreakdown;
   int? presentDays;
   int? totalDays;
-  int? averageHoursPerDay;
+  double? averageHoursPerDay;
   List<DailyBreakdown>? dailyBreakdown;
 
   Data({
@@ -55,7 +55,7 @@ class Data {
         : null;
     presentDays = json['present_days'];
     totalDays = json['total_days'];
-    averageHoursPerDay = json['average_hours_per_day'];
+    averageHoursPerDay = (json['average_hours_per_day'] as num?)?.toDouble();
 
     if (json['daily_breakdown'] != null) {
       dailyBreakdown = (json['daily_breakdown'] as List)
@@ -111,19 +111,50 @@ class TotalHoursBreakdown {
 
 class DailyBreakdown {
   String? date;
-  String? totalHours;
+  String? status;
+  double? totalHours;
+  double? regularHours;
+  double? overtimeHours;
+  int? breakMinutes;
+  bool? isLate;
+  bool? isEarly;
+  int? lateMinutes;
 
-  DailyBreakdown({this.date, this.totalHours});
+  DailyBreakdown({
+    this.date,
+    this.status,
+    this.totalHours,
+    this.regularHours,
+    this.overtimeHours,
+    this.breakMinutes,
+    this.isLate,
+    this.isEarly,
+    this.lateMinutes,
+  });
 
   DailyBreakdown.fromJson(Map<String, dynamic> json) {
     date = json['date'];
-    totalHours = json['total_hours'];
+    status = json['status'];
+    totalHours = (json['totalHours'] as num?)?.toDouble();
+    regularHours = (json['regularHours'] as num?)?.toDouble();
+    overtimeHours = (json['overtimeHours'] as num?)?.toDouble();
+    breakMinutes = json['breakMinutes'];
+    isLate = json['isLate'];
+    isEarly = json['isEarly'];
+    lateMinutes = json['lateMinutes'];
   }
 
   Map<String, dynamic> toJson() {
     return {
       'date': date,
-      'total_hours': totalHours,
+      'status': status,
+      'totalHours': totalHours,
+      'regularHours': regularHours,
+      'overtimeHours': overtimeHours,
+      'breakMinutes': breakMinutes,
+      'isLate': isLate,
+      'isEarly': isEarly,
+      'lateMinutes': lateMinutes,
     };
   }
 }

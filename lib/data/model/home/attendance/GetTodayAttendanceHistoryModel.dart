@@ -8,17 +8,15 @@ class GetTodayAttendanceHistoryModel {
   GetTodayAttendanceHistoryModel.fromJson(Map<String, dynamic> json) {
     success = json['success'];
     message = json['message'];
-    data = json['data'] != null ? new Data.fromJson(json['data']) : null;
+    data = json['data'] != null ? Data.fromJson(json['data']) : null;
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['success'] = this.success;
-    data['message'] = this.message;
-    if (this.data != null) {
-      data['data'] = this.data!.toJson();
-    }
-    return data;
+    return {
+      'success': success,
+      'message': message,
+      'data': data?.toJson(),
+    };
   }
 }
 
@@ -30,23 +28,18 @@ class Data {
 
   Data.fromJson(Map<String, dynamic> json) {
     if (json['records'] != null) {
-      records = <Records>[];
-      json['records'].forEach((v) {
-        records!.add(new Records.fromJson(v));
-      });
+      records = List<Records>.from(
+        json['records'].map((v) => Records.fromJson(v)),
+      );
     }
-    stats = json['stats'] != null ? new Stats.fromJson(json['stats']) : null;
+    stats = json['stats'] != null ? Stats.fromJson(json['stats']) : null;
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    if (this.records != null) {
-      data['records'] = this.records!.map((v) => v.toJson()).toList();
-    }
-    if (this.stats != null) {
-      data['stats'] = this.stats!.toJson();
-    }
-    return data;
+    return {
+      'records': records?.map((v) => v.toJson()).toList(),
+      'stats': stats?.toJson(),
+    };
   }
 }
 
@@ -65,44 +58,47 @@ class Records {
   bool? isValid;
   String? validationMessage;
   bool? isManual;
-  Null? manualReason;
+  String? manualReason;
   String? status;
-  Null? approvedBy;
-  Null? approvedAt;
-  Null? notes;
+  int? approvedBy;
+  String? approvedAt;
+  String? notes;
   bool? isOffline;
   String? syncedAt;
   String? createdAt;
   String? updatedAt;
   Workplace? workplace;
   QrCode? qrCode;
+  Approver? approver;
 
-  Records(
-      {this.id,
-        this.userId,
-        this.workplaceId,
-        this.qrCodeId,
-        this.type,
-        this.scanTime,
-        this.date,
-        this.checkInTime,
-        this.checkOutTime,
-        this.latitude,
-        this.longitude,
-        this.isValid,
-        this.validationMessage,
-        this.isManual,
-        this.manualReason,
-        this.status,
-        this.approvedBy,
-        this.approvedAt,
-        this.notes,
-        this.isOffline,
-        this.syncedAt,
-        this.createdAt,
-        this.updatedAt,
-        this.workplace,
-        this.qrCode});
+  Records({
+    this.id,
+    this.userId,
+    this.workplaceId,
+    this.qrCodeId,
+    this.type,
+    this.scanTime,
+    this.date,
+    this.checkInTime,
+    this.checkOutTime,
+    this.latitude,
+    this.longitude,
+    this.isValid,
+    this.validationMessage,
+    this.isManual,
+    this.manualReason,
+    this.status,
+    this.approvedBy,
+    this.approvedAt,
+    this.notes,
+    this.isOffline,
+    this.syncedAt,
+    this.createdAt,
+    this.updatedAt,
+    this.workplace,
+    this.qrCode,
+    this.approver,
+  });
 
   Records.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -128,45 +124,49 @@ class Records {
     syncedAt = json['synced_at'];
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
+
     workplace = json['workplace'] != null
-        ? new Workplace.fromJson(json['workplace'])
+        ? Workplace.fromJson(json['workplace'])
         : null;
-    qrCode =
-    json['qrCode'] != null ? new QrCode.fromJson(json['qrCode']) : null;
+
+    qrCode = json['qrCode'] != null
+        ? QrCode.fromJson(json['qrCode'])
+        : null;
+
+    approver = json['approver'] != null
+        ? Approver.fromJson(json['approver'])
+        : null;
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['user_id'] = this.userId;
-    data['workplace_id'] = this.workplaceId;
-    data['qr_code_id'] = this.qrCodeId;
-    data['type'] = this.type;
-    data['scan_time'] = this.scanTime;
-    data['date'] = this.date;
-    data['check_in_time'] = this.checkInTime;
-    data['check_out_time'] = this.checkOutTime;
-    data['latitude'] = this.latitude;
-    data['longitude'] = this.longitude;
-    data['is_valid'] = this.isValid;
-    data['validation_message'] = this.validationMessage;
-    data['is_manual'] = this.isManual;
-    data['manual_reason'] = this.manualReason;
-    data['status'] = this.status;
-    data['approved_by'] = this.approvedBy;
-    data['approved_at'] = this.approvedAt;
-    data['notes'] = this.notes;
-    data['is_offline'] = this.isOffline;
-    data['synced_at'] = this.syncedAt;
-    data['created_at'] = this.createdAt;
-    data['updated_at'] = this.updatedAt;
-    if (this.workplace != null) {
-      data['workplace'] = this.workplace!.toJson();
-    }
-    if (this.qrCode != null) {
-      data['qrCode'] = this.qrCode!.toJson();
-    }
-    return data;
+    return {
+      'id': id,
+      'user_id': userId,
+      'workplace_id': workplaceId,
+      'qr_code_id': qrCodeId,
+      'type': type,
+      'scan_time': scanTime,
+      'date': date,
+      'check_in_time': checkInTime,
+      'check_out_time': checkOutTime,
+      'latitude': latitude,
+      'longitude': longitude,
+      'is_valid': isValid,
+      'validation_message': validationMessage,
+      'is_manual': isManual,
+      'manual_reason': manualReason,
+      'status': status,
+      'approved_by': approvedBy,
+      'approved_at': approvedAt,
+      'notes': notes,
+      'is_offline': isOffline,
+      'synced_at': syncedAt,
+      'created_at': createdAt,
+      'updated_at': updatedAt,
+      'workplace': workplace?.toJson(),
+      'qrCode': qrCode?.toJson(),
+      'approver': approver?.toJson(),
+    };
   }
 }
 
@@ -184,11 +184,11 @@ class Workplace {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['name'] = this.name;
-    data['address'] = this.address;
-    return data;
+    return {
+      'id': id,
+      'name': name,
+      'address': address,
+    };
   }
 }
 
@@ -206,11 +206,33 @@ class QrCode {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['company_name'] = this.companyName;
-    data['department'] = this.department;
-    return data;
+    return {
+      'id': id,
+      'company_name': companyName,
+      'department': department,
+    };
+  }
+}
+
+class Approver {
+  int? id;
+  String? fullName;
+  String? email;
+
+  Approver({this.id, this.fullName, this.email});
+
+  Approver.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    fullName = json['full_name'];
+    email = json['email'];
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'full_name': fullName,
+      'email': email,
+    };
   }
 }
 
@@ -224,20 +246,21 @@ class Stats {
   bool? isEarly;
   int? lateMinutes;
 
-  Stats(
-      {this.status,
-        this.totalHours,
-        this.regularHours,
-        this.overtimeHours,
-        this.breakMinutes,
-        this.isLate,
-        this.isEarly,
-        this.lateMinutes});
+  Stats({
+    this.status,
+    this.totalHours,
+    this.regularHours,
+    this.overtimeHours,
+    this.breakMinutes,
+    this.isLate,
+    this.isEarly,
+    this.lateMinutes,
+  });
 
   Stats.fromJson(Map<String, dynamic> json) {
     status = json['status'];
-    totalHours = json['totalHours'];
-    regularHours = json['regularHours'];
+    totalHours = (json['totalHours'] as num?)?.toDouble();
+    regularHours = (json['regularHours'] as num?)?.toDouble();
     overtimeHours = json['overtimeHours'];
     breakMinutes = json['breakMinutes'];
     isLate = json['isLate'];
@@ -246,15 +269,15 @@ class Stats {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['status'] = this.status;
-    data['totalHours'] = this.totalHours;
-    data['regularHours'] = this.regularHours;
-    data['overtimeHours'] = this.overtimeHours;
-    data['breakMinutes'] = this.breakMinutes;
-    data['isLate'] = this.isLate;
-    data['isEarly'] = this.isEarly;
-    data['lateMinutes'] = this.lateMinutes;
-    return data;
+    return {
+      'status': status,
+      'totalHours': totalHours,
+      'regularHours': regularHours,
+      'overtimeHours': overtimeHours,
+      'breakMinutes': breakMinutes,
+      'isLate': isLate,
+      'isEarly': isEarly,
+      'lateMinutes': lateMinutes,
+    };
   }
 }

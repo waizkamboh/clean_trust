@@ -668,9 +668,12 @@ class _HomeScreenState extends State<HomeScreen> {
 
                     RoundButton(
                       onPress: () async{
-
+                        if (Get.isDialogOpen == true) {
+                          Get.back();
+                        }
                         try {
                           await getCurrentLocation();
+
                         } catch (e) {
                           if (kDebugMode) {
                             print(e);
@@ -691,8 +694,13 @@ class _HomeScreenState extends State<HomeScreen> {
 
                     RoundButton(
                       onPress: () async{
+                        // Close dialog before navigation
+                        if (Get.isDialogOpen == true) {
+                          Get.back();
+                        }
 
-                        Get.back();
+                        Get.toNamed(RouteName.scanQRCodeScreen);
+
 
                       },
                       radius: BorderRadius.circular(16),
