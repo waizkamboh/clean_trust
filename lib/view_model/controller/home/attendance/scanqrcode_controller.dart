@@ -6,7 +6,6 @@ import 'package:mobile_scanner/mobile_scanner.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:flutter/foundation.dart';
 import '../../../../data/local_storage/hive/offline_attendance_service.dart';
-import '../../../../data/model/home/attendance/ScanQRCodeModel.dart';
 import '../../../../data/model/hive/offline_attendance_model.dart';
 import '../../../../data/repository/home/attendance/scan_qr_code_repository.dart';
 import '../../../../helper/internet_check.dart';
@@ -15,7 +14,8 @@ import '../../../user_preference/user_preference.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:flutter/widgets.dart';
 
-import '../../app_setting/get_app_setting_controller.dart';
+import '../../profile/app_setting/get_app_setting_controller.dart';
+
 
 
 class ScanQrCodeController extends GetxController with WidgetsBindingObserver{
@@ -140,7 +140,6 @@ class ScanQrCodeController extends GetxController with WidgetsBindingObserver{
       if (!online) {
         final appSettingController = Get.find<AppSettingController>();
 
-        /// 🔹 Auto Sync OFF
         if (!appSettingController.autoSync.value) {
           loading.value = false;
 
@@ -151,7 +150,6 @@ class ScanQrCodeController extends GetxController with WidgetsBindingObserver{
           return;
         }
 
-        /// 🔹 Auto Sync ON → save locally
         final int? userId = await userPreference.getUserId();
 
         if (userId == null) {

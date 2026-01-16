@@ -1,4 +1,3 @@
-import 'package:clean_trust/data/model/app_setting/UpdateAppSettingModel.dart';
 import 'package:clean_trust/data/model/notification/MarkAllNotificationAsReadModel.dart';
 import '../../../util/app_constant.dart';
 import '../../api/network/network_api_services.dart';

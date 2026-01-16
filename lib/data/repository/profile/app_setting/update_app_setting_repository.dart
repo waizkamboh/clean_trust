@@ -1,6 +1,8 @@
-import 'package:clean_trust/data/model/app_setting/UpdateAppSettingModel.dart';
-import '../../../util/app_constant.dart';
-import '../../api/network/network_api_services.dart';
+
+
+import '../../../../util/app_constant.dart';
+import '../../../api/network/network_api_services.dart';
+import '../../../model/profile/app_setting/UpdateAppSettingModel.dart';
 
 class UpdateAppSettingRepository {
   final _api = NetworkApiServices();

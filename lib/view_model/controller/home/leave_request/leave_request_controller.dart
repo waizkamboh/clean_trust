@@ -3,10 +3,12 @@ import 'package:clean_trust/helper/routes/routes_name.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:file_picker/file_picker.dart';
-import '../../../data/repository/leave_request/leave_request_repository.dart';
-import '../../../helper/internet_check.dart';
-import '../../../util/custom_snackbar.dart';
-import '../../user_preference/user_preference.dart';
+
+import '../../../../data/repository/home/leave_request/leave_request_repository.dart';
+import '../../../../helper/internet_check.dart';
+import '../../../../util/custom_snackbar.dart';
+import '../../../user_preference/user_preference.dart';
+
 
 class LeaveRequestController extends GetxController {
   final _repo = LeaveRequestRepository();

@@ -4,7 +4,7 @@ import '../../../../data/model/notification/GetAllNotificationModel.dart';
 import '../../../../data/repository/notification/get_all_notification_repository.dart';
 import '../../../../util/custom_snackbar.dart';
 import '../../user_preference/user_preference.dart';
-import '../app_setting/get_app_setting_controller.dart';
+import '../profile/app_setting/get_app_setting_controller.dart';
 
 class GetNotificationController extends GetxController {
   final GetAllNotificationRepository _repo =

@@ -3,9 +3,9 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../../../data/repository/employee/get_employee_repository.dart';
-import '../../../../data/repository/employee/update_employee_repository.dart';
 import '../../../../util/custom_snackbar.dart';
+import '../../../data/repository/profile/profile/get_employee_repository.dart';
+import '../../../data/repository/profile/profile/update_employee_repository.dart';
 import '../../../helper/internet_check.dart';
 import '../../user_preference/user_preference.dart';
 
@@ -58,7 +58,6 @@ class EditProfileController extends GetxController {
 
 
   }
-  // ================= LOAD FROM CACHE =================
 
   Future<void> _loadProfileFromCache() async {
     final data = await _userPreference.getProfile();
@@ -72,7 +71,6 @@ class EditProfileController extends GetxController {
     createdAt.value = data['created_at']!;
   }
 
-  // ================= FETCH FROM API =================
 
   Future<void> fetchEmployee() async {
     try {
@@ -93,7 +91,6 @@ class EditProfileController extends GetxController {
       final emp = response.data?.user;
       if (emp == null) return;
 
-      // Update State
       fullName.value = emp.fullName ?? '';
       email.value = emp.email ?? '';
       role.value = emp.role ?? '';
@@ -102,7 +99,6 @@ class EditProfileController extends GetxController {
       profilePicture.value = emp.profilePicture ?? '';
       createdAt.value = formatDate(emp.createdAt);
 
-      // 💾 Save in SharedPreferences
       await _userPreference.saveProfile(
         fullName: fullName.value,
         email: email.value,
@@ -125,7 +121,6 @@ class EditProfileController extends GetxController {
     }
   }
 
-  // ================= UPDATE PROFILE =================
 
   Future<void> updateProfile() async {
     final emailText = emailController.value.text.trim();
@@ -137,19 +132,16 @@ class EditProfileController extends GetxController {
       r'^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[!@#$%^&*(),.?":{}|<>]).{8,}$',
     );
 
-    // ✅ EMAIL (optional)
     if (emailText.isNotEmpty && !GetUtils.isEmail(emailText)) {
       showCustomSnackBar('Enter a valid email address');
       return;
     }
 
-    // ✅ PHONE (optional)
     if (phoneText.isNotEmpty && !GetUtils.isPhoneNumber(phoneText)) {
       showCustomSnackBar('Enter a valid phone number');
       return;
     }
 
-    // ✅ PASSWORD CHANGE RULE
     if (newPassword.isNotEmpty) {
       if (currentPassword.isEmpty) {
         showCustomSnackBar('Enter current password to change password');
@@ -164,7 +156,6 @@ class EditProfileController extends GetxController {
       }
     }
 
-    // ❌ NOTHING TO UPDATE
     if (emailText.isEmpty &&
         phoneText.isEmpty &&
         newPassword.isEmpty) {

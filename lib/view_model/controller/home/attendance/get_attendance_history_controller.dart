@@ -80,10 +80,8 @@ class GetAttendanceHistoryController extends GetxController {
 
       final newRecords = response.data?.records ?? [];
 
-      // 🔥 Append data
       attendanceList.addAll(newRecords);
 
-      // 🔥 Pagination info
       totalPages = response.data?.pagination?.pages?.toInt() ?? 1;
 
       if (currentPage >= totalPages || newRecords.isEmpty) {

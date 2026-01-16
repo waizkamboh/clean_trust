@@ -12,7 +12,7 @@ import '../../../helper/routes/routes_name.dart';
 import '../../../util/app_colors.dart';
 import '../../../util/size_config.dart';
 import '../../../util/text_style.dart';
-import '../../../view_model/controller/employee/editProfileController.dart';
+import '../../../view_model/controller/profile/editProfileController.dart';
 import '../../base/round_button.dart';
 
 class ProfileScreen extends StatefulWidget {

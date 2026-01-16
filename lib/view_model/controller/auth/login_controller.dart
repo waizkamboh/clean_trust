@@ -1,5 +1,4 @@
 import 'package:clean_trust/util/custom_snackbar.dart';
-import 'package:clean_trust/view_model/controller/app_setting/get_app_setting_controller.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -7,6 +6,7 @@ import 'package:get/get.dart';
 import '../../../data/repository/auth/login_repository.dart';
 import '../../../helper/routes/routes_name.dart';
 import '../../user_preference/user_preference.dart';
+import '../profile/app_setting/get_app_setting_controller.dart';
 
 
 

@@ -18,7 +18,6 @@ class ManualAttendanceEntryController extends GetxController {
 
   RxBool loading = false.obs;
   RxBool isSubmitted = false.obs;
-  /// Controllers
   final dateController = TextEditingController().obs;
   final checkInController = TextEditingController().obs;
   final checkOutController = TextEditingController().obs;
@@ -50,7 +49,6 @@ class ManualAttendanceEntryController extends GetxController {
     );
 
     if (pickedTime != null) {
-      // Convert TimeOfDay to DateTime
       final now = DateTime.now();
       final dateTime = DateTime(
         now.year,
@@ -60,7 +58,6 @@ class ManualAttendanceEntryController extends GetxController {
         pickedTime.minute,
       );
 
-      // Format to HH:mm:ss
       final formattedTime =
           "${dateTime.hour.toString().padLeft(2, '0')}:"
           "${dateTime.minute.toString().padLeft(2, '0')}:00";

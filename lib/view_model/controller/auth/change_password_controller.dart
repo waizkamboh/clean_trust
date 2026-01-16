@@ -29,9 +29,7 @@ class ChangePasswordController extends GetxController {
   // Loading
   RxBool loading = false.obs;
 
-  /// ============================
-  /// CHANGE PASSWORD API
-  /// ============================
+
   void changePasswordApi() async {
     final passwordRegex = RegExp(
         r'^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[!@#$%^&*(),.?":{}|<>]).{8,}$');
@@ -40,7 +38,6 @@ class ChangePasswordController extends GetxController {
     String newPassword = newPasswordController.value.text.trim();
     String confirmPassword = confirmPasswordController.value.text.trim();
 
-    // Validation
     if (oldPassword.isEmpty) {
       showCustomSnackBar('Old password is required');
       return;
@@ -56,7 +53,6 @@ class ChangePasswordController extends GetxController {
       return;
     }
 
-    // Regex check for new password
     if (!passwordRegex.hasMatch(newPassword)) {
       showCustomSnackBar(
           'Password must contain at least 1 uppercase letter, 1 lowercase letter, 1 number, 1 special character, and be at least 8 characters long');
@@ -69,14 +65,12 @@ class ChangePasswordController extends GetxController {
     }
 
 
-    // Regex check for confirm password (optional but good for consistency)
     if (!passwordRegex.hasMatch(confirmPassword)) {
       showCustomSnackBar(
           'Confirm password does not meet required pattern');
       return;
     }
 
-    // Check if newPassword and confirmPassword match
     if (newPassword != confirmPassword) {
       showCustomSnackBar('Passwords do not match');
       return;
@@ -121,9 +115,7 @@ class ChangePasswordController extends GetxController {
     }
   }
 
-  /// ============================
-  /// CLEAR FIELDS
-  /// ============================
+
   void clearFields() {
     oldPasswordController.value.clear();
     newPasswordController.value.clear();
@@ -134,9 +126,7 @@ class ChangePasswordController extends GetxController {
     confirmPasswordFocus.value.unfocus();
   }
 
-  /// ============================
-  /// DISPOSE
-  /// ============================
+
   @override
   void dispose() {
     oldPasswordController.value.dispose();

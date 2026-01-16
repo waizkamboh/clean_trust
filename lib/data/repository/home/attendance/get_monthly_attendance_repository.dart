@@ -1,9 +1,7 @@
 
 
 
-import 'package:clean_trust/data/model/app_setting/GetAppSettingModel.dart';
 import 'package:clean_trust/data/model/home/attendance/GetMonthlyAttendanceModel.dart';
-import 'package:clean_trust/data/model/home/attendance/GetTodayAttendanceHistoryModel.dart';
 
 import '../../../../util/app_constant.dart';
 import '../../../api/network/network_api_services.dart';

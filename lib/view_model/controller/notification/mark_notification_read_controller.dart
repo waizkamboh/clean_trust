@@ -16,7 +16,6 @@ class MarkNotificationReadController extends GetxController {
 
   RxBool isLoading = false.obs;
 
-  /// Mark notification as read by ID
   Future<void> markAsRead({
     required int notificationId,
   }) async {
@@ -43,11 +42,9 @@ class MarkNotificationReadController extends GetxController {
         return;
       }
 
-      /// 🔹 Update notification list locally
       Get.find<GetNotificationController>()
           .markNotificationReadLocally(notificationId);
 
-      /// 🔹 Update unread badge
       final unreadController = Get.find<UnreadCountController>();
       if (unreadController.unreadCount.value > 0) {
         unreadController.unreadCount.value--;

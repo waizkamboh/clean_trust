@@ -1,11 +1,8 @@
 
 
-
-import 'package:clean_trust/data/model/app_setting/GetAppSettingModel.dart';
-import 'package:clean_trust/data/model/app_setting/GetAppVersionModel.dart';
-
-import '../../../util/app_constant.dart';
-import '../../api/network/network_api_services.dart';
+import '../../../../util/app_constant.dart';
+import '../../../api/network/network_api_services.dart';
+import '../../../model/profile/app_setting/GetAppVersionModel.dart';
 
 class GetAppVersionRepository{
   final _api = NetworkApiServices();

@@ -7,8 +7,8 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
 
 import '../../../util/text_style.dart';
-import '../../../view_model/controller/app_setting/get_app_setting_controller.dart';
 import '../../../view_model/controller/notification/get_notification_controller.dart';
+import '../../../view_model/controller/profile/app_setting/get_app_setting_controller.dart';
 
 class AppSettingScreen extends StatelessWidget {
   AppSettingScreen({super.key});
@@ -28,7 +28,6 @@ class AppSettingScreen extends StatelessWidget {
               TopHeader(title: 'appSettingScreen1'.tr),
               SizedBox(height: getHeight(30)),
 
-              /// 🔹 MAIN CONTENT / FETCH LOADER
               Expanded(
                 child: Obx(() {
                   if (controller.isFetching.value) {
@@ -46,7 +45,6 @@ class AppSettingScreen extends StatelessWidget {
                       EdgeInsets.symmetric(horizontal: getWidth(20)),
                       child: Column(
                         children: [
-                          /// Notifications
                           Obx(() => GestureDetector(
                             onTap: controller.isUpdating.value
                                 ? null
@@ -81,8 +79,6 @@ class AppSettingScreen extends StatelessWidget {
 
                           SizedBox(height: getHeight(10)),
 
-                          /// Location
-                          /// Location
                           Obx(() => GestureDetector(
                             onTap: controller.isUpdating.value
                                 ? null
@@ -100,7 +96,6 @@ class AppSettingScreen extends StatelessWidget {
 
                           SizedBox(height: getHeight(10)),
 
-                          /// Auto Sync
                           Obx(() => GestureDetector(
                             onTap: controller.isUpdating.value
                                 ? null
@@ -122,7 +117,6 @@ class AppSettingScreen extends StatelessWidget {
 
                           SizedBox(height: getHeight(30)),
 
-                          /// App Version Card
                           _appVersionCard(),
 
                           SizedBox(height: getHeight(30)),
@@ -185,7 +179,6 @@ class AppSettingScreen extends StatelessWidget {
     );
   }
 
-  /// 🔹 APP VERSION CARD
   Widget _appVersionCard() {
     return Container(
       width: getWidth(362),
@@ -278,7 +271,6 @@ class AppSettingScreen extends StatelessWidget {
     );
   }
 
-  /// 🔹 MISSING WIDGET (NOW ADDED ✅)
   Widget appSettingContainer({
     required String leadingIcon,
     required String title,

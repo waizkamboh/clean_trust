@@ -16,7 +16,6 @@ class MarkAllNotificationReadController extends GetxController {
 
   RxBool isLoading = false.obs;
 
-  /// 🔹 Mark ALL notifications as read
   Future<void> markAllAsRead() async {
     try {
       isLoading.value = true;
@@ -37,14 +36,12 @@ class MarkAllNotificationReadController extends GetxController {
         return;
       }
 
-      /// 🔹 Update notification list locally
       final notificationController = Get.find<GetNotificationController>();
       notificationController.notifications.value =
           notificationController.notifications
               .map((n) => n.copyWith(isRead: true))
               .toList();
 
-      /// 🔹 Reset unread badge
       Get.find<UnreadCountController>().unreadCount.value = 0;
 
       showCustomSnackBar(response.message ?? 'All notifications marked as read');

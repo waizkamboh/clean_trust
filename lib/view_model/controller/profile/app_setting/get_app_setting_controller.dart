@@ -1,17 +1,19 @@
-import 'package:clean_trust/data/repository/app_setting/get_app_version_repository.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 
-import '../../../data/model/app_setting/GetAppSettingModel.dart';
-import '../../../data/model/app_setting/GetAppVersionModel.dart';
-import '../../../data/repository/app_setting/get_app_setting.dart';
-import '../../../data/repository/app_setting/update_app_setting_repository.dart';
-import '../../../helper/internet_check.dart';
-import '../../../util/app_images.dart';
-import '../../user_preference/user_preference.dart';
-import '../../../util/custom_snackbar.dart';
+import '../../../../data/model/profile/app_setting/GetAppSettingModel.dart';
+import '../../../../data/model/profile/app_setting/GetAppVersionModel.dart';
+import '../../../../data/repository/profile/app_setting/get_app_setting.dart';
+import '../../../../data/repository/profile/app_setting/get_app_version_repository.dart';
+import '../../../../data/repository/profile/app_setting/update_app_setting_repository.dart';
+import '../../../../helper/internet_check.dart';
+import '../../../../util/app_images.dart';
+import '../../../../util/custom_snackbar.dart';
+import '../../../user_preference/user_preference.dart';
+
+
 
 class AppSettingController extends GetxController with WidgetsBindingObserver{
   final UserPreference _userPreference = UserPreference();
@@ -45,7 +47,7 @@ class AppSettingController extends GetxController with WidgetsBindingObserver{
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
     if (state == AppLifecycleState.resumed) {
-      syncLocationStatus(); // 🔥 VERY IMPORTANT
+      syncLocationStatus();
     }
   }
 
@@ -62,23 +64,17 @@ class AppSettingController extends GetxController with WidgetsBindingObserver{
     final serviceEnabled = await Geolocator.isLocationServiceEnabled();
     final permission = await Geolocator.checkPermission();
 
-    // ===============================
-    // 🔴 CASE 1: Location already ON → turn OFF
-    // ===============================
+
     if (allowLocation.value == true) {
       allowLocation.value = false;
 
-      // Backend update
       await updateAppSetting(location: false);
 
-      // System settings open (user manually OFF kare)
       await Geolocator.openLocationSettings();
       return;
     }
 
-    // ===============================
-    // 🟢 CASE 2: Location OFF → turn ON
-    // ===============================
+
     if (!serviceEnabled) {
       await Geolocator.openLocationSettings();
       return;
@@ -95,7 +91,6 @@ class AppSettingController extends GetxController with WidgetsBindingObserver{
       return;
     }
 
-    // ✅ Permission granted → ON
     allowLocation.value = true;
     await updateAppSetting(location: true);
   }
@@ -214,7 +209,6 @@ class AppSettingController extends GetxController with WidgetsBindingObserver{
       final response = await _updateRepo.updateAppSettingApi(body, headers);
 
       if (response.success == true) {
-        // ✅ Update local state
         allowNotifications.value = body["allow_notifications"]!;
         allowLocation.value = body["allow_location"]!;
         autoSync.value = body["auto_sync"]!;

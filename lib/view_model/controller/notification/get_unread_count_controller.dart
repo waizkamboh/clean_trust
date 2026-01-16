@@ -19,7 +19,6 @@ class UnreadCountController extends GetxController {
   //   fetchUnreadCount();
   // }
 
-  /// Fetch unread notification count
   Future<void> fetchUnreadCount() async {
     try {
       isLoading.value = true;

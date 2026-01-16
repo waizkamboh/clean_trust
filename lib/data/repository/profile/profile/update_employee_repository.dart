@@ -1,7 +1,6 @@
-import 'package:clean_trust/data/model/app_setting/UpdateAppSettingModel.dart';
-import 'package:clean_trust/data/model/employee/UpdateEmployeeModel.dart';
-import '../../../util/app_constant.dart';
-import '../../api/network/network_api_services.dart';
+import '../../../../util/app_constant.dart';
+import '../../../api/network/network_api_services.dart';
+import '../../../model/profile/profile/UpdateEmployeeModel.dart';
 
 class UpdateEmployeeRepository {
   final _api = NetworkApiServices();
